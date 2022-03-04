@@ -32,10 +32,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    Refral: {
-      type: String,
-      // required: true,
-    },
+    // Refral: {
+    //   type: String,
+    //   // required: true,
+    // },
 
     Status: {
       type: Boolean,

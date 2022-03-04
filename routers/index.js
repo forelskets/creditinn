@@ -65,12 +65,12 @@ router.post('/userRegister', async (req, res) => {
   try {
     console.log(req.body.Refral);
     let data1 = await User.collection.count();
-    const { Name, Email, Password, Mobile, Refral } = req.body;
-    console.log(Name, Email, Password, Mobile, Refral);
+    const { Name, Email, Password, Mobile } = req.body;
+    console.log(Name, Email, Password, Mobile);
 
     data1++;
     refral = 3456789 + data1;
-    if (!Name || !Email || !Password || !Mobile || !Refral) {
+    if (!Name || !Email || !Password || !Mobile) {
       res.status(400).send('please fill data');
     } else {
       const isMatch = await User.findOne({ Email });
@@ -86,7 +86,7 @@ router.post('/userRegister', async (req, res) => {
           Email,
           Password,
           Mobile,
-          Refral,
+
           Status: true,
         });
         const addUser = await user.save();
