@@ -32,9 +32,14 @@ const section1 = () => {
                 >
                   <a></a> Register
                 </button>
-                <button className="button btn-3">
-                  <img src="images/gpay.svg" alt="" className="img-fluid" />
-                </button>
+                <lottie-player
+                  src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
+                  background="transparent"
+                  speed="1"
+                  style={{ width: '100px', height: '100px' }}
+                  loop
+                  autoplay
+                ></lottie-player>
               </div>
             </div>
 
@@ -44,7 +49,14 @@ const section1 = () => {
                 alt=""
                 className="img-container"
               />
-
+              <lottie-player
+                src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
+                background="transparent"
+                speed="1"
+                style={{ width: '100px', height: '100px' }}
+                loop
+                autoplay
+              ></lottie-player>
               {/* <div
                   className="card "
                   style={{

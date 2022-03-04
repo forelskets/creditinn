@@ -6,9 +6,7 @@
   box-sizing: border-box;
   border: none;
   /*font-family: "Montserrat", sans-serif;*/
-  box-sizing: border-box;
   color: #33afa9;
-  overflow-x: hidden;
 }
 
 .padQuad {
@@ -47,7 +45,6 @@
   .featured-in .container .row .the-box {
     height: 500px !important;
     justify-content: space-between;
-    overflow: none;
   }
   .services-section .text-area .align-inline .text-box .heading {
     font-size: 30px !important;
@@ -67,7 +64,6 @@
   .another-timeline .container .row .the-box {
     height: 213px !important;
     justify-content: space-between;
-    overflow: none;
   }
   .services-section .text-area .align-inline .icon-box1 img {
     height: 45px !important;
@@ -75,7 +71,6 @@
   .featured-in .container .row .the-box {
     height: 500px !important;
     justify-content: space-between;
-    overflow: none;
   }
   .footer .info-area .button-section {
     margin: 25px 0px !important;
@@ -164,10 +159,8 @@
   vertical-align: middle;
 }
 .heading {
-  overflow-y: hidden !important;
 }
 .text-center {
-  overflow-y: hidden;
 }
 .header .container .text-area .heading {
   position: relative;
@@ -176,12 +169,10 @@
   font-style: normal;
   font-weight: 700;
   font-size: 50px;
-  overflow-y: hidden;
   line-height: 1;
   color: #33afa9;
 }
 .header .container .text-area #paragraph .paragraph {
-  overflow: visible;
   text-align: left;
   font-family: 'Montserrat';
   font-style: normal;
@@ -644,7 +635,6 @@
 .accordian-section .wrapper .parent-tab .content,
 .accordian-section .wrapper .child-tab .sub-content {
   max-height: 0px;
-  overflow: hidden;
   background: #fff;
   border-radius: 0 0 3px 3px;
   transition: all 0.4s ease;
@@ -792,6 +782,8 @@
 
 .back-image {
   background-image: url('back1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .bannerimg {
   background-size: 100%;

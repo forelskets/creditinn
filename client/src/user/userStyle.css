@@ -284,10 +284,10 @@ nav .profile-details i {
 .home-content .sales-boxes .top-sales {
   /*width: 35%;*/
   background: #fff;
-  position: fixed;
+  /* position: fixed; */
   padding: 0px 0px;
   height: 580px;
-  margin: 0 0px 0 990px;
+  margin: 0 0px 0 20px;
   border-radius: 12px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }

@@ -45,25 +45,26 @@ const Section3 = () => {
             </div>
           </div>
         </section> */}
-        <div
-          className="row col-sm-12 mx-5 py-5 "
-          style={{ margin: 'auto 30px' }}
-        >
-          <h1
-            className="heading text-center"
-            // style={{
-            //   margin: 'auto 30px',
-            // }}
-            style={{ paddingBottom: '30px' }}
-          >
+        <div className="row col-sm-12  justify-content-around px-5">
+          <h1 className="mb-5" style={{ textAlign: 'Center' }}>
             Creditsin a platform which <br />
             boost's customer engagement
           </h1>
           <div
+            className="card card3"
+            git
+            style={{ width: '18rem', margin: 'auto 20px' }}
+          >
+            <i class="fas fa-ring fa-4x" style={{ margin: '20px auto' }}></i>
+            <div className="card-body">
+              <h4 className="text-center">Easily Install Application</h4>
+            </div>
+          </div>
+          <div
             className="card  card1"
             style={{ width: '18rem', margin: 'auto 20px' }}
           >
-            <i class="fas fa-share fa-4x" style={{ margin: '20px 100px' }}></i>
+            <i class="fas fa-share fa-4x" style={{ margin: '20px auto' }}></i>
             <div className="card-body">
               <h4 className="text-center">Every Customer Earn Credits</h4>
             </div>
@@ -74,7 +75,7 @@ const Section3 = () => {
           >
             <i
               class="fas fa-user-alt fa-4x"
-              style={{ margin: '20px 100px' }}
+              style={{ margin: '20px auto' }}
             ></i>
             <div className="card-body">
               <h4 className="text-center">Get Targeted Audience</h4>
@@ -86,19 +87,10 @@ const Section3 = () => {
           >
             <i
               class="fas fa-credit-card fa-4x"
-              style={{ margin: '20px 100px' }}
+              style={{ margin: '20px auto' }}
             ></i>
             <div className="card-body">
               <h4 className="text-center">Refer and Earn Credits</h4>
-            </div>
-          </div>
-          <div
-            className="card card3"
-            style={{ width: '18rem', margin: 'auto 20px' }}
-          >
-            <i class="fas fa-ring fa-4x" style={{ margin: '20px 100px' }}></i>
-            <div className="card-body">
-              <h4 className="text-center">Inc. Customer engagement</h4>
             </div>
           </div>
         </div>
@@ -142,6 +134,17 @@ const Section3 = () => {
                       alt=""
                       className="img-fluid"
                     />
+                    <lottie-player
+                      src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
+                      background="transparent"
+                      speed="1"
+                      style={{
+                        width: '100px',
+                        height: '100px',
+                      }}
+                      loop
+                      autoplay
+                    ></lottie-player>
                   </div>
                   <div className="text-box">
                     <h2 className="heading">Cashback Reward</h2>
@@ -182,6 +185,14 @@ const Section3 = () => {
                       Pariatur laborum id natus nihil sint.
                     </p>
                   </div>
+                  <lottie-player
+                    src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
+                    background="transparent"
+                    speed="1"
+                    style={{ width: '100px', height: '100px' }}
+                    loop
+                    autoplay
+                  ></lottie-player>
                 </div>
                 <div className="align-inline">
                   <div className="icon-box1">
@@ -199,13 +210,21 @@ const Section3 = () => {
                     </p>
                   </div>
                 </div>
+                <lottie-player
+                  src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
+                  background="transparent"
+                  speed="1"
+                  style={{ width: '100px', height: '100px' }}
+                  loop
+                  autoplay
+                ></lottie-player>
               </div>
             </div>
           </div>
         </section>
         <section className=" card-slider-section">
           <div className="container">
-            <h1 className="heading">Reward for Anything & Everything</h1>
+            <h1 className="heading">Reward for Anything & Everything</h1> 
             <h3 className="heading2">
               Customers will love Creditsin to apply{' '}
             </h3>

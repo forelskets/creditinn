@@ -35,6 +35,14 @@ const footer = () => {
                   <li>PrivacyPolicy</li>
                   <li>About Us</li>
                   <li>Create An Account</li>
+                  <lottie-player
+                    src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
+                    background="transparent"
+                    speed="1"
+                    style={{ width: '100px', height: '100px' }}
+                    loop
+                    autoplay
+                  ></lottie-player>
                 </div>
                 <div className="col-md-2 text-area">
                   <div className="align-inline">
@@ -51,6 +59,14 @@ const footer = () => {
                   <li>About Us</li>
                   <li>Create An Account</li>
                   <br />
+                  <lottie-player
+                    src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
+                    background="transparent"
+                    speed="1"
+                    style={{ width: '100px', height: '100px' }}
+                    loop
+                    autoplay
+                  ></lottie-player>
                 </div>
                 <div className="col-md-3 info-area">
                   <h3>Social Links</h3>
