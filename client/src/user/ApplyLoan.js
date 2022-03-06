@@ -71,17 +71,6 @@ const ApplyLoan = () => {
                       </div>
                     </div>
                   </div>
-
-                  <div className="row pb-5">
-                    <div className="recent-sales box">
-                      <Apply />
-                    </div>
-                  </div>
-                  <div className="row pb-3">
-                    <div className="recent-sales box">
-                      <Bank />
-                    </div>
-                  </div>
                   <div className="row">
                     <div className="recent-sales box">
                       <div
@@ -94,9 +83,19 @@ const ApplyLoan = () => {
                       {lstatus ? <LoanForm /> : ''}
                     </div>
                   </div>
+                  <div className="row pb-5">
+                    <div className="recent-sales box">
+                      <Apply />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="recent-sales box">
+                      <Bank />
+                    </div>
+                  </div>
                 </div>
 
-                <div className="top-sales box col-sm-3">
+                <div className="top-sales box profile-card col-sm-3">
                   <div className="title">Profile</div>
                   <ul className="top-sales-details">
                     <li>

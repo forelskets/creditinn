@@ -8,10 +8,10 @@ const eye = { fontSize: '15px', height: '0px' };
 const LoanForm = () => {
   const [message, setMessage] = useState('');
   const modelRef = useRef(null);
-  const [pan, setPan] = useState('');
-  const [adhaar, setAdhaar] = useState('');
-  const [bankStmt, setBankStmt] = useState('');
-  const [photo, setPhoto] = useState('');
+  // const [pan, setPan] = useState('');
+  // const [adhaar, setAdhaar] = useState('');
+  // const [bankStmt, setBankStmt] = useState('');
+  // const [photo, setPhoto] = useState('');
   const [profession, setProfession] = useState('');
 
   const EmployeeDatails = useRef(null);
@@ -24,25 +24,25 @@ const LoanForm = () => {
   const [stateSelect, setStateSelect] = useState({});
   const [employeeProfile, setEmployeeProfile] = useState({
     fname: '',
-    lname: '',
+    // lname: '',
     fathername: '',
-    email: '',
+    // email: '',
     dob: '',
     mobile: '',
     address: '',
-    address2: '',
+    // address2: '',
     zip: '',
     companyName: '',
-    designation: '',
-    currentCompanyExperience: '',
+    // designation: '',
+    // currentCompanyExperience: '',
     totalExperience: '',
     monthlyIncome: '',
     annualIncome: '',
     adhaarNo: '',
     panNo: '',
-    bankName: '',
-    accountNo: '',
-    IFSCcode: '',
+    // bankName: '',
+    // accountNo: '',
+    // IFSCcode: '',
     loanAmount: '',
     emi: '',
   });
@@ -61,20 +61,20 @@ const LoanForm = () => {
       totalExperience: tat.value,
     });
   };
-  const WorkExperience = [
-    { value: '1 or less then yrs', label: '1 or less then yrs' },
-    { value: '1 to 2  yrs', label: '1 to 2 yrs' },
-    { value: '2 to 3 yrs', label: '2 or 3 yrs' },
-    { value: '3 to 4 yrs', label: '3 or 4 yrs' },
-    { value: '4 to 5 yrs', label: '4 or 5 yrs' },
-  ];
+  // const WorkExperience = [
+  //   { value: '1 or less then yrs', label: '1 or less then yrs' },
+  //   { value: '1 to 2  yrs', label: '1 to 2 yrs' },
+  //   { value: '2 to 3 yrs', label: '2 or 3 yrs' },
+  //   { value: '3 to 4 yrs', label: '3 or 4 yrs' },
+  //   { value: '4 to 5 yrs', label: '4 or 5 yrs' },
+  // ];
 
-  const WorkExperienceHandler = (tat) => {
-    setEmployeeProfile({
-      ...employeeProfile,
-      currentCompanyExperience: tat.value,
-    });
-  };
+  // const WorkExperienceHandler = (tat) => {
+  //   setEmployeeProfile({
+  //     ...employeeProfile,
+  //     currentCompanyExperience: tat.value,
+  //   });
+  // };
 
   const MonthlyIncome = [
     { value: 'less than 10000', label: 'less than 10000' },
@@ -151,8 +151,8 @@ const LoanForm = () => {
   ];
 
   const LoanAmount = [
-    { value: '1 Lakh', label: '1Lakh' },
-    { value: '2 Lakh', label: '2Lakh' },
+    { value: '1,00,000', label: '1,00,000' },
+    { value: '2,00,000', label: '2,00,000' },
   ];
 
   const Profession = [
@@ -174,18 +174,18 @@ const LoanForm = () => {
   const KYCFunc = () => {
     KYCDetails.current.click();
   };
-  const AdhaarUpload = (e) => {
-    setAdhaar(e.target.files[0]);
-  };
-  const PanUpload = (e) => {
-    setPan(e.target.files[0]);
-  };
-  const PhotoUpload = (e) => {
-    setPhoto(e.target.files[0]);
-  };
-  const BankStmtUpload = (e) => {
-    setBankStmt(e.target.files[0]);
-  };
+  // const AdhaarUpload = (e) => {
+  //   setAdhaar(e.target.files[0]);
+  // };
+  // const PanUpload = (e) => {
+  //   setPan(e.target.files[0]);
+  // };
+  // const PhotoUpload = (e) => {
+  //   setPhoto(e.target.files[0]);
+  // };
+  // const BankStmtUpload = (e) => {
+  //   setBankStmt(e.target.files[0]);
+  // };
   const checkFunc = () => {
     return (
       <>
@@ -230,33 +230,33 @@ const LoanForm = () => {
     let submit = 0;
     let employeeProfileForm = {
       FirstName: employeeProfile.fname,
-      LastName: employeeProfile.lname,
+      // LastName: employeeProfile.lname,
       FatherName: employeeProfile.fathername,
-      Email: employeeProfile.email,
+      // Email: employeeProfile.email,
       DOB: employeeProfile.dob,
       Mobile: employeeProfile.mobile,
       CurrentAddress: employeeProfile.address,
-      CurrentAddress2: employeeProfile.address2,
+      // CurrentAddress2: employeeProfile.address2,
       State: stateSelect.value,
       City: citySelect.value,
       ZIP: employeeProfile.zip,
       CompanyName: employeeProfile.companyName,
-      Designation: employeeProfile.designation,
-      CurrentCompanyExperience: employeeProfile.currentCompanyExperience,
+      // Designation: employeeProfile.designation,
+      // CurrentCompanyExperience: employeeProfile.currentCompanyExperience,
       TotalExperience: employeeProfile.totalExperience,
       MonthlyIncome: employeeProfile.monthlyIncome,
       AnnualIncome: employeeProfile.annualIncome,
       AdhaarNo: employeeProfile.adhaarNo,
       PanNo: employeeProfile.panNo,
-      BankName: employeeProfile.bankName,
-      AccountNo: employeeProfile.accountNo,
-      IFSCcode: employeeProfile.IFSCcode,
+      // BankName: employeeProfile.bankName,
+      // AccountNo: employeeProfile.accountNo,
+      // IFSCcode: employeeProfile.IFSCcode,
       LoanAmount: employeeProfile.loanAmount,
       EMI: employeeProfile.emi,
-      adhaar: adhaar,
-      pan: pan,
-      bankStmt: bankStmt,
-      photo: photo,
+      // adhaar: adhaar,
+      // pan: pan,
+      // bankStmt: bankStmt,
+      // photo: photo,
       loanPurpose: loanPurpose,
       loanAmount: loanAmount,
       profession: profession,
@@ -290,32 +290,32 @@ const LoanForm = () => {
         setEmployeeProfile({
           ...employeeProfile,
           fname: '',
-          lname: '',
+          // lname: '',
           fathername: '',
-          email: '',
+          // email: '',
           dob: '',
           mobile: '',
           address: '',
-          address2: '',
+          // address2: '',
           zip: '',
           companyName: '',
-          designation: '',
-          currentCompanyExperience: '',
+          // designation: '',
+          // currentCompanyExperience: '',
           totalExperience: '',
           monthlyIncome: '',
           annualIncome: '',
           adhaarNo: '',
           panNo: '',
-          bankName: '',
-          accountNo: '',
-          IFSCcode: '',
+          // bankName: '',
+          // accountNo: '',
+          // IFSCcode: '',
           loanAmount: '',
           emi: '',
         });
-        setPan('');
-        setAdhaar('');
-        setBankStmt('');
-        setPhoto('');
+        // setPan('');
+        // setAdhaar('');
+        // setBankStmt('');
+        // setPhoto('');
         setLoanPurpose('');
         setLoanAmount('');
         setProfession('');
@@ -339,12 +339,11 @@ const LoanForm = () => {
         <div className="row my-3">
           <div className="form-group col-md-4">
             <Select
-              placeholder="Purpose Of Loan"
+              placeholder="Loan Types"
               id="loanPurpose"
               name="loanPurpose"
               options={LoanPurpose}
               onChange={LoanPurposeHandler}
-              className="form-control"
             />
           </div>
           <div className="form-group col-md-4">
@@ -354,7 +353,6 @@ const LoanForm = () => {
               name="professrion"
               options={Profession}
               onChange={ProfessionHandler}
-              className="form-control"
             />
           </div>
           <div className="form-group col-md-4">
@@ -364,7 +362,6 @@ const LoanForm = () => {
               name="loanAmount"
               options={LoanAmount}
               onChange={LoanAmountHandler}
-              className="form-control"
             />
           </div>
         </div>
@@ -413,6 +410,28 @@ const LoanForm = () => {
                     <div className="form-row row my-3">
                       <div className="form-group col-md-4">
                         <label>
+                          Mobile Number
+                          <i
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="for eg:0123456789"
+                            class="fas fa-eye "
+                            style={eye}
+                          ></i>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="mobile"
+                          name="mobile"
+                          value={employeeProfile.mobile}
+                          onChange={ProfileChangeHandler}
+                          placeholder="mobile Number"
+                          disabled={validateSelectOptions()}
+                        />
+                      </div>
+                      <div className="form-group col-md-4">
+                        <label>
                           First Name
                           <i
                             data-bs-toggle="tooltip"
@@ -433,7 +452,7 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div>
-                      <div className="form-group col-md-4">
+                      {/* <div className="form-group col-md-4">
                         <label>
                           Last Name
                           <i
@@ -454,7 +473,7 @@ const LoanForm = () => {
                           placeholder=" Last Name"
                           disabled={validateSelectOptions()}
                         />
-                      </div>
+                      </div> */}
                       <div className="form-group col-md-4">
                         <label>
                           Father's Name
@@ -479,7 +498,7 @@ const LoanForm = () => {
                       </div>
                     </div>
                     <div className="form-row my-3 row">
-                      <div className="form-group col-md-4">
+                      {/* <div className="form-group col-md-4">
                         <label>
                           Email
                           <i
@@ -500,7 +519,7 @@ const LoanForm = () => {
                           placeholder="Email"
                           disabled={validateSelectOptions()}
                         />
-                      </div>
+                      </div> */}
                       <div className="form-group col-md-4">
                         <label>
                           Date Of Birth
@@ -523,13 +542,13 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div>
-                      <div className="form-group col-md-4">
+                      <div className="form-group  col-md-8">
                         <label>
-                          Mobile Number
+                          address
                           <i
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
-                            title="for eg:0123456789"
+                            title="for eg:1234 Main Street aligarh"
                             class="fas fa-eye "
                             style={eye}
                           ></i>
@@ -537,38 +556,17 @@ const LoanForm = () => {
                         <input
                           type="text"
                           className="form-control"
-                          id="mobile"
-                          name="mobile"
-                          value={employeeProfile.mobile}
+                          id="address"
+                          name="address"
+                          value={employeeProfile.address}
                           onChange={ProfileChangeHandler}
-                          placeholder="mobile Number"
+                          placeholder="1234 Main Street aligarh"
                           disabled={validateSelectOptions()}
                         />
                       </div>
                     </div>
-                    <div className="form-group my-3">
-                      <label>
-                        address
-                        <i
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title="for eg:1234 Main Street aligarh"
-                          class="fas fa-eye "
-                          style={eye}
-                        ></i>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="address"
-                        name="address"
-                        value={employeeProfile.address}
-                        onChange={ProfileChangeHandler}
-                        placeholder="1234 Main Street aligarh"
-                        disabled={validateSelectOptions()}
-                      />
-                    </div>
-                    <div className="form-group my-3">
+
+                    {/* <div className="form-group my-3">
                       <label>
                         Address 2
                         <i
@@ -589,7 +587,7 @@ const LoanForm = () => {
                         placeholder="Apartment, studio, or floor"
                         disabled={validateSelectOptions()}
                       />
-                    </div>
+                    </div> */}
                     <div className="form-row my-3 row">
                       <div className="form-group col-md-4">
                         <label>
@@ -608,7 +606,6 @@ const LoanForm = () => {
                           name="state"
                           onChange={OptionHandler}
                           options={options}
-                          className="form-control"
                           isDisabled={validateSelectOptions()}
                         />
                       </div>
@@ -629,11 +626,10 @@ const LoanForm = () => {
                           name="city"
                           options={options1}
                           onChange={OptionHandler1}
-                          className="form-control"
                           isDisabled={validateSelectOptions()}
                         />
                       </div>
-                      <div className="form-group col-md-3">
+                      <div className="form-group col-md-4">
                         <label>
                           ZIP Code
                           <i
@@ -694,7 +690,7 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div>
-                      <div className="form-group col-md-4">
+                      {/* <div className="form-group col-md-4">
                         <label>
                           Post/Designination
                           <i
@@ -715,9 +711,9 @@ const LoanForm = () => {
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
                         />
-                      </div>
-                      <div className="form-group col-md-4">
-                        <label>
+                      </div> */}
+                      {/* <div className="form-group col-md-4"> */}
+                      {/* <label>
                           Current Work Experience
                           <i
                             data-bs-toggle="tooltip"
@@ -726,9 +722,9 @@ const LoanForm = () => {
                             class="fas fa-eye "
                             style={eye}
                           ></i>
-                        </label>
+                        </label> */}
 
-                        {/* <input
+                      {/* <input
                           type="text"
                           className="form-control"
                           id="currentCompanyExperience"
@@ -738,16 +734,14 @@ const LoanForm = () => {
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
                         /> */}
-                        <Select
+                      {/* <Select
                           placeholder="work Experience"
                           id="workExperience"
                           name="workExperience"
                           options={WorkExperience}
                           onChange={WorkExperienceHandler}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-row my-3 row">
+                        /> */}
+                      {/* </div> */}
                       <div className="form-group col-md-4">
                         <label>
                           Total Work Experience
@@ -806,6 +800,8 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         /> */}
                       </div>
+                    </div>
+                    <div className="form-row my-3 row">
                       <div className="form-group col-md-4">
                         <label>
                           Annual Income
@@ -884,7 +880,7 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div>
-                      <div className="form-group col-md-6">
+                      {/* <div className="form-group col-md-6">
                         <input
                           type="file"
                           name="adhaar"
@@ -894,9 +890,7 @@ const LoanForm = () => {
                           onChange={AdhaarUpload}
                           disabled={validateSelectOptions()}
                         />
-                      </div>
-                    </div>
-                    <div className="form-row row my-3">
+                      </div> */}
                       <div className="form-group col-md-6">
                         <label>
                           PAN Card no.
@@ -919,7 +913,9 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div>
-                      <div className="form-group col-md-6">
+                    </div>
+                    <div className="form-row row my-3">
+                      {/* <div className="form-group col-md-6">
                         <input
                           type="file"
                           className="file-input"
@@ -928,10 +924,10 @@ const LoanForm = () => {
                           onChange={PanUpload}
                           disabled={validateSelectOptions()}
                         />
-                      </div>
+                      </div> */}
                     </div>
                     <div className="form-row row my-3">
-                      <div className="form-group col-md-4">
+                      {/* <div className="form-group col-md-4">
                         <label>
                           Bank Name
                           <i
@@ -952,8 +948,8 @@ const LoanForm = () => {
                           placeholder="Bank Name"
                           disabled={validateSelectOptions()}
                         />
-                      </div>
-                      <div className="form-group col-md-4">
+                      </div> */}
+                      {/* <div className="form-group col-md-4">
                         <label>
                           account no.
                           <i
@@ -974,8 +970,8 @@ const LoanForm = () => {
                           placeholder="Account number"
                           disabled={validateSelectOptions()}
                         />
-                      </div>
-                      <div className="form-group col-md-4">
+                      </div> */}
+                      {/* <div className="form-group col-md-4">
                         <label>
                           IFSC Code
                           <i
@@ -996,10 +992,10 @@ const LoanForm = () => {
                           placeholder="IFSC Code"
                           disabled={validateSelectOptions()}
                         />
-                      </div>
+                      </div> */}
                     </div>
                     <div className="form-row row my-3">
-                      <div className="form-group col-md-6">
+                      {/* <div className="form-group col-md-6">
                         <label for="adhar">Insert Your Photograph</label>
                         <input
                           type="file"
@@ -1009,8 +1005,8 @@ const LoanForm = () => {
                           onChange={PhotoUpload}
                           disabled={validateSelectOptions()}
                         />
-                      </div>
-                      <div className="form-group col-md-6">
+                      </div> */}
+                      {/* <div className="form-group col-md-6">
                         <label for="adhar">Last 3 month's Bank Statement</label>
                         <input
                           type="file"
@@ -1020,7 +1016,7 @@ const LoanForm = () => {
                           onChange={BankStmtUpload}
                           disabled={validateSelectOptions()}
                         />
-                      </div>
+                      </div> */}
                     </div>
 
                     <div className="form-row my-3 row">

@@ -42,6 +42,9 @@
 */
 /* #####################################################media query for mobile##########################*/
 @media (max-width: 760px) {
+  .navbar {
+    height: 90px !important;
+  }
   .featured-in .container .row .the-box {
     height: 500px !important;
     justify-content: space-between;
@@ -56,6 +59,9 @@
 @media (max-width: 600px) {
   .header {
     padding: 10px !important;
+  }
+  .navbar {
+    height: 90px !important;
   }
 
   .header .container .text-area .heading {
@@ -92,7 +98,7 @@
 /* #####################################################media query for mobile##########################*/
 
 .navbar {
-  height: 98px;
+  height: 80px;
   box-shadow: -8px -7px 17px 0px rgb(104, 99, 99);
   background: #ffff;
 }
@@ -151,8 +157,8 @@
   background-color: #f6f7fc;
   width: 100vw;
   height: fit-content;
-  padding-top: 70px;
-  padding-bottom: 80px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   padding-right: 10px;
 }
 .header .col-md-6 {
@@ -176,7 +182,7 @@
   text-align: left;
   font-family: 'Montserrat';
   font-style: normal;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 15px;
   color: rgba(0, 0, 0, 1);
 }
@@ -331,8 +337,8 @@
   padding: 6px;
 }
 .timeline-section {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   color: black;
   background-color: #f6f7fc;
   text-align: center;
@@ -419,8 +425,8 @@
 }
 .services-section {
   height: fit-content;
-  padding-top: 70px;
-  padding-bottom: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .services-section .container .row .col-md-5 .img-area {
@@ -479,7 +485,7 @@
   text-transform: capitalize;
 }
 .card-slider-section {
-  padding-top: 70px;
+  padding-top: 40px;
   padding-bottom: 70px;
 }
 .card-slider-section .container .heading,
@@ -660,7 +666,7 @@
 }
 
 .footer {
-  padding: 50px 0px 0px 0px;
+  padding: 20px 0px 0px 0px;
   background-color: #33afa9;
 }
 .footer h3 {
@@ -686,7 +692,7 @@
   font-size: 17px;
   color: white;
   text-align: justify;
-  margin: 40px 30px 10px 0px;
+  margin: 40px 10px 0px 0px;
 }
 .footer .info-area {
   text-align: center;
@@ -829,4 +835,13 @@
 .card4:hover {
   background-color: #55cbcd;
   transition: 3ms;
+}
+.card-slider-section i {
+  color: #77450b;
+}
+.padding-down {
+  padding-top: 5px;
+}
+.padding-ul {
+  padding-top: 56px;
 }

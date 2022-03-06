@@ -9,45 +9,45 @@ const kycSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    Adhaar: {
-      type: String,
-    },
-    AdhaarVerified: {
-      type: Boolean,
-      // required: true
-    },
+    // Adhaar: {
+    //   type: String,
+    // },
+    // AdhaarVerified: {
+    //   type: Boolean,
+    //   // required: true
+    // },
     PanNo: {
       type: String,
       required: true,
     },
-    Pan: {
-      type: String,
-    },
-    PanVerified: {
-      type: Boolean,
-      // required: true
-    },
-    BankName: {
-      type: String,
-      required: true,
-    },
-    AccountNo: {
-      type: String,
-      required: true,
-    },
-    IFSCcode: {
-      type: String,
-      required: true,
-    },
-    BankStmt: {
-      type: String,
-    },
+    // Pan: {
+    //   type: String,
+    // },
+    // PanVerified: {
+    //   type: Boolean,
+    //   // required: true
+    // },
+    // BankName: {
+    //   type: String,
+    //   required: true,
+    // },
+    // AccountNo: {
+    //   type: String,
+    //   required: true,
+    // },
+    // IFSCcode: {
+    //   type: String,
+    //   required: true,
+    // },
+    // BankStmt: {
+    //   type: String,
+    // },
     StatementPassword: {
       type: String,
     },
-    Photo: {
-      type: String,
-    },
+    // Photo: {
+    //   type: String,
+    // },
     PreviousLoan: {
       type: Boolean,
       require: true,

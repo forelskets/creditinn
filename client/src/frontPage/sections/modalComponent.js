@@ -63,7 +63,6 @@ const ModalComponent = (props) => {
     <>
       <form>
         <div className="mb-3">
-          <label>Name</label>
           <input
             type="text"
             className="form-control"

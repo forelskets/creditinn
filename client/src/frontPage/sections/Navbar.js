@@ -60,8 +60,8 @@ const Navbar = () => {
         <div className="container">
           <NavLink className="navbar-brand" to="#">
             <img
-              style={{ height: '90px', width: '190px' }}
-              src="images/credit-n-logo.svg"
+              style={{ height: '70px' }}
+              src="images/logo.png"
               className="d-inline-block align-top"
               alt=""
             />

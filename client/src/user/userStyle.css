@@ -497,3 +497,14 @@ nav.recent-sales-box-nav {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+.profile-card {
+  position: fixed;
+  right: 10px;
+}
+
+@media (max-width: 1155px) {
+  .profile-card {
+    position: relative;
+  }
+}

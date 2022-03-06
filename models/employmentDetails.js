@@ -9,14 +9,14 @@ const employmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    Designation: {
-      type: String,
-      required: true,
-    },
-    CurrentCompanyExperience: {
-      type: String,
-      required: true,
-    },
+    // Designation: {
+    //   type: String,
+    //   required: true,
+    // },
+    // CurrentCompanyExperience: {
+    //   type: String,
+    //   required: true,
+    // },
     TotalExperience: {
       type: String,
       required: true,

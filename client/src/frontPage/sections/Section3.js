@@ -5,6 +5,162 @@ const Section3 = () => {
   return (
     <>
       <div className="back-image">
+        <section className=" card-slider-section">
+          <div className="container">
+            <h3 className="heading2">
+              Creditsin a platform which <br />
+              boost's customer engagement
+            </h3>
+            <div className="row">
+              <div className="col-12">
+                <div>
+                  <div>
+                    <div>
+                      <div className="row">
+                        {/* <div className="col-md-4 mb-3">
+                          <div className="card">
+                            <img
+                              className="img-container "
+                              alt=""
+                              src="images/portrait-young-smiling-woman-2.png"
+                            />
+
+                            <div className="card-body">
+                              <h4 className="heading3">
+                                Special title treatment
+                              </h4>
+                            </div>
+                          </div>
+                        </div> */}
+                        <div className="col-md-4  ">
+                          <div
+                            className="card card1 mx-auto"
+                            style={{
+                              height: '250px',
+                              width: '300px',
+                              align: 'center',
+                            }}
+                          >
+                            <i
+                              class="fab fa-instalod fa-7x"
+                              style={{ margin: '15px  auto 5px auto' }}
+                            ></i>
+
+                            <div className="card-body">
+                              <h4 className="heading3">
+                                Easy Application Install
+                              </h4>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-4 mb-3">
+                          <div
+                            className="card card2 mx-auto"
+                            style={{
+                              height: '250px',
+                              width: '300px',
+                              align: 'center',
+                            }}
+                          >
+                            <i
+                              class="fas fa-share fa-7x"
+                              style={{ margin: '15px  auto 5px auto' }}
+                            ></i>
+                            <div className="card-body">
+                              <h4 className="heading3">
+                                Every Customer Earn Credits
+                              </h4>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-4 mb-3">
+                          <div
+                            className="card card3 mx-auto"
+                            style={{
+                              height: '250px',
+                              width: '300px',
+                              align: 'center',
+                            }}
+                          >
+                            <i
+                              class="fas fa-user-alt fa-7x"
+                              style={{ margin: '15px  auto 5px auto' }}
+                            ></i>
+
+                            <div className="card-body">
+                              <h4 className="heading3">
+                                Get Targeted Audience
+                              </h4>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        {/* <div className="col-md-4 mb-3">
+                          <div className="card">
+                            <img
+                              className="img-container "
+                              alt=""
+                              src="images/portrait-young-smiling-woman-2.png"
+                            />
+
+                            <div className="card-body">
+                              <h4 className="heading3">
+                                Special title treatment
+                              </h4>
+                            </div>
+                          </div>
+                        </div> */}
+                        <div className="col-md-2"></div>
+                        <div className="col-md-4 mb-3 ">
+                          <div
+                            className="card card4 mx-auto"
+                            style={{
+                              height: '250px',
+                              width: '300px',
+                              align: 'center',
+                            }}
+                          >
+                            <i
+                              class="fas fa-credit-card fa-7x"
+                              style={{ margin: '15px  auto 5px auto' }}
+                            ></i>
+
+                            <div className="card-body">
+                              <h4 className="heading3">
+                                Refer and Earn Revenue
+                              </h4>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-4 mb-3">
+                          <div
+                            className="card card1 mx-auto"
+                            style={{
+                              height: '250px',
+                              width: '300px',
+                              align: 'center',
+                            }}
+                          >
+                            <i
+                              class="fas fa-dharmachakra fa-7x"
+                              style={{ margin: '15px  auto 5px auto' }}
+                            ></i>
+
+                            <div className="card-body">
+                              <h4 className="heading3">Customer Engagements</h4>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         {/* <section className="featured-in">
           <div className="container">
             <h1>featured in</h1>
@@ -45,8 +201,11 @@ const Section3 = () => {
             </div>
           </div>
         </section> */}
-        <div className="row col-sm-12  justify-content-around px-5">
-          <h1 className="mb-5" style={{ textAlign: 'Center' }}>
+        {/* <div className="row col-sm-12  justify-content-around px-5">
+          <h1
+            className="mb-5"
+            style={{ textAlign: 'Center', fontWeight: '700' }}
+          >
             Creditsin a platform which <br />
             boost's customer engagement
           </h1>
@@ -107,8 +266,8 @@ const Section3 = () => {
                 style={{ width: '100%', align: 'center', leftPadding: '100px' }}
               />
             </div>
-          </div> */}
-        </section>
+          </div> 
+        </section> */}
         <section className="services-section">
           <div className="container">
             <div className="row">
@@ -122,7 +281,7 @@ const Section3 = () => {
                   style={{
                     marginLeft: '28%',
                     textAlign: 'left',
-                    fontWeight: '600',
+                    fontWeight: '700',
                   }}
                 >
                   Reach customers anywhere and everywhere
@@ -185,14 +344,6 @@ const Section3 = () => {
                       Pariatur laborum id natus nihil sint.
                     </p>
                   </div>
-                  <lottie-player
-                    src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
-                    background="transparent"
-                    speed="1"
-                    style={{ width: '100px', height: '100px' }}
-                    loop
-                    autoplay
-                  ></lottie-player>
                 </div>
                 <div className="align-inline">
                   <div className="icon-box1">
@@ -224,7 +375,7 @@ const Section3 = () => {
         </section>
         <section className=" card-slider-section">
           <div className="container">
-            <h1 className="heading">Reward for Anything & Everything</h1> 
+            <h1 className="heading">Reward for Anything & Everything</h1>
             <h3 className="heading2">
               Customers will love Creditsin to apply{' '}
             </h3>

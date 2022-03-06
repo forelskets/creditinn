@@ -27,14 +27,17 @@ const footer = () => {
                     to the customers and get a fast payout every month.
                   </p>
                 </div>
-                <div className="col-md-2 text-area">
+                <div className="col-md-2 text-area padding-down">
                   <div className="align-inline">
                     <h3>Learn More</h3>
                   </div>
-                  <li>Support</li>
-                  <li>PrivacyPolicy</li>
-                  <li>About Us</li>
-                  <li>Create An Account</li>
+                  <ul className="padding-ul">
+                    <li>Support</li>
+                    <li>PrivacyPolicy</li>
+                    <li>About Us</li>
+                    <li>Create An Account</li>
+                  </ul>
+
                   <lottie-player
                     src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
                     background="transparent"
@@ -44,20 +47,24 @@ const footer = () => {
                     autoplay
                   ></lottie-player>
                 </div>
-                <div className="col-md-2 text-area">
+                <div className="col-md-2 text-area padding-down">
                   <div className="align-inline">
                     <h3>Get Started </h3>
                   </div>
-                  <li>Create An Account</li>
+                  <ul className="padding-ul">
+                    <li>Create An Account</li>
+                  </ul>
                 </div>
-                <div className="col-md-2 text-area">
+                <div className="col-md-2 text-area padding-down">
                   <div className="align-inline">
                     <h3>Need Help?</h3>
                   </div>
-                  <li>Support</li>
-                  <li>PrivacyPolicy</li>
-                  <li>About Us</li>
-                  <li>Create An Account</li>
+                  <ul className="padding-ul">
+                    <li>Support</li>
+                    <li>PrivacyPolicy</li>
+                    <li>About Us</li>
+                    <li>Create An Account</li>
+                  </ul>
                   <br />
                   <lottie-player
                     src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
@@ -68,15 +75,17 @@ const footer = () => {
                     autoplay
                   ></lottie-player>
                 </div>
-                <div className="col-md-3 info-area">
+                <div className="col-md-3 info-area padding-down">
                   <h3>Social Links</h3>
                   <br />
                   <div className="align-inline">
                     <div className="m-auto">
-                      <i className="fab fa-instagram"></i>
-                      <i className="fab fa-facebook"></i>
-                      <i className="fab fa-twitter"></i>
-                      <i className="fab fa-youtube"></i>{' '}
+                      <div className="padding-ul">
+                        <i className="fab fa-instagram"></i>
+                        <i className="fab fa-facebook"></i>
+                        <i className="fab fa-twitter"></i>
+                        <i className="fab fa-youtube"></i>{' '}
+                      </div>
                     </div>
                   </div>
 

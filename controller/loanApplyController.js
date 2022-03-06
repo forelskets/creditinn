@@ -10,10 +10,10 @@ exports.getApplicationList = async (req, res, next) => {
 
   const fileArray = [];
   const filesArray = [
-    req.files.adhaar[0],
-    req.files.pan[0],
-    req.files.photo[0],
-    req.files.bankStmt[0],
+    // req.files.adhaar[0],
+    // req.files.pan[0],
+    // req.files.photo[0],
+    // req.files.bankStmt[0],
   ];
 
   console.log('aaaaaa fileArray', filesArray);
@@ -33,10 +33,10 @@ exports.getApplicationList = async (req, res, next) => {
 
   if (
     (!req.body.FirstName ||
-      !req.body.LastName ||
+      // !req.body.LastName ||
       !req.body.FatherName ||
       !req.body.DOB ||
-      !req.body.Email ||
+      // !req.body.Email ||
       !req.body.Mobile ||
       !req.body.CurrentAddress ||
       !req.body.CurrentAddress ||
@@ -44,20 +44,20 @@ exports.getApplicationList = async (req, res, next) => {
       !req.body.City ||
       !req.body.ZIP ||
       !req.body.CompanyName ||
-      !req.body.Designation ||
-      !req.body.CurrentCompanyExperience ||
+      // !req.body.Designation ||
+      // !req.body.CurrentCompanyExperience ||
       !req.body.TotalExperience ||
       !req.body.MonthlyIncome ||
       !req.body.AnnualIncome ||
       !req.body.AdhaarNo ||
-      !fileArray[0] ||
+      // !fileArray[0] ||
       !req.body.PanNo ||
-      !fileArray[1] ||
-      !req.body.BankName ||
-      !req.body.AccountNo ||
-      !req.body.IFSCcode ||
-      !fileArray[2] ||
-      !fileArray[3] ||
+      // !fileArray[1] ||
+      // !req.body.BankName ||
+      // !req.body.AccountNo ||
+      // !req.body.IFSCcode ||
+      // !fileArray[2] ||
+      // !fileArray[3] ||
       !req.body.LoanAmount,
     !req.body.loanPurpose,
     !req.body.loanAmount,
@@ -81,13 +81,13 @@ exports.getApplicationList = async (req, res, next) => {
     const profile = new Profile({
       UserId: req.userId,
       FirstName: req.body.FirstName,
-      LastName: req.body.LastName,
+      // LastName: req.body.LastName,
       FatherName: req.body.FatherName,
       DOB: req.body.DOB,
-      Email: req.body.Email,
+      // Email: req.body.Email,
       Mobile: req.body.Mobile,
       CurrentAddress: req.body.CurrentAddress,
-      CurrentAddress2: req.body.CurrentAddress,
+      // CurrentAddress2: req.body.CurrentAddress,
       State: req.body.State,
       City: req.body.City,
       ZIP: req.body.ZIP,
@@ -97,8 +97,8 @@ exports.getApplicationList = async (req, res, next) => {
     const details = new EmploymentDetails({
       UserId: req.userId,
       CompanyName: req.body.CompanyName,
-      Designation: req.body.Designation,
-      CurrentCompanyExperience: req.body.CurrentCompanyExperience,
+      // Designation: req.body.Designation,
+      // CurrentCompanyExperience: req.body.CurrentCompanyExperience,
       TotalExperience: req.body.TotalExperience,
       MonthlyIncome: req.body.MonthlyIncome,
       AnnualIncome: req.body.AnnualIncome,
@@ -107,14 +107,14 @@ exports.getApplicationList = async (req, res, next) => {
     const kyc = new KYC({
       UserId: req.userId,
       AdhaarNo: req.body.AdhaarNo,
-      Adhaar: JSON.stringify(fileArray[0]),
+      // Adhaar: JSON.stringify(fileArray[0]),
       PanNo: req.body.PanNo,
-      Pan: JSON.stringify(fileArray[1]),
-      BankName: req.body.BankName,
-      AccountNo: req.body.AccountNo,
-      IFSCcode: req.body.IFSCcode,
-      Photo: JSON.stringify(fileArray[2]),
-      BankStmt: JSON.stringify(fileArray[3]),
+      // Pan: JSON.stringify(fileArray[1]),
+      // BankName: req.body.BankName,
+      // AccountNo: req.body.AccountNo,
+      // IFSCcode: req.body.IFSCcode,
+      // Photo: JSON.stringify(fileArray[2]),
+      // BankStmt: JSON.stringify(fileArray[3]),
       ActiveLoanAmount: req.body.LoanAmount,
     });
     let count = await Application.collection.count();
