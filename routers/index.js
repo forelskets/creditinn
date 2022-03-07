@@ -17,6 +17,13 @@ router.post('/login', async (req, res) => {
     const userExist = await User.findOne({ Email: email });
     // console.log("userExixt", userExist);
     if (userExist) {
+      if(userExist.userVerified !== 1) {
+        return res.send({
+          status: 0,
+          message: 'user is not verified'
+        });
+      }
+
       const isMatch = await bcrypt.compare(password, userExist.Password);
       console.log('isMatch', isMatch);
       if (userExist && isMatch) {
@@ -172,6 +179,12 @@ router.post('/userLogin', async (req, res) => {
       const isMatch = await bcrypt.compare(password, isExist.Password);
       console.log('b', isMatch);
       if (isMatch) {
+        if(isExist.userVerified !== 1) {
+          return res.send({
+            status: 0,
+            message: 'user is not verified'
+          });
+        } 
         const token = await isExist.generateAuthToken();
         res.cookie('jwtoken', token);
         res.status(200).json(isExist);
@@ -204,10 +217,17 @@ router.post('/matchOtp', async (req, res) => {
           userVerified: 1
         });
 
+          const token = await result.generateAuthToken();
+          res.cookie('jwtoken', token);
+
         return res.send({
           status: 1,
           message: 'User Verified',
+          data:{
+            user: userExist
+          }
         });
+
       } else {
         return res.send({
           status: 0,
