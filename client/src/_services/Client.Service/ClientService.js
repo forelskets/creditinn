@@ -5,6 +5,12 @@ export const registerService = async (obj) => {
     return res
 }
 
+export const matchOTP = async (obj) => {
+    let res =await NoAUTH_API('POST', '/matchOtp', obj)
+    console.log("res",res)
+    return res
+}
+
 
 // export const AllService = async (obj) => {
 //     let res =await NoAUTH_API('GET', '/service', obj)
