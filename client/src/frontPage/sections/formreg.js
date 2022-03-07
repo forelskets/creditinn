@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-
+import toastr from 'toastr'
+import { Validate } from '../../_helper'
+import { registerService } from '../../_services/Client.Service'
+const init = {
+  userName: '',
+  userEmail: '',
+  userPassword: '',
+  userCPassword: '',
+  userMobile: '',
+  userRefral: '',
+}
 const FormReg = () => {
   const [isVarified, setIsVarified] = useState(false);
-  const [userDetails, setUserDetails] = useState({
-    userName: '',
-    userEmail: '',
-    userPassword: '',
-    userCPassword: '',
-    userMobile: '',
-    userRefral: '',
-  });
+  const [userDetails, setUserDetails] = useState(init);
+  const [error, setError] = useState('');
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -25,42 +29,44 @@ const FormReg = () => {
   }
 
   const changeFormsValue = async () => {
-    const Name = userDetails.userName;
-    const Email = userDetails.userEmail;
-    const Password = userDetails.userPassword;
-    const CPassword = userDetails.userCPassword;
-    const Mobile = userDetails.userMobile;
-    const Refral = userDetails.userRefral;
-    if (!Name || !Email || !Password || !CPassword || !Mobile || !Refral) {
-      window.alert('Please fill complete data');
-    } else if (Password !== CPassword) {
-      window.alert('Password and Confirm Password is not matched');
-    } else {
-      const response = await fetch('/userRegister', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ Name, Email, Password, Mobile, Refral }),
-      });
-      setUserDetails({
-        userName: '',
-        userEmail: '',
-        userPassword: '',
-        userCPassword: '',
-        userMobile: '',
-        userRefral: '',
-      });
-      const data = await response.json();
-
-      if (response.status === 400 && data) {
-        window.alert(data);
-      } else if (response.status === 200 && data) {
-        // props.formsValue(false);
-        alert('registration doneS');
+    let success = 0;
+    let Obj = Validate(userDetails, rules)
+    const { userName, userEmail, userPassword, userCPassword, userMobile, userRefral } = userDetails
+    if (Obj.userCPassword !== "" && userPassword !== userCPassword) {
+      Obj.userCPassword = 'Password is not matched!'
+    }
+    Object.keys(Obj).map(key => {
+      if (Obj[key] !== "") {
+        success = 1
       }
+      return true
+    })
+
+    setError(Obj)
+
+    let data = {
+      Name: userName,
+      Email: userEmail,
+      Password: userPassword,
+      CPassword: userCPassword,
+      Mobile: userMobile,
+      RefralUserCode: userRefral
+    }
+
+
+    if (success === 0) {
+      registerService(data).then(res => {
+        if(res.status === 1){
+          toastr.warning(res.message)
+        }else if(res.message){
+          toastr.warning(res.message)
+        }
+        // setUserDetails(init);
+      })
     }
   };
+
+
 
   return (
     <>
@@ -106,7 +112,9 @@ const FormReg = () => {
                 <label className="form-label" for="form3Example1">
                   Name
                 </label>
+                {error?.userName && <div className='error-msg'>{error.userName}</div>}
               </div>
+
             </div>
             <div className="col">
               <div className="form-outline">
@@ -122,8 +130,10 @@ const FormReg = () => {
                 <label className="form-label" for="form3Example2">
                   Mobile No
                 </label>
+                {error?.userMobile && <div className='error-msg'>{error.userMobile}</div>}
               </div>
             </div>
+
           </div>
 
           <div className="form-outline mb-2">
@@ -139,6 +149,7 @@ const FormReg = () => {
             <label className="form-label" for="form3Example3">
               Email address
             </label>
+            {error?.userEmail && <div className='error-msg'>{error.userEmail}</div>}
           </div>
           <div className="row mb-2">
             <div className="col">
@@ -155,6 +166,7 @@ const FormReg = () => {
                 <label className="form-label" for="form3Example4">
                   Password
                 </label>
+                {error?.userPassword && <div className='error-msg'>{error.userPassword}</div>}
               </div>
             </div>
             <div className="col">
@@ -171,6 +183,7 @@ const FormReg = () => {
                 <label className="form-label" for="form3Example4">
                   Confirm Password
                 </label>
+                {error?.userCPassword && <div className='error-msg'>{error.userCPassword}</div>}
               </div>
             </div>
           </div>
@@ -188,6 +201,7 @@ const FormReg = () => {
               <label className="form-label" for="form3Example4">
                 Refral no.
               </label>
+              {error?.userRefral && <div className='error-msg'>{error.userRefral}</div>}
             </div>
           </div>
 
@@ -229,3 +243,38 @@ const FormReg = () => {
 };
 
 export default FormReg;
+
+const rules = [{
+  field: 'userName',
+  fieldName: 'Name',
+  type: 'string',
+  require: true
+},
+{
+  field: 'userMobile',
+  fieldName: 'Mobile',
+  type: 'mobile',
+  require: true
+}, {
+  field: 'userEmail',
+  fieldName: 'Email',
+  type: 'email',
+  require: true
+}, {
+  field: 'userPassword',
+  fieldName: 'Password',
+  type: 'password',
+  require: true
+}, {
+  field: 'userCPassword',
+  fieldName: 'Password',
+  type: 'string',
+  require: true
+}
+  // , {
+  //   field: 'userRefral',
+  //   fieldName: 'User Refral',
+  //   type: 'string',
+  //   require: true
+  // }
+]

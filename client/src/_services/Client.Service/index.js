@@ -1,0 +1,2 @@
+export {registerService
+} from './ClientService'

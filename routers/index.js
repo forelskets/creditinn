@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const Bank = require('../models/bankService');
 const BankNote = require('../models/bankOffer');
 const auth = require('../middleware/Authentication');
+const nodemailer = require('nodemailer');
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -65,87 +66,99 @@ router.post('/userRegister', async (req, res) => {
   try {
     console.log(req.body.Refral);
     let data1 = await User.collection.count();
-    const { Name, Email, Password, Mobile } = req.body;
+    const { Name, Email, Password, Mobile, RefralUserCode } = req.body;
     console.log(Name, Email, Password, Mobile);
 
     data1++;
     refral = 3456789 + data1;
-    if (!Name || !Email || !Password || !Mobile) {
-      res.status(400).send('please fill data');
-    } else {
-      const isMatch = await User.findOne({ Email });
-      //  console.log(isMatch);
-      if (isMatch) {
-        res.status(400).json('user is already exist.');
-      } else {
-        const user = new User({
-          RoleId: 2,
-          UserId: data1,
-          RefralNo: refral,
-          Name,
-          Email,
-          Password,
-          Mobile,
 
-          Status: true,
-        });
-        const addUser = await user.save();
-        // console.log(addUser);
-        if (addUser) {
-          const token = await addUser.generateAuthToken();
-          res.cookie('jwtoken', token);
-        }
-        const otpFunc = async () => {
-          const otpCode = Math.floor(Math.random() * 10000 + 1);
-          const otpData = new Otp({
-            Email,
-            Mobile,
-            Code: otpCode,
-            expireIn: new Date().getTime() + 300 * 10000,
-          });
-          const otpResponse = await otpData.save();
-          otpMail(Email, otpCode, Name);
-          // res.status(200).send({message: "otp sent"})
-        };
-        function otpMail(Email, otpCode, Name) {
-          'use strict';
-          const nodemailer = require('nodemailer');
+    const isMatch = await User.findOne({ Email });
+    //  console.log(isMatch);
+    if (isMatch) {
+      return res.send({ status: 0, message: 'user is already exist.' });
+    }
 
-          async function main() {
-            let transporter = nodemailer.createTransport({
-              host: 'mail.creditsin.com',
-              port: 587,
-              secure: false,
-              requireTLS: true,
-              auth: {
-                user: 'info@creditsin.com',
-                pass: '12345678',
-              },
-              tls: {
-                // do not fail on invalid certs
-                rejectUnauthorized: false,
-              },
-            });
+    let obj = {
+      RoleId: 2,
+      UserId: data1,
+      RefralNo: refral,
+      Name,
+      Email,
+      Password,
+      Mobile,
+      userVerified: 0,
+      Status: true,
+    };
 
-            let info = await transporter.sendMail({
-              from: '"CreditIN OTP Verification" <info@creditsin.com>',
-              to: `${Email}, info@creditsin.com`,
-              subject: `Hello ${Name}✔`,
-              html: `<b>${otpCode}</b>`,
-            });
-          }
-
-          main().catch(console.error);
-        }
-
-        otpFunc();
-        if (addUser) {
-          res.status(200).json('user register successfully1');
-        }
+    if (RefralUserCode) {
+      const ReferedUser = await User.findOne({ RefralNo: RefralUserCode });
+    
+      if(ReferedUser){
+        obj.RefralID = ReferedUser.id;
+        obj.RefralUserCode = RefralUserCode;
       }
     }
+
+    const user = new User(obj);
+
+    const addUser = await user.save();
+    // if (addUser) {
+    //   const token = await addUser.generateAuthToken();
+    //   res.cookie('jwtoken', token);
+    // }
+
+    const otpFunc = async () => {
+      const otpCode = Math.floor(Math.random() * 10000 + 1);
+      const otpData = new Otp({
+        Email,
+        Mobile,
+        Code: otpCode,
+        expireIn: new Date().getTime() + 300 * 10000,
+      });
+      const otpResponse = await otpData.save();
+      otpMail(Email, otpCode, Name);
+      // res.status(200).send({message: "otp sent"})
+    };
+    function otpMail(Email, otpCode, Name) {
+
+      async function main() {
+        let transporter = nodemailer.createTransport({
+          host: 'mail.creditsin.com',
+          port: 587,
+          secure: false,
+          requireTLS: true,
+          auth: {
+            user: 'info@creditsin.com',
+            pass: '12345678',
+          },
+          tls: {
+            // do not fail on invalid certs
+            rejectUnauthorized: false,
+          },
+        });
+
+        let info = await transporter.sendMail({
+          from: '"CreditIN OTP Verification" <info@creditsin.com>',
+          to: `${Email}, info@creditsin.com`,
+          subject: `Hello ${Name}✔`,
+          html: `<b>${otpCode}</b>`,
+        });
+      }
+
+      main().catch(console.error);
+    }
+
+    otpFunc();
+    if (addUser) {
+      return res.send({ status: 1, message: 'user register successfully!', data: { user: addUser } });
+    }
+
   } catch (err) {
     console.log(err);
+    return res.send({
+      status: 0,
+      message: 'Something Went Wrong'
+    })
   }
 });
 
@@ -174,19 +187,36 @@ router.post('/userLogin', async (req, res) => {
 });
 
 router.post('/matchOtp', async (req, res) => {
-  console.log(req.body.otp);
-  const data = await Otp.find({ Code: req.body.otp });
+  const { Email, Mobile, Code } = req.body;
+
+  const data = await Otp.find({ Email, Mobile, Code });
   console.log(data);
   if (data) {
     const currentTime = new Date().getTime();
     const diff = data.expireIn - currentTime;
     if (diff < 0) {
-      res.status(400).json('Token Failed');
+      return res.send({ status: 0, message: 'Token Failed' });
     } else {
-      res.status(200).json('Token Matched');
+
+      const result = await User.findOne({ Email });
+      if (result) {
+        await result.update({
+          userVerified: 1
+        });
+
+        return res.send({
+          status: 1,
+          message: 'User Verified',
+        });
+      } else {
+        return res.send({
+          status: 0,
+          message: 'No Record Found',
+        });
+      }
     }
   } else {
-    res.status(400).json('Invalid otp');
+    return res.send({ status: 0, message: 'Invalid otp' });
   }
 });
 
