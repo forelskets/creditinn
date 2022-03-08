@@ -1,3 +1,4 @@
 export {registerService,
-    matchOTP
+    matchOTP,
+    sendOTP
 } from './ClientService'

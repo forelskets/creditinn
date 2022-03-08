@@ -9,9 +9,9 @@ export const rules = (field, rule) => {
         }else if(rule.type === 'email' && !validateEmail(field)){
             message = rule.fieldName + " is not valid!"
         }else if(rule.type === 'password'){
-            let pass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            let pass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
             if(!pass.test(field)){
-                message = 'Minimum eight characters, at least one letter and one number!'
+                message = 'Minimum eight characters, at least one letter, one number and one special character!'
             }
         }
     }

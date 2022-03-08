@@ -1,21 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import ModalComponent from './modalComponent';
-import OtpComponent from './otpComponent';
-import ReCAPTCHA from 'react-google-recaptcha';
-
+import React, { useState, useEffect, useRef } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import ModalComponent from "./modalComponent";
+import OtpComponent from "./otpComponent";
+import ReCAPTCHA from "react-google-recaptcha";
+import toastr from "toastr";
+import { sendOTP, matchOTP } from "../../_services/Client.Service";
 const Navbar = () => {
   const history = useHistory();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [forms, setForms] = useState(false);
   const [isVarified, setIsVarified] = useState(false);
-
+  const [userNotVerified, setUserNotVerified] = useState(false);
+  const [otp, setOTP] = useState("");
+  const [error, setError] = useState("");
+  const [dataa, setData] = useState("");
   const refModal = useRef(null);
   const loginModal = useRef(null);
 
   function onChangeHandle(value) {
-    console.log('Captcha value:', value);
+    console.log("Captcha value:", value);
     setIsVarified(true);
   }
   const register = () => {
@@ -30,27 +34,56 @@ const Navbar = () => {
   };
 
   const loginSubmit = async (req, res) => {
-    const response = await fetch('/userLogin', {
-      method: 'POST',
+    const response = await fetch("/userLogin", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
     });
+    console.log("response", response);
 
     const data = await response.json();
+    console.log("data", data);
 
-    console.log(data);
-    if (response.status === 400 && data) {
-      window.alert(data);
-    } else if (response.status === 200 && data) {
-      if (data.RoleId === 1) {
-        // dispatch({type:"USER", payload:false})
-        history.push('/nav');
-      } else if (data.RoleId === 2) {
-        // dispatch({type:"USER", payload:true})
-        history.push('/nav');
+    if (data) {
+      if (data?.status == 1) {
+        loginModal?.current?.click();
+        history.push("/nav");
+      } else if (data?.status == 0 && data?.userVerified === 1) {
+        setData(data.data.user);
+        sendOTP({ Email: email }).then((response) => {
+          if (response?.status === 1) {
+            setUserNotVerified(true);
+          }
+        });
+      } else {
+        if (data?.message) {
+          toastr.warning(data.message);
+        }
       }
+    }
+  };
+
+  const VerifyOTP = () => {
+    let success = 0;
+    if (otp === "") {
+      setError({ otp: "Please enter OTP" });
+      success = 1;
+    }
+    if (success === 0) {
+      matchOTP({ Email: email, Mobile: dataa.Mobile, Code: otp }).then(
+        (res) => {
+          if (res?.status === 1) {
+            toastr.info("Account Verified Please login.");
+            
+            setUserNotVerified(false);
+            history.push("/");
+          } else if (res?.message) {
+            toastr.warning(res.message);
+          }
+        }
+      );
     }
   };
 
@@ -60,7 +93,7 @@ const Navbar = () => {
         <div className="container">
           <NavLink className="navbar-brand" to="#">
             <img
-              style={{ height: '70px' }}
+              style={{ height: "70px" }}
               src="images/logo.png"
               className="d-inline-block align-top"
               alt=""
@@ -78,7 +111,7 @@ const Navbar = () => {
           >
             <i
               className="fab fa-ioxhost fa-2x outline-none"
-              style={{ color: '#155263', outline: 'none' }}
+              style={{ color: "#155263", outline: "none" }}
             ></i>
           </button>
 
@@ -95,7 +128,10 @@ const Navbar = () => {
                 </button> */}
               </li>
               <li className="nav-item active">
-                <button className="btn-3 button my-1" onClick={register}>
+                <button
+                  className="btn-3 button my-1"
+                  onClick={() => history.push("/form")}
+                >
                   register
                 </button>
               </li>
@@ -159,6 +195,7 @@ const Navbar = () => {
       >
         Launch demo modal
       </button>
+
       <div
         className="modal fade"
         id="exampleModal1"
@@ -180,49 +217,80 @@ const Navbar = () => {
               ></button>
             </div>
             <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={email}
-                    placeholder="Enter YOur Email"
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
+              {userNotVerified ? (
+                <form>
+                  <div className="mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="otp"
+                      name="otp"
+                      value={otp}
+                      placeholder="OTP (one time password)"
+                      onChange={(e) => {
+                        setOTP(e.target.value);
+                      }}
+                    />
+                    {error?.otp && <div className="error-msg">{error.otp}</div>}
+                  </div>
+
+                  <div className="mb-3">
+                    <button
+                      type="button"
+                      className="btn btn-2 button my-2"
+                      // data-bs-dismiss="modal"
+                      onClick={VerifyOTP}
+                      disabled={!isVarified}
+                    >
+                      Verify OTP
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <form>
+                  <div className="mb-3">
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      name="email"
+                      value={email}
+                      placeholder="Enter YOur Email"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      name="password"
+                      value={password}
+                      placeholder="Enter Password"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <ReCAPTCHA
+                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                    onChange={onChangeHandle}
                   />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    value={password}
-                    placeholder="Enter Password"
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  />
-                </div>
-                <ReCAPTCHA
-                  sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                  onChange={onChangeHandle}
-                />
-                <div className="mb-3">
-                  <button
-                    type="button"
-                    className="btn btn-2 button my-2"
-                    data-bs-dismiss="modal"
-                    onClick={loginSubmit}
-                    disabled={!isVarified}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
+                  <div className="mb-3">
+                    <button
+                      type="button"
+                      className="btn btn-2 button my-2"
+                      // data-bs-dismiss="modal"
+                      onClick={loginSubmit}
+                      disabled={!isVarified}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </div>
