@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useHistory } from 'react-router-dom';
 import toastr from 'toastr'
 import { Validate } from '../../_helper'
-import { registerService } from '../../_services/Client.Service'
+import { registerService, matchOTP } from '../../_services/Client.Service'
 const init = {
   userName: '',
   userEmail: '',
@@ -15,7 +16,9 @@ const FormReg = () => {
   const [isVarified, setIsVarified] = useState(false);
   const [userDetails, setUserDetails] = useState(init);
   const [error, setError] = useState('');
-
+  const [isformSubmit, setFormSubmit] = useState(false);
+  const [otp, setOTP] = useState("");
+  const history =useHistory()
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setUserDetails({
@@ -56,9 +59,10 @@ const FormReg = () => {
 
     if (success === 0) {
       registerService(data).then(res => {
-        if(res.status === 1){
+        if (res?.status === 1) {
+          setFormSubmit(true)
           toastr.warning(res.message)
-        }else if(res.message){
+        } else if (res.message) {
           toastr.warning(res.message)
         }
         // setUserDetails(init);
@@ -66,7 +70,24 @@ const FormReg = () => {
     }
   };
 
-
+  const submitOTP = () => {
+    let success = 0;
+    if (otp === "") {
+      setError({ otp: "Please enter OTP" })
+      success = 1
+    }
+    if (success === 0) {
+      matchOTP({ otp }).then(res => {
+        if (res?.status === 1) {
+          setUserDetails(init);
+          toastr.warning(res.message)
+          history.push('/nav')
+        } else if (res?.message) {
+          toastr.warning(res.message)
+        }
+      })
+    }
+  }
 
   return (
     <>
@@ -80,7 +101,7 @@ const FormReg = () => {
           border: '1',
         }}
       >
-        <form
+        {isformSubmit ? <form
           style={{
             width: '100%',
             padding: '20px 10px 10px 10px',
@@ -96,116 +117,157 @@ const FormReg = () => {
             />
             <h2>Register Here</h2>
           </div>
-          <div className="row mb-2">
-            <div className="col">
-              <div className="form-outline">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="userName"
-                  name="userName"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter Your Name"
-                  value={userDetails.userName}
-                  onChange={changeHandler}
-                />
-                <label className="form-label" for="form3Example1">
-                  Name
-                </label>
-                {error?.userName && <div className='error-msg'>{error.userName}</div>}
-              </div>
-
-            </div>
-            <div className="col">
-              <div className="form-outline">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="userMobile"
-                  name="userMobile"
-                  placeholder="Enter Your Mobile No."
-                  value={userDetails.userMobile}
-                  onChange={changeHandler}
-                />
-                <label className="form-label" for="form3Example2">
-                  Mobile No
-                </label>
-                {error?.userMobile && <div className='error-msg'>{error.userMobile}</div>}
-              </div>
-            </div>
-
-          </div>
 
           <div className="form-outline mb-2">
             <input
-              type="email"
+              type="otp"
               className="form-control"
               id="userEmail"
               name="userEmail"
-              placeholder="Enter Your Email"
-              value={userDetails.userEmail}
-              onChange={changeHandler}
+              placeholder="OTP"
+              value={otp}
+              onChange={e => setOTP(e.target.value)}
             />
             <label className="form-label" for="form3Example3">
-              Email address
+              OTP - (one time password)
             </label>
-            {error?.userEmail && <div className='error-msg'>{error.userEmail}</div>}
-          </div>
-          <div className="row mb-2">
-            <div className="col">
-              <div className="form-outline">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="userPassword"
-                  name="userPassword"
-                  placeholder="Enter Your Password"
-                  value={userDetails.userPassword}
-                  onChange={changeHandler}
-                />
-                <label className="form-label" for="form3Example4">
-                  Password
-                </label>
-                {error?.userPassword && <div className='error-msg'>{error.userPassword}</div>}
-              </div>
-            </div>
-            <div className="col">
-              <div className="form-outline">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="userCPassword"
-                  name="userCPassword"
-                  placeholder="Enter Your confirm - password"
-                  value={userDetails.userCPassword}
-                  onChange={changeHandler}
-                />
-                <label className="form-label" for="form3Example4">
-                  Confirm Password
-                </label>
-                {error?.userCPassword && <div className='error-msg'>{error.userCPassword}</div>}
-              </div>
-            </div>
-          </div>
-          <div className="col">
-            <div className="form-outline">
-              <input
-                type="text"
-                className="form-control"
-                id="userRefral"
-                name="userRefral"
-                placeholder="Enter Your Refral no."
-                value={userDetails.userRefral}
-                onChange={changeHandler}
-              />
-              <label className="form-label" for="form3Example4">
-                Refral no.
-              </label>
-              {error?.userRefral && <div className='error-msg'>{error.userRefral}</div>}
-            </div>
+            {error?.otp && <div className='error-msg'>{error.otp}</div>}
           </div>
 
-          {/* <div className="col">
+          <button
+            type="button"
+            className="btn btn-2 button my-3"
+            onClick={submitOTP}
+          >
+            Submit
+          </button>
+        </form> :
+          <form
+            style={{
+              width: '100%',
+              padding: '20px 10px 10px 10px',
+              border: '1',
+            }}
+          >
+            <div className="text-center">
+              <img
+                style={{ height: '90px', width: '190px' }}
+                src="images/credit-n-logo.svg"
+                className="d-inline-block align-top"
+                alt=""
+              />
+              <h2>Register Here</h2>
+            </div>
+            <div className="row mb-2">
+              <div className="col">
+                <div className="form-outline">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="userName"
+                    name="userName"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter Your Name"
+                    value={userDetails.userName}
+                    onChange={changeHandler}
+                  />
+                  <label className="form-label" for="form3Example1">
+                    Name
+                  </label>
+                  {error?.userName && <div className='error-msg'>{error.userName}</div>}
+                </div>
+
+              </div>
+              <div className="col">
+                <div className="form-outline">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="userMobile"
+                    name="userMobile"
+                    placeholder="Enter Your Mobile No."
+                    value={userDetails.userMobile}
+                    onChange={changeHandler}
+                  />
+                  <label className="form-label" for="form3Example2">
+                    Mobile No
+                  </label>
+                  {error?.userMobile && <div className='error-msg'>{error.userMobile}</div>}
+                </div>
+              </div>
+
+            </div>
+
+            <div className="form-outline mb-2">
+              <input
+                type="email"
+                className="form-control"
+                id="userEmail"
+                name="userEmail"
+                placeholder="Enter Your Email"
+                value={userDetails.userEmail}
+                onChange={changeHandler}
+              />
+              <label className="form-label" for="form3Example3">
+                Email address
+              </label>
+              {error?.userEmail && <div className='error-msg'>{error.userEmail}</div>}
+            </div>
+            <div className="row mb-2">
+              <div className="col">
+                <div className="form-outline">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="userPassword"
+                    name="userPassword"
+                    placeholder="Enter Your Password"
+                    value={userDetails.userPassword}
+                    onChange={changeHandler}
+                  />
+                  <label className="form-label" for="form3Example4">
+                    Password
+                  </label>
+                  {error?.userPassword && <div className='error-msg'>{error.userPassword}</div>}
+                </div>
+              </div>
+              <div className="col">
+                <div className="form-outline">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="userCPassword"
+                    name="userCPassword"
+                    placeholder="Enter Your confirm - password"
+                    value={userDetails.userCPassword}
+                    onChange={changeHandler}
+                  />
+                  <label className="form-label" for="form3Example4">
+                    Confirm Password
+                  </label>
+                  {error?.userCPassword && <div className='error-msg'>{error.userCPassword}</div>}
+                </div>
+              </div>
+            </div>
+            <div className="col">
+              <div className="form-outline">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="userRefral"
+                  name="userRefral"
+                  placeholder="Enter Your Refral no."
+                  value={userDetails.userRefral}
+                  onChange={changeHandler}
+                />
+                <label className="form-label" for="form3Example4">
+                  Refral no.
+                </label>
+                {error?.userRefral && <div className='error-msg'>{error.userRefral}</div>}
+              </div>
+            </div>
+
+            {/* <div className="col">
             <div className="form-outline">
               <input type="text" id="form3Example4" className="form-control" />
               <label className="form-label" for="form3Example4">
@@ -213,19 +275,19 @@ const FormReg = () => {
               </label>
             </div>
           </div> */}
-          <ReCAPTCHA
-            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-            onChange={onChangeHandle}
-          />
-          <button
-            type="button"
-            className="btn btn-2 button my-3"
-            onClick={changeFormsValue}
-            disabled={!isVarified}
-          >
-            Submit
-          </button>
-        </form>
+            <ReCAPTCHA
+              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              onChange={onChangeHandle}
+            />
+            <button
+              type="button"
+              className="btn btn-2 button my-3"
+              onClick={changeFormsValue}
+              disabled={!isVarified}
+            >
+              Submit
+            </button>
+          </form>}
         <div className="form-check d-flex justify-content-center mb-2">
           <img
             style={{ height: '20px', width: '20px' }}
