@@ -393,8 +393,8 @@ const Section3 = () => {
                           <div className="card">
                             <img
                               className="img-container "
-                              alt=""
-                              src="images/portrait-young-smiling-woman-2.png"
+                              alt="" style={{ height: '300px', width: '400px' }}
+                              src="images/personal.jpg"
                             />
 
                             <div className="card-body">
@@ -412,8 +412,8 @@ const Section3 = () => {
                           <div className="card">
                             <img
                               className="img-container "
-                              alt=""
-                              src="images/portrait-young-smiling-woman-2.png"
+                              alt="" style={{ height: '300px', width: '400px' }}
+                              src="images/business.jpeg"
                             />
 
                             <div className="card-body">
@@ -431,8 +431,8 @@ const Section3 = () => {
                           <div className="card">
                             <img
                               className="img-container "
-                              alt=""
-                              src="images/portrait-young-smiling-woman-2.png"
+                              alt="" style={{ height: '300px', width: '400px' }}
+                              src="images/home.webp"
                             />
 
                             <div className="card-body">

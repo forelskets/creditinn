@@ -76,7 +76,7 @@ const Navbar = () => {
         (res) => {
           if (res?.status === 1) {
             toastr.info("Account Verified Please login.");
-            
+
             setUserNotVerified(false);
             history.push("/");
           } else if (res?.message) {
@@ -89,7 +89,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg ">
+      <nav className="navbar navbar-expand-lg fixed-top ">
         <div className="container">
           <NavLink className="navbar-brand" to="#">
             <img
@@ -179,8 +179,8 @@ const Navbar = () => {
               {forms ? (
                 <ModalComponent formsValue={formsValue} />
               ) : (
-                <OtpComponent />
-              )}
+                  <OtpComponent />
+                )}
             </div>
           </div>
         </div>
@@ -247,50 +247,50 @@ const Navbar = () => {
                   </div>
                 </form>
               ) : (
-                <form>
-                  <div className="mb-3">
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="email"
-                      name="email"
-                      value={email}
-                      placeholder="Enter YOur Email"
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
+                  <form>
+                    <div className="mb-3">
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        name="email"
+                        value={email}
+                        placeholder="Enter YOur Email"
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        name="password"
+                        value={password}
+                        placeholder="Enter Password"
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <ReCAPTCHA
+                      sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                      onChange={onChangeHandle}
                     />
-                  </div>
-                  <div className="mb-3">
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="password"
-                      name="password"
-                      value={password}
-                      placeholder="Enter Password"
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <ReCAPTCHA
-                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                    onChange={onChangeHandle}
-                  />
-                  <div className="mb-3">
-                    <button
-                      type="button"
-                      className="btn btn-2 button my-2"
-                      // data-bs-dismiss="modal"
-                      onClick={loginSubmit}
-                      disabled={!isVarified}
-                    >
-                      Submit
+                    <div className="mb-3">
+                      <button
+                        type="button"
+                        className="btn btn-2 button my-2"
+                        // data-bs-dismiss="modal"
+                        onClick={loginSubmit}
+                        disabled={!isVarified}
+                      >
+                        Submit
                     </button>
-                  </div>
-                </form>
-              )}
+                    </div>
+                  </form>
+                )}
             </div>
           </div>
         </div>
