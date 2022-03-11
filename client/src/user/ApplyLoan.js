@@ -3,8 +3,12 @@ import { NavLink, useHistory } from 'react-router-dom';
 import LoanForm from './LoanForm';
 import Apply from './Apply';
 import Bank from './Bank';
+import {
+  FacebookShareButton, WhatsappShareButton, WhatsappIcon, EmailIcon, EmailShareButton, FacebookIcon
+} from "react-share";
 
 const ApplyLoan = () => {
+  const shareUrl = 'www.forelskets.com bvhfytrytyrytrtyryryrrtrty';
   const [profile, setProfile] = useState({});
   const [lstatus, setLstatus] = useState(false);
   const LoanFunc = () => {
@@ -107,6 +111,17 @@ const ApplyLoan = () => {
                         <span className="profile-name">{profile.Name}</span>
                       </NavLink>
                     </li>
+
+                    <text style={{ backgroundColor: '#00000' }}>6751757</text>
+                    <FacebookShareButton url={shareUrl} style={{ padding: 10 }}>
+                      <FacebookIcon size={40} />
+                    </FacebookShareButton>
+                    <EmailShareButton url={shareUrl} style={{ padding: 10 }} >
+                      <EmailIcon size={40} />
+                    </EmailShareButton>
+                    <WhatsappShareButton url={shareUrl} style={{ padding: 10 }} >
+                      <WhatsappIcon size={40} />
+                    </WhatsappShareButton>
                     <br />
                     <br />
                     <li>
