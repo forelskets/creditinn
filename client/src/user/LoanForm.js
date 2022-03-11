@@ -392,7 +392,7 @@ const LoanForm = () => {
                   >
                     Employement Details
                   </Link>
-                  <Link
+                  {/* <Link
                     className="nav-link recent-nav-tab"
                     id="step3-tab"
                     data-bs-toggle="tab"
@@ -400,13 +400,70 @@ const LoanForm = () => {
                     ref={KYCDetails}
                   >
                     KYC Details
-                  </Link>
+                  </Link> */}
                 </div>
               </nav>
 
               <div className="tab-content py-4">
                 <div className="tab-pane fade show active" id="step1">
                   <div className="form-1">
+                    <div className="form-row row my-3">
+                      <div className="form-group col-md-6">
+                        <label>
+                          Adhar Card no.
+                          <i
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="for eg:123456789009867"
+                            class="fas fa-eye "
+                            style={eye}
+                          ></i>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="adhaarNo"
+                          name="adhaarNo"
+                          placeholder="Adhar Card number"
+                          value={employeeProfile.adhaarNo}
+                          onChange={ProfileChangeHandler}
+                          disabled={validateSelectOptions()}
+                        />
+                      </div>
+                      {/* <div className="form-group col-md-6">
+                        <input
+                          type="file"
+                          name="adhaar"
+                          className="file-input"
+                          id="adhaar"
+                          placeholder="Post/Designination"
+                          onChange={AdhaarUpload}
+                          disabled={validateSelectOptions()}
+                        />
+                      </div> */}
+                      <div className="form-group col-md-6">
+                        <label>
+                          PAN Card no.
+                          <i
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="for eg:123456789009867"
+                            class="fas fa-eye "
+                            style={eye}
+                          ></i>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="panNo"
+                          name="panNo"
+                          value={employeeProfile.panNo}
+                          onChange={ProfileChangeHandler}
+                          placeholder="PAN-Card number"
+                          disabled={validateSelectOptions()}
+                        />
+                      </div>
+                    </div>
                     <div className="form-row row my-3">
                       <div className="form-group col-md-4">
                         <label>
@@ -670,7 +727,7 @@ const LoanForm = () => {
                     <div className="form-row row my-3">
                       <div className="form-group col-md-4">
                         <label>
-                          Company Name
+                          Employer/Firm Name
                           <i
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
@@ -744,7 +801,7 @@ const LoanForm = () => {
                       {/* </div> */}
                       <div className="form-group col-md-4">
                         <label>
-                          Total Work Experience
+                          Total Business/Work Experience
                           <i
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
@@ -773,7 +830,7 @@ const LoanForm = () => {
                       </div>
                       <div className="form-group col-md-4">
                         <label>
-                          Monthly Income
+                          MonthlyIncome/Curr. Yr. TurnOver
                           <i
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
@@ -804,7 +861,7 @@ const LoanForm = () => {
                     <div className="form-row my-3 row">
                       <div className="form-group col-md-4">
                         <label>
-                          Annual Income
+                          Annual Income/ Last Yr. TurnOver
                           <i
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
@@ -832,8 +889,42 @@ const LoanForm = () => {
                         /> */}
                       </div>
                     </div>
-
+                    <div className="form-row my-3 row">
+                      <div className="form-group col-md-6">
+                        <input
+                          type="checkbox"
+                          id="HaveLoan"
+                          name="HaveLoan"
+                          value="1"
+                          onChange={changeBox}
+                          disabled={validateSelectOptions()}
+                        />
+                        <label for="vehicle1">already have a Loan</label>
+                        <br />
+                      </div>
+                    </div>
+                    {checkBoxStatus ? checkFunc() : ''}
                     <div className="row justify-content-between my-3">
+                      <div className="col-auto">
+                        <button
+                          type="button"
+                          className="btn form-btn"
+                          onClick={ClickEmployeeDetails}
+                        >
+                          Previous
+                        </button>
+                      </div>
+                      <div className="col-auto">
+                        <button
+                          type="button"
+                          className="btn form-btn"
+                          onClick={SubmitDetails}
+                        >
+                          Finish
+                        </button>
+                      </div>
+                    </div>
+                    {/* <div className="row justify-content-between my-3">
                       <div className="col-auto">
                         <button
                           type="button"
@@ -852,13 +943,13 @@ const LoanForm = () => {
                           Next
                         </button>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="tab-pane fade" id="step3">
                   <div className="form-3">
                     <div className="form-row row my-3">
-                      <div className="form-group col-md-6">
+                      {/* <div className="form-group col-md-6">
                         <label>
                           Adhar Card no.
                           <i
@@ -879,7 +970,7 @@ const LoanForm = () => {
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
                         />
-                      </div>
+                      </div> */}
                       {/* <div className="form-group col-md-6">
                         <input
                           type="file"
@@ -891,7 +982,7 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div> */}
-                      <div className="form-group col-md-6">
+                      {/* <div className="form-group col-md-6">
                         <label>
                           PAN Card no.
                           <i
@@ -912,7 +1003,7 @@ const LoanForm = () => {
                           placeholder="PAN-Card number"
                           disabled={validateSelectOptions()}
                         />
-                      </div>
+                      </div> */}
                     </div>
                     <div className="form-row row my-3">
                       {/* <div className="form-group col-md-6">
@@ -1019,7 +1110,7 @@ const LoanForm = () => {
                       </div> */}
                     </div>
 
-                    <div className="form-row my-3 row">
+                    {/* <div className="form-row my-3 row">
                       <div className="form-group col-md-6">
                         <input
                           type="checkbox"
@@ -1053,7 +1144,7 @@ const LoanForm = () => {
                           Finish
                         </button>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

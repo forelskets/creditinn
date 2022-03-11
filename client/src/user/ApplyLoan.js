@@ -91,6 +91,22 @@ const ApplyLoan = () => {
                   </div>
                   <div className="row pb-5">
                     <div className="recent-sales box">
+                      <div id="ecww-widgetwrapper" style={{ minWidth: '250px', width: '100%' }}>
+                        <div
+                          id="ecww-widget"
+                          style={{
+                            position: 'relative',
+                            paddingTop: '0',
+                            paddingBottom: '280px',
+                            height: '0',
+                            overflow: 'hidden',
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row pb-5">
+                    <div className="recent-sales box">
                       <Apply />
                     </div>
                   </div>
@@ -126,13 +142,21 @@ const ApplyLoan = () => {
                       </NavLink>
                     </li>
 
-                    <text style={{ backgroundColor: '#00000' }}>6751757</text>
-                    <FacebookShareButton url={shareUrl} style={{ padding: 10 }}>
+                    <text style={{ backgroundColor: '#f0f3f4', padding: 8 }}>{profile.RefralNo}</text>
+                    <FacebookShareButton url={shareUrl} style={{ padding: 10 }} >
                       <FacebookIcon size={40} />
                     </FacebookShareButton>
-                    <EmailShareButton url={shareUrl} style={{ padding: 10 }} >
-                      <EmailIcon size={40} />
+                    <EmailShareButton
+                      url={profile.RefralNo}
+                      subject="subject"
+                      body={"hey there, pls share my referal code"}
+                    >
+                      <EmailIcon
+                        size={40} />
                     </EmailShareButton>
+
+
+
                     <WhatsappShareButton url={shareUrl} style={{ padding: 10 }} >
                       <WhatsappIcon size={40} />
                     </WhatsappShareButton>

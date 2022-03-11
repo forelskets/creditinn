@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const {Schema} = mongoose
+const { Schema } = mongoose
 const userSchema = new Schema(
   {
     RoleId: {
@@ -13,7 +13,7 @@ const userSchema = new Schema(
       required: true,
     },
     RefralNo: {
-      type: Number,
+      type: String,
       //    required: true
     },
     RefralID: {
@@ -21,7 +21,7 @@ const userSchema = new Schema(
       ref: 'user',
     },
     RefralUserCode: {
-      type: Number,
+      type: String,
     },
     Name: {
       type: String,
