@@ -136,7 +136,7 @@ router.post("/userRegister", async (req, res) => {
           secure: false,
           requireTLS: true,
           auth: {
-            user: "info@creditsin.com",
+            user: "info@critsin.com",
             pass: "12345678",
           },
           tls: {
