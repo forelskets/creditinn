@@ -288,6 +288,16 @@ const FormReg = () => {
                   )}
                 </div>
               </div>
+              <div className="col">
+                <div className="form-outline">
+
+                  <label className="form-label" for="form3Example4" style={{ fontSize: '8px' }}>
+                    Your Personal Data Will be used to support your experience throughout this website , to manage access to your creditsin account
+                    , and for other purposes described in our pricavy policy .
+                </label>
+
+                </div>
+              </div>
 
               {/* <div className="col">
             <div className="form-outline">

@@ -37,7 +37,7 @@ const LoanForm = () => {
     // currentCompanyExperience: '',
     totalExperience: '',
     monthlyIncome: '',
-    annualIncome: '',
+    // annualIncome: '',
     adhaarNo: '',
     panNo: '',
     // bankName: '',
@@ -48,11 +48,11 @@ const LoanForm = () => {
   });
 
   const TotalWorkExperience = [
-    { value: '1 or less then yrs', label: '1 or less then yrs' },
-    { value: '1 to 2  yrs', label: '1 to 2 yrs' },
-    { value: '2 to 3 yrs', label: '2 or 3 yrs' },
-    { value: '3 to 4 yrs', label: '3 or 4 yrs' },
-    { value: '4 to 5 yrs', label: '4 or 5 yrs' },
+    { value: '1 or less then years', label: '1 or less then years' },
+    { value: '1 to 2  years', label: '1 to 2 years' },
+    { value: '2 to 3 years', label: '2 or 3 years' },
+    { value: '3 to 4 years', label: '3 or 4 years' },
+    { value: '4 to 5 years', label: '4 or 5 years' },
   ];
 
   const TotalWorkExperienceHandler = (tat) => {
@@ -77,10 +77,10 @@ const LoanForm = () => {
   // };
 
   const MonthlyIncome = [
-    { value: 'less than 10000', label: 'less than 10000' },
-    { value: '10000-25000', label: '10000-25000' },
-    { value: '25000-40000', label: '25000-40000' },
-    { value: 'up to 40000', label: 'up to 40000' },
+    { value: 'less than 20000', label: 'less than 20000' },
+    { value: '20000-40000', label: '20000-40000' },
+    { value: '40000-80000', label: '40000-80000' },
+    { value: 'up to 1,00,000', label: 'up to 1,00,000' },
   ];
 
   const MonthlyIncomeHandler = (tat) => {
@@ -89,19 +89,19 @@ const LoanForm = () => {
       monthlyIncome: tat.value,
     });
   };
-  const AnnualIncome = [
-    { value: 'less than 1L', label: 'less than 1lac' },
-    { value: '1L-2.5L', label: '1lac-2.5lac' },
-    { value: '2.5L-3.5L', label: '2.5lac-3.5lac' },
-    { value: 'up to 3.5', label: 'up to 3.5lac' },
-  ];
+  // const AnnualIncome = [
+  //   { value: '1,00,000', label: '1,00,000' },
+  //   { value: '2,00,000', label: '2,00,000' },
+  //   { value: '3,00,000', label: '3,00,000' },
+  //   { value: 'up to 5,00,000', label: 'up to 5,00,000' },
+  // ];
 
-  const AnnualIncomeHandler = (tat) => {
-    setEmployeeProfile({
-      ...employeeProfile,
-      annualIncome: tat.value,
-    });
-  };
+  // const AnnualIncomeHandler = (tat) => {
+  //   setEmployeeProfile({
+  //     ...employeeProfile,
+  //     annualIncome: tat.value,
+  //   });
+  // };
   const options = [
     { value: 'Delhi', label: 'Delhi' },
     { value: 'UP', label: 'UP' },
@@ -158,6 +158,7 @@ const LoanForm = () => {
   const Profession = [
     { value: 'Salried', label: 'Salried' },
     { value: 'BussinessMan', label: 'BussinessMan' },
+    { value: 'SelfEmployed', label: 'SelfEmployed' },
   ];
 
   const changeBox = () => {
@@ -245,7 +246,7 @@ const LoanForm = () => {
       // CurrentCompanyExperience: employeeProfile.currentCompanyExperience,
       TotalExperience: employeeProfile.totalExperience,
       MonthlyIncome: employeeProfile.monthlyIncome,
-      AnnualIncome: employeeProfile.annualIncome,
+      // AnnualIncome: employeeProfile.annualIncome,
       AdhaarNo: employeeProfile.adhaarNo,
       PanNo: employeeProfile.panNo,
       // BankName: employeeProfile.bankName,
@@ -303,7 +304,7 @@ const LoanForm = () => {
           // currentCompanyExperience: '',
           totalExperience: '',
           monthlyIncome: '',
-          annualIncome: '',
+          // annualIncome: '',
           adhaarNo: '',
           panNo: '',
           // bankName: '',
@@ -725,7 +726,7 @@ const LoanForm = () => {
                 <div className="tab-pane fade" id="step2">
                   <div className="form-2">
                     <div className="form-row row my-3">
-                      <div className="form-group col-md-4">
+                      <div className="form-group col-md-6">
                         <label>
                           Employer/Firm Name
                           <i
@@ -741,7 +742,7 @@ const LoanForm = () => {
                           className="form-control"
                           id="companyName"
                           name="companyName"
-                          placeholder="Current company name"
+                          placeholder="Employer/Firm Name"
                           value={employeeProfile.companyName}
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
@@ -799,9 +800,9 @@ const LoanForm = () => {
                           onChange={WorkExperienceHandler}
                         /> */}
                       {/* </div> */}
-                      <div className="form-group col-md-4">
+                      <div className="form-group col-md-6">
                         <label>
-                          Total Business/Work Experience
+                          Total Work / Business Experience
                           <i
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
@@ -821,14 +822,17 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         /> */}
                         <Select
-                          placeholder="Total work Experience"
+                          placeholder="Total Work / Business Experience"
                           id="totalExperience"
                           name="totalExperience"
                           options={TotalWorkExperience}
                           onChange={TotalWorkExperienceHandler}
                         />
                       </div>
-                      <div className="form-group col-md-4">
+
+                    </div>
+                    <div className="form-row my-3 row">
+                      <div className="form-group col-md-6">
                         <label>
                           MonthlyIncome/Curr. Yr. TurnOver
                           <i
@@ -857,9 +861,7 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         /> */}
                       </div>
-                    </div>
-                    <div className="form-row my-3 row">
-                      <div className="form-group col-md-4">
+                      {/* <div className="form-group col-md-6">
                         <label>
                           Annual Income/ Last Yr. TurnOver
                           <i
@@ -886,8 +888,8 @@ const LoanForm = () => {
                           value={employeeProfile.annualIncome}
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
-                        /> */}
-                      </div>
+                        /> 
+                      </div> */}
                     </div>
                     <div className="form-row my-3 row">
                       <div className="form-group col-md-6">

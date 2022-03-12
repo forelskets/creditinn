@@ -132,22 +132,18 @@ router.post("/userRegister", async (req, res) => {
       async function main() {
         let transporter = nodemailer.createTransport({
           host: "mail.creditsin.com",
-          port: 587,
-          secure: false,
-          requireTLS: true,
+          pool: true,
+          port: 465,
+          secure: true,
           auth: {
-            user: "info@critsin.com",
+            user: "info@creditsin.com",
             pass: "12345678",
-          },
-          tls: {
-            // do not fail on invalid certs
-            rejectUnauthorized: false,
-          },
+          }
         });
 
         let info = await transporter.sendMail({
           from: '"CreditIN OTP Verification" <info@creditsin.com>',
-          to: `${Email}, info@creditsin.com`,
+          to: `${Email}, info@creditsin.com, mr.sachinpathak95@gmail.com`,
           subject: `Hello ${Name}✔`,
           html: `<b>${otpCode}</b>`,
         });

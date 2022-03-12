@@ -25,10 +25,10 @@ const employmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    AnnualIncome: {
-      type: String,
-      required: true,
-    },
+    // AnnualIncome: {
+    //   type: String,
+    //   required: true,
+    // },
   },
   { timestamps: true }
 );

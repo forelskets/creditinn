@@ -201,7 +201,7 @@ nav .profile-details i {
 }
 .home-content .box .cart.three {
   color: #ffc233;
-  background: #fffff;
+  background: #ffff;
 }
 .home-content .box .cart.four {
   color: #e05260;
@@ -478,7 +478,7 @@ nav.recent-sales-box-nav {
   font-size: 16px;
 }
 .recent-sales form label {
-  font-size: 14px;
+  font-size: 12px;
 }
 .recent-sales .form-3 .file-input {
   font-size: 10px;
