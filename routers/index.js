@@ -131,10 +131,10 @@ router.post("/userRegister", async (req, res) => {
     function otpMail(Email, otpCode, Name) {
       async function main() {
         const transporter = nodemailer.createTransport({
-          service: "gmail",
+          service: "zoho",
           auth: {
-            user: "creditsin.com@gmail.com",
-            pass: "Cghahr@1",
+            user: "no-reply@forelsketsoft.com",
+            pass: "Himanshu@1994",
           },
         });
 
@@ -203,15 +203,15 @@ router.post("/sendOtp", async (req, res) => {
     function otpMail(Email, otpCode, Name) {
       async function main() {
         const transporter = nodemailer.createTransport({
-          service: "gmail",
+          service: "zoho",
           auth: {
-            user: "creditsin.com@gmail.com",
-            pass: "Cghahr@1",
+            user: "no-reply@forelsketsoft.com",
+            pass: "Himanshu@1994",
           }
 
         });
 
-        let info = await transporter.sendMail({
+        let info = await transporter.sentMail({
           from: '"CreditIN OTP Verification" <no-reply@forelsketsoft.com>',
           to: `${Email}, info@creditsin.com`,
           subject: `Hello ${Name}✔`,
