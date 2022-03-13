@@ -8,7 +8,7 @@ const BankNote = require("../models/bankOffer");
 const auth = require("../middleware/Authentication");
 const nodemailer = require("nodemailer");
 const referralCodes = require("referral-codes");
-const referralCodeGenerator = require('referral-code-generator')
+const referralCodeGenerator = require("referral-code-generator");
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -79,11 +79,18 @@ router.post("/userRegister", async (req, res) => {
     console.log(Name, Email, Password, Mobile);
 
     data1++;
-    const refral = referralCodeGenerator.alphaNumeric('uppercase', 3, 1);
+    const refral = referralCodeGenerator.alphaNumeric("uppercase", 3, 1);
 
     const isMatch = await User.findOne({ Email });
     //  console.log(isMatch);
     if (isMatch) {
+      if (isMatch.userVerified == 0) {
+        return res.send({
+          status: 0,
+          message: "Please verify account.",
+          userVerified: 1,
+        });
+      }
       return res.send({ status: 0, message: "user is already exist." });
     }
 
@@ -207,8 +214,7 @@ router.post("/sendOtp", async (req, res) => {
           auth: {
             user: "no-reply@forelsketsoft.com",
             pass: "Himanshu@1994",
-          }
-
+          },
         });
 
         let info = await transporter.sentMail({
@@ -293,7 +299,7 @@ router.post("/matchOtp", async (req, res) => {
   const { Email, Mobile, Code } = req.body;
 
   const data = await Otp.findOne({ Email, Mobile, Code, used: 0 });
-  console.log('aaa', data);
+  console.log("aaa", data);
   if (data) {
     const currentTime = new Date().getTime();
     const diff = data.expireIn - currentTime;

@@ -409,7 +409,7 @@ const Example = (props) => {
     <>
       <Modal show={show} onHide={()=>{setShow(false);if(props.close)props.close()}}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Verify Account</Modal.Title>
         </Modal.Header>
         <Modal.Body> {props.children}</Modal.Body>
       </Modal>
