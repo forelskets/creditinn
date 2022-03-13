@@ -130,19 +130,16 @@ router.post("/userRegister", async (req, res) => {
     };
     function otpMail(Email, otpCode, Name) {
       async function main() {
-        let transporter = nodemailer.createTransport({
-          host: "mail.creditsin.com",
-          pool: true,
-          port: 465,
-          secure: true,
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
           auth: {
-            user: "info@creditsin.com",
-            pass: "12345678",
-          }
+            user: "creditsin.com@gmail.com",
+            pass: "Cghahr@1",
+          },
         });
 
         let info = await transporter.sendMail({
-          from: '"CreditIN OTP Verification" <info@creditsin.com>',
+          from: '"CreditIN OTP Verification" <no-reply@forelsketsoft.com>',
           to: `${Email}, info@creditsin.com, mr.sachinpathak95@gmail.com`,
           subject: `Hello ${Name}✔`,
           html: `<b>${otpCode}</b>`,
@@ -205,23 +202,17 @@ router.post("/sendOtp", async (req, res) => {
     };
     function otpMail(Email, otpCode, Name) {
       async function main() {
-        let transporter = nodemailer.createTransport({
-          host: "mail.creditsin.com",
-          port: 587,
-          secure: false,
-          requireTLS: true,
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
           auth: {
-            user: "info@creditsin.com",
-            pass: "12345678",
-          },
-          tls: {
-            // do not fail on invalid certs
-            rejectUnauthorized: false,
-          },
+            user: "creditsin.com@gmail.com",
+            pass: "Cghahr@1",
+          }
+
         });
 
         let info = await transporter.sendMail({
-          from: '"CreditIN OTP Verification" <info@creditsin.com>',
+          from: '"CreditIN OTP Verification" <no-reply@forelsketsoft.com>',
           to: `${Email}, info@creditsin.com`,
           subject: `Hello ${Name}✔`,
           html: `<b>${otpCode}</b>`,
