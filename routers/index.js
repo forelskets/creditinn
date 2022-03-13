@@ -88,7 +88,7 @@ router.post("/userRegister", async (req, res) => {
         return res.send({
           status: 0,
           message: "Please verify account.",
-          userVerified: 0,
+          userVerified: 1,
         });
       }
       return res.send({ status: 0, message: "user is already exist." });
