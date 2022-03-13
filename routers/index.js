@@ -7,6 +7,8 @@ const Bank = require("../models/bankService");
 const BankNote = require("../models/bankOffer");
 const auth = require("../middleware/Authentication");
 const nodemailer = require("nodemailer");
+const referralCodes = require("referral-codes");
+const referralCodeGenerator = require('referral-code-generator')
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -77,7 +79,7 @@ router.post("/userRegister", async (req, res) => {
     console.log(Name, Email, Password, Mobile);
 
     data1++;
-    refral = 3456789 + data1;
+    const refral = referralCodeGenerator.alphaNumeric('uppercase', 3, 1);
 
     const isMatch = await User.findOne({ Email });
     //  console.log(isMatch);
@@ -128,24 +130,17 @@ router.post("/userRegister", async (req, res) => {
     };
     function otpMail(Email, otpCode, Name) {
       async function main() {
-        let transporter = nodemailer.createTransport({
-          host: "mail.creditsin.com",
-          port: 587,
-          secure: false,
-          requireTLS: true,
+        const transporter = nodemailer.createTransport({
+          service: "zoho",
           auth: {
-            user: "info@creditsin.com",
-            pass: "12345678",
-          },
-          tls: {
-            // do not fail on invalid certs
-            rejectUnauthorized: false,
+            user: "no-reply@forelsketsoft.com",
+            pass: "Himanshu@1994",
           },
         });
 
         let info = await transporter.sendMail({
-          from: '"CreditIN OTP Verification" <info@creditsin.com>',
-          to: `${Email}, info@creditsin.com`,
+          from: '"CreditIN OTP Verification" <no-reply@forelsketsoft.com>',
+          to: `${Email}, info@creditsin.com, mr.sachinpathak95@gmail.com`,
           subject: `Hello ${Name}✔`,
           html: `<b>${otpCode}</b>`,
         });
@@ -207,23 +202,17 @@ router.post("/sendOtp", async (req, res) => {
     };
     function otpMail(Email, otpCode, Name) {
       async function main() {
-        let transporter = nodemailer.createTransport({
-          host: "mail.creditsin.com",
-          port: 587,
-          secure: false,
-          requireTLS: true,
+        const transporter = nodemailer.createTransport({
+          service: "zoho",
           auth: {
-            user: "info@creditsin.com",
-            pass: "12345678",
-          },
-          tls: {
-            // do not fail on invalid certs
-            rejectUnauthorized: false,
-          },
+            user: "no-reply@forelsketsoft.com",
+            pass: "Himanshu@1994",
+          }
+
         });
 
-        let info = await transporter.sendMail({
-          from: '"CreditIN OTP Verification" <info@creditsin.com>',
+        let info = await transporter.sentMail({
+          from: '"CreditIN OTP Verification" <no-reply@forelsketsoft.com>',
           to: `${Email}, info@creditsin.com`,
           subject: `Hello ${Name}✔`,
           html: `<b>${otpCode}</b>`,
@@ -304,7 +293,7 @@ router.post("/matchOtp", async (req, res) => {
   const { Email, Mobile, Code } = req.body;
 
   const data = await Otp.findOne({ Email, Mobile, Code, used: 0 });
-  console.log('aaa',data);
+  console.log('aaa', data);
   if (data) {
     const currentTime = new Date().getTime();
     const diff = data.expireIn - currentTime;

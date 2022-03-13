@@ -2,8 +2,11 @@ import React from 'react';
 import Bannerchart from '../chart/bannerChart';
 import AreaChart1 from '../chart/areaCharts';
 
+
 const section1 = () => {
+
   return (
+
     <>
       <section className="header w-100">
         <div className="container">
@@ -32,6 +35,7 @@ const section1 = () => {
                 >
                   <a></a> Register
                 </button>
+
                 <lottie-player
                   src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
                   background="transparent"

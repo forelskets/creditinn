@@ -48,7 +48,7 @@ exports.getApplicationList = async (req, res, next) => {
       // !req.body.CurrentCompanyExperience ||
       !req.body.TotalExperience ||
       !req.body.MonthlyIncome ||
-      !req.body.AnnualIncome ||
+      // !req.body.AnnualIncome ||
       !req.body.AdhaarNo ||
       // !fileArray[0] ||
       !req.body.PanNo ||
@@ -59,9 +59,9 @@ exports.getApplicationList = async (req, res, next) => {
       // !fileArray[2] ||
       // !fileArray[3] ||
       !req.body.LoanAmount,
-    !req.body.loanPurpose,
-    !req.body.loanAmount,
-    !req.body.profession)
+      !req.body.loanPurpose,
+      !req.body.loanAmount,
+      !req.body.profession)
   ) {
     res
       .status(401)
@@ -101,7 +101,7 @@ exports.getApplicationList = async (req, res, next) => {
       // CurrentCompanyExperience: req.body.CurrentCompanyExperience,
       TotalExperience: req.body.TotalExperience,
       MonthlyIncome: req.body.MonthlyIncome,
-      AnnualIncome: req.body.AnnualIncome,
+      // AnnualIncome: req.body.AnnualIncome,
     });
 
     const kyc = new KYC({

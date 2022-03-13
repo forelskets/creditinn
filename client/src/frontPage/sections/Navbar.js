@@ -15,6 +15,7 @@ const Navbar = () => {
   const [otp, setOTP] = useState("");
   const [error, setError] = useState("");
   const [dataa, setData] = useState("");
+  const [showLink, setShowLink] = useState(false);
   const refModal = useRef(null);
   const loginModal = useRef(null);
 
@@ -51,18 +52,22 @@ const Navbar = () => {
         loginModal?.current?.click();
         history.push("/nav");
       } else if (data?.status == 0 && data?.userVerified === 1) {
+        setShowLink(true);
         setData(data.data.user);
-        sendOTP({ Email: email }).then((response) => {
-          if (response?.status === 1) {
-            setUserNotVerified(true);
-          }
-        });
       } else {
         if (data?.message) {
           toastr.warning(data.message);
         }
       }
     }
+  };
+
+  const sendOTPtoServer = () => {
+    sendOTP({ Email: email }).then((response) => {
+      if (response?.status === 1) {
+        setUserNotVerified(true);
+      }
+    });
   };
 
   const VerifyOTP = () => {
@@ -76,7 +81,7 @@ const Navbar = () => {
         (res) => {
           if (res?.status === 1) {
             toastr.info("Account Verified Please login.");
-            
+
             setUserNotVerified(false);
             history.push("/");
           } else if (res?.message) {
@@ -89,7 +94,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg ">
+      <nav className="navbar navbar-expand-lg fixed-top ">
         <div className="container">
           <NavLink className="navbar-brand" to="#">
             <img
@@ -278,7 +283,14 @@ const Navbar = () => {
                     sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                     onChange={onChangeHandle}
                   />
-                  <p>To verify your account <a href="">click here</a></p>
+                  {showLink && (
+                    <span>
+                      To verify your account{" "}
+                      <a href="#" onClick={() => sendOTPtoServer()}>
+                        click here
+                      </a>
+                    </span>
+                  )}
                   <div className="mb-3">
                     <button
                       type="button"

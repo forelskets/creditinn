@@ -138,7 +138,17 @@ nav .profile-details i {
   justify-content: space-around;
   width: calc(100% / 3 - 15px);
   background: #fff;
-  padding: 15px 14px;
+  padding: 10px 10px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.overview-boxes .box1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: calc(100% / 1 - 15px);
+  background: #fff;
+  padding: 15px 15px;
   border-radius: 12px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
@@ -191,7 +201,7 @@ nav .profile-details i {
 }
 .home-content .box .cart.three {
   color: #ffc233;
-  background: #fffff;
+  background: #ffff;
 }
 .home-content .box .cart.four {
   color: #e05260;
@@ -468,7 +478,7 @@ nav.recent-sales-box-nav {
   font-size: 16px;
 }
 .recent-sales form label {
-  font-size: 14px;
+  font-size: 12px;
 }
 .recent-sales .form-3 .file-input {
   font-size: 10px;

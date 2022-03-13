@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import toastr from "toastr";
 import { Validate } from "../../_helper";
 import { registerService, matchOTP } from "../../_services/Client.Service";
+import { Button } from "bootstrap/dist/js/bootstrap.bundle";
+
 const init = {
   userName: "",
   userEmail: "",
@@ -12,6 +14,7 @@ const init = {
   userMobile: "",
   userRefral: "",
 };
+
 const FormReg = () => {
   const [isVarified, setIsVarified] = useState(false);
   const [userDetails, setUserDetails] = useState(init);
@@ -111,185 +114,247 @@ const FormReg = () => {
           border: "1",
         }}
       >
-        {isformSubmit ? (
-          <form
-            style={{
-              width: "100%",
-              padding: "20px 10px 10px 10px",
-              border: "1",
-            }}
-          >
-            <div className="text-center">
-              <img
-                style={{ height: "90px", width: "190px" }}
-                src="images/credit-n-logo.svg"
-                className="d-inline-block align-top"
-                alt=""
-              />
-              <h2>Register Here</h2>
-            </div>
+        {isformSubmit ||true? (
 
-            <div className="form-outline mb-2">
-              <input
-                type="otp"
-                className="form-control"
-                id="userEmail"
-                name="userEmail"
-                placeholder="OTP"
-                value={otp}
-                onChange={(e) => setOTP(e.target.value)}
-              />
-              <label className="form-label" for="form3Example3">
-                OTP - (one time password)
-              </label>
-              {error?.otp && <div className="error-msg">{error.otp}</div>}
-            </div>
 
-            <button
-              type="button"
-              className="btn btn-2 button my-3"
-              onClick={submitOTP}
+
+
+
+<>
+
+
+
+<Example />
+
+</>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          // <form
+          //   style={{
+          //     width: "100%",
+          //     padding: "20px 10px 10px 10px",
+          //     border: "1",
+          //   }}
+          // >
+          //   <div className="text-center">
+          //     <img
+          //       style={{ height: "90px", width: "190px" }}
+          //       src="images/credit-n-logo.svg"
+          //       className="d-inline-block align-top"
+          //       alt=""
+          //     />
+          //     <h2>Register Here</h2>
+          //   </div>
+
+          //   <div className="form-outline mb-2">
+          //     <input
+          //       type="otp"
+          //       className="form-control"
+          //       id="userEmail"
+          //       name="userEmail"
+          //       placeholder="OTP"
+          //       value={otp}
+          //       onChange={(e) => setOTP(e.target.value)}
+          //     />
+          //     <label className="form-label" for="form3Example3">
+          //       OTP - (one time password)
+          //     </label>
+          //     {error?.otp && <div className="error-msg">{error.otp}</div>}
+          //   </div>
+
+          //   <button
+          //     type="button"
+          //     className="btn btn-2 button my-3"
+          //     onClick={submitOTP}
+          //   >
+          //     Submit
+          //   </button>
+          // </form>
+        )
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        : (
+            <form
+              style={{
+                width: "100%",
+                padding: "20px 10px 10px 10px",
+                border: "1",
+              }}
             >
-              Submit
-            </button>
-          </form>
-        ) : (
-          <form
-            style={{
-              width: "100%",
-              padding: "20px 10px 10px 10px",
-              border: "1",
-            }}
-          >
-            <div className="text-center">
-              <img
-                style={{ height: "90px", width: "190px" }}
-                src="images/credit-n-logo.svg"
-                className="d-inline-block align-top"
-                alt=""
-              />
-              <h2>Register Here</h2>
-            </div>
-            <div className="row mb-2">
-              <div className="col">
-                <div className="form-outline">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="userName"
-                    name="userName"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter Your Name"
-                    value={userDetails.userName}
-                    onChange={changeHandler}
-                  />
-                  <label className="form-label" for="form3Example1">
-                    Name
+              <div className="text-center">
+                <img
+                  style={{ height: "90px", width: "190px" }}
+                  src="images/credit-n-logo.svg"
+                  className="d-inline-block align-top"
+                  alt=""
+                />
+                <h2>Register Here</h2>
+              </div>
+              <div className="row mb-2">
+                <div className="col">
+                  <div className="form-outline">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="userName"
+                      name="userName"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter Your Name"
+                      value={userDetails.userName}
+                      onChange={changeHandler}
+                    />
+                    <label className="form-label" for="form3Example1">
+                      Name
                   </label>
-                  {error?.userName && (
-                    <div className="error-msg">{error.userName}</div>
-                  )}
+                    {error?.userName && (
+                      <div className="error-msg">{error.userName}</div>
+                    )}
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-outline">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="userMobile"
+                      name="userMobile"
+                      placeholder="Enter Your Mobile No."
+                      value={userDetails.userMobile}
+                      onChange={changeHandler}
+                    />
+                    <label className="form-label" for="form3Example2">
+                      Mobile No
+                  </label>
+                    {error?.userMobile && (
+                      <div className="error-msg">{error.userMobile}</div>
+                    )}
+                  </div>
                 </div>
               </div>
-              <div className="col">
-                <div className="form-outline">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="userMobile"
-                    name="userMobile"
-                    placeholder="Enter Your Mobile No."
-                    value={userDetails.userMobile}
-                    onChange={changeHandler}
-                  />
-                  <label className="form-label" for="form3Example2">
-                    Mobile No
-                  </label>
-                  {error?.userMobile && (
-                    <div className="error-msg">{error.userMobile}</div>
-                  )}
-                </div>
-              </div>
-            </div>
 
-            <div className="form-outline mb-2">
-              <input
-                type="email"
-                className="form-control"
-                id="userEmail"
-                name="userEmail"
-                placeholder="Enter Your Email"
-                value={userDetails.userEmail}
-                onChange={changeHandler}
-              />
-              <label className="form-label" for="form3Example3">
-                Email address
-              </label>
-              {error?.userEmail && (
-                <div className="error-msg">{error.userEmail}</div>
-              )}
-            </div>
-            <div className="row mb-2">
-              <div className="col">
-                <div className="form-outline">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="userPassword"
-                    name="userPassword"
-                    placeholder="Enter Your Password"
-                    value={userDetails.userPassword}
-                    onChange={changeHandler}
-                  />
-                  <label className="form-label" for="form3Example4">
-                    Password
-                  </label>
-                  {error?.userPassword && (
-                    <div className="error-msg">{error.userPassword}</div>
-                  )}
-                </div>
-              </div>
-              <div className="col">
-                <div className="form-outline">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="userCPassword"
-                    name="userCPassword"
-                    placeholder="Enter Your confirm - password"
-                    value={userDetails.userCPassword}
-                    onChange={changeHandler}
-                  />
-                  <label className="form-label" for="form3Example4">
-                    Confirm Password
-                  </label>
-                  {error?.userCPassword && (
-                    <div className="error-msg">{error.userCPassword}</div>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="form-outline">
+              <div className="form-outline mb-2">
                 <input
-                  type="text"
+                  type="email"
                   className="form-control"
-                  id="userRefral"
-                  name="userRefral"
-                  placeholder="Enter Your Refral no."
-                  value={userDetails.userRefral}
+                  id="userEmail"
+                  name="userEmail"
+                  placeholder="Enter Your Email"
+                  value={userDetails.userEmail}
                   onChange={changeHandler}
                 />
-                <label className="form-label" for="form3Example4">
-                  Refral no.
-                </label>
-                {error?.userRefral && (
-                  <div className="error-msg">{error.userRefral}</div>
+                <label className="form-label" for="form3Example3">
+                  Email address
+              </label>
+                {error?.userEmail && (
+                  <div className="error-msg">{error.userEmail}</div>
                 )}
               </div>
-            </div>
+              <div className="row mb-2">
+                <div className="col">
+                  <div className="form-outline">
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="userPassword"
+                      name="userPassword"
+                      placeholder="Enter Your Password"
+                      value={userDetails.userPassword}
+                      onChange={changeHandler}
+                    />
+                    <label className="form-label" for="form3Example4">
+                      Password
+                  </label>
+                    {error?.userPassword && (
+                      <div className="error-msg">{error.userPassword}</div>
+                    )}
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-outline">
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="userCPassword"
+                      name="userCPassword"
+                      placeholder="Enter Your confirm - password"
+                      value={userDetails.userCPassword}
+                      onChange={changeHandler}
+                    />
+                    <label className="form-label" for="form3Example4">
+                      Confirm Password
+                  </label>
+                    {error?.userCPassword && (
+                      <div className="error-msg">{error.userCPassword}</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="col">
+                <div className="form-outline">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="userRefral"
+                    name="userRefral"
+                    placeholder="Enter Your Refral no."
+                    value={userDetails.userRefral}
+                    onChange={changeHandler}
+                  />
+                  <label className="form-label" for="form3Example4">
+                    Refral no.
+                </label>
+                  {error?.userRefral && (
+                    <div className="error-msg">{error.userRefral}</div>
+                  )}
+                </div>
+              </div>
+              <div className="col">
+                <div className="form-outline">
 
-            {/* <div className="col">
+                  <label className="form-label" for="form3Example4" style={{ fontSize: '8px' }}>
+                    Your Personal Data Will be used to support your experience throughout this website , to manage access to your creditsin account
+                    , and for other purposes described in our pricavy policy .
+                </label>
+
+                </div>
+              </div>
+
+              {/* <div className="col">
             <div className="form-outline">
               <input type="text" id="form3Example4" className="form-control" />
               <label className="form-label" for="form3Example4">
@@ -297,20 +362,20 @@ const FormReg = () => {
               </label>
             </div>
           </div> */}
-            <ReCAPTCHA
-              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-              onChange={onChangeHandle}
-            />
-            <button
-              type="button"
-              className="btn btn-2 button my-3"
-              onClick={changeFormsValue}
-              disabled={!isVarified}
-            >
-              Submit
+              <ReCAPTCHA
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                onChange={onChangeHandle}
+              />
+              <button
+                type="button"
+                className="btn btn-2 button my-3"
+                onClick={changeFormsValue}
+                disabled={!isVarified}
+              >
+                Submit
             </button>
-          </form>
-        )}
+            </form>
+          )}
         <div className="form-check d-flex justify-content-center mb-2">
           <img
             style={{ height: "20px", width: "20px" }}
@@ -367,3 +432,38 @@ const rules = [
   //   require: true
   // }
 ];
+
+
+
+
+
+const Example=()=> {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+

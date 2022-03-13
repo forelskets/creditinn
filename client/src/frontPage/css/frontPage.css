@@ -157,7 +157,7 @@
   background-color: #f6f7fc;
   width: 100vw;
   height: fit-content;
-  padding-top: 20px;
+  padding-top: 50px;
   padding-bottom: 20px;
   padding-right: 10px;
 }
@@ -182,7 +182,7 @@
   text-align: left;
   font-family: 'Montserrat';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
   color: rgba(0, 0, 0, 1);
 }
@@ -548,7 +548,7 @@
   position: relative;
 }
 .card-slider-section .card img {
-  padding-top: 20px;
+  padding-top: 10px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -805,7 +805,7 @@
 }
 
 .card1 {
-  background-color: #fec8d8;
+  background-color: #ffff;
   box-shadow: -1px -1px 17px 0px rgb(100, 95, 99);
 }
 .card1:hover {
@@ -813,7 +813,7 @@
   transition: 3ms;
 }
 .card2 {
-  background-color: #ddf2fd;
+  background-color: #ffff;
   box-shadow: -1px -1px 17px 0px rgb(100, 95, 99);
 }
 .card2:hover {
@@ -821,7 +821,7 @@
   transition: 3ms;
 }
 .card3 {
-  background-color: #e0bbe4;
+  background-color: #ffff;
   box-shadow: -1px -1px 17px 0px rgb(100, 95, 99);
 }
 .card3:hover {
@@ -829,7 +829,7 @@
   transition: 3ms;
 }
 .card4 {
-  background-color: #e8f881;
+  background-color: #ffff;
   box-shadow: -1px -1px 17px 0px rgb(100, 95, 99);
 }
 .card4:hover {
@@ -837,7 +837,7 @@
   transition: 3ms;
 }
 .card-slider-section i {
-  color: #77450b;
+  color: #ec830a;
 }
 .padding-down {
   padding-top: 5px;

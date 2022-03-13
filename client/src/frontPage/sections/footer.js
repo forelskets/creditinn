@@ -81,8 +81,13 @@ const footer = () => {
                   <div className="align-inline">
                     <div className="m-auto">
                       <div className="padding-ul">
-                        <i className="fab fa-instagram"></i>
-                        <i className="fab fa-facebook"></i>
+                        <a className="text-light" href="https://instagram.com/creditin">
+
+                          <i className="fab fa-instagram" ></i></a>
+                        <a className="text-light" href="https://facebook.com/creditin">
+
+                          <i className="fab fa-facebook" ></i></a>
+
                         <i className="fab fa-twitter"></i>
                         <i className="fab fa-youtube"></i>{' '}
                       </div>
@@ -127,7 +132,7 @@ const footer = () => {
             >
               About us.
             </a>
-            <a href="https://twitter.com/CEO_fact" className="text-white me-4">
+            <a href="https://facebook.com/" className="text-white me-4">
               {' '}
               Privacy and policy.{' '}
             </a>
