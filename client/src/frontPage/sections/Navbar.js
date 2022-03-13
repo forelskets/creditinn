@@ -278,6 +278,7 @@ const Navbar = () => {
                     sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                     onChange={onChangeHandle}
                   />
+                  <p>To verify your account <a href="">click here</a></p>
                   <div className="mb-3">
                     <button
                       type="button"
