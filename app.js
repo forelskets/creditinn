@@ -10,6 +10,7 @@ const serviceRouter = require('./routers/service');
 const bankRouter = require('./routers/bank');
 const bankOfferRouter = require('./routers/bankOffer');
 const applicationRouter = require('./routers/application');
+const userRouter = require('./routers/user');
 
 const cors = require('cors');
 
@@ -23,6 +24,7 @@ app.use('/service', serviceRouter);
 app.use('/bank', bankRouter);
 app.use('/bank-offer', bankOfferRouter);
 app.use('/application', applicationRouter);
+app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello server');

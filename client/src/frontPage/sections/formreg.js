@@ -449,7 +449,7 @@ const Example=()=> {
         Launch demo modal
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
@@ -462,7 +462,7 @@ const Example=()=> {
             Save Changes
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </>
   );
 }
