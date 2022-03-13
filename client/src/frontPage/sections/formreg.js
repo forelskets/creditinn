@@ -109,6 +109,7 @@ const FormReg = () => {
     sendOTP({ Email: userDetails?.userEmail, }).then((response) => {
       if (response?.status === 1) {
          setFormSubmit(true);
+         setModal(false)
       }
     });
   }
