@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useHistory } from "react-router-dom";
 import toastr from "toastr";
 import { Validate } from "../../_helper";
-import { registerService, matchOTP } from "../../_services/Client.Service";
-import { Button } from "bootstrap/dist/js/bootstrap.bundle";
-
+import { registerService, matchOTP,sendOTP } from "../../_services/Client.Service";
+import { Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 const init = {
   userName: "",
   userEmail: "",
@@ -21,6 +21,7 @@ const FormReg = () => {
   const [error, setError] = useState("");
   const [isformSubmit, setFormSubmit] = useState(false);
   const [otp, setOTP] = useState("");
+  const [modal, setModal] = useState(false);
   const history = useHistory();
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -71,6 +72,8 @@ const FormReg = () => {
         if (res?.status === 1) {
           setFormSubmit(true);
           toastr.warning(res.message);
+        }if(res?.userVerified === 1){
+          setModal(true)
         } else if (res.message) {
           toastr.warning(res.message);
         }
@@ -102,6 +105,14 @@ const FormReg = () => {
     }
   };
 
+  const gotoTOP=()=>{
+    sendOTP({ Email: userDetails?.userEmail, }).then((response) => {
+      if (response?.status === 1) {
+         setFormSubmit(true);
+      }
+    });
+  }
+
   return (
     <>
       <div
@@ -114,101 +125,53 @@ const FormReg = () => {
           border: "1",
         }}
       >
-        {isformSubmit ||true? (
+        {isformSubmit ? (
+          <>
+              <form
+                style={{
+                  width: "100%",
+                  padding: "20px 10px 10px 10px",
+                  border: "1",
+                }}
+              >
+                <div className="text-center">
+                  <img
+                    style={{ height: "90px", width: "190px" }}
+                    src="images/credit-n-logo.svg"
+                    className="d-inline-block align-top"
+                    alt=""
+                  />
+                  <h2>Register Here</h2>
+                </div>
 
+                <div className="form-outline mb-2">
+                  <input
+                    type="otp"
+                    className="form-control"
+                    id="userEmail"
+                    name="userEmail"
+                    placeholder="OTP"
+                    value={otp}
+                    onChange={(e) => setOTP(e.target.value)}
+                  />
+                  <label className="form-label" for="form3Example3">
+                    OTP - (one time password)
+                  </label>
+                  {error?.otp && <div className="error-msg">{error.otp}</div>}
+                </div>
 
+                <button
+                  type="button"
+                  className="btn btn-2 button my-3"
+                  onClick={submitOTP}
+                >
+                  Submit
+                </button>
+              </form>
+          </>
 
-
-
-<>
-
-
-
-<Example />
-
-</>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          // <form
-          //   style={{
-          //     width: "100%",
-          //     padding: "20px 10px 10px 10px",
-          //     border: "1",
-          //   }}
-          // >
-          //   <div className="text-center">
-          //     <img
-          //       style={{ height: "90px", width: "190px" }}
-          //       src="images/credit-n-logo.svg"
-          //       className="d-inline-block align-top"
-          //       alt=""
-          //     />
-          //     <h2>Register Here</h2>
-          //   </div>
-
-          //   <div className="form-outline mb-2">
-          //     <input
-          //       type="otp"
-          //       className="form-control"
-          //       id="userEmail"
-          //       name="userEmail"
-          //       placeholder="OTP"
-          //       value={otp}
-          //       onChange={(e) => setOTP(e.target.value)}
-          //     />
-          //     <label className="form-label" for="form3Example3">
-          //       OTP - (one time password)
-          //     </label>
-          //     {error?.otp && <div className="error-msg">{error.otp}</div>}
-          //   </div>
-
-          //   <button
-          //     type="button"
-          //     className="btn btn-2 button my-3"
-          //     onClick={submitOTP}
-          //   >
-          //     Submit
-          //   </button>
-          // </form>
         )
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        : (
+          : (
             <form
               style={{
                 width: "100%",
@@ -240,7 +203,7 @@ const FormReg = () => {
                     />
                     <label className="form-label" for="form3Example1">
                       Name
-                  </label>
+                    </label>
                     {error?.userName && (
                       <div className="error-msg">{error.userName}</div>
                     )}
@@ -259,7 +222,7 @@ const FormReg = () => {
                     />
                     <label className="form-label" for="form3Example2">
                       Mobile No
-                  </label>
+                    </label>
                     {error?.userMobile && (
                       <div className="error-msg">{error.userMobile}</div>
                     )}
@@ -279,7 +242,7 @@ const FormReg = () => {
                 />
                 <label className="form-label" for="form3Example3">
                   Email address
-              </label>
+                </label>
                 {error?.userEmail && (
                   <div className="error-msg">{error.userEmail}</div>
                 )}
@@ -298,7 +261,7 @@ const FormReg = () => {
                     />
                     <label className="form-label" for="form3Example4">
                       Password
-                  </label>
+                    </label>
                     {error?.userPassword && (
                       <div className="error-msg">{error.userPassword}</div>
                     )}
@@ -317,7 +280,7 @@ const FormReg = () => {
                     />
                     <label className="form-label" for="form3Example4">
                       Confirm Password
-                  </label>
+                    </label>
                     {error?.userCPassword && (
                       <div className="error-msg">{error.userCPassword}</div>
                     )}
@@ -337,7 +300,7 @@ const FormReg = () => {
                   />
                   <label className="form-label" for="form3Example4">
                     Refral no.
-                </label>
+                  </label>
                   {error?.userRefral && (
                     <div className="error-msg">{error.userRefral}</div>
                   )}
@@ -349,7 +312,7 @@ const FormReg = () => {
                   <label className="form-label" for="form3Example4" style={{ fontSize: '8px' }}>
                     Your Personal Data Will be used to support your experience throughout this website , to manage access to your creditsin account
                     , and for other purposes described in our pricavy policy .
-                </label>
+                  </label>
 
                 </div>
               </div>
@@ -373,7 +336,7 @@ const FormReg = () => {
                 disabled={!isVarified}
               >
                 Submit
-            </button>
+              </button>
             </form>
           )}
         <div className="form-check d-flex justify-content-center mb-2">
@@ -387,6 +350,9 @@ const FormReg = () => {
             powered by creditsin.com
           </label>
         </div>
+        <Example modal={modal} close={()=>setModal(false)}>
+          <span>To verify account please <a href="#" onClick={()=>gotoTOP()}>click here</a></span>
+          </Example>
       </div>
     </>
   );
@@ -434,34 +400,18 @@ const rules = [
 ];
 
 
-
-
-
-const Example=()=> {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+const Example = (props) => {
+  const [show, setShow] = useState(false)
+  useEffect(()=>{
+    setShow(props.modal)
+  },[props.modal])
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={()=>{setShow(false);if(props.close)props.close()}}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
+        <Modal.Body> {props.children}</Modal.Body>
       </Modal>
     </>
   );
