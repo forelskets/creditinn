@@ -31,15 +31,15 @@ exports.getReferralCountById = async (req, res, next) => {
 
 exports.updateProfileById = async (req, res, next) => {
   const id = req.params.id;
-  const { ServiceName, Note } = req.body;
+  const { Name, Mobile } = req.body;
 
   try {
     const result = await User.findById(id);
     console.log("result", result);
     if (result) {
       await result.update({
-        ServiceName: ServiceName,
-        Note: Note,
+        Name: Name,
+        Mobile: Mobile,
       });
 
       return res.send({
