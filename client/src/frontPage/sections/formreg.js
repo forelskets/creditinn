@@ -1,9 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useHistory } from "react-router-dom";
 import toastr from "toastr";
 import { Validate } from "../../_helper";
-import { registerService, matchOTP,sendOTP } from "../../_services/Client.Service";
+import { registerService, matchOTP, sendOTP } from "../../_services/Client.Service";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 const init = {
@@ -72,7 +72,7 @@ const FormReg = () => {
         if (res?.status === 1) {
           setFormSubmit(true);
           toastr.warning(res.message);
-        }if(res?.userVerified === 1){
+        } if (res?.userVerified === 1) {
           setModal(true)
         } else if (res.message) {
           toastr.warning(res.message);
@@ -105,11 +105,11 @@ const FormReg = () => {
     }
   };
 
-  const gotoTOP=()=>{
+  const gotoTOP = () => {
     sendOTP({ Email: userDetails?.userEmail, }).then((response) => {
       if (response?.status === 1) {
-         setFormSubmit(true);
-         setModal(false)
+        setFormSubmit(true);
+        setModal(false)
       }
     });
   }
@@ -128,51 +128,6 @@ const FormReg = () => {
       >
         {isformSubmit ? (
           <>
-              <form
-                style={{
-                  width: "100%",
-                  padding: "20px 10px 10px 10px",
-                  border: "1",
-                }}
-              >
-                <div className="text-center">
-                  <img
-                    style={{ height: "90px", width: "190px" }}
-                    src="images/credit-n-logo.svg"
-                    className="d-inline-block align-top"
-                    alt=""
-                  />
-                  <h2>Register Here</h2>
-                </div>
-
-                <div className="form-outline mb-2">
-                  <input
-                    type="otp"
-                    className="form-control"
-                    id="userEmail"
-                    name="userEmail"
-                    placeholder="OTP"
-                    value={otp}
-                    onChange={(e) => setOTP(e.target.value)}
-                  />
-                  <label className="form-label" for="form3Example3">
-                    OTP - (one time password)
-                  </label>
-                  {error?.otp && <div className="error-msg">{error.otp}</div>}
-                </div>
-
-                <button
-                  type="button"
-                  className="btn btn-2 button my-3"
-                  onClick={submitOTP}
-                >
-                  Submit
-                </button>
-              </form>
-          </>
-
-        )
-          : (
             <form
               style={{
                 width: "100%",
@@ -189,6 +144,51 @@ const FormReg = () => {
                 />
                 <h2>Register Here</h2>
               </div>
+
+              <div className="form-outline mb-2">
+                <input
+                  type="otp"
+                  className="form-control"
+                  id="userEmail"
+                  name="userEmail"
+                  placeholder="OTP"
+                  value={otp}
+                  onChange={(e) => setOTP(e.target.value)}
+                />
+                <label className="form-label" for="form3Example3">
+                  OTP - (one time password)
+                  </label>
+                {error?.otp && <div className="error-msg">{error.otp}</div>}
+              </div>
+
+              <button
+                type="button"
+                className="btn btn-2 button my-3"
+                onClick={submitOTP}
+              >
+                Submit
+                </button>
+            </form>
+          </>
+
+        )
+          : (
+            <form
+              style={{
+                width: "100%",
+                padding: "20px 10px 10px 10px",
+                border: "1",
+              }}
+            >
+              <div className="text-center">
+                <img
+                  style={{ height: "70px" }}
+                  src="images/logo.png"
+                  className="d-inline-block align-top"
+                  alt=""
+                />
+                <h2>Register Here</h2>
+              </div>
               <div className="row mb-2">
                 <div className="col">
                   <div className="form-outline">
@@ -197,8 +197,7 @@ const FormReg = () => {
                       className="form-control"
                       id="userName"
                       name="userName"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter Your Name"
+                      placeholder="Name"
                       value={userDetails.userName}
                       onChange={changeHandler}
                     />
@@ -217,7 +216,7 @@ const FormReg = () => {
                       className="form-control"
                       id="userMobile"
                       name="userMobile"
-                      placeholder="Enter Your Mobile No."
+                      placeholder="9475837485"
                       value={userDetails.userMobile}
                       onChange={changeHandler}
                     />
@@ -237,7 +236,7 @@ const FormReg = () => {
                   className="form-control"
                   id="userEmail"
                   name="userEmail"
-                  placeholder="Enter Your Email"
+                  placeholder="xyz@domain.com"
                   value={userDetails.userEmail}
                   onChange={changeHandler}
                 />
@@ -256,7 +255,7 @@ const FormReg = () => {
                       className="form-control"
                       id="userPassword"
                       name="userPassword"
-                      placeholder="Enter Your Password"
+                      placeholder="Cgha@12!"
                       value={userDetails.userPassword}
                       onChange={changeHandler}
                     />
@@ -275,7 +274,7 @@ const FormReg = () => {
                       className="form-control"
                       id="userCPassword"
                       name="userCPassword"
-                      placeholder="Enter Your confirm - password"
+                      placeholder="Cgha@12!"
                       value={userDetails.userCPassword}
                       onChange={changeHandler}
                     />
@@ -295,7 +294,7 @@ const FormReg = () => {
                     className="form-control"
                     id="userRefral"
                     name="userRefral"
-                    placeholder="Enter Your Refral no."
+                    placeholder="g6shw"
                     value={userDetails.userRefral}
                     onChange={changeHandler}
                   />
@@ -351,9 +350,9 @@ const FormReg = () => {
             powered by creditsin.com
           </label>
         </div>
-        <Example modal={modal} close={()=>setModal(false)}>
-          <span>To verify account please <a href="#" onClick={()=>gotoTOP()}>click here</a></span>
-          </Example>
+        <Example modal={modal} close={() => setModal(false)}>
+          <span>To verify account please <a href="#" onClick={() => gotoTOP()}>click here</a></span>
+        </Example>
       </div>
     </>
   );
@@ -403,12 +402,12 @@ const rules = [
 
 const Example = (props) => {
   const [show, setShow] = useState(false)
-  useEffect(()=>{
+  useEffect(() => {
     setShow(props.modal)
-  },[props.modal])
+  }, [props.modal])
   return (
     <>
-      <Modal show={show} onHide={()=>{setShow(false);if(props.close)props.close()}}>
+      <Modal show={show} onHide={() => { setShow(false); if (props.close) props.close() }}>
         <Modal.Header closeButton>
           <Modal.Title>Verify Account</Modal.Title>
         </Modal.Header>

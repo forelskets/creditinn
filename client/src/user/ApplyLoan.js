@@ -3,12 +3,14 @@ import { NavLink, useHistory } from 'react-router-dom';
 import LoanForm from './LoanForm';
 import Apply from './Apply';
 import Bank from './Bank';
+import Emi from './emi';
+
 import {
   FacebookShareButton, WhatsappShareButton, WhatsappIcon, EmailIcon, EmailShareButton, FacebookIcon
 } from "react-share";
 
 const ApplyLoan = () => {
-  const shareUrl = 'www.forelskets.com bvhfytrytyrytrtyryryrrtrty';
+  const shareUrl = 'www.creditsin.com/form ';
   const [profile, setProfile] = useState({});
   const [lstatus, setLstatus] = useState(false);
   const LoanFunc = () => {
@@ -91,18 +93,7 @@ const ApplyLoan = () => {
                   </div>
                   <div className="row pb-5">
                     <div className="recent-sales box">
-                      <div id="ecww-widgetwrapper" style={{ minWidth: '250px', width: '100%' }}>
-                        <div
-                          id="ecww-widget"
-                          style={{
-                            position: 'relative',
-                            paddingTop: '0',
-                            paddingBottom: '280px',
-                            height: '0',
-                            overflow: 'hidden',
-                          }}
-                        ></div>
-                      </div>
+                      <Emi />
                     </div>
                   </div>
                   <div className="row pb-5">
@@ -143,7 +134,12 @@ const ApplyLoan = () => {
                     </li>
 
                     <text style={{ backgroundColor: '#f0f3f4', padding: 8 }}>{profile.RefralNo}</text>
-                    <FacebookShareButton url={shareUrl} style={{ padding: 10 }} >
+
+                    <FacebookShareButton
+                      url={"www.creditsin.com"}
+                      quote={profile.RefralNo} style={{ padding: 10 }}
+
+                    >
                       <FacebookIcon size={40} />
                     </FacebookShareButton>
                     <EmailShareButton
@@ -157,7 +153,9 @@ const ApplyLoan = () => {
 
 
 
-                    <WhatsappShareButton url={shareUrl} style={{ padding: 10 }} >
+                    <WhatsappShareButton url={profile.RefralNo}
+                      subject="subject"
+                      body={"hey there, pls share my referal code"} style={{ padding: 10 }} >
                       <WhatsappIcon size={40} />
                     </WhatsappShareButton>
                     <br />

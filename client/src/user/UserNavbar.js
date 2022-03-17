@@ -41,7 +41,8 @@ const UserNavbar = () => {
         <div>
           <div class="logo-container">
             <img
-              src="images/credit-n-logo.svg"
+              style={{ height: "70px" }}
+              src="images/logo.png"
               className="d-inline-block align-top"
               alt=""
             />

@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/users');
 
+
 const Authentication = async (req, res, next) => {
   try {
     const token = req.cookies.jwtoken;

@@ -22,6 +22,7 @@ import privacy from './frontPage/sections/privacy';
 import Salaried from './user/Salaried';
 import Business from './user/Business';
 import Loan from './user/Loan';
+import state1 from './user/state1';
 import 'bootstrap/dist/css/bootstrap.min.css';
 toastr.options = {
   positionClass: 'toast-top-center',
@@ -31,8 +32,10 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/" exact component={FrontMain} />
+        <Route path="/state1" exact component={state1} />
         <Route path="/privacy-policy" exact component={privacy} />
         <Route path="/form" exact component={formReg} />
+
         <Route path="/applyloan" component={ApplyLoan} />
         <Route path="/nav" component={UserMain} />
         <Route path="/admin" component={AdminMain} />

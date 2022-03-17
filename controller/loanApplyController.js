@@ -102,6 +102,8 @@ exports.getApplicationList = async (req, res, next) => {
       TotalExperience: req.body.TotalExperience,
       MonthlyIncome: req.body.MonthlyIncome,
       // AnnualIncome: req.body.AnnualIncome,
+      Gst: req.body.GST,
+      Lyst: req.body.LYST
     });
 
     const kyc = new KYC({
@@ -158,7 +160,7 @@ exports.getApplicationList = async (req, res, next) => {
         });
       }
     } catch (err) {
-      console.log('err', error);
+      console.log('err', err);
     }
   }
 };

@@ -1,11 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
 import toastr from 'toastr';
-import { Country, State, City } from 'country-state-city'
-
-
 const eye = { fontSize: '15px', height: '0px' };
 
 const LoanForm = () => {
@@ -51,45 +48,6 @@ const LoanForm = () => {
     loanAmount: '',
     emi: '',
   });
-  const [code, setCode] = useState({
-
-    stateCode: "",
-    cityCode: ""
-  })
-
-
-  const state = [];
-  const city = [];
-
-
-  console.log(Country.getCountryByCode('IN'));
-  console.log(State.getStatesOfCountry('IN'));
-  console.log(City.getCitiesOfState('IN', 'UP'));
-
-
-
-
-
-
-  State.getStatesOfCountry("IN").map((item) => {
-    state.push({ value: item.name, label: item.name, isoCode: item.isoCode })
-  })
-
-  const stateChange = (tat) => {
-    setStateSelect(tat);
-    setCode({
-      ...code,
-      stateCode: tat.isoCode
-    })
-  }
-  City.getCitiesOfState("IN", code.stateCode).map((item) => {
-    city.push({ value: item.name, label: item.name, isoCode: item.isoCode })
-  })
-
-  const cityChange = (tat) => {
-    setCitySelect(tat);
-
-  }
 
   const LYSTHandler = (e) => {
     setLyst(e.target.value)
@@ -154,11 +112,11 @@ const LoanForm = () => {
   //     annualIncome: tat.value,
   //   });
   // };
-  // const options = [
-  //   { value: 'Delhi', label: 'Delhi' },
-  //   { value: 'UP', label: 'UP' },
-  //   { value: 'Bihar', label: 'Bihar' },
-  // ];
+  const options = [
+    { value: 'Delhi', label: 'Delhi' },
+    { value: 'UP', label: 'UP' },
+    { value: 'Bihar', label: 'Bihar' },
+  ];
 
   const LoanPurposeHandler = (tat) => {
     setLoanPurpose(tat.value);
@@ -181,19 +139,19 @@ const LoanForm = () => {
     return disable;
   };
 
-  // const OptionHandler = (tat) => {
-  //   setStateSelect(tat);
-  // };
+  const OptionHandler = (tat) => {
+    setStateSelect(tat);
+  };
 
-  // const options1 = [
-  //   { value: 'Aligarh', label: 'Aligarh' },
-  //   { value: 'Agra', label: 'Agra' },
-  //   { value: 'MuradaBad', label: 'MuradaBad' },
-  // ];
+  const options1 = [
+    { value: 'Aligarh', label: 'Aligarh' },
+    { value: 'Agra', label: 'Agra' },
+    { value: 'MuradaBad', label: 'MuradaBad' },
+  ];
 
-  // const OptionHandler1 = (tat) => {
-  //   setCitySelect(tat);
-  // };
+  const OptionHandler1 = (tat) => {
+    setCitySelect(tat);
+  };
 
   const LoanPurpose = [
     { value: 'Education Loan', label: 'Education Loan' },
@@ -801,20 +759,13 @@ const LoanForm = () => {
                           ></i>
                         </label>
                         <Select
-                          placeholder="Select-State"
-                          id="state"
-                          name="state"
-                          options={state}
-                          onChange={stateChange}
-                        />
-                        {/* <Select
                           placeholder="Selected State"
                           id="state"
                           name="state"
                           onChange={OptionHandler}
                           options={options}
                           isDisabled={validateSelectOptions()}
-                        /> */}
+                        />
                       </div>
                       <div className="form-group col-md-4">
                         <label>
@@ -827,21 +778,14 @@ const LoanForm = () => {
                             style={eye}
                           ></i>
                         </label>
-                        <Select isDisabled={!code.stateCode}
-                          placeholder="city"
-                          id="workExperience"
-                          name="workExperience"
-                          options={city}
-                          onChange={cityChange}
-                        />
-                        {/* <Select
+                        <Select
                           placeholder="Selected City"
                           id="city"
                           name="city"
                           options={options1}
                           onChange={OptionHandler1}
                           isDisabled={validateSelectOptions()}
-                        /> */}
+                        />
                       </div>
                       <div className="form-group col-md-4">
                         <label>

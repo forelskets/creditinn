@@ -35,7 +35,7 @@ const footer = () => {
                     <li>Support</li>
                     <li>PrivacyPolicy</li>
                     <li>About Us</li>
-                    <li>Create An Account</li>
+
                   </ul>
 
                   <lottie-player
@@ -52,7 +52,12 @@ const footer = () => {
                     <h3>Get Started </h3>
                   </div>
                   <ul className="padding-ul">
-                    <li>Create An Account</li>
+                    <li><a style={{ textDecoration: 'none' }}
+                      href="https://creditsin.com/form/"
+                      className="text-white me-4"
+                    >
+                      Create An Account
+            </a></li>
                   </ul>
                 </div>
                 <div className="col-md-2 text-area padding-down">
