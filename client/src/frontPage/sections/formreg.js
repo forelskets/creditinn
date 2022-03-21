@@ -6,6 +6,8 @@ import { Validate } from "../../_helper";
 import { registerService, matchOTP, sendOTP } from "../../_services/Client.Service";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
+const eye = { fontSize: '15px', height: '0px' };
+
 const init = {
   userName: "",
   userEmail: "",
@@ -116,15 +118,17 @@ const FormReg = () => {
 
   return (
     <>
+    <div className="form-image" style={{padding: '1px'}}>
       <div
         style={{
-          width: "40%",
-          margin: "3% 30%",
-          padding: "20px 10px 10px 10px",
+          width: "30%",
+          margin: "3% 35%",
+          padding: "10px 10px 10px 10px",
           background: "#ffff",
           boxShadow: "-1px -1px 17px 0px rgb(100, 95, 99)",
           border: "1",
-        }}
+          
+        }} className="form-image"
       >
         {isformSubmit ? (
           <>
@@ -197,11 +201,10 @@ const FormReg = () => {
                       className="form-control"
                       id="userName"
                       name="userName"
-                      placeholder="Name"
                       value={userDetails.userName}
                       onChange={changeHandler}
                     />
-                    <label className="form-label" for="form3Example1">
+                    <label className="form-label" for="form3Example1" style={eye}>
                       Name
                     </label>
                     {error?.userName && (
@@ -216,11 +219,10 @@ const FormReg = () => {
                       className="form-control"
                       id="userMobile"
                       name="userMobile"
-                      placeholder="9475837485"
                       value={userDetails.userMobile}
                       onChange={changeHandler}
                     />
-                    <label className="form-label" for="form3Example2">
+                    <label className="form-label" for="form3Example2" style={eye} >
                       Mobile No
                     </label>
                     {error?.userMobile && (
@@ -229,24 +231,45 @@ const FormReg = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="form-outline mb-2">
+              <div className="row mb-2">
+                <div className="col">
+                <div className="form-outline ">
                 <input
                   type="email"
                   className="form-control"
                   id="userEmail"
                   name="userEmail"
-                  placeholder="xyz@domain.com"
                   value={userDetails.userEmail}
                   onChange={changeHandler}
                 />
-                <label className="form-label" for="form3Example3">
+                <label className="form-label" for="form3Example3" style={eye} >
                   Email address
                 </label>
                 {error?.userEmail && (
                   <div className="error-msg">{error.userEmail}</div>
                 )}
               </div>
+                </div><div className="col">
+                <div className="form-outline">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="userRefral"
+                    name="userRefral"
+                    value={userDetails.userRefral}
+                    onChange={changeHandler}
+                  />
+                  <label className="form-label" for="form3Example4" style={eye}>
+                    Refral no.
+                  </label>
+                  {error?.userRefral && (
+                    <div className="error-msg">{error.userRefral}</div>
+                  )}
+                </div>
+              </div>
+              </div>
+
+              
               <div className="row mb-2">
                 <div className="col">
                   <div className="form-outline">
@@ -255,11 +278,13 @@ const FormReg = () => {
                       className="form-control"
                       id="userPassword"
                       name="userPassword"
-                      placeholder="Cgha@12!"
                       value={userDetails.userPassword}
                       onChange={changeHandler}
                     />
-                    <label className="form-label" for="form3Example4">
+                    <label className="form-label" for="form3Example4" title="
+                    Password should be contains 8 digit with 1 Special character & 1 numeric value"
+                class="fas fa-eye "
+                style={eye}>
                       Password
                     </label>
                     {error?.userPassword && (
@@ -274,11 +299,10 @@ const FormReg = () => {
                       className="form-control"
                       id="userCPassword"
                       name="userCPassword"
-                      placeholder="Cgha@12!"
                       value={userDetails.userCPassword}
                       onChange={changeHandler}
                     />
-                    <label className="form-label" for="form3Example4">
+                    <label className="form-label" for="form3Example4" >
                       Confirm Password
                     </label>
                     {error?.userCPassword && (
@@ -287,25 +311,7 @@ const FormReg = () => {
                   </div>
                 </div>
               </div>
-              <div className="col">
-                <div className="form-outline">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="userRefral"
-                    name="userRefral"
-                    placeholder="g6shw"
-                    value={userDetails.userRefral}
-                    onChange={changeHandler}
-                  />
-                  <label className="form-label" for="form3Example4">
-                    Refral no.
-                  </label>
-                  {error?.userRefral && (
-                    <div className="error-msg">{error.userRefral}</div>
-                  )}
-                </div>
-              </div>
+              
               <div className="col">
                 <div className="form-outline">
 
@@ -353,6 +359,7 @@ const FormReg = () => {
         <Example modal={modal} close={() => setModal(false)}>
           <span>To verify account please <a href="#" onClick={() => gotoTOP()}>click here</a></span>
         </Example>
+      </div>
       </div>
     </>
   );

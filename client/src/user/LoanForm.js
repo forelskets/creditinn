@@ -1,110 +1,98 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Select from 'react-select';
-import axios from 'axios';
-import toastr from 'toastr';
-import { Country, State, City } from 'country-state-city'
+import React, { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Select from "react-select";
+import axios from "axios";
+import toastr from "toastr";
+import { Country, State, City } from "country-state-city";
 
-
-const eye = { fontSize: '15px', height: '0px' };
+const eye = { fontSize: "15px", height: "0px" };
 
 const LoanForm = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const modelRef = useRef(null);
   // const [pan, setPan] = useState('');
   // const [adhaar, setAdhaar] = useState('');
   // const [bankStmt, setBankStmt] = useState('');
   // const [photo, setPhoto] = useState('');
-  const [profession, setProfession] = useState('');
-  const [professionLabel, setProfessionLabel] = useState('');
-  const [gst, setGst] = useState('');
-  const [lyst, setLyst] = useState('');
+  const [profession, setProfession] = useState("");
+  const [professionLabel, setProfessionLabel] = useState("");
+  const [gst, setGst] = useState("");
+  const [lyst, setLyst] = useState("");
   const EmployeeDatails = useRef(null);
   const BasicDetails = useRef(null);
   const KYCDetails = useRef(null);
   const [checkBoxStatus, setCheckBoxStatus] = useState(false);
   const [citySelect, setCitySelect] = useState({});
-  const [loanAmount, setLoanAmount] = useState('');
-  const [loanPurpose, setLoanPurpose] = useState('');
+  const [loanAmount, setLoanAmount] = useState("");
+  const [loanPurpose, setLoanPurpose] = useState("");
   const [stateSelect, setStateSelect] = useState({});
+  const [basicInformation , setBasicInformation] = useState(true)
   const [employeeProfile, setEmployeeProfile] = useState({
-    fname: '',
-    // lname: '',
-    fathername: '',
-    // email: '',
-    dob: '',
-    mobile: '',
-    address: '',
-    // address2: '',
-    zip: '',
-    companyName: '',
-    // designation: '',
-    // currentCompanyExperience: '',
-    totalExperience: '',
-    monthlyIncome: '',
-    // annualIncome: '',
-    adhaarNo: '',
-    panNo: '',
-    // bankName: '',
-    // accountNo: '',
-    // IFSCcode: '',
-    loanAmount: '',
-    emi: '',
+    fname: "",
+
+    fathername: "",
+
+    dob: "",
+    mobile: "",
+    address: "",
+
+    zip: "",
+    companyName: "",
+
+    totalExperience: "",
+    monthlyIncome: "",
+
+    adhaarNo: "",
+    panNo: "",
+
+    loanAmount: "",
+    emi: "",
   });
+
+ 
   const [code, setCode] = useState({
-
     stateCode: "",
-    cityCode: ""
-  })
-
+    cityCode: "",
+  });
 
   const state = [];
   const city = [];
 
-
-  console.log(Country.getCountryByCode('IN'));
-  console.log(State.getStatesOfCountry('IN'));
-  console.log(City.getCitiesOfState('IN', 'UP'));
-
-
-
-
-
+  console.log(Country.getCountryByCode("IN"));
+  console.log(State.getStatesOfCountry("IN"));
+  console.log(City.getCitiesOfState("IN", "UP"));
 
   State.getStatesOfCountry("IN").map((item) => {
-    state.push({ value: item.name, label: item.name, isoCode: item.isoCode })
-  })
+    state.push({ value: item.name, label: item.name, isoCode: item.isoCode });
+  });
 
   const stateChange = (tat) => {
     setStateSelect(tat);
     setCode({
       ...code,
-      stateCode: tat.isoCode
-    })
-  }
+      stateCode: tat.isoCode,
+    });
+  };
   City.getCitiesOfState("IN", code.stateCode).map((item) => {
-    city.push({ value: item.name, label: item.name, isoCode: item.isoCode })
-  })
+    city.push({ value: item.name, label: item.name, isoCode: item.isoCode });
+  });
 
   const cityChange = (tat) => {
     setCitySelect(tat);
-
-  }
+  };
 
   const LYSTHandler = (e) => {
-    setLyst(e.target.value)
-
-  }
+    setLyst(e.target.value);
+  };
   const GSTHandler = (e) => {
-    setGst(e.target.value)
-  }
+    setGst(e.target.value);
+  };
 
   const TotalWorkExperience = [
-    { value: '1 or less then years', label: '1 or less then years' },
-    { value: '1 to 2  years', label: '1 to 2 years' },
-    { value: '2 to 3 years', label: '2 or 3 years' },
-    { value: 'More than 3 years', label: 'More Than 3 years' },
-
+    { value: "1 or less then years", label: "1 or less then years" },
+    { value: "1 to 2  years", label: "1 to 2 years" },
+    { value: "2 to 3 years", label: "2 or 3 years" },
+    { value: "More than 3 years", label: "More Than 3 years" },
   ];
 
   const TotalWorkExperienceHandler = (tat) => {
@@ -129,10 +117,10 @@ const LoanForm = () => {
   // };
 
   const MonthlyIncome = [
-    { value: 'less than 20000', label: 'less than 20000' },
-    { value: '20000-40000', label: '20000-40000' },
-    { value: '40000-80000', label: '40000-80000' },
-    { value: 'up to 1,00,000', label: 'up to 1,00,000' },
+    { value: "less than 20000", label: "less than 20000" },
+    { value: "20000-40000", label: "20000-40000" },
+    { value: "40000-80000", label: "40000-80000" },
+    { value: "up to 1,00,000", label: "up to 1,00,000" },
   ];
 
   const MonthlyIncomeHandler = (tat) => {
@@ -169,8 +157,8 @@ const LoanForm = () => {
     setProfessionLabel(tat.status);
   };
 
-  const LoanAmountHandler = (tat) => {
-    setLoanAmount(tat.value);
+  const LoanAmountHandler = (e) => {
+    setLoanAmount(e.target.value);
   };
 
   const validateSelectOptions = () => {
@@ -196,22 +184,26 @@ const LoanForm = () => {
   // };
 
   const LoanPurpose = [
-    { value: 'Education Loan', label: 'Education Loan' },
-    { value: 'Personal Loan', label: 'Personal Loan' },
-    { value: 'Home Loan', label: 'Home Loan' },
-    { value: 'Business Loan', label: 'Business Loan' },
-    { value: 'Flexi Loan', label: 'Flexi Loan/Overdraft Loan' },
+    { value: "Education Loan", label: "Education Loan" },
+    { value: "Personal Loan", label: "Personal Loan" },
+    { value: "Home Loan", label: "Home Loan" },
+    { value: "Business Loan", label: "Business Loan" },
+    { value: "Flexi Loan", label: "Flexi Loan/Overdraft Loan" },
   ];
 
   const LoanAmount = [
-    { value: '1,00,000', label: '1,00,000' },
-    { value: '2,00,000', label: '2,00,000' },
+    { value: "1,00,000", label: "1,00,000" },
+    { value: "2,00,000", label: "2,00,000" },
   ];
 
   const Profession = [
-    { value: 'Salaried', label: 'Salaried', status: 'Salried' },
-    { value: 'Self Employed', label: 'Self Employed', status: 'Bussiness' },
-    { value: 'Self Employed (Professional)', label: 'Self Employed (Professional)', status: 'Bussiness' },
+    { value: "Salaried", label: "Salaried", status: "Salried" },
+    { value: "Self Employed", label: "Self Employed", status: "Bussiness" },
+    {
+      value: "Self Employed (Professional)",
+      label: "Self Employed (Professional)",
+      status: "Bussiness",
+    },
   ];
 
   const changeBox = () => {
@@ -278,7 +270,7 @@ const LoanForm = () => {
           <div className="form-group col-md-6">
             <label>
               Last. Year Income
-                          <i
+              <i
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 title="for eg:13000"
@@ -292,17 +284,15 @@ const LoanForm = () => {
               className="form-control"
               id="lyst"
               name="lyst"
-
               value={lyst}
               onChange={LYSTHandler}
               disabled={validateSelectOptions()}
             />
           </div>
           <div className="form-group col-md-6">
-
             <label>
               GST NO.
-                          <i
+              <i
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 title="for eg:13000"
@@ -316,20 +306,15 @@ const LoanForm = () => {
               className="form-control"
               id="gst"
               name="gst"
-
               value={gst}
               onChange={GSTHandler}
               disabled={validateSelectOptions()}
             />
-
-
           </div>
         </div>
-
       </>
-
-    )
-  }
+    );
+  };
   const ProfileChangeHandler = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -343,59 +328,53 @@ const LoanForm = () => {
     let submit = 0;
     let employeeProfileForm = {
       FirstName: employeeProfile.fname,
-      // LastName: employeeProfile.lname,
+
       FatherName: employeeProfile.fathername,
-      // Email: employeeProfile.email,
+
       DOB: employeeProfile.dob,
       Mobile: employeeProfile.mobile,
       CurrentAddress: employeeProfile.address,
-      // CurrentAddress2: employeeProfile.address2,
+
       State: stateSelect.value,
       City: citySelect.value,
       ZIP: employeeProfile.zip,
       CompanyName: employeeProfile.companyName,
-      // Designation: employeeProfile.designation,
-      // CurrentCompanyExperience: employeeProfile.currentCompanyExperience,
+
       TotalExperience: employeeProfile.totalExperience,
       MonthlyIncome: employeeProfile.monthlyIncome,
-      // AnnualIncome: employeeProfile.annualIncome,
+
       AdhaarNo: employeeProfile.adhaarNo,
       PanNo: employeeProfile.panNo,
-      // BankName: employeeProfile.bankName,
-      // AccountNo: employeeProfile.accountNo,
-      // IFSCcode: employeeProfile.IFSCcode,
-      // LoanAmount: employeeProfile.loanAmount,
-      // EMI: employeeProfile.emi,
-      // adhaar: adhaar,
-      // pan: pan,
-      // bankStmt: bankStmt,
-      // photo: photo,
+
       loanPurpose: loanPurpose,
       loanAmount: loanAmount,
       profession: profession,
       GST: gst,
-      LYST: lyst
+      LYST: lyst,
     };
 
     Object.keys(employeeProfileForm).map((key) => {
-      console.log(gst + "" + lyst)
-      if (professionLabel === 'Bussiness') {
+      console.log(gst + "" + lyst);
+      if (professionLabel === "Bussiness") {
         if (
-          employeeProfileForm[key] === '' ||
+          employeeProfileForm[key] === "" ||
           employeeProfileForm[key] === null ||
           employeeProfileForm[key] === undefined
-        ) { submit = 1; }
-      }
-      else if (professionLabel === 'Salried') {
+        ) {
+          submit = 1;
+        }
+      } else if (professionLabel === "Salried") {
         if (
-          employeeProfileForm[key] === '' ||
+          employeeProfileForm[key] === "" ||
           employeeProfileForm[key] === null ||
           employeeProfileForm[key] === undefined
-        ) { submit = submit + 1; }
+        ) {
+          submit = submit + 1;
+        }
       }
     });
 
-    console.log('req:', employeeProfileForm);
+    console.log("req:", employeeProfileForm);
 
     if (submit === 2) {
       submit = 0;
@@ -410,46 +389,47 @@ const LoanForm = () => {
         console.log([key]);
       }
 
-      console.log('req111:', formData);
+      console.log("req111:", formData);
 
       try {
-        console.log('xios');
-        const upload = await axios.post('/kycDetails', formData, {
+        console.log("xios");
+        const upload = await axios.post("/kycDetails", formData, {
           withCredentials: true,
         });
-        console.log(upload.data.status, upload.data.status === 401, 'upload');
+
+        console.log(upload.data.status, upload.data.status === 401, "upload");
         setEmployeeProfile({
           ...employeeProfile,
-          fname: '',
+          fname: "",
           // lname: '',
-          fathername: '',
+          fathername: "",
           // email: '',
-          dob: '',
-          mobile: '',
-          address: '',
+          dob: "",
+          mobile: "",
+          address: "",
           // address2: '',
-          zip: '',
-          companyName: '',
+          zip: "",
+          companyName: "",
           // designation: '',
           // currentCompanyExperience: '',
-          totalExperience: '',
-          monthlyIncome: '',
+          totalExperience: "",
+          monthlyIncome: "",
           // annualIncome: '',
-          adhaarNo: '',
-          panNo: '',
+          adhaarNo: "",
+          panNo: "",
           // bankName: '',
           // accountNo: '',
           // IFSCcode: '',
-          loanAmount: '',
-          emi: '',
+          loanAmount: "",
+          emi: "",
         });
         // setPan('');
         // setAdhaar('');
         // setBankStmt('');
         // setPhoto('');
-        setLoanPurpose('');
-        setLoanAmount('');
-        setProfession('');
+        setLoanPurpose("");
+        setLoanAmount("");
+        setProfession("");
         if (upload.data.status === 401) {
           window.alert(upload.data.message);
         } else if (upload.data.status === 200) {
@@ -457,12 +437,21 @@ const LoanForm = () => {
           setMessage(upload.data.message);
         }
       } catch (err) {
-        console.log('err', err);
+        console.log("err", err);
       }
     } else {
-      toastr.success('please fill all the field carefully');
+      toastr.success("please fill all the field carefully");
     }
   };
+
+  const EmployeeClickFunc =() =>{
+    if(employeeProfile.fname && employeeProfile.fathername && employeeProfile.dob && employeeProfile.mobile && employeeProfile.address && employeeProfile.adhaarNo && employeeProfile.panNo && employeeProfile.zip && stateSelect && citySelect){
+      setBasicInformation(false)
+    }
+    else{
+      alert('please fill all the Input')
+    }
+  }
 
   return (
     <>
@@ -487,23 +476,21 @@ const LoanForm = () => {
             />
           </div>
           <div className="form-group col-md-4">
-            <Select
+            {/* <Select
               placeholder="Loan Amount"
               id="loanAmount"
               name="loanAmount"
               options={LoanAmount}
               onChange={LoanAmountHandler}
-            />
-            {/* <input
+            /> */}
+            <input
               type="text"
               className="form-control"
               id="loanAmount"
               name="loanAmount"
-
               onChange={LoanAmountHandler}
-              placeholder="mobile Number"
-
-            /> */}
+              placeholder="Loan Amount"
+            />
           </div>
         </div>
         <div>
@@ -530,6 +517,8 @@ const LoanForm = () => {
                     data-bs-toggle="tab"
                     to="#step2"
                     ref={EmployeeDatails}
+                    disabled={basicInformation}
+                    onClick={EmployeeClickFunc}
                   >
                     Employement Details
                   </Link>
@@ -548,7 +537,6 @@ const LoanForm = () => {
               <div className="tab-content py-4">
                 <div className="tab-pane fade show active" id="step1">
                   <div className="form-1">
-
                     <div className="form-row row my-3">
                       <div className="form-group col-md-4">
                         <label>
@@ -734,7 +722,7 @@ const LoanForm = () => {
                           type="date"
                           className="form-control"
                           id="dob"
-                          maxDate='new Date()'
+                          maxDate="new Date()"
                           name="dob"
                           value={employeeProfile.dob}
                           onChange={ProfileChangeHandler}
@@ -827,7 +815,8 @@ const LoanForm = () => {
                             style={eye}
                           ></i>
                         </label>
-                        <Select isDisabled={!code.stateCode}
+                        <Select
+                          isDisabled={!code.stateCode}
                           placeholder="city"
                           id="workExperience"
                           name="workExperience"
@@ -884,8 +873,9 @@ const LoanForm = () => {
                     <div className="form-row row my-3">
                       <div className="form-group col-md-6">
                         <label>
-
-                          {(professionLabel === 'Salried') ? "Employer Name" : "Firm Name"}
+                          {professionLabel === "Salried"
+                            ? "Employer Name"
+                            : "Firm Name"}
                           {/* {(professionLabel === 'Bussiness') ? "Employer" : "Firm Name"} */}
                           <i
                             data-bs-toggle="tooltip"
@@ -900,7 +890,6 @@ const LoanForm = () => {
                           className="form-control"
                           id="companyName"
                           name="companyName"
-
                           value={employeeProfile.companyName}
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
@@ -960,7 +949,9 @@ const LoanForm = () => {
                       {/* </div> */}
                       <div className="form-group col-md-6">
                         <label>
-                          {(professionLabel === 'Salried') ? "Total Experience " : "Total Business years"}
+                          {professionLabel === "Salried"
+                            ? "Total Experience "
+                            : "Total Business years"}
                           <i
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
@@ -987,12 +978,13 @@ const LoanForm = () => {
                           onChange={TotalWorkExperienceHandler}
                         />
                       </div>
-
                     </div>
                     <div className="form-row my-3 row">
                       <div className="form-group col-md-6">
                         <label>
-                          {(professionLabel === 'Salried') ? "MonthlyIncome" : "Current Year Income"}
+                          {professionLabel === "Salried"
+                            ? "MonthlyIncome"
+                            : "Current Year Income"}
                           <i
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
@@ -1013,7 +1005,6 @@ const LoanForm = () => {
                           className="form-control"
                           id="montlyIncome"
                           name="monthlyIncome"
-
                           value={employeeProfile.monthlyIncome}
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
@@ -1049,7 +1040,9 @@ const LoanForm = () => {
                         /> 
                       </div> */}
                     </div>
-                    {(professionLabel === 'Bussiness') ? professionLabelFunc() : ""}
+                    {professionLabel === "Bussiness"
+                      ? professionLabelFunc()
+                      : ""}
 
                     <div className="form-row my-3 row">
                       <div className="form-group col-md-6">
@@ -1065,7 +1058,7 @@ const LoanForm = () => {
                         <br />
                       </div>
                     </div>
-                    {checkBoxStatus ? checkFunc() : ''}
+                    {checkBoxStatus ? checkFunc() : ""}
                     <div className="row justify-content-between my-3">
                       <div className="col-auto">
                         <button

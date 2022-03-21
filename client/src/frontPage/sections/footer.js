@@ -13,7 +13,7 @@ const footer = () => {
                   <div className="align-inline">
                     <a className="footer-brand" href="#">
                       <img
-                        src="./images/credit-n-logo-footer.svg"
+                        src="./images/footer.png"
                         width="45"
                         height="65"
                         className=" align-top"
@@ -22,9 +22,7 @@ const footer = () => {
                     </a>
                   </div>
                   <p className="paragraph">
-                    Start Your Business with Zero Investment and Earn over
-                    ₹1,00,000 Every Month. Provide financial advice and products
-                    to the customers and get a fast payout every month.
+                    Refer and Generate revenue with CreditsIn!
                   </p>
                 </div>
                 <div className="col-md-2 text-area padding-down">

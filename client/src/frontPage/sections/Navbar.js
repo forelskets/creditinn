@@ -208,8 +208,8 @@ const Navbar = () => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
-          <div className="modal-content">
+        <div className="modal-dialog" >
+          <div className="modal-content" style={{width:'340px', alignContent:'center'}}>
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
                 Login here
@@ -260,7 +260,7 @@ const Navbar = () => {
                       id="email"
                       name="email"
                       value={email}
-                      placeholder="Enter YOur Email"
+                      placeholder="enter your email"
                       onChange={(e) => {
                         setEmail(e.target.value);
                       }}
@@ -273,7 +273,7 @@ const Navbar = () => {
                       id="password"
                       name="password"
                       value={password}
-                      placeholder="Enter Password"
+                      placeholder="enter password"
                       onChange={(e) => {
                         setPassword(e.target.value);
                       }}

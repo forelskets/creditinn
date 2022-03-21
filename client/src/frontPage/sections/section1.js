@@ -21,7 +21,7 @@ const section1 = () => {
               <div id="paragraph" className="pb-5 mt-5">
                 <span className="paragraph">
                   Start Your Business with Zero Investment and Earn over
-                  Thousand of rupees Every Month. Refer customers and earn a
+                  Thousands of rupees Every Month. Refer customers and earn a
                   fast payouts everymonth!
                 </span>
               </div>

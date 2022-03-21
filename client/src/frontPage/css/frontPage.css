@@ -791,6 +791,11 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+.form-image {
+  background-image: url('formback.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .bannerimg {
   background-size: 100%;
   background-repeat: no-repeat;
