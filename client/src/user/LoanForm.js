@@ -4,6 +4,8 @@ import Select from "react-select";
 import axios from "axios";
 import toastr from "toastr";
 import { Country, State, City } from "country-state-city";
+import NumberFormat from 'react-number-format';
+import { ToWords } from 'to-words';
 
 const eye = { fontSize: "15px", height: "0px"  };
 
@@ -267,7 +269,7 @@ const LoanForm = () => {
     return (
       <>
         <div className="form-row my-3 row">
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-4">
             <label>
               Last. Year Income
               
@@ -283,7 +285,7 @@ const LoanForm = () => {
               disabled={validateSelectOptions()}
             />
           </div>
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-4">
             <label>
               GST NO.
               
@@ -340,7 +342,15 @@ const LoanForm = () => {
       GST: gst,
       LYST: lyst,
     };
-
+    const toWords = new ToWords({
+      localeCode: 'en-IN',
+      converterOptions: {
+        currency: true,
+        ignoreDecimal: false,
+        ignoreZeroCurrency: false,
+        doNotAddOnly: false,
+      }
+    });
     Object.keys(employeeProfileForm).map((key) => {
       console.log(gst + "" + lyst);
       if (professionLabel === "Bussiness") {
@@ -458,7 +468,7 @@ const LoanForm = () => {
             <Select
               placeholder="Profession"
               id="profession"
-              name="professrion"
+              name="profession"
               options={Profession}
               onChange={ProfessionHandler}
             />
@@ -471,14 +481,19 @@ const LoanForm = () => {
               options={LoanAmount}
               onChange={LoanAmountHandler}
             /> */}
-            <input
+            {/* <input
               type="text"
               className="form-control"
               id="loanAmount"
               name="loanAmount"
               onChange={LoanAmountHandler}
               placeholder="Loan Amount"
-            />
+            /> */}
+            <NumberFormat  className="form-control" id="loanAmount"
+              name="loanAmount"
+              onChange={LoanAmountHandler}
+              placeholder="Loan Amount" thousandSeparator={true}  />
+              <span><toWords/></span>
           </div>
         </div>
         <div>
@@ -526,7 +541,7 @@ const LoanForm = () => {
                 <div className="tab-pane fade show active" id="step1">
                   <div className="form-1">
                     <div className="form-row row my-3">
-                      <div className="form-group col-md-4">
+                      <div className="form-group col-md-3">
                         <label>
                           Mobile Number
                           
@@ -542,7 +557,7 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div>
-                      <div className="form-group col-md-4">
+                      <div className="form-group col-md-3">
                         <label>
                           Name (As Per Pan)
                           
@@ -580,7 +595,7 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div> */}
-                      <div className="form-group col-md-4">
+                      <div className="form-group col-md-3">
                         <label>
                           Father's Name
                          
@@ -596,9 +611,27 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div>
+                      <div className="form-group col-md-3">
+                        <label>
+                          Date Of Birth
+                          
+                        </label>
+                        <input
+                          type="date"
+                          className="form-control"
+                          id="dob"
+                          maxDate="new Date()"
+                          name="dob"
+                          value={employeeProfile.dob}
+                          onChange={ProfileChangeHandler}
+                          placeholder="Date Of Birth"
+                          disabled={validateSelectOptions()}
+                        />
+                      </div>
+                      
                     </div>
                     <div className="form-row row my-3">
-                      <div className="form-group col-md-6">
+                      <div className="form-group col-md-4">
                         <label>
                           Aadhar Card no.
                          
@@ -625,7 +658,7 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div> */}
-                      <div className="form-group col-md-6">
+                      <div className="form-group col-md-4">
                         <label>
                           PAN Card no.
                         
@@ -641,6 +674,24 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div>
+                      <div className="form-group  col-md-4">
+                        <label>
+                          address
+                         
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="address"
+                          name="address"
+                          value={employeeProfile.address}
+                          onChange={ProfileChangeHandler}
+                          placeholder="1234 Main Street aligarh"
+                          disabled={validateSelectOptions()}
+                        />
+                      </div>
+                    </div>
+
                     </div>
                     <div className="form-row my-3 row">
                       {/* <div className="form-group col-md-4">
@@ -665,41 +716,7 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div> */}
-                      <div className="form-group col-md-4">
-                        <label>
-                          Date Of Birth
-                          
-                        </label>
-                        <input
-                          type="date"
-                          className="form-control"
-                          id="dob"
-                          maxDate="new Date()"
-                          name="dob"
-                          value={employeeProfile.dob}
-                          onChange={ProfileChangeHandler}
-                          placeholder="Date Of Birth"
-                          disabled={validateSelectOptions()}
-                        />
-                      </div>
-                      <div className="form-group  col-md-8">
-                        <label>
-                          address
-                         
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="address"
-                          name="address"
-                          value={employeeProfile.address}
-                          onChange={ProfileChangeHandler}
-                          placeholder="1234 Main Street aligarh"
-                          disabled={validateSelectOptions()}
-                        />
-                      </div>
-                    </div>
-
+                     
                     {/* <div className="form-group my-3">
                       <label>
                         Address 2
@@ -799,7 +816,7 @@ const LoanForm = () => {
                 <div className="tab-pane fade" id="step2">
                   <div className="form-2">
                     <div className="form-row row my-3">
-                      <div className="form-group col-md-6">
+                      <div className="form-group col-md-4">
                         <label>
                           {professionLabel === "Salried"
                             ? "Employer Name"
@@ -869,7 +886,7 @@ const LoanForm = () => {
                           onChange={WorkExperienceHandler}
                         /> */}
                       {/* </div> */}
-                      <div className="form-group col-md-6">
+                      <div className="form-group col-md-4">
                         <label>
                           {professionLabel === "Salried"
                             ? "Total Experience "
@@ -894,9 +911,7 @@ const LoanForm = () => {
                           onChange={TotalWorkExperienceHandler}
                         />
                       </div>
-                    </div>
-                    <div className="form-row my-3 row">
-                      <div className="form-group col-md-6">
+                      <div className="form-group col-md-4">
                         <label>
                           {professionLabel === "Salried"
                             ? "MonthlyIncome"
@@ -920,6 +935,9 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                       </div>
+                    </div>
+                    <div className="form-row my-3 row">
+                     
                       {/* <div className="form-group col-md-6">
                         <label>
                           Annual Income/ Last Yr. TurnOver

@@ -4,9 +4,8 @@ import { useHistory } from "react-router-dom";
 import toastr from "toastr";
 import { Validate } from "../../_helper";
 import { registerService, matchOTP, sendOTP } from "../../_services/Client.Service";
-import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
-const eye = { fontSize: '15px', height: '0px' };
+const eye = { fontSize: '15px', height: '0px', fontWeight: '600' }; 
 
 const init = {
   userName: "",
@@ -118,17 +117,15 @@ const FormReg = () => {
 
   return (
     <>
-    <div className="form-image" style={{padding: '1px'}}>
       <div
         style={{
           width: "30%",
           margin: "3% 35%",
-          padding: "10px 10px 10px 10px",
+          padding: "20px 10px 10px 10px",
           background: "#ffff",
           boxShadow: "-1px -1px 17px 0px rgb(100, 95, 99)",
           border: "1",
-          
-        }} className="form-image"
+        }}
       >
         {isformSubmit ? (
           <>
@@ -141,12 +138,12 @@ const FormReg = () => {
             >
               <div className="text-center">
                 <img
-                  style={{ height: "90px", width: "190px" }}
-                  src="images/credit-n-logo.svg"
+                  style={{ height: "70px" }}
+                  src="images/logo.png"
                   className="d-inline-block align-top"
                   alt=""
                 />
-                <h2>Register Here</h2>
+                <h2>Enter OTP</h2>
               </div>
 
               <div className="form-outline mb-2">
@@ -155,12 +152,12 @@ const FormReg = () => {
                   className="form-control"
                   id="userEmail"
                   name="userEmail"
-                  placeholder="OTP"
+                 
                   value={otp}
                   onChange={(e) => setOTP(e.target.value)}
                 />
                 <label className="form-label" for="form3Example3">
-                  OTP - (one time password)
+                  OTP( Send your registered email )
                   </label>
                 {error?.otp && <div className="error-msg">{error.otp}</div>}
               </div>
@@ -302,7 +299,7 @@ const FormReg = () => {
                       value={userDetails.userCPassword}
                       onChange={changeHandler}
                     />
-                    <label className="form-label" for="form3Example4" >
+                    <label className="form-label" for="form3Example4"  style={eye} >
                       Confirm Password
                     </label>
                     {error?.userCPassword && (
@@ -348,7 +345,7 @@ const FormReg = () => {
         <div className="form-check d-flex justify-content-center mb-2">
           <img
             style={{ height: "20px", width: "20px" }}
-            src="images/projectLogo.png"
+            src="images/favicon.png"
             className="d-inline-block "
             alt=""
           />
@@ -359,7 +356,6 @@ const FormReg = () => {
         <Example modal={modal} close={() => setModal(false)}>
           <span>To verify account please <a href="#" onClick={() => gotoTOP()}>click here</a></span>
         </Example>
-      </div>
       </div>
     </>
   );

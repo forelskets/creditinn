@@ -36,14 +36,14 @@ const Section3 = () => {
                           <div
                             className="card card1 mx-auto"
                             style={{
-                              height: '250px',
-                              width: '300px',
+                              height: '200px',
+                              width: '250px',
                               align: 'center',
                             }}
                           >
                             <i
-                              class="fab fa-instalod fa-7x"
-                              style={{ margin: '15px  auto 5px auto' }}
+                              class="fab fa-instalod fa-4x"
+                              style={{ margin: '10px  auto ' }}
                             ></i>
 
                             <div className="card-body">
@@ -57,14 +57,14 @@ const Section3 = () => {
                           <div
                             className="card card2 mx-auto"
                             style={{
-                              height: '250px',
-                              width: '300px',
+                              height: '200px',
+                              width: '250px',
                               align: 'center',
                             }}
                           >
                             <i
-                              class="fas fa-share fa-7x"
-                              style={{ margin: '15px  auto 5px auto' }}
+                              class="fas fa-share fa-4x"
+                              style={{ margin: '10px  auto ' }}
                             ></i>
                             <div className="card-body">
                               <h4 className="heading3">
@@ -77,14 +77,14 @@ const Section3 = () => {
                           <div
                             className="card card3 mx-auto"
                             style={{
-                              height: '250px',
-                              width: '300px',
+                              height: '200px',
+                              width: '250px',
                               align: 'center',
                             }}
                           >
                             <i
-                              class="fas fa-user-alt fa-7x"
-                              style={{ margin: '15px  auto 5px auto' }}
+                              class="fas fa-user-alt fa-4x"
+                              style={{ margin: '10px  auto ' }}
                             ></i>
 
                             <div className="card-body">
@@ -116,14 +116,14 @@ const Section3 = () => {
                           <div
                             className="card card4 mx-auto"
                             style={{
-                              height: '250px',
-                              width: '300px',
+                              height: '200px',
+                              width: '250px',
                               align: 'center',
                             }}
                           >
                             <i
-                              class="fas fa-credit-card fa-7x"
-                              style={{ margin: '15px  auto 5px auto' }}
+                              class="fas fa-credit-card fa-4x"
+                              style={{ margin: '10px  auto ' }}
                             ></i>
 
                             <div className="card-body">
@@ -137,14 +137,14 @@ const Section3 = () => {
                           <div
                             className="card card1 mx-auto"
                             style={{
-                              height: '250px',
-                              width: '300px',
+                              height: '200px',
+                              width: '250px',
                               align: 'center',
                             }}
                           >
                             <i
-                              class="fas fa-dharmachakra fa-7x"
-                              style={{ margin: '15px  auto 5px auto' }}
+                              class="fas fa-dharmachakra fa-4x"
+                              style={{ margin: '10px auto' }}
                             ></i>
 
                             <div className="card-body">
