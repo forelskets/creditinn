@@ -23,6 +23,8 @@ import Salaried from './user/Salaried';
 import Business from './user/Business';
 import Loan from './user/Loan';
 import state1 from './user/state1';
+import Support from './frontPage/support';
+import InputPassword from './user/InputPassword';
 import 'bootstrap/dist/css/bootstrap.min.css';
 toastr.options = {
   positionClass: 'toast-top-center',
@@ -33,8 +35,10 @@ function App() {
       <Switch>
         <Route path="/" exact component={FrontMain} />
         <Route path="/state1" exact component={state1} />
+        <Route path="/InputPassword" exact component={InputPassword} />
         <Route path="/privacy-policy" exact component={privacy} />
         <Route path="/form" exact component={formReg} />
+        <Route path="/support" exact component={Support} />
 
         <Route path="/applyloan" component={ApplyLoan} />
         <Route path="/nav" component={UserMain} />
