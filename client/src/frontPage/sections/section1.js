@@ -30,7 +30,7 @@ const section1 = () => {
                 <button
                   className="button btn-3"
                   onClick={() => {
-                    window.location.href = 'http://localhost:3000/form';
+                    window.location.href = '/form';
                   }}
                 >
                   <a></a> Register

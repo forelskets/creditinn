@@ -109,18 +109,7 @@ const ApplyLoan = () => {
                 </div>
 
                 <div className="top-sales box profile-card col-sm-3">
-                  <div className="col">
-                    <div className="overview-boxes">
-                      <div className="box1 col-sm-12">
-                        <div className="right-side">
-                          <div className="box-topic">Active Loans</div>
-                          <div className="number">0</div>
-                        </div>
-                        <i className="fas fa-money-bill-wave-alt"></i>
-                      </div>
-
-                    </div>
-                  </div>
+                 
                   <div className="title">Profile</div>
                   <ul className="top-sales-details">
                     <li>
@@ -197,8 +186,21 @@ const ApplyLoan = () => {
                       />
                     </li>
                   </ul>
-                  <button className="btns">Edit</button>
+                  {/* <button className="btns">Edit</button> */}
+                  <div className="col">
+                    <div className="overview-boxes">
+                      <div className="box1 col-sm-12">
+                        <div className="right-side">
+                          <div className="box-topic">Active Loans</div>
+                          <div className="number">0</div>
+                        </div>
+                        <i className="fas fa-money-bill-wave-alt"></i>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
+                
               </div>
             </div>
           </div>

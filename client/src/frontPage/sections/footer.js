@@ -63,7 +63,7 @@ const footer = () => {
                     <h3>Need Help?</h3>
                   </div>
                   <ul className="padding-ul">
-                    <li> <a href="/support">Support</a></li>
+                    <li > <a href="/support"  className="text-light" style={{textDecoration: 'none'}}>Support</a></li>
                     <li>PrivacyPolicy</li>
                     <li>About Us</li>
                     <li>Create An Account</li>

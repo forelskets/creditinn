@@ -6,6 +6,7 @@ import { Validate } from "../../_helper";
 import { registerService, matchOTP, sendOTP } from "../../_services/Client.Service";
 import { Modal } from "react-bootstrap";
 const eye = { fontSize: '15px', height: '0px', fontWeight: '600' }; 
+//const eye = <FontAwesomeIcon icon={faEye} />;
 
 const init = {
   userName: "",
@@ -23,6 +24,17 @@ const FormReg = () => {
   const [isformSubmit, setFormSubmit] = useState(false);
   const [otp, setOTP] = useState("");
   const [modal, setModal] = useState(false);
+  
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+  const [passwordShown1, setPasswordShown1] = useState(false);
+  const togglePasswordVisiblity1 = () => {
+    setPasswordShown1(passwordShown1 ? false : true);
+  };
+  
+  
   const history = useHistory();
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -114,7 +126,7 @@ const FormReg = () => {
       }
     });
   }
-
+ 
   return (
     <>
       <div
@@ -268,19 +280,22 @@ const FormReg = () => {
 
               
               <div className="row mb-2">
-                <div className="col">
-                  <div className="form-outline">
-                    <input
-                      type="password"
+                <div className="col " style={{position: 'relative' ,  display: 'flex'}}>
+                  <div className="form-outline ">
+                    <input 
                       className="form-control"
                       id="userPassword"
                       name="userPassword"
+                      type={passwordShown ? "text" : "password"}
                       value={userDetails.userPassword}
                       onChange={changeHandler}
                     />
+                       <i class="fas fa-eye " onClick={togglePasswordVisiblity} style={{position: 'absolute',
+  top: '10px',
+  right: '25px'}} ></i>{" "} 
                     <label className="form-label" for="form3Example4" title="
                     Password should be contains 8 digit with 1 Special character & 1 numeric value"
-                class="fas fa-eye "
+                class="fas fa-question "
                 style={eye}>
                       Password
                     </label>
@@ -289,16 +304,19 @@ const FormReg = () => {
                     )}
                   </div>
                 </div>
-                <div className="col">
+                <div className="col" style={{position: 'relative' ,  display: 'flex'}}>
                   <div className="form-outline">
                     <input
-                      type="password"
+                      type={passwordShown1 ? "text" : "password"}
                       className="form-control"
                       id="userCPassword"
                       name="userCPassword"
                       value={userDetails.userCPassword}
                       onChange={changeHandler}
                     />
+                    <i class="fas fa-eye " onClick={togglePasswordVisiblity1} style={{position: 'absolute',
+  top: '10px',
+  right: '25px'}} ></i>{" "} 
                     <label className="form-label" for="form3Example4"  style={eye} >
                       Confirm Password
                     </label>
