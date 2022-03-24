@@ -73,7 +73,7 @@ const footer = () => {
                     src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
                     background="transparent"
                     speed="1"
-                    style={{ width: '100px', height: '100px' }}
+                    style={{ width: '100px', height: '100px', marginTop: '-40px' }}
                     loop
                     autoplay
                   ></lottie-player>
@@ -84,10 +84,10 @@ const footer = () => {
                   <div className="align-inline">
                     <div className="m-auto">
                       <div className="padding-ul">
-                        <a className="text-light" href="https://instagram.com/creditin">
+                        <a className="text-light" style={{textDecoration: 'none'}} href="https://instagram.com/creditin">
 
                           <i className="fab fa-instagram" ></i></a>
-                        <a className="text-light" href="https://facebook.com/creditin">
+                        <a className="text-light" style={{textDecoration: 'none'}} href="https://facebook.com/creditin">
 
                           <i className="fab fa-facebook" ></i></a>
 

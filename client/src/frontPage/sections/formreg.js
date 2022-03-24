@@ -7,7 +7,7 @@ import { registerService, matchOTP, sendOTP } from "../../_services/Client.Servi
 import { Modal } from "react-bootstrap";
 const eye = { fontSize: '15px', height: '0px', fontWeight: '600' }; 
 //const eye = <FontAwesomeIcon icon={faEye} />;
-
+const msg = "Password should be contains atleast 8 digit\nPassword should be contain atleast 1 digit(0,1,2) \nPassword should be contain atleast 1 special characte($,#,@)\nFor Exp: Rahul@12";
 const init = {
   userName: "",
   userEmail: "",
@@ -300,8 +300,7 @@ const FormReg = () => {
                        <i class="fas fa-eye " onClick={togglePasswordVisiblity} style={{position: 'absolute',
   top: '10px',
   right: '25px'}} ></i>{" "} 
-                    <label className="form-label" for="form3Example4" title="
-                    Password should be contains 8 digit with 1 Special character & 1 numeric value"
+                    <label className="form-label" for="form3Example4" title={msg}
                 class="fas fa-question "
                 style={eye}>
                       Password
