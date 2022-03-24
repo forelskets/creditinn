@@ -1,8 +1,11 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import axios from "axios";
 import toastr from "toastr";
+import convertor from "number-to-words";
+import { upperCaseFirst } from "upper-case-first";
+import isNumber from "is-number";
 import { Country, State, City } from "country-state-city";
 import NumberFormat from 'react-number-format';
 import { ToWords } from 'to-words';
@@ -28,6 +31,8 @@ const LoanForm = () => {
   const [loanAmount, setLoanAmount] = useState("");
   const [loanPurpose, setLoanPurpose] = useState("");
   const [stateSelect, setStateSelect] = useState({});
+  //const [loanAmount, setState] = useState();
+  const [output, setOutput] = useState();
   const [basicInformation , setBasicInformation] = useState(true)
   const [employeeProfile, setEmployeeProfile] = useState({
     fname: "",
@@ -159,9 +164,7 @@ const LoanForm = () => {
     setProfessionLabel(tat.status);
   };
 
-  const LoanAmountHandler = (e) => {
-    setLoanAmount(e.target.value);
-  };
+
 
   const validateSelectOptions = () => {
     let disable = true;
@@ -234,7 +237,124 @@ const LoanForm = () => {
   // const BankStmtUpload = (e) => {
   //   setBankStmt(e.target.files[0]);
   // };
+  var numone = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(
+    " "
+  );
+  var tens = "twenty thirty forty fifty sixty seventy eighty ninety".split(" ");
+  // const [loanAmount, setState] = useState();
+  // const [output, setOutput] = useState();
+
+  // const handleChange = (e) => {
+  //   var num = e.target.value;
+  //   setState(e.target.value);
+  //   num = num.toString();
+  //   // convertNumberToWords();
+  //   // setOutput(e.target.value);
+  //   // if (checkIsValid() === true) {
+  //   var str = number2words(num);
+  //   setOutput(str);
+  //   // }
+  // };
+  const LoanAmountHandler = (e) => {
+    setLoanAmount(e.target.value);
+    var num = e.target.value;
+   // setState(e.target.value);
+    num = num.toString();
+    // convertNumberToWords();
+    // setOutput(e.target.value);
+    // if (checkIsValid() === true) {
+    var str = number2words(num);
+    setOutput(str);
+  };
+  function number2words(n) {
+    if (n < 20) {
+      return numone[n];
+    }
+    else{
+      var digit = n % 10;
+      if (n < 100){
+        return tens[~~(n / 10) - 2] + (digit ? "-" + numone[digit] : "");
+      }
+      else if (n < 1000){
+        return (
+          numone[~~(n / 100)] +
+          " hundred" +
+          (n % 100 === 0 ? "" : " and " + number2words(n % 100))
+        );
+      }
+      else{
+        if (n < 100000){
+          // return('less than 100000');
+          return (
+            number2words(~~(n / 1000)) +
+            " thousand" +
+            (n % 1000 !== 0 ? " " + number2words(n % 1000) : "")
+          );
+        }
+        else{
+          if (n < 10000000){
+            // return('less than 100000');
+            return (
+              number2words(~~(n / 100000)) +
+              " lakh" +
+              (n % 100000 !== 0 ? " " + number2words(n % 100000) : "")
+            );
+          }
+          else{
+            return (
+              number2words(~~(n / 10000000)) +
+              " Crore" +
+              (n % 10000000 !== 0 ? " " + number2words(n % 10000000) : "")
+            );
+          }
+          
+        }
+        
+      }
+    } 
+    
+    
+      
+    // return (
+    //   number2words(~~(n / 100000)) +
+    //   " lakh" +
+    //   (n % 100000 !== 0 ? " " + number2words(n % 100000) : "")
+    // )
+  }
+
+  const convertNumberToWords = () => {
+    if (isNumber(loanAmount)) {
+      const numberName = convertor.toWords(loanAmount);
+      const final = upperCaseFirst(numberName);
+      setOutput(final);
+    }
+  };
+
+  const checkIsValid = () => {
+    if (loanAmount === undefined) {
+      alert("Please Enter a value");
+      return false;
+    } else if (isNumber(loanAmount)) {
+      return true;
+    } else if (loanAmount.length >= 15) {
+      alert("Number Is Too Long");
+      return false;
+    } else if (!isNumber(loanAmount)) {
+      alert("Please Enter a Valid Number");
+      return false;
+    }
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (checkIsValid() === true) {
+      convertNumberToWords();
+    }
+  };
+
+  
+
   const checkFunc = () => {
+   
     return (
       <>
         <div className="form-row my-3 row">
@@ -265,6 +385,7 @@ const LoanForm = () => {
     );
   };
 
+ 
   const professionLabelFunc = () => {
     return (
       <>
@@ -481,19 +602,24 @@ const LoanForm = () => {
               options={LoanAmount}
               onChange={LoanAmountHandler}
             /> */}
-            {/* <input
+             <input
               type="text"
               className="form-control"
               id="loanAmount"
               name="loanAmount"
               onChange={LoanAmountHandler}
+              maxlength="9"
+              value={loanAmount}
               placeholder="Loan Amount"
-            /> */}
-            <NumberFormat  className="form-control" id="loanAmount"
-              name="loanAmount"
+            /> 
+            <span style={{ fontWeight: "bold" }}></span>
+            {output}
+            {/* <NumberFormat  className="form-control" id="loanAmount"
+              name="loanAmount" value={loanAmount}
               onChange={LoanAmountHandler}
               placeholder="Loan Amount" thousandSeparator={true}  />
-              <span><toWords/></span>
+               <span style={{ fontWeight: "bold" }}></span>
+            {output} */}
           </div>
         </div>
         <div>
