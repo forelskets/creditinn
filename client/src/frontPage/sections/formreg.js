@@ -171,6 +171,7 @@ const FormReg = () => {
                 <label className="form-label" for="form3Example3">
                 Otp has been sent your registered email id ( if don't receive plz check your spam folder)
                 </label>
+                <button type="button" onClick={() => gotoTOP()}>resend otp</button>
                 {error?.otp && <div className="error-msg">{error.otp}</div>}
               </div>
 
@@ -181,8 +182,14 @@ const FormReg = () => {
               >
                 Submit
                 </button>
+               
+                   
             </form>
-          </>
+            {/* <form method="POST" action="resend">
+                    <p class="full">
+                        </p>
+                </form> */}
+ </>
 
         )
           : (

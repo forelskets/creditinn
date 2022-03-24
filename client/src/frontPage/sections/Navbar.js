@@ -238,6 +238,8 @@ const Navbar = () => {
                     />
                     <span>Otp has been sent your registered email id ( if don't receive plz check your spam folder)</span>
                     {error?.otp && <div className="error-msg">{error.otp}</div>}
+                    <br/>
+                    <button type="button" onClick={() => sendOTPtoServer()}>resend otp</button>
                   </div>
 
                   <div className="mb-3">
