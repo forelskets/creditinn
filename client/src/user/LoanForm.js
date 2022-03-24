@@ -203,7 +203,7 @@ const LoanForm = () => {
 
   const Profession = [
     { value: "Salaried", label: "Salaried", status: "Salried" },
-    { value: "Self Employed", label: "Self Employed", status: "Bussiness" },
+    { value: "Self Employed (Business)", label: "Self Employed (Business)", status: "Bussiness" },
     {
       value: "Self Employed (Professional)",
       label: "Self Employed (Professional)",
@@ -392,19 +392,26 @@ const LoanForm = () => {
         <div className="form-row my-3 row">
           <div className="form-group col-md-4">
             <label>
-              Last. Year Income
+              Last Year Income
               
             </label>
-
-            <input
-              type="text"
-              className="form-control"
+  {/* 
+              <input
+                type="text"
+                className="form-control"
+                id="lyst"
+                name="lyst"
+                value={lyst}
+                onChange={LYSTHandler}
+                disabled={validateSelectOptions()}
+              /> */}
+            <NumberFormat  className="form-control"
               id="lyst"
               name="lyst"
               value={lyst}
               onChange={LYSTHandler}
               disabled={validateSelectOptions()}
-            />
+              thousandSeparator={true}  />
           </div>
           <div className="form-group col-md-4">
             <label>
@@ -1051,7 +1058,7 @@ const LoanForm = () => {
                           options={MonthlyIncome}
                           onChange={MonthlyIncomeHandler}
                         /> */}
-                        <input
+                        {/* <input
                           type="text"
                           className="form-control"
                           id="montlyIncome"
@@ -1059,7 +1066,14 @@ const LoanForm = () => {
                           value={employeeProfile.monthlyIncome}
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
-                        />
+                        /> */}
+                        <NumberFormat  className="form-control"  id="montlyIncome"
+                          name="monthlyIncome"
+                          value={employeeProfile.monthlyIncome}
+                          onChange={ProfileChangeHandler}
+                          disabled={validateSelectOptions()}
+              thousandSeparator={true}  />
+
                       </div>
                     </div>
                     <div className="form-row my-3 row">
