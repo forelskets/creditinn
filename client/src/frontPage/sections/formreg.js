@@ -157,8 +157,8 @@ const FormReg = () => {
                   onChange={(e) => setOTP(e.target.value)}
                 />
                 <label className="form-label" for="form3Example3">
-                  OTP( Send your registered email )
-                  </label>
+                Otp has been sent your registered email id ( if don't receive plz check your spam folder)
+                </label>
                 {error?.otp && <div className="error-msg">{error.otp}</div>}
               </div>
 

@@ -236,6 +236,7 @@ const Navbar = () => {
                         setOTP(e.target.value);
                       }}
                     />
+                    <span>Otp has been sent your registered email id ( if don't receive plz check your spam folder)</span>
                     {error?.otp && <div className="error-msg">{error.otp}</div>}
                   </div>
 
