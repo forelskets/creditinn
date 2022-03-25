@@ -17,7 +17,7 @@ router.post("/login", async (req, res) => {
   }
   try {
     const userExist = await User.findOne({ Email: email });
-    // console.log("userExixt", userExist);
+    // console.log("userExist", userExist);
     if (userExist) {
       if (userExist.userVerified !== 1) {
         return res.send({

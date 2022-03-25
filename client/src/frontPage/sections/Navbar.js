@@ -105,22 +105,14 @@ const Navbar = () => {
             />
           </NavLink>
 
-          <button
-            className="navbar-toggler me-2"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <button class="navbar-toggler me " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i
               className="fab fa-ioxhost fa-2x outline-none"
               style={{ color: "#155263", outline: "none" }}
             ></i>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent" style={{backgroundColor:'white'}}>
             <ul className="navbar-nav ms-auto">
               <li className="nav-item active">
                 {/* <button
