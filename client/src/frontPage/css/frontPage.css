@@ -57,6 +57,24 @@
   }
 }
 @media (max-width: 600px) {
+  .formreg {
+    width: 90% !important;
+    margin: 2% 2% 2% 2% !important;
+  }
+}
+@media (max-width: 900px) {
+  .formreg {
+    width: 50% !important;
+    margin: 2% 25% 2% 25% !important;
+  }
+}
+@media (max-width: 1200px) {
+  .formreg {
+    width: 50% !important;
+    margin: 2% 25% 2% 25% !important;
+  }
+}
+@media (max-width: 600px) {
   .header {
     padding: 10px !important;
   }
@@ -96,7 +114,13 @@
   }
 }
 /* #####################################################media query for mobile##########################*/
-
+.formreg{
+  background-color: #ffffff;
+  margin-left: 35%;
+  margin-top: 2%;
+  margin-right: 35%;
+  width: 30%;
+}
 .navbar {
   height: 80px;
   box-shadow: -8px -7px 17px 0px rgb(104, 99, 99);

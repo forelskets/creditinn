@@ -129,10 +129,9 @@ const FormReg = () => {
  
   return (
     <>
-      <div
+      <div className="formreg"
         style={{
-          width: "30%",
-          margin: "3% 35%",
+          //width: "30%",
           padding: "20px 10px 10px 10px",
           background: "#ffff",
           boxShadow: "-1px -1px 17px 0px rgb(100, 95, 99)",
@@ -144,6 +143,7 @@ const FormReg = () => {
             <form
               style={{
                 width: "100%",
+              
                 padding: "20px 10px 10px 10px",
                 border: "1",
               }}
@@ -192,8 +192,8 @@ const FormReg = () => {
  </>
 
         )
-          : (
-            <form
+          : ( 
+            <form 
               style={{
                 width: "100%",
                 padding: "20px 10px 10px 10px",
@@ -210,7 +210,7 @@ const FormReg = () => {
                 <h2>Register Here</h2>
               </div>
               <div className="row mb-2">
-                <div className="col">
+                <div className="col col-12 col-md-6">
                   <div className="form-outline">
                     <input
                       type="text"
@@ -228,7 +228,7 @@ const FormReg = () => {
                     )}
                   </div>
                 </div>
-                <div className="col">
+                <div className="col col-12 col-md-6">
                   <div className="form-outline">
                     <input
                       type="text"
@@ -248,7 +248,7 @@ const FormReg = () => {
                 </div>
               </div>
               <div className="row mb-2">
-                <div className="col">
+                <div className="col col-12 col-md-6">
                 <div className="form-outline ">
                 <input
                   type="email"
@@ -265,7 +265,7 @@ const FormReg = () => {
                   <div className="error-msg">{error.userEmail}</div>
                 )}
               </div>
-                </div><div className="col">
+                </div><div className="col col-12 col-md-6">
                 <div className="form-outline">
                   <input
                     type="text"
@@ -287,7 +287,7 @@ const FormReg = () => {
 
               
               <div className="row mb-2">
-                <div className="col " style={{position: 'relative' ,  display: 'flex'}}>
+                <div className="col col-12 col-md-6" style={{position: 'relative' ,  display: 'flex'}}>
                   <div className="form-outline ">
                     <input 
                       className="form-control"
@@ -310,7 +310,7 @@ const FormReg = () => {
                     )}
                   </div>
                 </div>
-                <div className="col" style={{position: 'relative' ,  display: 'flex'}}>
+                <div className="col col-12 col-md-6" style={{position: 'relative' ,  display: 'flex'}}>
                   <div className="form-outline">
                     <input
                       type={passwordShown1 ? "text" : "password"}
@@ -333,7 +333,7 @@ const FormReg = () => {
                 </div>
               </div>
               
-              <div className="col">
+              <div className="col col-12 col-md-6">
                 <div className="form-outline">
 
                   <label className="form-label" for="form3Example4" style={{ fontSize: '8px' }}>
