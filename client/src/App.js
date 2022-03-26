@@ -21,7 +21,6 @@ import formReg from './frontPage/sections/formreg';
 import privacy from './frontPage/sections/privacy';
 import Salaried from './user/Salaried';
 import Business from './user/Business';
-import Loan from './user/Loan';
 import state1 from './user/state1';
 import Support from './frontPage/support';
 import InputPassword from './user/InputPassword';
@@ -52,7 +51,7 @@ function App() {
         <Route path="/adminBank" component={AdminBank} />
         <Route path="/salaried" component={Salaried} />
         <Route path="/business" component={Business} />
-        <Route path="/loan" component={Loan} />
+       
       </Switch>
     </div>
   );

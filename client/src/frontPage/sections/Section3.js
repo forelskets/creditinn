@@ -5,7 +5,9 @@ const Section3 = () => {
   return (
     <>
       <div className="back-image">
+
         <section className=" card-slider-section">
+        
           <div className="container">
             <h3 className="heading2">
               Creditsin a platform which <br />
@@ -159,6 +161,18 @@ const Section3 = () => {
                 </div>
               </div>
             </div>
+            <div id="ecww-widgetwrapper" style={{ minWidth: '250px', width: '100%' }}>
+         <div
+         id="ecww-widget"
+           style={{
+             position: 'relative',
+             paddingTop: '0',
+             paddingBottom: '280px',
+             height: '0',
+             overflow: 'hidden',
+           }}
+        ></div>
+      </div>
           </div>
         </section>
         {/* <section className="featured-in">
@@ -532,6 +546,7 @@ const Section3 = () => {
             </div>
           </div>
         </section>
+
       </div>
     </>
   );

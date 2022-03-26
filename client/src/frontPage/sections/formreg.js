@@ -264,7 +264,7 @@ const FormReg = () => {
                 {error?.userEmail && (
                   <div className="error-msg">{error.userEmail}</div>
                 )}
-              </div>
+                 </div>
                 </div><div className="col col-12 col-md-6">
                 <div className="form-outline">
                   <input
@@ -313,8 +313,9 @@ const FormReg = () => {
                 <div className="col col-12 col-md-6" style={{position: 'relative' ,  display: 'flex'}}>
                   <div className="form-outline">
                     <input
-                      type={passwordShown1 ? "text" : "password"}
+                     
                       className="form-control"
+                      type={passwordShown1 ? "text" : "password"}
                       id="userCPassword"
                       name="userCPassword"
                       value={userDetails.userCPassword}
@@ -333,7 +334,7 @@ const FormReg = () => {
                 </div>
               </div>
               
-              <div className="col col-12 col-md-6">
+              <div className="col col-12 ">
                 <div className="form-outline">
 
                   <label className="form-label" for="form3Example4" style={{ fontSize: '8px' }}>
