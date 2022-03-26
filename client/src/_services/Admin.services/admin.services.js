@@ -41,6 +41,12 @@ export const Applications = async (obj) => {
     return res
 }
 
+export const ApplicationsById = async (id) => {
+    let res =await Api('GET', `/application/${id}`)
+    console.log("res",res)
+    return res
+}
+
 export const ApplicationsStateChange = async (id,obj) => {
     let res =await Api('PUT', '/application/status/'+id, obj)
     console.log("res",res)

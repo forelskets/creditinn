@@ -3,14 +3,16 @@ const User = require("../models/users");
 exports.getReferralCountById = async (req, res, next) => {
   try {
     const { id } = req.params;
+    console.log(id,'kkkk')
     const result = await User.find({ RefralID: id });
-
+    console.log(result)
     if (result && result.length > 0) {
       return res.send({
         status: 1,
         message: "success",
         data: {
           referralCount: result.length,
+          referraldata: result
         },
       });
     } else {

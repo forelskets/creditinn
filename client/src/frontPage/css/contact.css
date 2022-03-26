@@ -18,7 +18,7 @@
   width: 85%;
   background: #fff;
   border-radius: 6px;
-  padding-top: 150px;
+  padding-top: 100px;
   padding-bottom: 150px;
   
 } 
@@ -27,7 +27,15 @@
   align-items: center;
  
   justify-content: space-between;
-  padding: 20px 60px 30px 40px;
+  padding: 10px 50px 10px 50px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.contact .head{
+  display: flex;
+  align-items: center;
+  background-color: #f5f2ee;
+  justify-content: space-between;
+  padding:10px 50px 10px 50px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 .contact .content .left-side{

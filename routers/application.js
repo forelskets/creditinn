@@ -3,7 +3,7 @@ const router = express.Router();
 
 const applicationController = require('../controller/applicationController');
 
-// router.get('/:id', bankController.getBankById);
+router.get('/:id', applicationController.getApplicationById);
 router.get('/', applicationController.getApplicationList);
 // router.post('/', bankController.createBank);
 router.put('/status/:id', applicationController.updateApplicationStatus);

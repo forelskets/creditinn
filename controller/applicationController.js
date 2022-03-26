@@ -58,38 +58,40 @@ exports.updateApplicationStatus = async (req, res, next) => {
     });
   }
 };
-// exports.getApplicationById = async (req, res, next) => {
-//   const id = req.params.id;
-//   var options = {
-//     where: {
-//       id: id,
-//     },
-//   };
+ exports.getApplicationById = async (req, res, next) => {
+  const id = req.params.id;
+  // var options = {
+  //   where: {
+  //     id: id,
+  //   },
+  // };
+  console.log(id,'id')
 
-//   try {
-//     const result = await Application.findById(id);
-//     if (result) {
-//       return res.send({
-//         status: 1,
-//         message: 'success',
-//         data: {
-//           service: result,
-//         },
-//       });
-//     } else {
-//       return res.send({
-//         status: 0,
-//         message: 'no_record_found',
-//       });
-//     }
-//   } catch (error) {
-//     console.log('error', error);
-//     return res.send({
-//       status: 0,
-//       message: 'something_went_wrong',
-//     });
-//   }
-// };
+  try {
+    const result = await Application.find({UserId : id});
+    console.log(result,'vvv');
+    if (result) {
+      return res.send({
+        status: 1,
+        message: 'success',
+        data: {
+          service: result,
+        },
+      });
+    } else {
+      return res.send({
+        status: 0,
+        message: 'no_record_found',
+      });
+    }
+  } catch (error) {
+    console.log('error', error);
+    return res.send({
+      status: 0,
+      message: 'something_went_wrong',
+    });
+  }
+};
 
 // exports.createApplication = async (req, res, next) => {
 //   const { ApplicationName, Note } = req.body;

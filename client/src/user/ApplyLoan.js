@@ -1,49 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import LoanForm from './LoanForm';
-import Apply from './Apply';
-import Bank from './Bank';
-import Emi from './emi';
-
+import React, { useState, useEffect } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import LoanForm from "./LoanForm";
+import Apply from "./Apply";
+import Bank from "./Bank";
+import Emi from "./emi";
+import { myrefral } from "../_services/Refral.services/index";
 import {
-  FacebookShareButton, WhatsappShareButton, WhatsappIcon, EmailIcon, EmailShareButton, FacebookIcon
+  FacebookShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
 } from "react-share";
+import { ApplicationsById } from "../_services/Admin.services";
+var Success = 0;
 
 const ApplyLoan = () => {
-  const shareUrl = 'www.creditsin.com/form ';
+  const shareUrl = "www.creditsin.com/form ";
+ 
   const [profile, setProfile] = useState({});
   const [lstatus, setLstatus] = useState(false);
+  const [refralData, setRefralData] = useState([]);
+  const [applicationData , setApplicationData] = useState([])
   const LoanFunc = () => {
     setLstatus(!lstatus);
   };
 
   useEffect(() => {
-
     callUserMainPage();
+    Success = 1;
   }, []);
 
   const history = useHistory();
   const callUserMainPage = async (req, res) => {
     try {
-      const res = await fetch('/userMain', {
-        method: 'GET',
+      const res = await fetch("/userMain", {
+        method: "GET",
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        credentials: 'include',
+        credentials: "include",
       });
 
       const data = await res.json();
       console.log(res);
       if (res.status === 401) {
-        history.push('/');
+        history.push("/");
       }
       setProfile(data);
     } catch (err) {
       console.log(err);
     }
   };
+
+  if (Success === 1 && profile) {
+    const getMyRefral = async (req, res) => {
+      console.log(profile);
+      console.log(profile._id);
+      var response = await myrefral(profile._id);
+      setRefralData(response.data.referraldata);
+    };
+    getMyRefral();
+
+    const getApplications = async (req , res) =>{
+      var response = await ApplicationsById(profile._id);
+      setApplicationData(response.data.service)
+      
+    }
+
+    getApplications();
+
+    Success = 0;
+  }
 
   return (
     <div>
@@ -61,8 +91,11 @@ const ApplyLoan = () => {
                           <div className="number">0</div>
                         </div>
                         <i className="fas fa-money-bill-wave-alt"></i> */}
-                        <img src="images/personal.jpg" style={{ height: '120px', width: '300px' }}
-                        />                     </div>
+                        <img
+                          src="images/personal.jpg"
+                          style={{ height: "120px", width: "300px" }}
+                        />{" "}
+                      </div>
 
                       <div className="box col-sm-4">
                         {/* <div className="right-side">
@@ -70,11 +103,15 @@ const ApplyLoan = () => {
                           <div className="number">$12,876</div>
                         </div>
                         <i className="bx bx-cart cart three"></i>*/}
-                        <img src="images/business.jpeg" style={{ height: '120px', width: '300px' }}
+                        <img
+                          src="images/business.jpeg"
+                          style={{ height: "120px", width: "300px" }}
                         />
                       </div>
                       <div className="box col-sm-4">
-                        <img src="images/home.webp" style={{ height: '120px', width: '300px' }}
+                        <img
+                          src="images/home.webp"
+                          style={{ height: "120px", width: "300px" }}
                         />
                       </div>
                     </div>
@@ -83,12 +120,12 @@ const ApplyLoan = () => {
                     <div className="recent-sales box ">
                       <div
                         className="row-title mb-3 py-3"
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: "pointer" }}
                         onClick={LoanFunc}
                       >
                         Apply For Loans
                       </div>
-                      {lstatus ? <LoanForm /> : ''}
+                      {lstatus ? <LoanForm /> : ""}
                     </div>
                   </div>
                   <div className="row pb-5">
@@ -101,15 +138,143 @@ const ApplyLoan = () => {
                       <Apply />
                     </div>
                   </div>
+                  <div className="row pb-5">
+                    <div className="recent-sales box">
+                    <div className="col">
+                    
+                    <div className="row">
+                      <h3>My Referrals</h3>
+                    <div className="col">
+                      <table className="table">
+                        <thead className="title" >
+                          <tr>
+                            <th >S.no.</th>
+                            <th >Name</th>
+                            <th >Email</th></tr>
+                        </thead>
+                        <tbody style={{textAlign: 'center'}}>
+                          {refralData.map((item , ind)=>{
+                             return(
+                              <>
+                               <tr>
+                            <td>{ind + 1}</td>
+                            <td>{item.Name}</td>
+                             <td>{item.Email}</td> 
+                            {/* <td>{item.RefralNo}</td> */}
+                          </tr>
+                              </>
+                            )
+                          })}
+                         
+                        </tbody>
+                      </table>
+                    
+                  </div>
+                  
+                    </div>
+                    <div className="row">
+                      <h3>Application Table</h3>
+                    <div className="col">
+                      <table className="table">
+                        <thead className="title" >
+                          <tr>
+                            <th >S.no.</th>
+                            <th >Application No.</th>
+                            <th >Status</th></tr>
+                        </thead>
+                        <tbody style={{textAlign: 'center'}}>
+                          {applicationData.map((item , ind)=>{
+                             return(
+                              <>
+                               <tr>
+                            <td>{ind + 1}</td>
+                            <td>{item.ApplicationNo}</td>
+                             <td>{item.status}</td> 
+                            {/* <td>{item.RefralNo}</td> */}
+                          </tr>
+                              </>
+                            )
+                          })}
+                         
+                        </tbody>
+                      </table>
+                    
+                  </div>
+                  
+                    </div>
+                </div>
+                    </div>
+                  </div>
                   <div className="row">
                     <div className="recent-sales box">
                       <Bank />
                     </div>
                   </div>
                 </div>
-
+                
                 <div className="top-sales box profile-card col-sm-3">
-                 
+                <div className="col">
+                    
+                    {/* <div className="row">
+                      <h3>My Referrals</h3>
+                    <div className="col">
+                      <table className="table">
+                        <thead className="title" >
+                          <tr>
+                            <th >S.no.</th>
+                            <th >Name</th>
+                            <th >Email</th></tr>
+                        </thead>
+                        <tbody>
+                          {refralData.map((item , ind)=>{
+                             return(
+                              <>
+                               <tr>
+                            <td>{ind + 1}</td>
+                            <td>{item.Name}</td>
+                             <td>{item.Email}</td> 
+                          </tr>
+                              </>
+                            )
+                          })}
+                         
+                        </tbody>
+                      </table>
+                    
+                  </div>
+                  
+                    </div> */}
+                    {/* <div className="row">
+                      <h3>Application Table</h3>
+                    <div className="col">
+                      <table className="table">
+                        <thead className="title" >
+                          <tr>
+                            <th >S.no.</th>
+                            <th >Application No.</th>
+                            <th >Status</th></tr>
+                        </thead>
+                        <tbody>
+                          {applicationData.map((item , ind)=>{
+                             return(
+                              <>
+                               <tr>
+                            <td>{ind + 1}</td>
+                            <td>{item.ApplicationNo}</td>
+                             <td>{item.status}</td> 
+                          </tr>
+                              </>
+                            )
+                          })}
+                         
+                        </tbody>
+                      </table>
+                    
+                    </div>
+                  
+                    </div> */}
+                </div>
+                
                   <div className="title">Profile</div>
                   <ul className="top-sales-details">
                     <li>
@@ -122,12 +287,14 @@ const ApplyLoan = () => {
                       </NavLink>
                     </li>
 
-                    <text style={{ backgroundColor: '#f0f3f4', padding: 8 }}>{profile.RefralNo}</text>
+                    <text style={{ backgroundColor: "#f0f3f4", padding: 8 }}>
+                      {profile.RefralNo}
+                    </text>
 
                     <FacebookShareButton
                       url={"www.creditsin.com"}
-                      quote={profile.RefralNo} style={{ padding: 10 }}
-
+                      quote=  {"HI " + profile.RefralNo} 
+                      style={{ padding: 10 }}
                     >
                       <FacebookIcon size={40} />
                     </FacebookShareButton>
@@ -136,15 +303,15 @@ const ApplyLoan = () => {
                       subject="subject"
                       body={"hey there, pls share my referal code"}
                     >
-                      <EmailIcon
-                        size={40} />
+                      <EmailIcon size={40} />
                     </EmailShareButton>
 
-
-
-                    <WhatsappShareButton url={profile.RefralNo}
+                    <WhatsappShareButton
+                      url={profile.RefralNo}
                       subject="subject"
-                      body={"hey there, pls share my referal code"} style={{ padding: 10 }} >
+                      body={"hey there, pls share my referal code"}
+                      style={{ padding: 10 }}
+                    >
                       <WhatsappIcon size={40} />
                     </WhatsappShareButton>
                     <br />
@@ -187,6 +354,7 @@ const ApplyLoan = () => {
                     </li>
                   </ul>
                   {/* <button className="btns">Edit</button> */}
+                  
                   <div className="col">
                     <div className="overview-boxes">
                       <div className="box1 col-sm-12">
@@ -196,17 +364,15 @@ const ApplyLoan = () => {
                         </div>
                         <i className="fas fa-money-bill-wave-alt"></i>
                       </div>
-
                     </div>
                   </div>
                 </div>
-                
               </div>
             </div>
           </div>
         </div>
       </section>
-    </div >
+    </div>
   );
 };
 

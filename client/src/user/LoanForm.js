@@ -619,7 +619,7 @@ const LoanForm = () => {
               value={loanAmount}
               placeholder="Loan Amount"
             /> 
-            <span style={{ fontWeight: "bold" }}></span>
+            <span style={{ fontWeight: "bold" , fontSize: '4px'}}></span>
             {output}
             {/* <NumberFormat  className="form-control" id="loanAmount"
               name="loanAmount" value={loanAmount}
@@ -686,7 +686,7 @@ const LoanForm = () => {
                           name="mobile"
                           value={employeeProfile.mobile}
                           onChange={ProfileChangeHandler}
-                          placeholder="mobile Number"
+                         
                           disabled={validateSelectOptions()}
                         />
                       </div>
@@ -702,7 +702,7 @@ const LoanForm = () => {
                           name="fname"
                           value={employeeProfile.fname}
                           onChange={ProfileChangeHandler}
-                          placeholder=" As Per Pan"
+                          
                           disabled={validateSelectOptions()}
                         />
                       </div>
@@ -740,7 +740,7 @@ const LoanForm = () => {
                           name="fathername"
                           value={employeeProfile.fathername}
                           onChange={ProfileChangeHandler}
-                          placeholder="Fathers Name"
+                          
                           disabled={validateSelectOptions()}
                         />
                       </div>
@@ -819,7 +819,6 @@ const LoanForm = () => {
                           name="address"
                           value={employeeProfile.address}
                           onChange={ProfileChangeHandler}
-                          placeholder="1234 Main Street aligarh"
                           disabled={validateSelectOptions()}
                         />
                       </div>

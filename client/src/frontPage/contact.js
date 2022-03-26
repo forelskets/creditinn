@@ -4,7 +4,59 @@ import React from 'react';
 const Contact = () => {
   return (
     
+    
   <div className="container contact">
+      <div className="head mb-5" >
+    <h1> Let's make something awesome together. </h1>
+  </div>
+    
+    <div className="content mb-5">
+      
+    <div className="right-side">
+    <h2  style={{backgroundColor: '#f5f2ee' , textAlign: 'center', padding: '10px 10px'}} >Customer Enquiry</h2>
+    <p>If you have any query, you can send me message from here. It's our pleasure to help you.</p> 
+     <form action="#">
+      <div className="input-box">
+        <input type="text" placeholder="Name" />
+      </div>
+      <div className="input-box">
+        <input type="text" placeholder="Email Address" />
+      </div>
+      <div className="input-box message-box">
+        <textarea placeholder=" How can we help you? "></textarea>
+      </div>
+      <div className="button">
+        <input type="button" value="Send Question" / >
+      </div>
+    </form>
+    </div>
+   
+    <div className="right-side mt-2">
+      {/* <div className="topic-text">We would be happy to help you </div> */}
+      <h2  style={{backgroundColor: '#f5f2ee' , textAlign: 'center', padding: '10px 10px'}} >Corporate Enquiry</h2>
+      <p>If you have any query, you can send me message from here. It's our pleasure to help you.</p> 
+     <form action="#">
+      <div className="input-box">
+        <input type="text" placeholder="Name" />
+      </div>
+      <div className="input-box">
+        <input type="text" placeholder="Email Address" />
+      </div>
+      <div className="input-box message-box">
+        <textarea placeholder="How can we help you?"></textarea>
+      </div>
+      <div className="button">
+        <input type="button" value="Send Question" / >
+      </div>
+    </form>
+  
+
+    {/* <h1 style={{textAlign:'left'}} >Monday-Friday</h1>
+    <h3>9:00AM - 6:00PM</h3>
+    <h1 style={{textAlign:'left'}} >Saturday</h1>
+    <h3>9:00AM -4:00PM</h3> */}
+  </div>
+  </div>
   <div className="content">
     <div className="left-side">
     
