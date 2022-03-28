@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import ModalComponent from "./modalComponent";
 import OtpComponent from "./otpComponent";

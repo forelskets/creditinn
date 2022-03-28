@@ -478,6 +478,7 @@
 
 .align-inline {
   display: flex;
+  justify-content: space-between;
 }
 .services-section .text-area .align-inline .icon-box1 img {
   font-size: 56px;

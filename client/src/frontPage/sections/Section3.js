@@ -161,18 +161,7 @@ const Section3 = () => {
                 </div>
               </div>
             </div>
-            <div id="ecww-widgetwrapper" style={{ minWidth: '250px', width: '100%' }}>
-         <div
-         id="ecww-widget"
-           style={{
-             position: 'relative',
-             paddingTop: '0',
-             paddingBottom: '280px',
-             height: '0',
-             overflow: 'hidden',
-           }}
-        ></div>
-      </div>
+            
           </div>
         </section>
       
@@ -215,9 +204,9 @@ const Section3 = () => {
                   </div>
                   <div className="text-box">
                     <h2 className="heading">Cashback Reward</h2>
-                    <p className="paragraph" style={{textAlign:'left' , display: 'flex'}}>
+                    <p className="paragraph" >
                       Lorem ipsum dour addhbj hj.
-                      Pariatur  sint &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      Pariatur  sint&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                   </div>
                 </div>

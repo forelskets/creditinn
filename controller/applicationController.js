@@ -70,7 +70,8 @@ exports.updateApplicationStatus = async (req, res, next) => {
   try {
     const result = await Application.find({UserId : id});
     console.log(result,'vvv');
-    if (result) {
+    if (result && result.length > 0) {
+      console.log('111');
       return res.send({
         status: 1,
         message: 'success',
@@ -79,9 +80,10 @@ exports.updateApplicationStatus = async (req, res, next) => {
         },
       });
     } else {
+      console.log('222');
       return res.send({
         status: 0,
-        message: 'no_record_found',
+        message: 'No data available',
       });
     }
   } catch (error) {

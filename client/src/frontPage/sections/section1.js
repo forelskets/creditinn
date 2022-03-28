@@ -1,6 +1,4 @@
 import React from 'react';
-import Bannerchart from '../chart/bannerChart';
-import AreaChart1 from '../chart/areaCharts';
 
 
 const section1 = () => {

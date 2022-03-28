@@ -18,11 +18,12 @@ var Success = 0;
 
 const ApplyLoan = () => {
   const shareUrl = "www.creditsin.com/form ";
- 
   const [profile, setProfile] = useState({});
   const [lstatus, setLstatus] = useState(false);
   const [refralData, setRefralData] = useState([]);
   const [applicationData , setApplicationData] = useState([])
+  const [refralMessage , setRefralMessage] = useState('');
+  const [applicationMessage , setApplicationMessage] = useState('');
   const LoanFunc = () => {
     setLstatus(!lstatus);
   };
@@ -60,20 +61,34 @@ const ApplyLoan = () => {
       console.log(profile);
       console.log(profile._id);
       var response = await myrefral(profile._id);
-      setRefralData(response.data.referraldata);
+      
+         if(response.status === 0){
+            setRefralMessage(response.message);
+            
+       }else{
+        setRefralData(response.data.referraldata);
+       }
     };
     getMyRefral();
 
     const getApplications = async (req , res) =>{
       var response = await ApplicationsById(profile._id);
-      setApplicationData(response.data.service)
       
+      if(response.status === 0){
+        setApplicationMessage(response.message);
+        console.log(response.message,'resmessage');
+        console.log(applicationMessage,'appmsg')
+        
+   }else{
+    setApplicationData(response.data.service);
+   }
     }
 
     getApplications();
 
     Success = 0;
   }
+
 
   return (
     <div>
@@ -153,7 +168,7 @@ const ApplyLoan = () => {
                             <th >Email</th></tr>
                         </thead>
                         <tbody style={{textAlign: 'center'}}>
-                          {refralData.map((item , ind)=>{
+                        {refralData ? (refralData.map((item , ind)=>{
                              return(
                               <>
                                <tr>
@@ -164,14 +179,22 @@ const ApplyLoan = () => {
                           </tr>
                               </>
                             )
-                          })}
+                          })):""}
+                          {refralMessage ? refralMessage : ''}
+                          
                          
                         </tbody>
                       </table>
                     
-                  </div>
+                     </div>
                   
                     </div>
+                    </div>
+                  </div>
+                </div>
+                    <div className="row pb-5">
+                    <div className="recent-sales box">
+                    <div className="col">
                     <div className="row">
                       <h3>Application Table</h3>
                     <div className="col">
@@ -192,10 +215,22 @@ const ApplyLoan = () => {
                              <td>{item.status}</td> 
                             {/* <td>{item.RefralNo}</td> */}
                           </tr>
+                          {applicationData ? (applicationData.map((item , ind)=>{
+                             return(
+                              <>
+                               <tr>
+                            <td>{ind + 1}</td>
+                            <td>{item.ApplicationNo}</td>
+                             <td>{item.status}</td> 
+                            {/* <td>{item.RefralNo}</td> */}
+                          </tr>
                               </>
                             )
+                          })):""}
+                             </>
+                            )
                           })}
-                         
+                          {applicationMessage ? applicationMessage : ''}
                         </tbody>
                       </table>
                     

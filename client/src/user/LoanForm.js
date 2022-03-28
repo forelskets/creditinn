@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import axios from "axios";
 import toastr from "toastr";
-import convertor from "number-to-words";
-import { upperCaseFirst } from "upper-case-first";
 import isNumber from "is-number";
 import { Country, State, City } from "country-state-city";
 import NumberFormat from 'react-number-format';
@@ -123,19 +121,7 @@ const LoanForm = () => {
   //   });
   // };
 
-  const MonthlyIncome = [
-    { value: "less than 20000", label: "less than 20000" },
-    { value: "20000-40000", label: "20000-40000" },
-    { value: "40000-80000", label: "40000-80000" },
-    { value: "up to 1,00,000", label: "up to 1,00,000" },
-  ];
 
-  const MonthlyIncomeHandler = (tat) => {
-    setEmployeeProfile({
-      ...employeeProfile,
-      monthlyIncome: tat.value,
-    });
-  };
   // const AnnualIncome = [
   //   { value: '1,00,000', label: '1,00,000' },
   //   { value: '2,00,000', label: '2,00,000' },
@@ -196,10 +182,7 @@ const LoanForm = () => {
     { value: "Flexi Loan", label: "Flexi Loan/Overdraft Loan" },
   ];
 
-  const LoanAmount = [
-    { value: "1,00,000", label: "1,00,000" },
-    { value: "2,00,000", label: "2,00,000" },
-  ];
+ 
 
   const Profession = [
     { value: "Salaried", label: "Salaried", status: "Salried" },
@@ -222,9 +205,7 @@ const LoanForm = () => {
   const BasicDetailsFunc = () => {
     BasicDetails.current.click();
   };
-  const KYCFunc = () => {
-    KYCDetails.current.click();
-  };
+  
   // const AdhaarUpload = (e) => {
   //   setAdhaar(e.target.files[0]);
   // };
@@ -322,13 +303,13 @@ const LoanForm = () => {
     // )
   }
 
-  const convertNumberToWords = () => {
-    if (isNumber(loanAmount)) {
-      const numberName = convertor.toWords(loanAmount);
-      const final = upperCaseFirst(numberName);
-      setOutput(final);
-    }
-  };
+  // const convertNumberToWords = () => {
+  //   if (isNumber(loanAmount)) {
+  //     const numberName = convertor.toWords(loanAmount);
+  //     const final = upperCaseFirst(numberName);
+  //     setOutput(final);
+  //   }
+  // };
 
   const checkIsValid = () => {
     if (loanAmount === undefined) {
@@ -342,12 +323,6 @@ const LoanForm = () => {
     } else if (!isNumber(loanAmount)) {
       alert("Please Enter a Valid Number");
       return false;
-    }
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (checkIsValid() === true) {
-      convertNumberToWords();
     }
   };
 

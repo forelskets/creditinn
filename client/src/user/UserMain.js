@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './userStyle.css';
 // import  './emi.css';
 import ApplyLoan from './ApplyLoan';

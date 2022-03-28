@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Country, State, City } from 'country-state-city';
 import Select from 'react-select'
 

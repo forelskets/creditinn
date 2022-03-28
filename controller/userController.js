@@ -18,7 +18,7 @@ exports.getReferralCountById = async (req, res, next) => {
     } else {
       return res.send({
         status: 0,
-        message: "no_record_found",
+        message: "No data available",
       });
     }
   } catch (error) {

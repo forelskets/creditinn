@@ -26,7 +26,7 @@ const Contact = () => {
         <textarea placeholder=" How can we help you? "></textarea>
       </div>
       <div className="button">
-        <input type="button" value="Send Question" / >
+        <input type="button" value="Send a Message" / >
       </div>
     </form>
     </div>
@@ -46,7 +46,7 @@ const Contact = () => {
         <textarea placeholder="How can we help you?"></textarea>
       </div>
       <div className="button">
-        <input type="button" value="Send Question" / >
+        <input type="button" value="Send a Message" / >
       </div>
     </form>
   
