@@ -205,8 +205,7 @@ const Section3 = () => {
                   <div className="text-box">
                     <h2 className="heading">Cashback Reward</h2>
                     <p className="paragraph" >
-                      Lorem ipsum dour addhbj hj.
-                      Pariatur  sint&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     Creditsin offer's consumer a way to earn moneyback on purchases or services provided.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                   </div>
                 </div>
@@ -223,8 +222,7 @@ const Section3 = () => {
                   <div className="text-box">
                     <h2 className="heading">Increase engagement</h2>
                     <p className="paragraph">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Pariatur laborum id natus nihil sint.
+                      Accelerates on the repeat purchases option provided by creditsin with various products and services.
                     </p>
                   </div>
                 </div>
@@ -239,8 +237,7 @@ const Section3 = () => {
                   <div className="text-box">
                     <h2 className="heading">Customer engagement</h2>
                     <p className="paragraph">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Pariatur laborum id natus nihil sint.
+                     Creditsin is in the process of customer engagement with 100%  satisfaction.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                   </div>
                 </div>

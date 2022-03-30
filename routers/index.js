@@ -1,3 +1,4 @@
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const express = require("express");
 const User = require("../models/users");
 const Otp = require("../models/otp");
@@ -8,7 +9,9 @@ const BankNote = require("../models/bankOffer");
 const auth = require("../middleware/Authentication");
 const nodemailer = require("nodemailer");
 const referralCodes = require("referral-codes");
-const referralCodeGenerator = require('referral-code-generator')
+const referralCodeGenerator = require('referral-code-generator');
+const { json } = require('express/lib/response');
+
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -17,7 +20,7 @@ router.post("/login", async (req, res) => {
   }
   try {
     const userExist = await User.findOne({ Email: email });
-    // console.log("userExist", userExist);
+    // console.log("userExixt", userExist);
     if (userExist) {
       if (userExist.userVerified !== 1) {
         return res.send({
@@ -125,10 +128,12 @@ router.post("/userRegister", async (req, res) => {
         expireIn: new Date().getTime() + 300 * 10000,
       });
       const otpResponse = await otpData.save();
-      otpMail(Email, otpCode, Name);
+      otpMail(Email, otpCode, Name , Mobile);
       // res.status(200).send({message: "otp sent"})
     };
-    function otpMail(Email, otpCode, Name) {
+    function otpMail(Email, otpCode, Name , Mobile) {
+      console.log(Mobile)
+      console.log(otpCode)
       async function main() {
         const transporter = nodemailer.createTransport({
           service: "gmail",
@@ -144,9 +149,25 @@ router.post("/userRegister", async (req, res) => {
           subject: `Hello ${Name}✔`,
           html: `<b>${otpCode}</b>`,
         });
-      }
+      
+        fetch('http://mobicomm.dove-sms.com//REST/sendsms/', {method:"POST",headers:{"Content-Type":"application/json"}, body: JSON.stringify({
+          "listsms":
+        [
+        {"sms": otpCode,
+        "mobiles": Mobile,
+        "senderid":"ABCDEF",
+        "clientSMSID":"1947692308",
+        "accountusagetypeid":"1"},
+        ],
+        "password":"dddb337a6aXX","user":"rahulinf"})})
+        .then((res) => res.json())
+        .then((json) => console.log(json))
+        
+     
+      
+    }
 
-      main().catch(console.error);
+    main().catch(console.error);
     }
 
     otpFunc();

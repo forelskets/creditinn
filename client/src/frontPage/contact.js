@@ -20,6 +20,9 @@ const Contact = () => {
         <input type="text" placeholder="Name" />
       </div>
       <div className="input-box">
+        <input type="text" placeholder="Mobile" />
+      </div>
+      <div className="input-box">
         <input type="text" placeholder="Email Address" />
       </div>
       <div className="input-box message-box">
@@ -38,6 +41,9 @@ const Contact = () => {
      <form action="#">
       <div className="input-box">
         <input type="text" placeholder="Name" />
+      </div>
+      <div className="input-box">
+        <input type="text" placeholder="Mobile" />
       </div>
       <div className="input-box">
         <input type="text" placeholder="Email Address" />
