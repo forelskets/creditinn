@@ -69,7 +69,10 @@ const UserNavbar = () => {
             ></button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li class="dropdown-item" href="#">
-                <i class="fas fa-sign-in-alt"></i> <span>action</span>
+                <i class="fas fa-sign-in-alt"></i> <span>My Refferals</span>
+              </li>
+              <li class="dropdown-item" href="#">
+                <i class="fas fa-sign-in-alt"></i> <span>Applications</span>
               </li>
               <li class="dropdown-item" href="#" onClick={logOutFunc}>
                 Logout

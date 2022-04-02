@@ -9,11 +9,11 @@ export const rules = (field, rule) => {
             if(!gst_regex.test(field))
             message = rule.fieldName + " not correct"
         }else if (rule.type === 'PanNo') {
-            var pan_regex = /^[0-9]{2}[A-Za-z0-9]{8}$/;
+            var pan_regex = /^[a-zA-Z]{4}[a-zA-Z0-9]{6}$/;
             if(!pan_regex.test(field))
             message = rule.fieldName + " not correct"
         }else if(rule.type === 'Mobile'){
-            let mobile_regex = /^([+][91])?[897]+[0-9]{9}$/;
+            var mobile_regex = /^[+91]?[8976][0-9]{9}$/;
             if(!mobile_regex.test(field)){
                 message = rule.fieldName + ' is not valid'
             }

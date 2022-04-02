@@ -19,6 +19,10 @@ const Contact = () => {
       e.preventDefault();
       console.log(customername , customeremail , customermobile , customerarea,'aaa')
       const response = await customerSupport({customername , customeremail , customermobile , customerarea}) ;
+      setCustomerarea('');
+      setCustomeremail('');
+      setCustomermobile('');
+      setCustomername('');
       console.log(response,'ffff')
       if(response.status === 1){
         console.log(response.status)
@@ -32,6 +36,10 @@ const Contact = () => {
   const submitCorporate= async (e)=>{
     e.preventDefault();
     const response = await corporateSupport({corporatename , corporateemail , corporatemobile , corporatearea}) ;
+    setCorporatearea('');
+    setCorporateemail('');
+    setCorporatemobile('');
+    setCorporatename('');
     if(response.status === 1){
       setCorporatemessage(response.message)
     }else if(response.status === 0){
@@ -56,16 +64,16 @@ const Contact = () => {
     <p>If you have any query, you can send me message from here. It's our pleasure to help you.</p> 
      <form onSubmit={(e )=>{submitCustomer(e)}}>
       <div className="input-box">
-        <input type="text" name="customername"  placeholder="Name" onChange={(e)=>setCustomername(e.target.value)}/>
+        <input type="text" name="customername" value={customername}  placeholder="Name" onChange={(e)=>setCustomername(e.target.value)}/>
       </div>
       <div className="input-box">
-        <input type="text" name="customeremail" placeholder="Email Address" onChange={(e)=>setCustomeremail(e.target.value)}/>
+        <input type="text" name="customeremail" value={customeremail} placeholder="Email Address" onChange={(e)=>setCustomeremail(e.target.value)}/>
       </div>
       <div className="input-box">
-        <input type="text" name="customermobile" placeholder="Enter Your Mobile" onChange={(e)=>setCustomermobile(e.target.value)}/>
+        <input type="text" name="customermobile" value={customermobile} placeholder="Enter Your Mobile" onChange={(e)=>setCustomermobile(e.target.value)}/>
       </div>
       <div className="input-box message-box">
-        <textarea placeholder=" How can we help you? " name="customerarea" onChange={(e)=>setCustomerarea(e.target.value)}></textarea>
+        <textarea placeholder=" How can we help you? " value={customerarea} name="customerarea" onChange={(e)=>setCustomerarea(e.target.value)}></textarea>
       </div>
       <div >
         <input style={{padding: '15px'}} type="submit"  className="btn-3" value="Send a Message" />
@@ -80,19 +88,19 @@ const Contact = () => {
       <p>If you have any query, you can send me message from here. It's our pleasure to help you.</p> 
      <form onSubmit={(e )=>{submitCorporate(e)}}>
       <div className="input-box">
-        <input type="text" placeholder="Name" name='corporatename' onChange={(e)=>setCorporatename(e.target.value)}/>
+        <input type="text" placeholder="Name" name='corporatename' value={corporatename}onChange={(e)=>setCorporatename(e.target.value)}/>
       </div>
       <div className="input-box">
-        <input type="text" placeholder="Email Address" name='corporateemail' onChange={(e)=>setCorporateemail(e.target.value)}/>
+        <input type="text" placeholder="Email Address" name='corporateemail' value={corporateemail} onChange={(e)=>setCorporateemail(e.target.value)}/>
       </div>
       <div className="input-box">
-        <input type="text"  placeholder="Enter Your Mobile" name='corporatemobile' onChange={(e)=>setCorporatemobile(e.target.value)}/>
+        <input type="text"  placeholder="Enter Your Mobile" name='corporatemobile' value={corporatemobile} onChange={(e)=>setCorporatemobile(e.target.value)}/>
       </div>
       <div className="input-box message-box">
-        <textarea placeholder="How can we help you?" name='corporatearea' onChange={(e)=>setCorporatearea(e.target.value)}></textarea>
+        <textarea placeholder="How can we help you?" name='corporatearea' value={corporatearea} onChange={(e)=>setCorporatearea(e.target.value)}></textarea>
       </div>
       <div >
-        <input type="submit" style={{padding: '15px'}}   className="btn-3" value="Send a Message" />
+        <input style={{padding: '15px'}} type="submit"   className="btn-3" value="Send a Message" />
       </div>
     </form>
     {corporatemessage ? corporatemessage : ""}

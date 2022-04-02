@@ -9,7 +9,7 @@ export const customerSupport = async (obj) => {
 
 export const corporateSupport = async (obj) => {
     console.log(obj)
-    let res =await Api('POST', '/support/corporateSupprt', obj)
+    let res =await Api('POST', '/support/corporateSupport', obj)
     console.log("res",res)
     return res
 }
