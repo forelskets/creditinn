@@ -16,7 +16,7 @@ const LoanForm = () => {
   const [message, setMessage] = useState("");
   const modelRef = useRef(null);
   // const [pan, setPan] = useState('');
-  // const [adhaar, setAdhaar] = useState('');
+   const [adhaar, setAdhaar] = useState('');
   // const [bankStmt, setBankStmt] = useState('');
   // const [photo, setPhoto] = useState('');
   const [profession, setProfession] = useState("");
@@ -206,18 +206,18 @@ const LoanForm = () => {
     BasicDetails.current.click();
   };
 
-  // const AdhaarUpload = (e) => {
-  //   setAdhaar(e.target.files[0]);
-  // };
+  const AdhaarUpload = (e) => {
+    setAdhaar(e.target.files[0]);
+  };
   // const PanUpload = (e) => {
   //   setPan(e.target.files[0]);
   // };
   // const PhotoUpload = (e) => {
   //   setPhoto(e.target.files[0]);
   // };
-  // const BankStmtUpload = (e) => {
-  //   setBankStmt(e.target.files[0]);
-  // };
+  //  const BankStmtUpload = (e) => {
+  //    setBankStmt(e.target.files[0]);
+  //  };
   var numone =
     "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(
       " "
@@ -396,6 +396,17 @@ const LoanForm = () => {
             />
             {error?.GST && <div className="error-msg">{error.GST}</div>}
           </div>
+          <div className="form-group col-md-4">
+                        <label for="adhar">ITR upload</label>
+                        <input
+                          type="file"
+                          className="file-input"
+                          name="adhaar"
+                          id="adhaar"
+                          onChange={AdhaarUpload}
+                          disabled={validateSelectOptions()}
+                        />
+                      </div>
         </div>
       </>
     );
@@ -429,6 +440,7 @@ const LoanForm = () => {
       MonthlyIncome: employeeProfile.monthlyIncome,
 
       AdhaarNo: employeeProfile.adhaarNo,
+      adhaar: adhaar,
       PanNo: employeeProfile.panNo,
 
       loanPurpose: loanPurpose,
@@ -529,7 +541,7 @@ const LoanForm = () => {
           emi: "",
         });
         // setPan('');
-        // setAdhaar('');
+         setAdhaar('');
         // setBankStmt('');
         // setPhoto('');
         setLoanPurpose("");
@@ -890,6 +902,7 @@ const LoanForm = () => {
                           <div className="error-msg">{error.MonthlyIncome}</div>
                         )}
                       </div>
+                    
                     </div>
                     <div className="form-row my-3 row"></div>
                     {professionLabel === "Bussiness"

@@ -34,9 +34,6 @@ ApplyLoanrouter.post(
   auth,
   upload.fields([
     { name: 'adhaar' },
-    { name: 'pan' },
-    { name: 'photo' },
-    { name: 'bankStmt' },
   ]),
   loanApplyController.getApplicationList
 );

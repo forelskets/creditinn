@@ -4,7 +4,7 @@ exports.getApplicationList = async (req, res, next) => {
   console.log('getApplicationList');
   try {
     var result = await Application.find()
-      .populate(['UserId', 'ProfileId', 'EploymentId', 'KycId'])
+      .populate(['UserId', 'ProfileId', 'EmploymentId', 'KycId'])
       .sort({ _id: 'desc' });
     console.log('result', result);
 

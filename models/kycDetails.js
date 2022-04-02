@@ -9,9 +9,9 @@ const kycSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // Adhaar: {
-    //   type: String,
-    // },
+    Adhaar: {
+      type: String,
+    },
     // AdhaarVerified: {
     //   type: Boolean,
     //   // required: true
@@ -41,7 +41,7 @@ const kycSchema = new mongoose.Schema(
     // },
     //  BankStmt: {
     //    type: String,
-    //    required: true,     },
+    //   required: true,     },
     StatementPassword: {
       type: String,
     },
