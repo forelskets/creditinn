@@ -39,9 +39,9 @@ const kycSchema = new mongoose.Schema(
     //   type: String,
     //   required: true,
     // },
-    // BankStmt: {
-    //   type: String,
-    // },
+    //  BankStmt: {
+    //    type: String,
+    //    required: true,     },
     StatementPassword: {
       type: String,
     },

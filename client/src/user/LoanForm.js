@@ -5,12 +5,14 @@ import axios from "axios";
 import toastr from "toastr";
 import isNumber from "is-number";
 import { Country, State, City } from "country-state-city";
-import NumberFormat from 'react-number-format';
-import { ToWords } from 'to-words';
+import NumberFormat from "react-number-format";
+import { ToWords } from "to-words";
+import { Validate } from "../_helper/Validation/Validate";
 
-const eye = { fontSize: "15px", height: "0px"  };
+const eye = { fontSize: "15px", height: "0px" };
 
 const LoanForm = () => {
+  const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const modelRef = useRef(null);
   // const [pan, setPan] = useState('');
@@ -31,7 +33,7 @@ const LoanForm = () => {
   const [stateSelect, setStateSelect] = useState({});
   //const [loanAmount, setState] = useState();
   const [output, setOutput] = useState();
-  const [basicInformation , setBasicInformation] = useState(true)
+  const [basicInformation, setBasicInformation] = useState(true);
   const [employeeProfile, setEmployeeProfile] = useState({
     fname: "",
 
@@ -54,7 +56,6 @@ const LoanForm = () => {
     emi: "",
   });
 
- 
   const [code, setCode] = useState({
     stateCode: "",
     cityCode: "",
@@ -121,7 +122,6 @@ const LoanForm = () => {
   //   });
   // };
 
-
   // const AnnualIncome = [
   //   { value: '1,00,000', label: '1,00,000' },
   //   { value: '2,00,000', label: '2,00,000' },
@@ -149,8 +149,6 @@ const LoanForm = () => {
     setProfession(tat.value);
     setProfessionLabel(tat.status);
   };
-
-
 
   const validateSelectOptions = () => {
     let disable = true;
@@ -182,11 +180,13 @@ const LoanForm = () => {
     { value: "Flexi Loan", label: "Flexi Loan/Overdraft Loan" },
   ];
 
- 
-
   const Profession = [
     { value: "Salaried", label: "Salaried", status: "Salried" },
-    { value: "Self Employed (Business)", label: "Self Employed (Business)", status: "Bussiness" },
+    {
+      value: "Self Employed (Business)",
+      label: "Self Employed (Business)",
+      status: "Bussiness",
+    },
     {
       value: "Self Employed (Professional)",
       label: "Self Employed (Professional)",
@@ -205,7 +205,7 @@ const LoanForm = () => {
   const BasicDetailsFunc = () => {
     BasicDetails.current.click();
   };
-  
+
   // const AdhaarUpload = (e) => {
   //   setAdhaar(e.target.files[0]);
   // };
@@ -218,9 +218,10 @@ const LoanForm = () => {
   // const BankStmtUpload = (e) => {
   //   setBankStmt(e.target.files[0]);
   // };
-  var numone = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(
-    " "
-  );
+  var numone =
+    "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(
+      " "
+    );
   var tens = "twenty thirty forty fifty sixty seventy eighty ninety".split(" ");
   // const [loanAmount, setState] = useState();
   // const [output, setOutput] = useState();
@@ -239,7 +240,7 @@ const LoanForm = () => {
   const LoanAmountHandler = (e) => {
     setLoanAmount(e.target.value);
     var num = e.target.value;
-   // setState(e.target.value);
+    // setState(e.target.value);
     num = num.toString();
     // convertNumberToWords();
     // setOutput(e.target.value);
@@ -250,52 +251,43 @@ const LoanForm = () => {
   function number2words(n) {
     if (n < 20) {
       return numone[n];
-    }
-    else{
+    } else {
       var digit = n % 10;
-      if (n < 100){
+      if (n < 100) {
         return tens[~~(n / 10) - 2] + (digit ? "-" + numone[digit] : "");
-      }
-      else if (n < 1000){
+      } else if (n < 1000) {
         return (
           numone[~~(n / 100)] +
           " hundred" +
           (n % 100 === 0 ? "" : " and " + number2words(n % 100))
         );
-      }
-      else{
-        if (n < 100000){
+      } else {
+        if (n < 100000) {
           // return('less than 100000');
           return (
             number2words(~~(n / 1000)) +
             " thousand" +
             (n % 1000 !== 0 ? " " + number2words(n % 1000) : "")
           );
-        }
-        else{
-          if (n < 10000000){
+        } else {
+          if (n < 10000000) {
             // return('less than 100000');
             return (
               number2words(~~(n / 100000)) +
               " lakh" +
               (n % 100000 !== 0 ? " " + number2words(n % 100000) : "")
             );
-          }
-          else{
+          } else {
             return (
               number2words(~~(n / 10000000)) +
               " Crore" +
               (n % 10000000 !== 0 ? " " + number2words(n % 10000000) : "")
             );
           }
-          
         }
-        
       }
-    } 
-    
-    
-      
+    }
+
     // return (
     //   number2words(~~(n / 100000)) +
     //   " lakh" +
@@ -326,10 +318,7 @@ const LoanForm = () => {
     }
   };
 
-  
-
   const checkFunc = () => {
-   
     return (
       <>
         <div className="form-row my-3 row">
@@ -343,6 +332,9 @@ const LoanForm = () => {
               onChange={ProfileChangeHandler}
               placeholder="Active Loan Amount"
             />
+            {error?.loanAmount && (
+              <div className="error-msg">{error.loanAmount}</div>
+            )}
           </div>
           <div className="form-group col-md-6">
             <input
@@ -354,23 +346,22 @@ const LoanForm = () => {
               onChange={ProfileChangeHandler}
               placeholder="EMI per Month"
             />
+            {error?.loanAmount && (
+              <div className="error-msg">{error.loanAmount}</div>
+            )}
           </div>
         </div>
       </>
     );
   };
 
- 
   const professionLabelFunc = () => {
     return (
       <>
         <div className="form-row my-3 row">
           <div className="form-group col-md-4">
-            <label>
-              Last Year Income
-              
-            </label>
-  {/* 
+            <label>Last Year Income</label>
+            {/* 
               <input
                 type="text"
                 className="form-control"
@@ -380,19 +371,19 @@ const LoanForm = () => {
                 onChange={LYSTHandler}
                 disabled={validateSelectOptions()}
               /> */}
-            <NumberFormat  className="form-control"
+            <NumberFormat
+              className="form-control"
               id="lyst"
               name="lyst"
               value={lyst}
               onChange={LYSTHandler}
               disabled={validateSelectOptions()}
-              thousandSeparator={true}  />
+              thousandSeparator={true}
+            />
+            {error?.LYST && <div className="error-msg">{error.LYST}</div>}
           </div>
           <div className="form-group col-md-4">
-            <label>
-              GST NO.
-              
-            </label>
+            <label>GST NO.</label>
 
             <input
               type="text"
@@ -403,6 +394,7 @@ const LoanForm = () => {
               onChange={GSTHandler}
               disabled={validateSelectOptions()}
             />
+            {error?.GST && <div className="error-msg">{error.GST}</div>}
           </div>
         </div>
       </>
@@ -446,13 +438,13 @@ const LoanForm = () => {
       LYST: lyst,
     };
     const toWords = new ToWords({
-      localeCode: 'en-IN',
+      localeCode: "en-IN",
       converterOptions: {
         currency: true,
         ignoreDecimal: false,
         ignoreZeroCurrency: false,
         doNotAddOnly: false,
-      }
+      },
     });
     Object.keys(employeeProfileForm).map((key) => {
       console.log(gst + "" + lyst);
@@ -480,6 +472,18 @@ const LoanForm = () => {
     if (submit === 2) {
       submit = 0;
     }
+
+    let obj = Validate(employeeProfileForm, rules);
+    Object.keys(obj).map((key) => {
+      if (obj[key] !== "") {
+        submit = 1;
+      }
+      return true;
+    });
+
+    setError(obj);
+
+    console.log(error, "error");
     if (submit === 0) {
       const formData = new FormData();
       for (const key in employeeProfileForm) {
@@ -545,14 +549,24 @@ const LoanForm = () => {
     }
   };
 
-  const EmployeeClickFunc =() =>{
-    if(employeeProfile.fname && employeeProfile.fathername && employeeProfile.dob && employeeProfile.mobile && employeeProfile.address && employeeProfile.adhaarNo && employeeProfile.panNo && employeeProfile.zip && stateSelect && citySelect){
-      setBasicInformation(false)
+  const EmployeeClickFunc = () => {
+    if (
+      employeeProfile.fname &&
+      employeeProfile.fathername &&
+      employeeProfile.dob &&
+      employeeProfile.mobile &&
+      employeeProfile.address &&
+      employeeProfile.adhaarNo &&
+      employeeProfile.panNo &&
+      employeeProfile.zip &&
+      stateSelect &&
+      citySelect
+    ) {
+      setBasicInformation(false);
+    } else {
+      alert("please fill all the Input");
     }
-    else{
-      alert('please fill all the Input')
-    }
-  }
+  };
 
   return (
     <>
@@ -566,6 +580,9 @@ const LoanForm = () => {
               options={LoanPurpose}
               onChange={LoanPurposeHandler}
             />
+            {error?.loanPurpose && (
+              <div className="error-msg">{error.loanPurpose}</div>
+            )}
           </div>
           <div className="form-group col-md-4">
             <Select
@@ -575,16 +592,12 @@ const LoanForm = () => {
               options={Profession}
               onChange={ProfessionHandler}
             />
+            {error?.profession && (
+              <div className="error-msg">{error.profession}</div>
+            )}
           </div>
           <div className="form-group col-md-4">
-            {/* <Select
-              placeholder="Loan Amount"
-              id="loanAmount"
-              name="loanAmount"
-              options={LoanAmount}
-              onChange={LoanAmountHandler}
-            /> */}
-             <input
+            <input
               type="text"
               className="form-control"
               id="loanAmount"
@@ -593,15 +606,12 @@ const LoanForm = () => {
               maxlength="9"
               value={loanAmount}
               placeholder="Loan Amount"
-            /> 
-            <span style={{ fontWeight: "bold" , fontSize: '4px'}}></span>
+            />
+            {error?.loanAmount && (
+              <div className="error-msg">{error.loanAmount}</div>
+            )}
+            <span style={{ fontWeight: "bold", fontSize: "4px" }}></span>
             {output}
-            {/* <NumberFormat  className="form-control" id="loanAmount"
-              name="loanAmount" value={loanAmount}
-              onChange={LoanAmountHandler}
-              placeholder="Loan Amount" thousandSeparator={true}  />
-               <span style={{ fontWeight: "bold" }}></span>
-            {output} */}
           </div>
         </div>
         <div>
@@ -633,15 +643,6 @@ const LoanForm = () => {
                   >
                     Employement Details
                   </Link>
-                  {/* <Link
-                    className="nav-link recent-nav-tab"
-                    id="step3-tab"
-                    data-bs-toggle="tab"
-                    to="#step3"
-                    ref={KYCDetails}
-                  >
-                    KYC Details
-                  </Link> */}
                 </div>
               </nav>
 
@@ -650,10 +651,7 @@ const LoanForm = () => {
                   <div className="form-1">
                     <div className="form-row row my-3">
                       <div className="form-group col-md-3">
-                        <label>
-                          Mobile Number
-                          
-                        </label>
+                        <label>Mobile Number</label>
                         <input
                           type="text"
                           className="form-control"
@@ -661,15 +659,14 @@ const LoanForm = () => {
                           name="mobile"
                           value={employeeProfile.mobile}
                           onChange={ProfileChangeHandler}
-                         
                           disabled={validateSelectOptions()}
                         />
+                        {error?.Mobile && (
+                          <div className="error-msg">{error.Mobile}</div>
+                        )}
                       </div>
                       <div className="form-group col-md-3">
-                        <label>
-                          Name (As Per Pan)
-                          
-                        </label>
+                        <label>Name (As Per Pan)</label>
                         <input
                           type="text"
                           className="form-control "
@@ -677,37 +674,15 @@ const LoanForm = () => {
                           name="fname"
                           value={employeeProfile.fname}
                           onChange={ProfileChangeHandler}
-                          
                           disabled={validateSelectOptions()}
                         />
+                        {error?.FirstName && (
+                          <div className="error-msg">{error.FirstName}</div>
+                        )}
                       </div>
-                      {/* <div className="form-group col-md-4">
-                        <label>
-                          Last Name
-                          <i
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="for eg:SHARMA"
-                            class="fas fa-eye "
-                            style={eye}
-                          ></i>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="lname"
-                          name="lname"
-                          value={employeeProfile.lname}
-                          onChange={ProfileChangeHandler}
-                          placeholder=" Last Name"
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
+
                       <div className="form-group col-md-3">
-                        <label>
-                          Father's Name
-                         
-                        </label>
+                        <label>Father's Name</label>
                         <input
                           type="text"
                           className="form-control"
@@ -715,15 +690,14 @@ const LoanForm = () => {
                           name="fathername"
                           value={employeeProfile.fathername}
                           onChange={ProfileChangeHandler}
-                          
                           disabled={validateSelectOptions()}
                         />
+                        {error?.FatherName && (
+                          <div className="error-msg">{error.FatherName}</div>
+                        )}
                       </div>
                       <div className="form-group col-md-3">
-                        <label>
-                          Date Of Birth
-                          
-                        </label>
+                        <label>Date Of Birth</label>
                         <input
                           type="date"
                           className="form-control"
@@ -735,15 +709,14 @@ const LoanForm = () => {
                           placeholder="Date Of Birth"
                           disabled={validateSelectOptions()}
                         />
+                        {error?.DOB && (
+                          <div className="error-msg">{error.DOB}</div>
+                        )}
                       </div>
-                      
                     </div>
                     <div className="form-row row my-3">
                       <div className="form-group col-md-4">
-                        <label>
-                          Aadhar Card no.
-                         
-                        </label>
+                        <label>Aadhar Card no.</label>
                         <input
                           type="text"
                           className="form-control"
@@ -754,23 +727,13 @@ const LoanForm = () => {
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
                         />
+                        {error?.AdhaarNo && (
+                          <div className="error-msg">{error.AdhaarNoB}</div>
+                        )}
                       </div>
-                      {/* <div className="form-group col-md-6">
-                        <input
-                          type="file"
-                          name="adhaar"
-                          className="file-input"
-                          id="adhaar"
-                          placeholder="Post/Designination"
-                          onChange={AdhaarUpload}
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
+
                       <div className="form-group col-md-4">
-                        <label>
-                          PAN Card no.
-                        
-                        </label>
+                        <label>PAN Card no.</label>
                         <input
                           type="text"
                           className="form-control"
@@ -781,12 +744,12 @@ const LoanForm = () => {
                           placeholder="PAN-Card number"
                           disabled={validateSelectOptions()}
                         />
+                        {error?.PanNo && (
+                          <div className="error-msg">{error.PanNo}</div>
+                        )}
                       </div>
                       <div className="form-group  col-md-4">
-                        <label>
-                          address
-                         
-                        </label>
+                        <label>address</label>
                         <input
                           type="text"
                           className="form-control"
@@ -796,62 +759,18 @@ const LoanForm = () => {
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
                         />
+                        {error?.CurrentAddress && (
+                          <div className="error-msg">
+                            {error.CurrentAddress}
+                          </div>
+                        )}
                       </div>
                     </div>
-
-                    </div>
-                    <div className="form-row my-3 row">
-                      {/* <div className="form-group col-md-4">
-                        <label>
-                          Email
-                          <i
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="for eg:email@ex.com"
-                            class="fas fa-eye "
-                            style={eye}
-                          ></i>
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="email"
-                          name="email"
-                          value={employeeProfile.email}
-                          onChange={ProfileChangeHandler}
-                          placeholder="Email"
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                     
-                    {/* <div className="form-group my-3">
-                      <label>
-                        Address 2
-                        <i
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title="for eg:1234 Main Street aligarh"
-                          class="fas fa-eye "
-                          style={eye}
-                        ></i>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="address2"
-                        name="address2"
-                        value={employeeProfile.address2}
-                        onChange={ProfileChangeHandler}
-                        placeholder="Apartment, studio, or floor"
-                        disabled={validateSelectOptions()}
-                      />
-                    </div> */}
+                  </div>
+                  <div className="form-row my-3 row">
                     <div className="form-row my-3 row">
                       <div className="form-group col-md-4">
-                        <label>
-                          State
-                         
-                        </label>
+                        <label>State</label>
                         <Select
                           placeholder="Select-State"
                           id="state"
@@ -859,20 +778,12 @@ const LoanForm = () => {
                           options={state}
                           onChange={stateChange}
                         />
-                        {/* <Select
-                          placeholder="Selected State"
-                          id="state"
-                          name="state"
-                          onChange={OptionHandler}
-                          options={options}
-                          isDisabled={validateSelectOptions()}
-                        /> */}
+                        {error?.State && (
+                          <div className="error-msg">{error.State}</div>
+                        )}
                       </div>
                       <div className="form-group col-md-4">
-                        <label>
-                          City
-                          
-                        </label>
+                        <label>City</label>
                         <Select
                           isDisabled={!code.stateCode}
                           placeholder="city"
@@ -881,20 +792,12 @@ const LoanForm = () => {
                           options={city}
                           onChange={cityChange}
                         />
-                        {/* <Select
-                          placeholder="Selected City"
-                          id="city"
-                          name="city"
-                          options={options1}
-                          onChange={OptionHandler1}
-                          isDisabled={validateSelectOptions()}
-                        /> */}
+                        {error?.City && (
+                          <div className="error-msg">{error.City}</div>
+                        )}
                       </div>
                       <div className="form-group col-md-4">
-                        <label>
-                          PIN Code
-                        
-                        </label>
+                        <label>PIN Code</label>
                         <input
                           type="text"
                           className="form-control"
@@ -904,6 +807,9 @@ const LoanForm = () => {
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
                         />
+                        {error?.ZIP && (
+                          <div className="error-msg">{error.ZIP}</div>
+                        )}
                       </div>
                     </div>
                     <div className="row justify-content-between my-3">
@@ -929,7 +835,6 @@ const LoanForm = () => {
                             ? "Employer Name"
                             : "Firm Name"}
                           {/* {(professionLabel === 'Bussiness') ? "Employer" : "Firm Name"} */}
-                          
                         </label>
                         <input
                           type="text"
@@ -940,76 +845,18 @@ const LoanForm = () => {
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
                         />
+                        {error?.CompanyName && (
+                          <div className="error-msg">{error.CompanyName}</div>
+                        )}
                       </div>
-                      {/* <div className="form-group col-md-4">
-                        <label>
-                          Post/Designination
-                          <i
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="for eg:Front End developer"
-                            class="fas fa-eye "
-                            style={eye}
-                          ></i>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="designination"
-                          name="designation"
-                          placeholder="Post/Designination"
-                          value={employeeProfile.designation}
-                          onChange={ProfileChangeHandler}
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                      {/* <div className="form-group col-md-4"> */}
-                      {/* <label>
-                          Current Work Experience
-                          <i
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="for eg:2 Years"
-                            class="fas fa-eye "
-                            style={eye}
-                          ></i>
-                        </label> */}
 
-                      {/* <input
-                          type="text"
-                          className="form-control"
-                          id="currentCompanyExperience"
-                          name="currentCompanyExperience"
-                          placeholder="Current Work Expirience"
-                          value={employeeProfile.currentCompanyExperience}
-                          onChange={ProfileChangeHandler}
-                          disabled={validateSelectOptions()}
-                        /> */}
-                      {/* <Select
-                          placeholder="work Experience"
-                          id="workExperience"
-                          name="workExperience"
-                          options={WorkExperience}
-                          onChange={WorkExperienceHandler}
-                        /> */}
-                      {/* </div> */}
                       <div className="form-group col-md-4">
                         <label>
                           {professionLabel === "Salried"
                             ? "Total Experience "
                             : "Total Business years"}
-                          
                         </label>
-                        {/* <input
-                          type="text"
-                          className="form-control"
-                          id="totalExperience"
-                          name="totalExperience"
-                          placeholder="Total Work Expirience"
-                          value={employeeProfile.totalExperience}
-                          onChange={ProfileChangeHandler}
-                          disabled={validateSelectOptions()}
-                        /> */}
+
                         <Select
                           placeholder="Select"
                           id="totalExperience"
@@ -1017,71 +864,34 @@ const LoanForm = () => {
                           options={TotalWorkExperience}
                           onChange={TotalWorkExperienceHandler}
                         />
+                        {error?.TotalExperience && (
+                          <div className="error-msg">
+                            {error.TotalExperience}
+                          </div>
+                        )}
                       </div>
                       <div className="form-group col-md-4">
                         <label>
                           {professionLabel === "Salried"
                             ? "MonthlyIncome"
                             : "Current Year Income"}
-                          
                         </label>
-                        {/* <Select
-                          placeholder="Monthly Income"
-                          id="monthlyIncome"
-                          name="monthlyIncome"
-                          options={MonthlyIncome}
-                          onChange={MonthlyIncomeHandler}
-                        /> */}
-                        {/* <input
-                          type="text"
+
+                        <NumberFormat
                           className="form-control"
                           id="montlyIncome"
                           name="monthlyIncome"
                           value={employeeProfile.monthlyIncome}
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
-                        /> */}
-                        <NumberFormat  className="form-control"  id="montlyIncome"
-                          name="monthlyIncome"
-                          value={employeeProfile.monthlyIncome}
-                          onChange={ProfileChangeHandler}
-                          disabled={validateSelectOptions()}
-              thousandSeparator={true}  />
-
+                          thousandSeparator={true}
+                        />
+                        {error?.MonthlyIncome && (
+                          <div className="error-msg">{error.MonthlyIncome}</div>
+                        )}
                       </div>
                     </div>
-                    <div className="form-row my-3 row">
-                     
-                      {/* <div className="form-group col-md-6">
-                        <label>
-                          Annual Income/ Last Yr. TurnOver
-                          <i
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="for eg:540000"
-                            class="fas fa-eye "
-                            style={eye}
-                          ></i>
-                        </label>
-                        <Select
-                          placeholder="Annual Income"
-                          id="annualIncome"
-                          name="annualIncome"
-                          options={AnnualIncome}
-                          onChange={AnnualIncomeHandler}
-                        />
-                        {/* <input
-                          type="text"
-                          className="form-control"
-                          id="annualIncome"
-                          name="annualIncome"
-                          placeholder="Annual Income"
-                          value={employeeProfile.annualIncome}
-                          onChange={ProfileChangeHandler}
-                          disabled={validateSelectOptions()}
-                        /> 
-                      </div> */}
-                    </div>
+                    <div className="form-row my-3 row"></div>
                     {professionLabel === "Bussiness"
                       ? professionLabelFunc()
                       : ""}
@@ -1121,227 +931,14 @@ const LoanForm = () => {
                         </button>
                       </div>
                     </div>
-                    {/* <div className="row justify-content-between my-3">
-                      <div className="col-auto">
-                        <button
-                          type="button"
-                          className="btn form-btn"
-                          onClick={BasicDetailsFunc}
-                        >
-                          Previous
-                        </button>
-                      </div>
-                      <div className="col-auto">
-                        <button
-                          type="button"
-                          className="btn form-btn"
-                          onClick={KYCFunc}
-                        >
-                          Next
-                        </button>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
                 <div className="tab-pane fade" id="step3">
                   <div className="form-3">
-                    <div className="form-row row my-3">
-                      {/* <div className="form-group col-md-6">
-                        <label>
-                          Adhar Card no.
-                          <i
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="for eg:123456789009867"
-                            class="fas fa-eye "
-                            style={eye}
-                          ></i>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="adhaarNo"
-                          name="adhaarNo"
-                          placeholder="Adhar Card number"
-                          value={employeeProfile.adhaarNo}
-                          onChange={ProfileChangeHandler}
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                      {/* <div className="form-group col-md-6">
-                        <input
-                          type="file"
-                          name="adhaar"
-                          className="file-input"
-                          id="adhaar"
-                          placeholder="Post/Designination"
-                          onChange={AdhaarUpload}
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                      {/* <div className="form-group col-md-6">
-                        <label>
-                          PAN Card no.
-                          <i
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="for eg:123456789009867"
-                            class="fas fa-eye "
-                            style={eye}
-                          ></i>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="panNo"
-                          name="panNo"
-                          value={employeeProfile.panNo}
-                          onChange={ProfileChangeHandler}
-                          placeholder="PAN-Card number"
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                    </div>
-                    <div className="form-row row my-3">
-                      {/* <div className="form-group col-md-6">
-                        <input
-                          type="file"
-                          className="file-input"
-                          name="pan"
-                          id="pan"
-                          onChange={PanUpload}
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                    </div>
-                    <div className="form-row row my-3">
-                      {/* <div className="form-group col-md-4">
-                        <label>
-                          Bank Name
-                          <i
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="for eg:SBI govt. in"
-                            class="fas fa-eye "
-                            style={eye}
-                          ></i>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="bankName"
-                          name="bankName"
-                          value={employeeProfile.bankName}
-                          onChange={ProfileChangeHandler}
-                          placeholder="Bank Name"
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                      {/* <div className="form-group col-md-4">
-                        <label>
-                          account no.
-                          <i
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="for eg:123456789009867"
-                            class="fas fa-eye "
-                            style={eye}
-                          ></i>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="accountNo"
-                          name="accountNo"
-                          value={employeeProfile.accountNo}
-                          onChange={ProfileChangeHandler}
-                          placeholder="Account number"
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                      {/* <div className="form-group col-md-4">
-                        <label>
-                          IFSC Code
-                          <i
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="for eg:AOH1623576"
-                            class="fas fa-eye "
-                            style={eye}
-                          ></i>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="IFSCcode"
-                          name="IFSCcode"
-                          value={employeeProfile.IFSCcode}
-                          onChange={ProfileChangeHandler}
-                          placeholder="IFSC Code"
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                    </div>
-                    <div className="form-row row my-3">
-                      {/* <div className="form-group col-md-6">
-                        <label for="adhar">Insert Your Photograph</label>
-                        <input
-                          type="file"
-                          className="file-input"
-                          name="photo"
-                          id="photo"
-                          onChange={PhotoUpload}
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                      {/* <div className="form-group col-md-6">
-                        <label for="adhar">Last 3 month's Bank Statement</label>
-                        <input
-                          type="file"
-                          className="file-input"
-                          name="bankStmt"
-                          id="bankStmt"
-                          onChange={BankStmtUpload}
-                          disabled={validateSelectOptions()}
-                        />
-                      </div> */}
-                    </div>
-
-                    {/* <div className="form-row my-3 row">
-                      <div className="form-group col-md-6">
-                        <input
-                          type="checkbox"
-                          id="HaveLoan"
-                          name="HaveLoan"
-                          value="1"
-                          onChange={changeBox}
-                          disabled={validateSelectOptions()}
-                        />
-                        <label for="vehicle1">already have a Loan</label>
-                        <br />
-                      </div>
-                    </div>
-                    {checkBoxStatus ? checkFunc() : ''}
-                    <div className="row justify-content-between my-3">
-                      <div className="col-auto">
-                        <button
-                          type="button"
-                          className="btn form-btn"
-                          onClick={ClickEmployeeDetails}
-                        >
-                          Previous
-                        </button>
-                      </div>
-                      <div className="col-auto">
-                        <button
-                          type="button"
-                          className="btn form-btn"
-                          onClick={SubmitDetails}
-                        >
-                          Finish
-                        </button>
-                      </div>
-                    </div> */}
+                    <div className="form-row row my-3"></div>
+                    <div className="form-row row my-3"></div>
+                    <div className="form-row row my-3"></div>
+                    <div className="form-row row my-3"></div>
                   </div>
                 </div>
               </div>
@@ -1393,13 +990,113 @@ const LoanForm = () => {
 
 export default LoanForm;
 
-// State: undefined
-// City: undefined
-// ZIP: ""
-// DOB: ""
-
-// adhaar: ""
-// bankStmt: ""
-// pan: ""
-// photo: ""
-// EMI: ""
+const rules = [
+  {
+    field: "AdhaarNo",
+    fieldName: "AdhaarNo",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "City",
+    fieldName: "City",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "CompanyName",
+    fieldName: "CompanyName",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "CurrentAddress",
+    fieldName: "address",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "DOB",
+    fieldName: "DOB",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "FatherName",
+    fieldName: "FatherName",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "FirstName",
+    fieldName: "FirstName",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "GST",
+    fieldName: "GST",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "LYST",
+    fieldName: "LYST",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "Mobile",
+    fieldName: "Mobile",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "MonthlyIncome",
+    fieldName: "MonthlyIncome",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "PanNo",
+    fieldName: "PAN-Card number",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "State",
+    fieldName: "State",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "TotalExperience",
+    fieldName: "TotalExperience",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "ZIP",
+    fieldName: "PIN code",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "loanAmount",
+    fieldName: "Loan Amount",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "loanPurpose",
+    fieldName: "Loan Types",
+    type: "string",
+    required: true,
+  },
+  {
+    field: "profession",
+    fieldName: "Profession",
+    type: "string",
+    required: true,
+  },
+];

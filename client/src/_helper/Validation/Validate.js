@@ -1,5 +1,7 @@
-import { rules } from './Rules'
+import { rules } from './ApplyLoanRules'
 export const Validate = (fields, frule) => {
+    console.log(fields,'fields');
+    console.log(frule,'frule');
     let error = {}
     Object.keys(fields).map((key) => {
         let rule = ""
@@ -16,3 +18,4 @@ export const Validate = (fields, frule) => {
     })
     return error
 }
+
