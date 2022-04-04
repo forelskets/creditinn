@@ -174,7 +174,7 @@ export default function Offer() {
   const isOfferNotFound = filteredServices.length === 0;
 
   return (
-    <Page title="Banks Services | CreditIN">
+    <Page title="Banks Services | CreditsIN">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>

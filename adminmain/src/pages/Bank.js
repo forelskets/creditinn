@@ -162,7 +162,7 @@ export default function Bank() {
   const isBankNotFound = filteredBank.length === 0;
 
   return (
-    <Page title="Bank | Minimal-UI">
+    <Page title="Bank | CreditsIN">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>

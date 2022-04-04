@@ -55,7 +55,7 @@ const UserNavbar = () => {
         </div>
         <div class="dropdown">
           <div class="profile-details">
-            <img src="images/portrait-young-smiling-woman-2.png" alt="" />
+            <img src="images/545.png" alt="" />
 
             <span class="admin_name" style={{ textTransform: 'capitalize' }}>
               {profile.Name}

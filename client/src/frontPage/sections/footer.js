@@ -120,7 +120,11 @@ const Footer = () => {
                       />
                     </a>
                   </div>
-                  <p className="paragraph">
+                  <p className="paragraph">Start Your Business with Zero Investment
+                    and Earn over ₹1,00,000 Every Month. Provide
+                    financial advice and products to the customers
+                    and get a fast payout every month.
+                 
                     Refer and Generate revenue with CreditsIn!
                   </p>
                 </div>

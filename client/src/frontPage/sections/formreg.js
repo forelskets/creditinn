@@ -169,9 +169,9 @@ const FormReg = () => {
                   onChange={(e) => setOTP(e.target.value)}
                 />
                 <label className="form-label" for="form3Example3">
-                Otp has been sent your registered email id ( if don't receive plz check your spam folder)
+                Otp has been sent your registered email id ( if don't receive please check your spam folder)
                 </label>
-                <button type="button" onClick={() => gotoTOP()}>resend otp</button>
+                <button type="button" className="btn-3" onClick={() => gotoTOP()}>resend otp</button>
                 {error?.otp && <div className="error-msg">{error.otp}</div>}
               </div>
 

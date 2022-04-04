@@ -4,7 +4,7 @@ exports.getApplicationList = async (req, res, next) => {
   console.log('getApplicationList');
   try {
     var result = await Application.find()
-      .populate(['UserId', 'ProfileId', 'EmploymentId', 'KycId'])
+      .populate(['UserId', 'ProfileId', 'EploymentId', 'KycId'])
       .sort({ _id: 'desc' });
     console.log('result', result);
 
@@ -60,11 +60,11 @@ exports.updateApplicationStatus = async (req, res, next) => {
 };
  exports.getApplicationById = async (req, res, next) => {
   const id = req.params.id;
-  // var options = {
-  //   where: {
-  //     id: id,
-  //   },
-  // };
+  var options = {
+    where: {
+      id: id,
+    },
+  };
   console.log(id,'id')
 
   try {

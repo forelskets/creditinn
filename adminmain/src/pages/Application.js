@@ -140,7 +140,7 @@ export default function User() {
   // console.log('sssss', APPLIST);
 
   return (
-    <Page title="Applications | CreditIN">
+    <Page title="Applications | CreditsIN">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
