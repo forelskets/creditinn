@@ -133,8 +133,9 @@ const Footer = () => {
                     <h3>Learn More</h3>
                   </div>
                   <ul className="padding-ul">
-                    <li>Support</li>
-                    <li>PrivacyPolicy</li>
+                    <li>About Us</li>
+                    <li>Privacy Policy</li>
+                    <li>Terms & Conditions</li>
                     <li onClick={loginVar}>Login </li>
 
                   </ul>
@@ -167,9 +168,9 @@ const Footer = () => {
                   </div>
                   <ul className="padding-ul">
                     <li > <a href="/support"  className="text-light" style={{textDecoration: 'none'}}>Support</a></li>
-                    <li>PrivacyPolicy</li>
-                    <li>About Us</li>
-                    <li>Create An Account</li>
+                    <li>FAQ's</li>
+                  
+                    
                   </ul>
                   <br />
                   <lottie-player

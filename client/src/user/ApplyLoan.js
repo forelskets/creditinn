@@ -4,7 +4,7 @@ import LoanForm from "./LoanForm";
 import Apply from "./Apply";
 import Bank from "./Bank";
 import Emi from "./emi";
-import { myrefral } from "../_services/Refral.services/index";
+
 import {
   FacebookShareButton,
   WhatsappShareButton,
@@ -13,24 +13,21 @@ import {
   EmailShareButton,
   FacebookIcon,
 } from "react-share";
-import { ApplicationsById } from "../_services/Admin.services";
-var Success = 0;
+
 
 const ApplyLoan = () => {
   const shareUrl = "www.creditsin.com/form ";
   const [profile, setProfile] = useState({});
   const [lstatus, setLstatus] = useState(false);
-  const [refralData, setRefralData] = useState([]);
-  const [applicationData , setApplicationData] = useState([])
-  const [refralMessage , setRefralMessage] = useState('');
-  const [applicationMessage , setApplicationMessage] = useState('');
+
+  
   const LoanFunc = () => {
     setLstatus(!lstatus);
   };
 
   useEffect(() => {
     callUserMainPage();
-    Success = 1;
+    
   }, []);
 
   const history = useHistory();
@@ -56,38 +53,7 @@ const ApplyLoan = () => {
     }
   };
 
-  if (Success === 1 && profile) {
-    const getMyRefral = async (req, res) => {
-      console.log(profile);
-      console.log(profile._id);
-      var response = await myrefral(profile._id);
-      
-         if(response.status === 0){
-            setRefralMessage(response.message);
-            
-       }else{
-        setRefralData(response.data.referraldata);
-       }
-    };
-    getMyRefral();
-
-    const getApplications = async (req , res) =>{
-      var response = await ApplicationsById(profile._id);
-      
-      if(response.status === 0){
-        setApplicationMessage(response.message);
-        console.log(response.message,'resmessage');
-        console.log(applicationMessage,'appmsg')
-        
-   }else{
-    setApplicationData(response.data.service);
-   }
-    }
-
-    getApplications();
-
-    Success = 0;
-  }
+  
 
 
   return (
@@ -153,93 +119,8 @@ const ApplyLoan = () => {
                       <Apply />
                     </div>
                   </div>
-                  <div className="row pb-5">
-                    <div className="recent-sales box">
-                    <div className="col">
-                    
-                    <div className="row">
-                      <h3>My Referrals</h3>
-                    <div className="col">
-                      <table className="table">
-                        <thead className="title" >
-                          <tr>
-                            <th >S.no.</th>
-                            <th >Name</th>
-                            <th >Email</th></tr>
-                        </thead>
-                        <tbody style={{textAlign: 'center'}}>
-                        {refralData ? (refralData.map((item , ind)=>{
-                             return(
-                              <>
-                               <tr>
-                            <td>{ind + 1}</td>
-                            <td>{item.Name}</td>
-                             <td>{item.Email}</td> 
-                            {/* <td>{item.RefralNo}</td> */}
-                          </tr>
-                              </>
-                            )
-                          })):""}
-                          {refralMessage ? refralMessage : ''}
-                          
-                         
-                        </tbody>
-                      </table>
-                    
-                     </div>
+              
                   
-                    </div>
-                    </div>
-                  </div>
-                </div>
-                    <div className="row pb-5">
-                    <div className="recent-sales box">
-                    <div className="col">
-                    <div className="row">
-                      <h3>Application Table</h3>
-                    <div className="col">
-                      <table className="table">
-                        <thead className="title" >
-                          <tr>
-                            <th >S.no.</th>
-                            <th >Application No.</th>
-                            <th >Status</th></tr>
-                        </thead>
-                        <tbody style={{textAlign: 'center'}}>
-                          {applicationData.map((item , ind)=>{
-                             return(
-                              <>
-                               <tr>
-                            <td>{ind + 1}</td>
-                            <td>{item.ApplicationNo}</td>
-                             <td>{item.status}</td> 
-                            {/* <td>{item.RefralNo}</td> */}
-                          </tr>
-                          {applicationData ? (applicationData.map((item , ind)=>{
-                             return(
-                              <>
-                               <tr>
-                            <td>{ind + 1}</td>
-                            <td>{item.ApplicationNo}</td>
-                             <td>{item.status}</td> 
-                            {/* <td>{item.RefralNo}</td> */}
-                          </tr>
-                              </>
-                            )
-                          })):""}
-                             </>
-                            )
-                          })}
-                          {applicationMessage ? applicationMessage : ''}
-                        </tbody>
-                      </table>
-                    
-                  </div>
-                  
-                    </div>
-                </div>
-                    </div>
-                  </div>
                   <div className="row">
                     <div className="recent-sales box">
                       <Bank />

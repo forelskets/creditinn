@@ -658,7 +658,7 @@ const LoanForm = () => {
                 </div>
               </nav>
 
-              <div className="tab-content py-4">
+              <div className="tab-content ">
                 <div className="tab-pane fade show active" id="step1">
                   <div className="form-1">
                     <div className="form-row row my-3">

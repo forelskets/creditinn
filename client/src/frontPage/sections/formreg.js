@@ -164,7 +164,6 @@ const FormReg = () => {
                   className="form-control"
                   id="userEmail"
                   name="userEmail"
-                 
                   value={otp}
                   onChange={(e) => setOTP(e.target.value)}
                 />
@@ -205,6 +204,7 @@ const FormReg = () => {
                   style={{ height: "70px" }}
                   src="images/logo.png"
                   className="d-inline-block align-top"
+                  
                   alt=""
                 />
                 <h2>Register Here</h2>
@@ -217,12 +217,13 @@ const FormReg = () => {
                       className="form-control"
                       id="userName"
                       name="userName"
+                      placeholder="Enter Your Name"
                       value={userDetails.userName}
                       onChange={changeHandler}
                     />
-                    <label className="form-label" for="form3Example1" style={eye}>
+                    {/* <label className="form-label" for="form3Example1" style={eye}>
                       Name
-                    </label>
+                    </label> */}
                     {error?.userName && (
                       <div className="error-msg">{error.userName}</div>
                     )}
@@ -235,12 +236,13 @@ const FormReg = () => {
                       className="form-control"
                       id="userMobile"
                       name="userMobile"
+                      placeholder="Enter Your Mobile"
                       value={userDetails.userMobile}
                       onChange={changeHandler}
                     />
-                    <label className="form-label" for="form3Example2" style={eye} >
+                    {/* <label className="form-label" for="form3Example2" style={eye} >
                       Mobile No
-                    </label>
+                    </label> */}
                     {error?.userMobile && (
                       <div className="error-msg">{error.userMobile}</div>
                     )}
@@ -255,12 +257,13 @@ const FormReg = () => {
                   className="form-control"
                   id="userEmail"
                   name="userEmail"
+                  placeholder="Enter your Email"
                   value={userDetails.userEmail}
                   onChange={changeHandler}
                 />
-                <label className="form-label" for="form3Example3" style={eye} >
+                {/* <label className="form-label" for="form3Example3" style={eye} >
                   Email address
-                </label>
+                </label> */}
                 {error?.userEmail && (
                   <div className="error-msg">{error.userEmail}</div>
                 )}
@@ -272,12 +275,13 @@ const FormReg = () => {
                     className="form-control"
                     id="userRefral"
                     name="userRefral"
+                    placeholder="Enter Referal Code"
                     value={userDetails.userRefral}
                     onChange={changeHandler}
                   />
-                  <label className="form-label" for="form3Example4" style={eye}>
+                  {/* <label className="form-label" for="form3Example4" style={eye}>
                     Refral no.
-                  </label>
+                  </label> */}
                   {error?.userRefral && (
                     <div className="error-msg">{error.userRefral}</div>
                   )}
@@ -294,16 +298,17 @@ const FormReg = () => {
                       id="userPassword"
                       name="userPassword"
                       type={passwordShown ? "text" : "password"}
+                      placeholder="Generate Password"
                       value={userDetails.userPassword}
                       onChange={changeHandler}
                     />
                        <i class="fas fa-eye " onClick={togglePasswordVisiblity} style={{position: 'absolute',
   top: '10px',
-  right: '25px'}} ></i>{" "} 
+  right: '23px'}} ></i>{" "} 
                     <label className="form-label" for="form3Example4" title={msg}
                 class="fas fa-question "
                 style={eye}>
-                      Password
+                      
                     </label>
                     {error?.userPassword && (
                       <div className="error-msg">{error.userPassword}</div>
@@ -318,15 +323,16 @@ const FormReg = () => {
                       type={passwordShown1 ? "text" : "password"}
                       id="userCPassword"
                       name="userCPassword"
+                      placeholder="Confirm Password"
                       value={userDetails.userCPassword}
                       onChange={changeHandler}
                     />
                     <i class="fas fa-eye " onClick={togglePasswordVisiblity1} style={{position: 'absolute',
   top: '10px',
-  right: '25px'}} ></i>{" "} 
-                    <label className="form-label" for="form3Example4"  style={eye} >
+  right: '23px'}} ></i>{" "} 
+                    {/* <label className="form-label" for="form3Example4"  style={eye} >
                       Confirm Password
-                    </label>
+                    </label> */}
                     {error?.userCPassword && (
                       <div className="error-msg">{error.userCPassword}</div>
                     )}
