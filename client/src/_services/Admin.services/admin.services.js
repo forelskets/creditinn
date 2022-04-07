@@ -52,3 +52,16 @@ export const ApplicationsStateChange = async (id,obj) => {
     console.log("res",res)
     return res
 }
+
+export const ShareRefralDataSave = async (id,obj) => {
+    let res =await Api('POST', `/user/shareRefralDataStore/${id}`, obj)
+    console.log("res",res)
+    return res
+}
+
+export const productDataSave = async (id,obj) => {
+    let res =await Api('POST', `/user/productDataSave/${id}`, obj)
+    console.log("res",res)
+    return res
+}
+

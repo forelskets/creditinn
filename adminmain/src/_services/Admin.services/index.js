@@ -5,5 +5,6 @@ export {service,
     AllBankOffer,
     saveBankOffer,
     Applications,
-    ApplicationsStateChange
+    ApplicationsStateChange , 
+    AllUsers
 } from './admin.services'

@@ -4,6 +4,7 @@ import LoanForm from "./LoanForm";
 import Apply from "./Apply";
 import Bank from "./Bank";
 import Emi from "./emi";
+import ShareModalc from './Modal'
 
 import {
   FacebookShareButton,
@@ -19,8 +20,13 @@ const ApplyLoan = () => {
   const shareUrl = "www.creditsin.com/form ";
   const [profile, setProfile] = useState({});
   const [lstatus, setLstatus] = useState(false);
+  const [sharemodal , setSharemodal] = useState(false);
 
-  
+  const ShareModal = () =>{
+    console.log('shareModal')
+    setSharemodal(!sharemodal)
+      
+  }
   const LoanFunc = () => {
     setLstatus(!lstatus);
   };
@@ -53,7 +59,7 @@ const ApplyLoan = () => {
     }
   };
 
-  
+ 
 
 
   return (
@@ -196,7 +202,7 @@ const ApplyLoan = () => {
                     <li>
                       <NavLink to="#">
                         <img
-                          src="images/545.png"
+                          src="images/portrait-young-smiling-woman-2.png"
                           alt=""
                         />
                         <span className="profile-name">{profile.Name}</span>
@@ -230,6 +236,7 @@ const ApplyLoan = () => {
                     >
                       <WhatsappIcon size={40} />
                     </WhatsappShareButton>
+                    <button type="button" onClick={ShareModal}>ShareRefral</button>
                     <br />
                     <br />
                     <li>
@@ -288,7 +295,12 @@ const ApplyLoan = () => {
           </div>
         </div>
       </section>
+
+      {sharemodal ? <ShareModalc sharemodal={sharemodal} InputValue = "SHAREINPUT" id={profile._id}/> : ""}
+      
+      
     </div>
+    
   );
 };
 
