@@ -155,7 +155,7 @@ const Navbar = () => {
         className="modal fade"
         id="exampleModal"
         tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
+        ariaLabelledby="exampleModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">

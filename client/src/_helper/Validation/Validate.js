@@ -1,4 +1,4 @@
-import { rules } from './ApplyLoanRules'
+import { rules } from './Rules'
 export const Validate = (fields, frule) => {
     console.log(fields,'fields');
     console.log(frule,'frule');

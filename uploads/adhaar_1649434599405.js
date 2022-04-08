@@ -6,7 +6,6 @@ import Bank from "./Bank";
 import Emi from "./emi";
 import ShareModalc from './Modal'
 import ProductModal from "./ProductModal";
-import {Card , Button} from "react-bootstrap";
 
 import {
   FacebookShareButton,
@@ -75,102 +74,40 @@ const ApplyLoan = () => {
           <div className="container">
             <div className="row">
               <div className="sales-boxes">
-                <div className="col-sm-9 ">
+                <div className="col-sm-9">
                   <div className="row">
                     <div className="overview-boxes">
-                    <div className=" col-sm-4">
-                      
-                      <Card style={{ width: '18rem' }}>
- <Card.Img variant="top" src=" images/business.jpeg" />
- <Card.Body>
-   {/* <Card.Title>Card Title</Card.Title> */}
-   
-   <Button className="btn-3" onClick={ProductModals}>Apply </Button>
- </Card.Body>
-</Card>
-                     </div>
-                     <div className=" col-sm-4">
-                      
-                      <Card style={{ width: '18rem' }}>
- <Card.Img variant="top" src=" images/business.jpeg" />
- <Card.Body>
-   {/* <Card.Title>Card Title</Card.Title> */}
-   
-   <Button className="btn-3" onClick={ProductModals}>Apply </Button>
- </Card.Body>
-</Card>
-                     </div>
-                     <div className=" col-sm-4">
-                      
-                      <Card style={{ width: '18rem' }}>
- <Card.Img variant="top" src=" images/business.jpeg" />
- <Card.Body>
-   {/* <Card.Title>Card Title</Card.Title> */}
-   
-   <Button className="btn-3" onClick={ProductModals}>Apply </Button>
- </Card.Body>
-</Card>
-                     </div>
+                      <div className="box col-sm-4">
+                        {/* <div className="right-side">
+                          <div className="box-topic">Active Loans</div>
+                          <div className="number">0</div>
+                        </div>
+                        <i className="fas fa-money-bill-wave-alt"></i> */}
+                        <img
+                          src="images/personal.jpg"
+                          style={{ height: "120px", width: "300px" }}
+                        />{" "}
+                      </div>
 
-                      {/* <div className="box col-sm-4">
+                      <div className="box col-sm-4">
+                        {/* <div className="right-side">
+                          <div className="box-topic">Loan Amount</div>
+                          <div className="number">$12,876</div>
+                        </div>
+                        <i className="bx bx-cart cart three"></i>*/}
+                        <img
+                          src="images/business.jpeg"
+                          style={{ height: "120px", width: "300px" }}
+                        />
+                      </div>
+                      <div className="box col-sm-4">
                         <img
                           src="images/home.webp"
                           style={{ height: "120px", width: "300px" }}
                         />
-                      </div> */}
+                      </div>
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="overview-boxes">
-                      <div className=" col-sm-4">
-                      
-                       <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src=" images/business.jpeg" />
-  <Card.Body>
-    {/* <Card.Title>Card Title</Card.Title> */}
-    
-    <Button className="btn-3" onClick={ProductModals}>Apply </Button>
-  </Card.Body>
-</Card>
-                      </div>
-
-                      <div className=" col-sm-4">
-                      
-                       <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src=" images/business.jpeg" />
-  <Card.Body>
-    {/* <Card.Title>Card Title</Card.Title> */}
-    
-    <Button className="btn-3" onClick={ProductModals}>Apply </Button>
-  </Card.Body>
-</Card>
-                      </div>
-                      <div className=" col-sm-4">
-                      
-                      <Card style={{ width: '18rem' }}>
- <Card.Img variant="top" src=" images/business.jpeg" />
- <Card.Body>
-   {/* <Card.Title>Card Title</Card.Title> */}
-   
-   <Button className="btn-3" onClick={ProductModals}>Apply </Button>
- </Card.Body>
-</Card>
-                     </div>
-
-                    </div>
-                  </div>
-                  {/* <div className="row pb-5">
-                    <div className="recent-sales box ">
-                      <div
-                        className="row-title  py-3"
-                        style={{ cursor: "pointer" }}
-                        onClick={ProductModals}
-                      >
-                        Apply For Products
-                      </div>
-                      
-                    </div>
-                  </div> */}
                   <div className="row pb-5">
                     <div className="recent-sales box ">
                       <div
@@ -201,7 +138,6 @@ const ApplyLoan = () => {
                     </div>
                   </div>
                 </div>
-                
                 
                 <div className="top-sales box profile-card col-sm-3">
                 <div className="col">
@@ -278,9 +214,9 @@ const ApplyLoan = () => {
                       </NavLink>
                     </li>
 
-                    <Button className="btn-3">
+                    <text style={{ backgroundColor: "#f0f3f4", padding: 8 }}>
                       {profile.RefralNo}
-                    </Button>
+                    </text>
 
                     <FacebookShareButton
                       url={"www.creditsin.com"}
@@ -305,11 +241,10 @@ const ApplyLoan = () => {
                     >
                       <WhatsappIcon size={40} />
                     </WhatsappShareButton>
-                    
-   <Button className="btn-3" onClick={ShareModal}>Share Refral </Button>
+                    <button type="button" onClick={ShareModal}>ShareRefral</button>
                     <br />
-                    {/* <button type="button" onClick={ProductModals}>Product</button> */}
-                    
+                    <button type="button" onClick={ProductModals}>Product</button>
+                    <br />
                     <br />
                     <li>
                       <span className="left-text"> name </span>

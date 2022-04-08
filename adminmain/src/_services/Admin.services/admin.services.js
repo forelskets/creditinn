@@ -46,9 +46,3 @@ export const ApplicationsStateChange = async (id,obj) => {
     console.log("res",res)
     return res
 }
-
-export const AllUsers = async (obj) => {
-    let res =await Api('GET', '/user/getAllUsers', obj)
-    console.log("res",res)
-    return res
-}

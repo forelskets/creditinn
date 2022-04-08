@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import axios from "axios";
@@ -8,15 +8,17 @@ import { Country, State, City } from "country-state-city";
 import NumberFormat from "react-number-format";
 import { ToWords } from "to-words";
 import { Validate } from "../_helper/Validation/Validate";
+var obj = {};
+var count = 0;
 
 const eye = { fontSize: "15px", height: "0px" };
-
+var basic = 1;
 const LoanForm = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const modelRef = useRef(null);
   // const [pan, setPan] = useState('');
-   const [adhaar, setAdhaar] = useState('');
+  const [adhaar, setAdhaar] = useState("");
   // const [bankStmt, setBankStmt] = useState('');
   // const [photo, setPhoto] = useState('');
   const [profession, setProfession] = useState("");
@@ -33,6 +35,7 @@ const LoanForm = () => {
   const [stateSelect, setStateSelect] = useState({});
   //const [loanAmount, setState] = useState();
   const [output, setOutput] = useState();
+  
   const [basicInformation, setBasicInformation] = useState(true);
   const [employeeProfile, setEmployeeProfile] = useState({
     fname: "",
@@ -397,7 +400,7 @@ const LoanForm = () => {
             {error?.GST && <div className="error-msg">{error.GST}</div>}
           </div>
           <div className="form-group col-md-4">
-                        <label for="adhar">ITR upload</label>
+                        <label for="adhar">ITR Upload</label>
                         <input
                           type="file"
                           className="file-input"
@@ -413,12 +416,75 @@ const LoanForm = () => {
   };
   const ProfileChangeHandler = (e) => {
     e.preventDefault();
+   
     const { name, value } = e.target;
     setEmployeeProfile({
       ...employeeProfile,
       [name]: value,
     });
+    count = count + 1;  
+   
   };
+  
+  const LinkClickHandler = () =>{
+    basic = 0;
+    let setstate = ""
+    let setcity = "" 
+    if(stateSelect.value !== undefined){
+      setstate = stateSelect.value
+    }
+    
+    if(citySelect.value !== undefined){
+        setcity = citySelect.value
+    }
+    let profile = {
+     loanAmount:loanAmount,
+     loanPurpose:loanPurpose,
+     profession:profession,
+     FirstName: employeeProfile.fname,
+     FatherName: employeeProfile.fathername,
+     DOB: employeeProfile.dob,
+     Mobile: employeeProfile.mobile,
+     CurrentAddress: employeeProfile.address,
+     AdhaarNo: employeeProfile.adhaarNo,
+     PanNo: employeeProfile.panNo,
+     ZIP: employeeProfile.zip,
+     State: setstate,
+     City: setcity,
+   };
+
+   
+    obj = Validate(profile, rules.slice(0, 13));
+    setError(obj);
+   console.log(obj)
+   
+    console.log(basic,'basic 1')
+   setBasicInformation(true)
+   Object.keys(obj).map((ele)=>{
+     console.log(obj[ele],'ooo')
+       if(obj[ele] !== "" ||
+       obj[ele] === null ||
+       obj[ele] === undefined ){
+         basic = 1 ;
+        
+       }
+       else {
+         basic = 0;
+       }
+     })
+    //  if(!basic){
+    //    console.log(basic,'basic 3')
+    //    console.log(basicInformation,'basicinfo3')
+    //    setBasicInformation(false);
+    //    console.log(basicInformation,'basicinfo4')
+      
+    //      }
+
+  }
+ useEffect(()=>{
+  LinkClickHandler();
+ },[count , profession , loanAmount , loanPurpose , stateSelect , citySelect ])
+  
 
   const SubmitDetails = async () => {
     let submit = 0;
@@ -500,7 +566,7 @@ const LoanForm = () => {
       const formData = new FormData();
       for (const key in employeeProfileForm) {
         const element = employeeProfileForm[key];
-        if ([key] != undefined) {
+        if ([key] !== undefined) {
           formData.append([key], element);
         }
         console.log([key]);
@@ -541,7 +607,7 @@ const LoanForm = () => {
           emi: "",
         });
         // setPan('');
-         setAdhaar('');
+        setAdhaar("");
         // setBankStmt('');
         // setPhoto('');
         setLoanPurpose("");
@@ -561,24 +627,10 @@ const LoanForm = () => {
     }
   };
 
-  const EmployeeClickFunc = () => {
-    if (
-      employeeProfile.fname &&
-      employeeProfile.fathername &&
-      employeeProfile.dob &&
-      employeeProfile.mobile &&
-      employeeProfile.address &&
-      employeeProfile.adhaarNo &&
-      employeeProfile.panNo &&
-      employeeProfile.zip &&
-      stateSelect &&
-      citySelect
-    ) {
-      setBasicInformation(false);
-    } else {
-      alert("please fill all the Input");
-    }
-  };
+ 
+  
+
+  console.log(error,'errrrr')
 
   return (
     <>
@@ -645,13 +697,14 @@ const LoanForm = () => {
                     Basic Information
                   </Link>
                   <Link
-                    className="nav-link recent-nav-tab"
+                    className="nav-link  recent-nav-tab"
                     id="step2-tab"
                     data-bs-toggle="tab"
                     to="#step2"
                     ref={EmployeeDatails}
-                    disabled={basicInformation}
-                    onClick={EmployeeClickFunc}
+                    disabled={basic}
+                    onClick={LinkClickHandler}
+                    
                   >
                     Employement Details
                   </Link>
@@ -661,7 +714,7 @@ const LoanForm = () => {
               <div className="tab-content ">
                 <div className="tab-pane fade show active" id="step1">
                   <div className="form-1">
-                    <div className="form-row row my-3">
+                    <div className="form-row row">
                       <div className="form-group col-md-3">
                         <label>Mobile Number</label>
                         <input
@@ -740,7 +793,7 @@ const LoanForm = () => {
                           disabled={validateSelectOptions()}
                         />
                         {error?.AdhaarNo && (
-                          <div className="error-msg">{error.AdhaarNoB}</div>
+                          <div className="error-msg">{error.AdhaarNo}</div>
                         )}
                       </div>
 
@@ -804,7 +857,7 @@ const LoanForm = () => {
                           options={city}
                           onChange={cityChange}
                         />
-                        {error?.City && (
+                        {error.City && (
                           <div className="error-msg">{error.City}</div>
                         )}
                       </div>
@@ -902,7 +955,7 @@ const LoanForm = () => {
                           <div className="error-msg">{error.MonthlyIncome}</div>
                         )}
                       </div>
-                    
+                      
                     </div>
                     <div className="form-row my-3 row"></div>
                     {professionLabel === "Bussiness"
@@ -1005,111 +1058,116 @@ export default LoanForm;
 
 const rules = [
   {
-    field: "AdhaarNo",
-    fieldName: "AdhaarNo",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "City",
-    fieldName: "City",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "CompanyName",
-    fieldName: "CompanyName",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "CurrentAddress",
-    fieldName: "address",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "DOB",
-    fieldName: "DOB",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "FatherName",
-    fieldName: "FatherName",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "FirstName",
-    fieldName: "FirstName",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "GST",
-    fieldName: "GST",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "LYST",
-    fieldName: "LYST",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "Mobile",
-    fieldName: "Mobile",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "MonthlyIncome",
-    fieldName: "MonthlyIncome",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "PanNo",
-    fieldName: "PAN-Card number",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "State",
-    fieldName: "State",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "TotalExperience",
-    fieldName: "TotalExperience",
-    type: "string",
-    required: true,
-  },
-  {
-    field: "ZIP",
-    fieldName: "PIN code",
-    type: "string",
-    required: true,
-  },
-  {
     field: "loanAmount",
     fieldName: "Loan Amount",
-    type: "string",
+    type: "loanAmount",
     required: true,
   },
   {
     field: "loanPurpose",
     fieldName: "Loan Types",
-    type: "string",
+    type: "loanPurpose",
     required: true,
   },
   {
     field: "profession",
     fieldName: "Profession",
-    type: "string",
+    type: "profession",
     required: true,
   },
+  {
+    field: "FirstName",
+    fieldName: "FirstName",
+    type: "FirstName",
+    required: true,
+  },
+  {
+    field: "FatherName",
+    fieldName: "FatherName",
+    type: "FatherName",
+    required: true,
+  },
+  {
+    field: "DOB",
+    fieldName: "DOB",
+    type: "DOB",
+    required: true,
+  },
+  {
+    field: "Mobile",
+    fieldName: "Mobile",
+    type: "Mobile",
+    required: true,
+  },
+  {
+    field: "CurrentAddress",
+    fieldName: "address",
+    type: "CurrentAddress",
+    required: true,
+  },
+  {
+    field: "AdhaarNo",
+    fieldName: "AdhaarNo",
+    type: "AdhaarNo",
+    required: true,
+  },
+  {
+    field: "PanNo",
+    fieldName: "PAN-Card number",
+    type: "PanNo",
+    required: true,
+  },
+  {
+    field: "ZIP",
+    fieldName: "PIN code",
+    type: "ZIP",
+    required: true,
+  },
+  {
+    field: "State",
+    fieldName: "State",
+    type: "State",
+    required: true,
+  },
+  {
+    field: "City",
+    fieldName: "City",
+    type: "City",
+    required: true,
+  },
+  {
+    field: "CompanyName",
+    fieldName: "CompanyName",
+    type: "CompanyName",
+    required: true,
+  },
+
+  {
+    field: "GST",
+    fieldName: "GST",
+    type: "CompanyName",
+    required: true,
+  },
+  {
+    field: "LYST",
+    fieldName: "LYST",
+    type: "LYST",
+    required: true,
+  },
+
+  {
+    field: "MonthlyIncome",
+    fieldName: "MonthlyIncome",
+    type: "MonthlyIncomeg",
+    required: true,
+  },
+
+  {
+    field: "TotalExperience",
+    fieldName: "TotalExperience",
+    type: "TotalExperience",
+    required: true,
+  },
+
+  
 ];

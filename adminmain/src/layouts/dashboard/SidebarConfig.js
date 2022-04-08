@@ -38,7 +38,16 @@ const sidebarConfig = [
     icon: getIcon('mdi:application-edit-outline')
   },
 
-  
+  {
+    title: 'Share Referals',
+    path: '/dashboard/referal',
+    icon: getIcon('icon-park-outline:file-staff')
+  },
+  {
+    title: 'Token',
+    path: '/dashboard/token',
+    icon: getIcon('ic:outline-token')
+  },
   {
     title: 'login',
     path: '/login',

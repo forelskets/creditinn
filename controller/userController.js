@@ -104,7 +104,7 @@ exports.ShareRefralDataStor =  async (req , res, next)=>{
       Sentmsg( refral , mobile)
       return res.send({
         status: 1,
-        message: "Store_Data",
+        message: "Successfully Sent",
       });
     }else {
       return res.send({
@@ -129,7 +129,7 @@ exports.getAllRefrals =  async (req , res, next)=>{
       
       return res.send({
         status: 1,
-        message: "Store_Data",
+        message: "Successfully sent",
         data: result
       });
     }else {
@@ -159,7 +159,7 @@ exports.ProductStor =  async (req , res, next)=>{
       Sentmsg( refral , mobile)
       return res.send({
         status: 1,
-        message: "Store_Data",
+        message: "Successfully Received",
       });
     }else {
       return res.send({
@@ -184,7 +184,7 @@ exports.getAllProducts =  async (req , res, next)=>{
       
       return res.send({
         status: 1,
-        message: "Store_Data",
+        message: "Successfully Submitted",
         data: result
       });
     }else {
@@ -197,7 +197,7 @@ exports.getAllProducts =  async (req , res, next)=>{
     console.log("error" , error);
     return res.send({
       status: 0,
-      message: "something_went_wrong"
+      message: "sonething_went_wrong"
     })
   }
 }
