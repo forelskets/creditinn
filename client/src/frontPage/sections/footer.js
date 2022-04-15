@@ -108,7 +108,7 @@ const Footer = () => {
           <div className="row">
             <div className="col-12 col-md-12">
               <div className="row">
-                <div className="col-md-3 text-area">
+                <div className="col-md-3 text-area ">
                   <div className="align-inline">
                     <a className="footer-brand" href="#">
                       <img
@@ -120,9 +120,12 @@ const Footer = () => {
                       />
                     </a>
                   </div>
-                  <p className="paragraph">Become an Exclusive Member of Creditsin Elite Partners club.
+                  <p className="paragraph">Become an Exclusive Member of <b>Creditsin Elite Partners club.</b>
                   <br/>
-                  Earn up to Rs. 20000/- on singal referral . Double Cashback on self Booking.
+                  <ul className="padding-ul" style={{paddingTop: '0px'}}>
+                 <li>*Earn up to Rs. 20000/- on singal referral.</li>
+                 <li>*Double Cashback on self Booking.</li>  
+                 </ul>
                   </p>
                 </div>
                 <div className="col-md-2 text-area padding-down">

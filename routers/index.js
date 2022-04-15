@@ -191,7 +191,7 @@ router.post("/sendOtp", async (req, res) => {
   try {
     const { Email } = req.body;
 
-    const result = await User.findOne({ Email, userVerified: 0 });
+    const result = await User.findOne({ Email, userVerified: 1 });
     if (!result) return res.send({ status: 0, message: "user not found" });
     const { Name, Mobile } = result;
     console.log("result", result);
@@ -204,7 +204,7 @@ router.post("/sendOtp", async (req, res) => {
     console.log("allOtpList", allOtpList);
 
     for (const iterator of allOtpList) {
-      await iterator.update({ used: 1 });
+      await iterator.updateOne({ used: 1 });
     }
 
     const otpFunc = async () => {
@@ -311,7 +311,7 @@ router.post("/userLogin", async (req, res) => {
 });
 
 router.post("/matchOtp", async (req, res) => {
-  const { Email, Mobile, Code } = req.body;
+  const { Email, Mobile,Code } = req.body;
 
   const data = await Otp.findOne({ Email, Mobile, Code, used: 0 });
   console.log('aaa', data);
@@ -366,6 +366,28 @@ router.get("/userLogout", auth, (req, res) => {
   res.clearCookie("jwtoken");
   res.status(200).send("user Logout");
 });
+
+router.post('/web/passUpdate' ,  async(req,res)=>{
+  const {Email ,Password } = req.body;
+
+   console.log(Email , Password)
+   const hashPassword = await bcrypt.hash(Password, 12);
+  const isMatch = await User.findOneAndUpdate({Email},{Password : hashPassword});
+  console.log(isMatch, "isMatch")
+  if(isMatch){
+    
+    res.send({
+         status: 1,
+         message: "PASSWORD_IS_UPDATED"
+       })
+      }
+  else{
+    res.send({
+      status: 0,
+      message: "something_is_wrong"
+    })
+  }
+})
 
 router.post('/mobile/passUpdate' ,  async(req,res)=>{
   const {UserId , Password} = req.body;

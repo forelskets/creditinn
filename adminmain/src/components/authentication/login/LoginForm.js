@@ -15,6 +15,7 @@ import {
 import { LoadingButton } from '@mui/lab';
 // component
 import Iconify from '../../Iconify';
+import {AdminLogin} from '../../../_services/Admin.services/index'
 
 // ----------------------------------------------------------------------
 
@@ -34,11 +35,19 @@ export default function LoginForm() {
       remember: true
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: async (values) => {
+      const Email = values.email;
+      const Password = values.password;
+      const response = await AdminLogin({Email , Password})
+      if(response.status === 1){
+        navigate("/dashboard/app");
+      }else if(response.status === 0){
+        alert(response.message)
+      }
+      
     }
   });
-
+  
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 
   const handleShowPassword = () => {

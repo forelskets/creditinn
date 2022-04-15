@@ -11,4 +11,10 @@ router.put('/update-profile/:id', userController.updateProfileById);
 router.post('/shareRefralDataStore/:id', userController.ShareRefralDataStor);
 router.post('/productDataSave/:id', userController.ProductStor);
 
+
+
+// forgetPassword
+
+router.post('/otpEmail' , userController.getgenerateOtp);
+
 module.exports = router;

@@ -22,6 +22,7 @@ import privacy from './frontPage/sections/privacy';
 import state1 from './user/state1';
 import Support from './frontPage/support';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ForgetPassword from './frontPage/utiles/ForgetPassword/ForgetPassword.js';
 toastr.options = {
   positionClass: 'toast-top-center',
 };
@@ -34,6 +35,7 @@ function App() {
         <Route path="/privacy-policy" exact component={privacy} />
         <Route path="/form" exact component={formReg} />
         <Route path="/support" exact component={Support} />
+        <Route path="/forgetPassword" exact component={ForgetPassword} />
 
         <Route path="/applyloan" component={ApplyLoan} />
         <Route path="/nav" component={UserMain} />

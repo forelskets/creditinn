@@ -8,4 +8,4 @@ export {service,
     ApplicationsStateChange
 } from './admin.services'
 
-export {AllUsers , AllRefrals , Products} from './admin.user'
+export {AllUsers , AllRefrals , Products , AdminLogin} from './admin.user'

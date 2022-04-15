@@ -2,6 +2,9 @@ const User = require("../models/users");
 const ShareRefral = require("../models/shareRefral");
 const Sentmsg = require('./utiles/mobilemsg');
 const Product = require("../models/product");
+const EmailSent = require('./utiles/email');
+const Otp = require("../models/otp");
+
 
 exports.getReferralCountById = async (req, res, next) => {
   try {
@@ -104,7 +107,7 @@ exports.ShareRefralDataStor =  async (req , res, next)=>{
       Sentmsg( refral , mobile)
       return res.send({
         status: 1,
-        message: "Successfully Sent",
+        message: "Store_Data",
       });
     }else {
       return res.send({
@@ -129,7 +132,7 @@ exports.getAllRefrals =  async (req , res, next)=>{
       
       return res.send({
         status: 1,
-        message: "Successfully sent",
+        message: "Store_Data",
         data: result
       });
     }else {
@@ -159,7 +162,7 @@ exports.ProductStor =  async (req , res, next)=>{
       Sentmsg( refral , mobile)
       return res.send({
         status: 1,
-        message: "Successfully Received",
+        message: "Store_Data",
       });
     }else {
       return res.send({
@@ -184,7 +187,7 @@ exports.getAllProducts =  async (req , res, next)=>{
       
       return res.send({
         status: 1,
-        message: "Successfully Submitted",
+        message: "Store_Data",
         data: result
       });
     }else {
@@ -201,4 +204,52 @@ exports.getAllProducts =  async (req , res, next)=>{
     })
   }
 }
+
+
+exports.getgenerateOtp =  async (req , res, next)=>{
+    const {email} = req.body;
+    console.log(email)
+  try {
+    const result = await User.findOne({Email : email});
+    if(result){
+      const Email = email;
+      const Mobile = result.Mobile;
+      const Name = result.Name;
+      const otpCode = Math.floor(Math.random() * 10000 + 1);
+      const otpData = new Otp({
+        Email,
+        Mobile,
+        Code: otpCode,
+        expireIn: new Date().getTime() + 300 * 10000,
+      });
+      const otpResponse = await otpData.save();
+      if(otpResponse){
+        EmailSent(Email, Name , otpCode);
+        return res.send({
+          status: 1,
+          message: "OTP_SENT_TO_YOUR_EMAIL_AND_MOBILE",
+          data: result
+        });
+      }else {
+        return res.send({
+          status: 0,
+          message: "something_wrong"
+        })
+      }
+     
+    }else {
+      return res.send({
+        status: 0,
+        message: "USER_NOT_FOUND"
+      })
+    }
+  } catch (error){
+    console.log("error" , error);
+    return res.send({
+      status: 0,
+      message: "sonething_went_wrong"
+    })
+  }
+}
+
 

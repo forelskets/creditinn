@@ -4,9 +4,9 @@ import LoanForm from "./LoanForm";
 import Apply from "./Apply";
 import Bank from "./Bank";
 import Emi from "./emi";
-import ShareModalc from './Modal'
+import ShareModalc from './ShareModal'
 import ProductModal from "./ProductModal";
-import {Card , Button} from "react-bootstrap";
+import { Card , Button } from "react-bootstrap";
 
 import {
   FacebookShareButton,
@@ -24,14 +24,19 @@ const ApplyLoan = () => {
   const [lstatus, setLstatus] = useState(false);
   const [sharemodal , setSharemodal] = useState(false);
   const [productmodal , setProductmodal] = useState(false);
+  
 
   const ShareModal = () =>{
     console.log('shareModal')
+    setProductmodal(false)
     setSharemodal(!sharemodal)
       
   }
   const ProductModals = ()=>{
-    setProductmodal(!productmodal)
+    console.log('productModalApplyLoanr')
+    setSharemodal(false)
+    setProductmodal(true)
+    console.log(productmodal , "productMOdal")
   }
   const LoanFunc = () => {
     setLstatus(!lstatus);
@@ -65,8 +70,6 @@ const ApplyLoan = () => {
     }
   };
 
- 
-
 
   return (
     <div>
@@ -80,8 +83,8 @@ const ApplyLoan = () => {
                     <div className="overview-boxes">
                     <div className=" col-sm-4">
                       
-                      <Card style={{ width: '18rem' }}>
- <Card.Img variant="top" src=" images/business.jpeg" />
+                      <Card style={{ width: '19rem' }}>
+ <Card.Img variant="top" src=" images/1.png" />
  <Card.Body>
    {/* <Card.Title>Card Title</Card.Title> */}
    
@@ -91,8 +94,8 @@ const ApplyLoan = () => {
                      </div>
                      <div className=" col-sm-4">
                       
-                      <Card style={{ width: '18rem' }}>
- <Card.Img variant="top" src=" images/business.jpeg" />
+                      <Card style={{ width: '19rem' }}>
+ <Card.Img variant="top" src=" images/2.png" />
  <Card.Body>
    {/* <Card.Title>Card Title</Card.Title> */}
    
@@ -102,8 +105,8 @@ const ApplyLoan = () => {
                      </div>
                      <div className=" col-sm-4">
                       
-                      <Card style={{ width: '18rem' }}>
- <Card.Img variant="top" src=" images/business.jpeg" />
+                      <Card style={{ width: '19rem' }}>
+ <Card.Img variant="top" src=" images/3.png" />
  <Card.Body>
    {/* <Card.Title>Card Title</Card.Title> */}
    
@@ -124,8 +127,8 @@ const ApplyLoan = () => {
                     <div className="overview-boxes">
                       <div className=" col-sm-4">
                       
-                       <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src=" images/business.jpeg" />
+                       <Card style={{ width: '19rem' }}>
+  <Card.Img variant="top" src=" images/4.png" />
   <Card.Body>
     {/* <Card.Title>Card Title</Card.Title> */}
     
@@ -136,8 +139,8 @@ const ApplyLoan = () => {
 
                       <div className=" col-sm-4">
                       
-                       <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src=" images/business.jpeg" />
+                       <Card style={{ width: '19rem' }}>
+  <Card.Img variant="top" src=" images/5.png" />
   <Card.Body>
     {/* <Card.Title>Card Title</Card.Title> */}
     
@@ -147,8 +150,8 @@ const ApplyLoan = () => {
                       </div>
                       <div className=" col-sm-4">
                       
-                      <Card style={{ width: '18rem' }}>
- <Card.Img variant="top" src=" images/business.jpeg" />
+                      <Card style={{ width: '19rem' }}>
+ <Card.Img variant="top" src=" images/6.png" />
  <Card.Body>
    {/* <Card.Title>Card Title</Card.Title> */}
    
@@ -367,9 +370,9 @@ const ApplyLoan = () => {
           </div>
         </div>
       </section>
-       {console.log(profile.RefralNo,'ccc')}
+       {console.log(profile.RefralNo,'ccc', productmodal)}
       {sharemodal ? <ShareModalc sharemodal={sharemodal} InputValue = "SHAREINPUT" id={profile._id} refral = {profile.RefralNo}/> : ""}
-      {productmodal ? <ProductModal sharemodal={productmodal} InputValue = "PRODUCTINPUT" profile={profile}/> : ""}
+      {productmodal ? <ProductModal productmodal={productmodal} InputValue = "PRODUCTINPUT" profile={profile}/> : ""}
       
       
     </div>

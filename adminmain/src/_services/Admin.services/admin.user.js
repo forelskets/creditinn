@@ -18,3 +18,11 @@ export const Products = async (obj) => {
     console.log("res",res)
     return res
 }
+
+export const AdminLogin = async (obj) => {
+
+    console.log(obj,'oobbjj')
+    let res =await Api('POST', '/admin/login', obj)
+    console.log("res",res)
+    return res
+}

@@ -1,4 +1,6 @@
 export {registerService,
     matchOTP,
-    sendOTP
+    sendOTP,
+    otpEmail,
+    PassUpdate,
 } from './ClientService'
