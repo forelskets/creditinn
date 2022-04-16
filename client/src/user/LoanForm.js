@@ -377,6 +377,7 @@ const LoanForm = () => {
             <NumberFormat
               className="form-control"
               id="lyst"
+              type="number"
               name="lyst"
               value={lyst}
               onChange={LYSTHandler}
@@ -662,7 +663,7 @@ const LoanForm = () => {
           </div>
           <div className="form-group col-md-4">
             <input
-              type="text"
+              type="number"
               className="form-control"
               id="loanAmount"
               name="loanAmount"
@@ -945,6 +946,7 @@ const LoanForm = () => {
                         <NumberFormat
                           className="form-control"
                           id="montlyIncome"
+                          type="number"
                           name="monthlyIncome"
                           value={employeeProfile.monthlyIncome}
                           onChange={ProfileChangeHandler}

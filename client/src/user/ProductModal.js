@@ -13,10 +13,12 @@ const ProductModal = (props) => {
 
     console.log(props.productmodal,"productModal")
     const HandleSubmit =async () =>{
-      const refral = props.profile.RefralNo;
-      console.log(props.profile._id , name , mobile , product , refral)
-      const response = await productDataSave(props.profile._id ,{ name , mobile , product , refral , email});
-      
+      console.log(props.profile._id , name , mobile , product)
+      const response = await productDataSave(props.profile._id ,{ name , mobile , product , email});
+      setName('');
+      setMobile('');
+      setEmail('');
+      setProduct('');
       if(response.status === 1){
         console.log(response.message,'dddd');
         setResponseMsg(response.message);
@@ -47,11 +49,15 @@ const ProductModal = (props) => {
       <form>
          <input type= "text" value={name} className="form-control mb-3" placeholder="Enter Your Name" onChange={(e)=>setName(e.target.value)} />
          <input type= "text" value={mobile} className="form-control mb-3" placeholder="Enter Your Mobile" onChange={(e)=>setMobile(e.target.value)} />
-         <input type= "text" value={email} className="form-control mb-3" placeholder="Ener Your Email" onChange={(e)=>setEmail(e.target.value)} />
+         <input type= "text" value={email} className="form-control mb-3" placeholder="Enter Your Email" onChange={(e)=>setEmail(e.target.value)} />
          <select onChange={(e)=>setProduct(e.target.value)} className="form-control mb-3">
            <option value='ddd'>Selected</option>
-           <option value="Health Insourance" >Health Insourance</option>
-           <option value="Car Insourance" >Car Insourance</option>
+           <option value="Health Insurance" >Health Insurance</option>
+           <option value="Life Insurance" >Life Insurance</option>
+           <option value="Car Insurance" >Car Insurance</option>
+           <option value="Bike Insurance" >Bike Insurance</option>
+           <option value="Eductaion Insurance" >Eductaion Insurance</option>
+           <option value="Home Insurance" >Home Insurance</option>
          </select>
          <Button type="button" className='btn-3' onClick={HandleSubmit}>Submit</Button>
          {responseMsg ? responseMsg : ""}

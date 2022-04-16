@@ -107,7 +107,7 @@ exports.ShareRefralDataStor =  async (req , res, next)=>{
       Sentmsg( refral , mobile)
       return res.send({
         status: 1,
-        message: "Store_Data",
+        message: "Sent Successfully",
       });
     }else {
       return res.send({
@@ -132,7 +132,7 @@ exports.getAllRefrals =  async (req , res, next)=>{
       
       return res.send({
         status: 1,
-        message: "Store_Data",
+        message: "Sent Successfully",
         data: result
       });
     }else {
@@ -162,7 +162,7 @@ exports.ProductStor =  async (req , res, next)=>{
       Sentmsg( refral , mobile)
       return res.send({
         status: 1,
-        message: "Store_Data",
+        message: "Submitted",
       });
     }else {
       return res.send({
@@ -187,7 +187,7 @@ exports.getAllProducts =  async (req , res, next)=>{
       
       return res.send({
         status: 1,
-        message: "Store_Data",
+        message: "Submitted",
         data: result
       });
     }else {

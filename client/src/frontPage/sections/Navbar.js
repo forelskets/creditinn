@@ -264,7 +264,7 @@ const Navbar = () => {
                   <div className="mb-3">
                     <input
                       type="password"
-                      className="form-control"
+                      className="form-control mb-3"
                       id="password"
                       name="password"
                       value={password}
@@ -273,6 +273,7 @@ const Navbar = () => {
                         setPassword(e.target.value);
                       }}
                     />
+                    <a href="/forgetpassword" style={{textDecoration: 'none' }}>forget Password</a>
                   </div>
                   <ReCAPTCHA
                     sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"

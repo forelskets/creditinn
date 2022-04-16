@@ -189,15 +189,7 @@ const UserNavbar = () => {
                               </tr>
                             </thead>
                             <tbody style={{ textAlign: "center" }}>
-                              {applicationData.map((item, ind) => {
-                                return (
-                                  <>
-                                    <tr>
-                                      <td>{ind + 1}</td>
-                                      <td>{item.ApplicationNo}</td>
-                                      <td>{item.status}</td>
-                                      {/* <td>{item.RefralNo}</td> */}
-                                    </tr>
+                             
                                     {applicationData
                                       ? applicationData.map((item, ind) => {
                                           return (
@@ -212,9 +204,9 @@ const UserNavbar = () => {
                                           );
                                         })
                                       : ""}
-                                  </>
-                                );
-                              })}
+                                
+                            
+                            
                               {applicationMessage ? applicationMessage : ""}
                             </tbody>
                           </table>
