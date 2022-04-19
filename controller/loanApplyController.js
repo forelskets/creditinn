@@ -151,7 +151,12 @@ exports.getApplicationList = async (req, res, next) => {
       if (profileSave && detailsSave && kycSave && applicationSave) {
         return res.send({
           status: 200,
-          message: `Your Application Submitted successfully and You application no. is ${counter}`,
+
+
+
+
+
+          message: `Your Application Submitted successfully and Your application no. is ${counter}`,
         });
       } else {
         return res.send({
