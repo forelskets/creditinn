@@ -120,12 +120,13 @@ const Footer = () => {
                       />
                     </a>
                   </div>
-                  <p className="paragraph">Become an Exclusive Member of <b>Creditsin Elite Partners club.</b>
+                  <p className="paragraph">Become an Exclusive Member of <u style={{color: 'white'}}>Creditsin</u> Elite Partners club.
                   <br/>
-                  <ul className="padding-ul" style={{paddingTop: '0px'}}>
-                 <li>*Earn up to Rs. 20000/- on singal referral.</li>
-                 <li>*Double Cashback on self Booking.</li>  
-                 </ul>
+                   -Earn up to Rs. 20000/- on single referral*.
+                 <br/>
+                 -Double cash back on self Booking*.
+                 <br/>
+               <div style={{color : 'orange' , font : '15px' , fontWeight: '700'}}> -*T & C Apply</div>
                   </p>
                 </div>
                 <div className="col-md-2 text-area padding-down">
@@ -135,7 +136,7 @@ const Footer = () => {
                   <ul className="padding-ul">
                     <li>About Us</li>
                     <li>Privacy Policy</li>
-                    <li>Terms & Conditions</li>
+                    <li>T & C</li>
                     <li onClick={loginVar}>Login </li>
 
                   </ul>
