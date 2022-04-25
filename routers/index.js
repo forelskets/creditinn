@@ -33,7 +33,7 @@ router.post("/login", async (req, res) => {
       console.log("isMatch", isMatch);
       if (userExist && isMatch) {
         const token = await userExist.generateAuthToken();
-        res.cookie("jwtoken", token);
+        res.cookie("jwtoken", token,{maxAge: 1800000 , expires: new Date(Date.now() + 300000)});
 
         res.status(200).json(userExist);
       } else {
@@ -278,7 +278,7 @@ router.post("/userLogin", async (req, res) => {
           });
         }
         const token = await isExist.generateAuthToken();
-        res.cookie("jwtoken", token);
+        res.cookie("jwtoken", token,{maxAge: 1800 , expires: new Date(Date.now() + 3000)});
 
         return res.send({
           status: 1,

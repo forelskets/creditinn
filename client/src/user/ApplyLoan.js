@@ -84,7 +84,7 @@ const ApplyLoan = () => {
                     <div className=" col-sm-4">
                       
                       <Card style={{ width: '19rem' }}>
- <Card.Img variant="top" src=" images/1.png" />
+ <Card.Img variant="top" src=" images/1.png" style={{height: '180px' }}/>
  <Card.Body>
    {/* <Card.Title>Card Title</Card.Title> */}
    
@@ -95,7 +95,7 @@ const ApplyLoan = () => {
                      <div className=" col-sm-4">
                       
                       <Card style={{ width: '19rem' }}>
- <Card.Img variant="top" src=" images/2.png" />
+ <Card.Img variant="top" src=" images/2.png" style={{height: '180px' }} />
  <Card.Body>
    {/* <Card.Title>Card Title</Card.Title> */}
    
@@ -106,7 +106,7 @@ const ApplyLoan = () => {
                      <div className=" col-sm-4">
                       
                       <Card style={{ width: '19rem' }}>
- <Card.Img variant="top" src=" images/3.png" />
+ <Card.Img variant="top" src=" images/3.png" style={{height: '180px' }} />
  <Card.Body>
    {/* <Card.Title>Card Title</Card.Title> */}
    
@@ -128,7 +128,7 @@ const ApplyLoan = () => {
                       <div className=" col-sm-4">
                       
                        <Card style={{ width: '19rem' }}>
-  <Card.Img variant="top" src=" images/4.png" />
+  <Card.Img variant="top" src=" images/4.png" style={{height: '180px' }} />
   <Card.Body>
     {/* <Card.Title>Card Title</Card.Title> */}
     
@@ -140,7 +140,7 @@ const ApplyLoan = () => {
                       <div className=" col-sm-4">
                       
                        <Card style={{ width: '19rem' }}>
-  <Card.Img variant="top" src=" images/5.png" />
+  <Card.Img variant="top" src=" images/5.png" style={{height: '180px' }} />
   <Card.Body>
     {/* <Card.Title>Card Title</Card.Title> */}
     
@@ -151,7 +151,7 @@ const ApplyLoan = () => {
                       <div className=" col-sm-4">
                       
                       <Card style={{ width: '19rem' }}>
- <Card.Img variant="top" src=" images/6.png" />
+ <Card.Img variant="top" src=" images/6.png" style={{height: '180px' }}/>
  <Card.Body>
    {/* <Card.Title>Card Title</Card.Title> */}
    
@@ -191,6 +191,10 @@ const ApplyLoan = () => {
                       <Emi />
                     </div>
                   </div>
+
+
+
+                  
                   <div className="row pb-5">
                     <div className="recent-sales box">
                       <Apply />

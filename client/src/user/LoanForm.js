@@ -181,6 +181,8 @@ const LoanForm = () => {
     { value: "Home Loan", label: "Home Loan" },
     { value: "Business Loan", label: "Business Loan" },
     { value: "Flexi Loan", label: "Flexi Loan/Overdraft Loan" },
+    
+    { value: "Credit Card", label: "Credit Card" },
   ];
 
   const Profession = [
