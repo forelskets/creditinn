@@ -8,5 +8,6 @@ export {service,
     ApplicationsById,
     ApplicationsStateChange,
     ShareRefralDataSave,
-    productDataSave
+    productDataSave,
+    ApplyLoans
 } from './admin.services'

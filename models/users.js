@@ -47,6 +47,9 @@ const userSchema = new Schema(
       type: Number,
       default: 0,
     },
+    PhotoURL: {
+      type: String
+    },
     Status: {
       type: Boolean,
       required: true,

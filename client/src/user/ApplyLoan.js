@@ -4,10 +4,11 @@ import LoanForm from "./LoanForm";
 import Apply from "./Apply";
 import Bank from "./Bank";
 import Emi from "./emi";
-import ShareModalc from './ShareModal'
+import axios from "axios";
+import ShareModalc from "./ShareModal";
 import ProductModal from "./ProductModal";
-import { Card , Button } from "react-bootstrap";
-
+import { Card, Button } from "react-bootstrap";
+import { ApplyLoans } from "../_services/Admin.services/index";
 import {
   FacebookShareButton,
   WhatsappShareButton,
@@ -16,36 +17,65 @@ import {
   EmailShareButton,
   FacebookIcon,
 } from "react-share";
-
+var id = "";
 
 const ApplyLoan = () => {
   const shareUrl = "www.creditsin.com/form ";
   const [profile, setProfile] = useState({});
   const [lstatus, setLstatus] = useState(false);
-  const [sharemodal , setSharemodal] = useState(false);
-  const [productmodal , setProductmodal] = useState(false);
-  
+  const [sharemodal, setSharemodal] = useState(false);
+  const [productmodal, setProductmodal] = useState(false);
+  const [userKycData, setUserKycData] = useState({});
+  const [userEmpDetailsData, setUserEmpDetailsData] = useState({});
+  const [userProfileData, setUserProfileData] = useState({});
+  const [profileImage ,setProfileImage] = useState();
 
-  const ShareModal = () =>{
-    console.log('shareModal')
-    setProductmodal(false)
-    setSharemodal(!sharemodal)
-      
-  }
-  const ProductModals = ()=>{
-    console.log('productModalApplyLoanr')
-    setSharemodal(false)
-    setProductmodal(true)
-    console.log(productmodal , "productMOdal")
-  }
+  const ShareModal = () => {
+    console.log("shareModal");
+    setProductmodal(false);
+    setSharemodal(!sharemodal);
+  };
+  const ProductModals = () => {
+    console.log("productModalApplyLoanr");
+    setSharemodal(false);
+    setProductmodal(true);
+    console.log(productmodal, "productMOdal");
+  };
   const LoanFunc = () => {
     setLstatus(!lstatus);
   };
+  const getApplyLoan = async () => {
+  
+    console.log(profile._id, "dddddddddddd");
+    const res = await ApplyLoans(profile._id);
+    if (res.status === 1) {
+      setUserKycData(res.data.kycData[0]);
+      console.log(res.data.kycData, "kycData");
+
+      setUserEmpDetailsData(res.data.empDetailsData[0]);
+      setUserProfileData(res.data.profileData[0]);
+    }
+  };
+  console.log(
+    "userkyc",
+    userKycData,
+    "useremployeeDetails",
+    userEmpDetailsData,
+    "userProfile",
+    userProfileData
+  );
 
   useEffect(() => {
-    callUserMainPage();
+   if(!profile._id){
+     callUserMainPage();
+   }
+
+   else if(profile._id){
+      getApplyLoan();
+      console.log("use efffect")
+   }
     
-  }, []);
+  },[profile._id]);
 
   const history = useHistory();
   const callUserMainPage = async (req, res) => {
@@ -60,19 +90,36 @@ const ApplyLoan = () => {
       });
 
       const data = await res.json();
+      
       console.log(res);
       if (res.status === 401) {
         history.push("/");
       }
       setProfile(data);
+      const Img  = JSON.parse(data.PhotoURL);
+      setProfileImage(Img)
+      id = data._id;
     } catch (err) {
       console.log(err);
     }
   };
 
+  const ImageUploader = async (e) =>{
+    console.log(e.target.files[0],"gggg")
+    const formdata = new FormData();
+    formdata.append('profileImag', e.target.files[0])
+   
+    const response = await axios.post('/user/propfileImgUpdate',formdata)
+    if(response.status === 1){
+      alert(response.message)
+    }else if(response.status === 0){
+      alert(response.message)
+    }
+  }
 
   return (
     <div>
+      {console.log(profileImage?.filePath, profile , "Profileeeeeee")}
       <section>
         <div className="home-content">
           <div className="container">
@@ -81,39 +128,42 @@ const ApplyLoan = () => {
                 <div className="col-sm-9 ">
                   <div className="row">
                     <div className="overview-boxes">
-                    <div className=" col-sm-4">
-                      
-                      <Card style={{ width: '19rem' }}>
- <Card.Img variant="top" src=" images/1.png" style={{height: '180px' }}/>
- <Card.Body>
-   {/* <Card.Title>Card Title</Card.Title> */}
-   
-   <Button className="btn-3" onClick={ProductModals}>Apply </Button>
- </Card.Body>
-</Card>
-                     </div>
-                     <div className=" col-sm-4">
-                      
-                      <Card style={{ width: '19rem' }}>
- <Card.Img variant="top" src=" images/2.png" style={{height: '180px' }} />
- <Card.Body>
-   {/* <Card.Title>Card Title</Card.Title> */}
-   
-   <Button className="btn-3" onClick={ProductModals}>Apply </Button>
- </Card.Body>
-</Card>
-                     </div>
-                     <div className=" col-sm-4">
-                      
-                      <Card style={{ width: '19rem' }}>
- <Card.Img variant="top" src=" images/3.png" style={{height: '180px' }} />
- <Card.Body>
-   {/* <Card.Title>Card Title</Card.Title> */}
-   
-   <Button className="btn-3" onClick={ProductModals}>Apply </Button>
- </Card.Body>
-</Card>
-                     </div>
+                      <div className=" col-sm-4">
+                        <Card style={{ width: "19rem" }}>
+                          <Card.Img variant="top" src=" images/1.png" />
+                          <Card.Body>
+                            {/* <Card.Title>Card Title</Card.Title> */}
+
+                            <Button className="btn-3" onClick={ProductModals}>
+                              Apply{" "}
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </div>
+                      <div className=" col-sm-4">
+                        <Card style={{ width: "19rem" }}>
+                          <Card.Img variant="top" src=" images/2.png" />
+                          <Card.Body>
+                            {/* <Card.Title>Card Title</Card.Title> */}
+
+                            <Button className="btn-3" onClick={ProductModals}>
+                              Apply{" "}
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </div>
+                      <div className=" col-sm-4">
+                        <Card style={{ width: "19rem" }}>
+                          <Card.Img variant="top" src=" images/3.png" />
+                          <Card.Body>
+                            {/* <Card.Title>Card Title</Card.Title> */}
+
+                            <Button className="btn-3" onClick={ProductModals}>
+                              Apply{" "}
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </div>
 
                       {/* <div className="box col-sm-4">
                         <img
@@ -126,40 +176,42 @@ const ApplyLoan = () => {
                   <div className="row">
                     <div className="overview-boxes">
                       <div className=" col-sm-4">
-                      
-                       <Card style={{ width: '19rem' }}>
-  <Card.Img variant="top" src=" images/4.png" style={{height: '180px' }} />
-  <Card.Body>
-    {/* <Card.Title>Card Title</Card.Title> */}
-    
-    <Button className="btn-3" onClick={ProductModals}>Apply </Button>
-  </Card.Body>
-</Card>
+                        <Card style={{ width: "19rem" }}>
+                          <Card.Img variant="top" src=" images/4.png" />
+                          <Card.Body>
+                            {/* <Card.Title>Card Title</Card.Title> */}
+
+                            <Button className="btn-3" onClick={ProductModals}>
+                              Apply{" "}
+                            </Button>
+                          </Card.Body>
+                        </Card>
                       </div>
 
                       <div className=" col-sm-4">
-                      
-                       <Card style={{ width: '19rem' }}>
-  <Card.Img variant="top" src=" images/5.png" style={{height: '180px' }} />
-  <Card.Body>
-    {/* <Card.Title>Card Title</Card.Title> */}
-    
-    <Button className="btn-3" onClick={ProductModals}>Apply </Button>
-  </Card.Body>
-</Card>
+                        <Card style={{ width: "19rem" }}>
+                          <Card.Img variant="top" src=" images/5.png" />
+                          <Card.Body>
+                            {/* <Card.Title>Card Title</Card.Title> */}
+
+                            <Button className="btn-3" onClick={ProductModals}>
+                              Apply{" "}
+                            </Button>
+                          </Card.Body>
+                        </Card>
                       </div>
                       <div className=" col-sm-4">
-                      
-                      <Card style={{ width: '19rem' }}>
- <Card.Img variant="top" src=" images/6.png" style={{height: '180px' }}/>
- <Card.Body>
-   {/* <Card.Title>Card Title</Card.Title> */}
-   
-   <Button className="btn-3" onClick={ProductModals}>Apply </Button>
- </Card.Body>
-</Card>
-                     </div>
+                        <Card style={{ width: "19rem" }}>
+                          <Card.Img variant="top" src=" images/6.png" />
+                          <Card.Body>
+                            {/* <Card.Title>Card Title</Card.Title> */}
 
+                            <Button className="btn-3" onClick={ProductModals}>
+                              Apply{" "}
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </div>
                     </div>
                   </div>
                   {/* <div className="row pb-5">
@@ -183,7 +235,17 @@ const ApplyLoan = () => {
                       >
                         Apply For Loans
                       </div>
-                      {lstatus ? <LoanForm /> : ""}
+                      {lstatus ? (
+                        <LoanForm
+                          userProfileData={userProfileData}
+                          userKycData={userKycData}
+                          userEmpDetailsData={userEmpDetailsData}
+                          getApplyLoan = {getApplyLoan}
+                          LoanFunc={LoanFunc}
+                        />
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                   <div className="row pb-5">
@@ -191,107 +253,41 @@ const ApplyLoan = () => {
                       <Emi />
                     </div>
                   </div>
-
-
-
-                  
                   <div className="row pb-5">
                     <div className="recent-sales box">
                       <Apply />
                     </div>
                   </div>
-              
-                  
+
                   <div className="row">
                     <div className="recent-sales box">
                       <Bank />
                     </div>
                   </div>
                 </div>
-                
-                
+
                 <div className="top-sales box profile-card col-sm-3">
-                <div className="col">
-                    
-                    {/* <div className="row">
-                      <h3>My Referrals</h3>
-                    <div className="col">
-                      <table className="table">
-                        <thead className="title" >
-                          <tr>
-                            <th >S.no.</th>
-                            <th >Name</th>
-                            <th >Email</th></tr>
-                        </thead>
-                        <tbody>
-                          {refralData.map((item , ind)=>{
-                             return(
-                              <>
-                               <tr>
-                            <td>{ind + 1}</td>
-                            <td>{item.Name}</td>
-                             <td>{item.Email}</td> 
-                          </tr>
-                              </>
-                            )
-                          })}
-                         
-                        </tbody>
-                      </table>
-                    
+                  <div className="col">
+                   
                   </div>
-                  
-                    </div> */}
-                    {/* <div className="row">
-                      <h3>Application Table</h3>
-                    <div className="col">
-                      <table className="table">
-                        <thead className="title" >
-                          <tr>
-                            <th >S.no.</th>
-                            <th >Application No.</th>
-                            <th >Status</th></tr>
-                        </thead>
-                        <tbody>
-                          {applicationData.map((item , ind)=>{
-                             return(
-                              <>
-                               <tr>
-                            <td>{ind + 1}</td>
-                            <td>{item.ApplicationNo}</td>
-                             <td>{item.status}</td> 
-                          </tr>
-                              </>
-                            )
-                          })}
-                         
-                        </tbody>
-                      </table>
-                    
-                    </div>
-                  
-                    </div> */}
-                </div>
-                
+
                   <div className="title">Profile</div>
                   <ul className="top-sales-details">
                     <li>
                       <NavLink to="#">
-                        <img
-                          src="images/545.png"
-                          alt=""
-                        />
+                        
+                        <img src={profileImage?.filePath} alt="" />
+                        
                         <span className="profile-name">{profile.Name}</span>
                       </NavLink>
+                      <input type='file' name="profileImage" accept="image/*" onChange={ImageUploader}/>
                     </li>
 
-                    <Button className="btn-3">
-                      {profile.RefralNo}
-                    </Button>
+                    <Button className="btn-3">{profile.RefralNo}</Button>
 
                     <FacebookShareButton
                       url={"www.creditsin.com"}
-                      quote=  {"HI " + profile.RefralNo} 
+                      quote={"HI " + profile.RefralNo}
                       style={{ padding: 10 }}
                     >
                       <FacebookIcon size={40} />
@@ -312,11 +308,13 @@ const ApplyLoan = () => {
                     >
                       <WhatsappIcon size={40} />
                     </WhatsappShareButton>
-                    
-   <Button className="btn-3" onClick={ShareModal}>Share Refral </Button>
+
+                    <Button className="btn-3" onClick={ShareModal}>
+                      Share Refral{" "}
+                    </Button>
                     <br />
                     {/* <button type="button" onClick={ProductModals}>Product</button> */}
-                    
+
                     <br />
                     <li>
                       <span className="left-text"> name </span>
@@ -356,7 +354,7 @@ const ApplyLoan = () => {
                     </li>
                   </ul>
                   {/* <button className="btns">Edit</button> */}
-                  
+
                   <div className="col">
                     <div className="overview-boxes">
                       <div className="box1 col-sm-12">
@@ -374,13 +372,27 @@ const ApplyLoan = () => {
           </div>
         </div>
       </section>
-       {console.log(profile.RefralNo,'ccc', productmodal)}
-      {sharemodal ? <ShareModalc sharemodal={sharemodal} InputValue = "SHAREINPUT" id={profile._id} refral = {profile.RefralNo}/> : ""}
-      {productmodal ? <ProductModal productmodal={productmodal} InputValue = "PRODUCTINPUT" profile={profile}/> : ""}
-      
-      
+      {console.log(profile.RefralNo, "ccc", productmodal)}
+      {sharemodal ? (
+        <ShareModalc
+          sharemodal={sharemodal}
+          InputValue="SHAREINPUT"
+          id={profile._id}
+          refral={profile.RefralNo}
+        />
+      ) : (
+        ""
+      )}
+      {productmodal ? (
+        <ProductModal
+          productmodal={productmodal}
+          InputValue="PRODUCTINPUT"
+          profile={profile}
+        />
+      ) : (
+        ""
+      )}
     </div>
-    
   );
 };
 

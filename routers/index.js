@@ -33,7 +33,7 @@ router.post("/login", async (req, res) => {
       console.log("isMatch", isMatch);
       if (userExist && isMatch) {
         const token = await userExist.generateAuthToken();
-        res.cookie("jwtoken", token,{maxAge: 1800000 , expires: new Date(Date.now() + 300000)});
+       res.cookie("jwtoken", token);
 
         res.status(200).json(userExist);
       } else {
@@ -121,6 +121,7 @@ router.post("/userRegister", async (req, res) => {
 
     const otpFunc = async () => {
       const otpCode = Math.floor(Math.random() * 10000 + 1);
+      console.log(otpCode)
       const otpData = new Otp({
         Email,
         Mobile,
@@ -278,7 +279,7 @@ router.post("/userLogin", async (req, res) => {
           });
         }
         const token = await isExist.generateAuthToken();
-        res.cookie("jwtoken", token,{maxAge: 1800 , expires: new Date(Date.now() + 3000)});
+        res.cookie("jwtoken", token );
 
         return res.send({
           status: 1,
@@ -393,14 +394,17 @@ router.post('/mobile/passUpdate' ,  async(req,res)=>{
   const {UserId , Password} = req.body;
 
    console.log(UserId , Password)
-  const isMatch = await User.findOne({UserId});
+  
+  const isMatch = await User.updateOne({UserId},{$set:{Passsword1: Password}},{upsert: true});
   if(isMatch){
-    isMatch.Password = Password ;
-     const updted = isMatch.save();
-     console.log(updted)
-     if(updted){
-       res.json("password updated")
-     }
+    
+    const fin = await User.findOne({UserId})
+     console.log('updated')
+     res.send({
+       status : 1,
+       message : "password updated",
+       data : fin
+     })
      
 
   }

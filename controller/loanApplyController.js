@@ -1,25 +1,20 @@
-const Application = require('../models/application');
-const EmploymentDetails = require('../models/employmentDetails');
-const Profile = require('../models/profile');
-const KYC = require('../models/kycDetails');
+const Application = require("../models/application");
+const EmploymentDetails = require("../models/employmentDetails");
+const Profile = require("../models/profile");
+const KYC = require("../models/kycDetails");
 
 exports.getApplicationList = async (req, res, next) => {
-  console.log('4');
-  console.log('kycDetails req', req);
-  console.log('req.files', req.files);
+  console.log("4");
+  console.log("kycDetails req", req);
+  console.log("req.files", req.files);
 
   const fileArray = [];
-  const filesArray = [   
-    req.files.adhaar[0],
-    // req.files.pan[0],
-    // req.files.photo[0],
-    // req.files.bankStmt[0],
-  ];
+  const filesArray = [req.files.ITRUpload[0]];
 
-  console.log('aaaaaa fileArray', filesArray);
+  console.log("aaaaaa fileArray", filesArray);
 
   filesArray.forEach((element) => {
-    console.log('aaaaaa element', element);
+    console.log("aaaaaa element", element);
     const file = {
       fileName: element.originalname,
       filePath: element.path,
@@ -28,109 +23,130 @@ exports.getApplicationList = async (req, res, next) => {
     };
     fileArray.push(file);
   });
-  console.log('req.body', req.body);
-  console.log('fileArray', fileArray);
+  console.log("req.body", req.body);
+  console.log("fileArray", fileArray);
+  console.log(
+    req.body.FirstName,
+
+    req.body.FatherName,
+    req.body.DOB,
+
+    req.body.Mobile,
+    req.body.CurrentAddress,
+
+    req.body.State,
+    req.body.City,
+    req.body.ZIP,
+    req.body.FirmName,
+
+    req.body.TotalBusinessExperience,
+    req.body.CurrentYearIncome,
+    req.body.LastYearIncome,
+    req.body.AdhaarNo,
+    req.body.GST,
+    req.body.PanNo,
+    req.body.ActiveLoanAmount,
+    req.body.Emi,
+    req.body.loanPurpose,
+    req.body.loanAmount,
+    req.body.profession
+  );
 
   if (
-    (!req.body.FirstName ||
-      // !req.body.LastName ||
-      !req.body.FatherName ||
-      !req.body.DOB ||
-      // !req.body.Email ||
-      !req.body.Mobile ||
-      !req.body.CurrentAddress ||
-      !req.body.CurrentAddress ||
-      !req.body.State ||
-      !req.body.City ||
-      !req.body.ZIP ||
-      !req.body.CompanyName ||
-      // !req.body.Designation ||
-      // !req.body.CurrentCompanyExperience ||
-      !req.body.TotalExperience ||
-      !req.body.MonthlyIncome ||
-      // !req.body.AnnualIncome ||
-      !req.body.AdhaarNo ||
-      // !fileArray[0] ||
-      !req.body.PanNo ||
-      // !fileArray[1] ||
-      // !req.body.BankName ||
-      // !req.body.AccountNo ||
-      // !req.body.IFSCcode ||
-      // !fileArray[2] ||
-      // !fileArray[3] ||
-      !req.body.LoanAmount,
-      !req.body.loanPurpose,
-      !req.body.loanAmount,
-      !req.body.profession)
+    !req.body.FirstName ||
+    !req.body.FatherName ||
+    !req.body.DOB ||
+    !req.body.Mobile ||
+    !req.body.CurrentAddress ||
+    !req.body.State ||
+    !req.body.City ||
+    !req.body.ZIP ||
+    !req.body.AdhaarNo ||
+    !req.body.PanNo ||
+    !req.body.loanPurpose ||
+    !req.body.loanAmount ||
+    !req.body.profession ||
+    !req.body.FirmName ||
+    !req.body.TotalBusinessExperience ||
+    !req.body.CurrentYearIncome ||
+    !req.body.LastYearIncome ||
+    !req.body.GST 
+ 
   ) {
-    res
-      .status(401)
-      .json('server is not getting complete data please fill carefully');
+    res.send({
+      status: 401,
+      message: "server is not getting complete data please fill carefully",
+    });
   } else {
     console.log(
-      'else',
+      "else",
       req.body.loanPurpose,
       req.body.loanAmount,
       req.body.profession
     );
     // req.rootUser = {};
     // req.rootUser.UserId = '620fe9f80c762c22263a6b42';
-    console.log('userId:', req.UserId);
-    console.log('aa:', req.rootUser);
+    console.log("userId:", req.UserId);
+    console.log("aa:", req.rootUser);
+    const profile = await Profile.findOneAndUpdate(
+      { UserId: req.userId },
+      {
+        UserId: req.userId,
+        FirstName: req.body.FirstName,
+       
+        FatherName: req.body.FatherName,
+        DOB: req.body.DOB,
+        
+        Mobile: req.body.Mobile,
+        
+        CurrentAddress: req.body.CurrentAddress,
+        
+        State: req.body.State,
+        City: req.body.City,
+        ZIP: req.body.ZIP,
+      },
+      { upsert: true }
+    );
 
-    const profile = new Profile({
-      UserId: req.userId,
-      FirstName: req.body.FirstName,
-      // LastName: req.body.LastName,
-      FatherName: req.body.FatherName,
-      DOB: req.body.DOB,
-      // Email: req.body.Email,
-      Mobile: req.body.Mobile,
-      CurrentAddress: req.body.CurrentAddress,
-      // CurrentAddress2: req.body.CurrentAddress,
-      State: req.body.State,
-      City: req.body.City,
-      ZIP: req.body.ZIP,
-    });
+    console.log("profile:", profile);
+    const details = await EmploymentDetails.findOneAndUpdate(
+      { UserId: req.userId },
+      {
+        UserId: req.userId,
+        FirmName: req.body.FirmName,
+        TotalBusinessExperience: req.body.TotalBusinessExperience,
+        CurrentYearIncome: req.body.CurrentYearIncome,
+        LastYearIncome: req.body.LastYearIncome,
+        GST: req.body.GST,
+        ITRUpload: req.body.ITRUpload,
+        ActiveLoanAmount : req.body.ActiveLoanAmount,
+        Emi: req.body.Emi
+      },
+      { upsert: true }
+    );
 
-    console.log('profile:', profile);
-    const details = new EmploymentDetails({
-      UserId: req.userId,
-      CompanyName: req.body.CompanyName,
-      // Designation: req.body.Designation,
-      // CurrentCompanyExperience: req.body.CurrentCompanyExperience,
-      TotalExperience: req.body.TotalExperience,
-      MonthlyIncome: req.body.MonthlyIncome,
-      // AnnualIncome: req.body.AnnualIncome,
-      Gst: req.body.GST,
-      Lyst: req.body.LYST
-    });
-
-    const kyc = new KYC({
-      UserId: req.userId,
-      AdhaarNo: req.body.AdhaarNo,
-      // Adhaar: JSON.stringify(fileArray[0]),
-      PanNo: req.body.PanNo,
-      // Pan: JSON.stringify(fileArray[1]),
-      // BankName: req.body.BankName,
-      // AccountNo: req.body.AccountNo,
-      // IFSCcode: req.body.IFSCcode,
-      // Photo: JSON.stringify(fileArray[2]),
-      // BankStmt: JSON.stringify(fileArray[3]),
-      ActiveLoanAmount: req.body.LoanAmount,
-    });
+    const kyc = await KYC.findOneAndUpdate(
+      { UserId: req.userId },
+      {
+        UserId: req.userId,
+        AdhaarNo: req.body.AdhaarNo,
+        PanNo: req.body.PanNo,
+        ActiveLoanAmount: req.body.LoanAmount,
+      },
+      { upsert: true }
+    );
     let count = await Application.collection.count();
     const counter = `AP${count}CRED`;
 
-    console.log('profile', profile);
-    console.log('details', details);
-    console.log('kyc', kyc);
+    console.log("profile", profile);
+    console.log("details", details);
+    console.log("kyc", kyc);
 
     try {
       const profileSave = await profile.save();
       const detailsSave = await details.save();
       const kycSave = await kyc.save();
-      console.log('aaa', profileSave, detailsSave, kycSave);
+      console.log("aaa", profileSave, detailsSave, kycSave);
 
       const applicaiton = new Application({
         UserId: req.userId,
@@ -141,43 +157,244 @@ exports.getApplicationList = async (req, res, next) => {
         Amount: req.body.loanAmount,
         Profession: req.body.profession,
         ApplicationNo: counter,
-        status: 'pending',
+        status: "pending",
       });
-      console.log('applicaiton', applicaiton);
+      console.log("applicaiton", applicaiton);
 
       const applicationSave = await applicaiton.save();
-      console.log('aa applicaiton', applicationSave);
+      console.log("aa applicaiton", applicationSave);
 
       if (profileSave && detailsSave && kycSave && applicationSave) {
+        console.log(profileSave, detailsSave, kycSave, applicationSave);
         return res.send({
           status: 200,
-
-
-
-
-
-          message: `Your Application Submitted successfully and Your application no. is ${counter}`,
+          message: `Your Application Submitted successfully and You application no. is ${counter}`,
         });
       } else {
+        console.log(profileSave, detailsSave, kycSave, applicationSave);
         return res.send({
           status: 401,
-          message: 'any technical problems please try again',
+          message: "any technical problems please try again",
         });
       }
     } catch (err) {
-      console.log('err', err);
+      console.log("err", err);
     }
   }
 };
 
 const fileSizeFormatter = (bytes, decimal) => {
   if (bytes === 0) {
-    return '0 Byte';
+    return "0 Byte";
   }
   const dm = decimal || 2;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'YB', 'ZB'];
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "YB", "ZB"];
   const index = Math.floor(Math.log(bytes) / Math.log(1000));
   return (
-    parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + '-' + sizes[index]
+    parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + "-" + sizes[index]
   );
+};
+
+exports.getApplicationLists = async (req, res, next) => {
+  console.log("4");
+  console.log("kycDetail req", req.body.FirstName);
+ 
+  if (
+    (!req.body.FirstName ||
+      !req.body.FatherName ||
+      !req.body.DOB ||
+      !req.body.Mobile ||
+      !req.body.CurrentAddress ||
+      !req.body.State ||
+      !req.body.City ||
+      !req.body.ZIP ||
+      !req.body.CompanyName ||
+      !req.body.TotalExperience ||
+      !req.body.MonthlyIncome ||
+      !req.body.AdhaarNo ||
+      !req.body.PanNo ||
+      !req.body.loanPurpose,
+    !req.body.loanAmount,
+    !req.body.profession)
+  ) {
+    console.log(
+      "status 401",
+      req.body.FirstName,
+
+      req.body.FatherName,
+      req.body.DOB,
+
+      req.body.Mobile,
+      req.body.CurrentAddress,
+
+      req.body.State,
+      req.body.City,
+      req.body.ZIP,
+      req.body.ActiveLoanAmount,
+      req.body.Emi,
+      req.body.CompanyName,
+
+      req.body.TotalExperience,
+      req.body.MonthlyIncome,
+
+      req.body.AdhaarNo,
+
+      req.body.PanNo,
+
+      req.body.loanPurpose,
+      req.body.loanAmount,
+      req.body.profession
+    );
+    res
+      .status(401)
+      .json("server is not getting complete data please fill carefully");
+  } else {
+    console.log(
+      "else",
+      req.body.loanPurpose,
+      req.body.loanAmount,
+      req.body.profession
+    );
+
+    console.log("userId:", req.userId);
+    console.log("aa:", req.rootUser);
+    const profile = await Profile.findOneAndUpdate(
+      { UserId: req.userId },
+      {
+        UserId: req.userId,
+        FirstName: req.body.FirstName,
+
+        FatherName: req.body.FatherName,
+        DOB: req.body.DOB,
+
+        Mobile: req.body.Mobile,
+        CurrentAddress: req.body.CurrentAddress,
+
+        State: req.body.State,
+        City: req.body.City,
+        ZIP: req.body.ZIP,
+      },
+      { upsert: true }
+    );
+
+    console.log("profile:", profile);
+    const details = await EmploymentDetails.findOneAndUpdate(
+      { UserId: req.userId },
+      {
+        UserId: req.userId,
+        CompanyName: req.body.CompanyName,
+
+        TotalExperience: req.body.TotalExperience,
+        MonthlyIncome: req.body.MonthlyIncome,
+        ActiveLoanAmount: req.body.ActiveLoanAmount,
+        Emi : req.body.Emi,
+      },
+      { upsert: true }
+    );
+
+    const kyc = await KYC.findOneAndUpdate(
+      { UserId: req.userId },
+      {
+        UserId: req.userId,
+        AdhaarNo: req.body.AdhaarNo,
+        PanNo: req.body.PanNo,
+
+        ActiveLoanAmount: req.body.LoanAmount,
+      },
+      { upsert: true }
+    );
+    let count = await Application.collection.count();
+    const counter = `AP${count}CRED`;
+
+    console.log("profile", profile);
+    console.log("details", details);
+    console.log("kyc", kyc);
+
+    try {
+      const profileSave = await profile.save();
+      const detailsSave = await details.save();
+      const kycSave = await kyc.save();
+      console.log("aaa", profileSave, detailsSave, kycSave);
+
+      const applicaiton = new Application({
+        UserId: req.userId,
+        ProfileId: profileSave.id,
+        EploymentId: detailsSave.id,
+        KycId: kycSave.id,
+        Purpose: req.body.loanPurpose,
+        Amount: req.body.loanAmount,
+        Profession: req.body.profession,
+        ApplicationNo: counter,
+        status: "pending",
+      });
+      console.log("applicaiton", applicaiton);
+
+      const applicationSave = await applicaiton.save();
+      console.log("aa applicaiton", applicationSave);
+
+      if (profileSave && detailsSave && kycSave && applicationSave) {
+        return res.send({
+          status: 200,
+          message: `Your Application Submitted successfully and You application no. is ${counter}`,
+        });
+      } else {
+        return res.send({
+          status: 401,
+          message: "any technical problems please try again",
+        });
+      }
+    } catch (err) {
+      console.log("err", err);
+    }
+  }
+};
+
+exports.getLoanFormData = async (req, res, next) => {
+  console.log("LoanFormData");
+  const { id } = req.params;
+  try {
+    console.log(id);
+    var employmentDetails = await EmploymentDetails.find({ UserId: id });
+
+    var profile = await Profile.find({ UserId: id });
+    var kyc = await KYC.find({ UserId: id });
+    console.log(
+      "employmentDetails",
+      employmentDetails,
+      "profie",
+      profile,
+      "kyc",
+      kyc
+    );
+
+    if (
+      employmentDetails &&
+      employmentDetails.length > 0 &&
+      profile &&
+      profile.length > 0 &&
+      kyc &&
+      kyc.length > 0
+    ) {
+      return res.send({
+        status: 1,
+        message: "success",
+        data: {
+          kycData: kyc,
+          empDetailsData: employmentDetails,
+          profileData: profile,
+        },
+      });
+    } else {
+      return res.send({
+        status: 0,
+        message: "no_record_found",
+      });
+    }
+  } catch (error) {
+    console.log("error", error);
+    return res.send({
+      status: 0,
+      message: "something_went_wrong",
+    });
+  }
 };

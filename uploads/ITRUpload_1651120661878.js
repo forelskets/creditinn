@@ -74,7 +74,7 @@ export default function Services() {
     <Page title="Services | CreditIN">
       <Container>
            <MaterialTable 
-           title ="Service "
+           title ="Service Table"
            columns = {columns}
            data = {data}
            options={{actionsColumnIndex : -1 , addRowPosition: "first" , filtering: true , exportButton: true}}

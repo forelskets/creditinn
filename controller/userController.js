@@ -252,4 +252,100 @@ exports.getgenerateOtp =  async (req , res, next)=>{
   }
 }
 
+exports.PropfileImgUpdate = async (req, res, next)=>{
+  console.log('4');
+  console.log('profileImageUploads req', req);
+  console.log('req.files', req.files);
+  var img_path = req.files.profileImag[0].path;
+  var image_path = img_path.slice(14,);
+  console.log(image_path , "pathhhhhh")
+  
+  const file = {
+    fileName: req.files.profileImag[0].originalname,
+    filePath: image_path,
+    fileType: req.files.profileImag[0].mimetype,
+  }
+  
+  const update = await User.findOneAndUpdate({_id : req.userId},{PhotoURL: JSON.stringify(file)},{upsert : true}) 
+  console.log(update)
+  if(update){
+    res.send({
+      status: 1,
+      message: "Image updated successfully"
+    })
+  }else{
+    res.send({
+      status: 0,
+      message: "Image not updated "
+    })
+  }
+
+
+}
+
+exports.PropfileImgUpdateMobile = async (req, res, next)=>{
+  const id = req.params.id
+  console.log('4');
+  console.log('profileImageUploads req', req);
+  console.log('req.files', req.files);
+  var img_path = req.files.profileImag[0].path;
+  var image_path = img_path.slice(14,);
+  console.log(image_path , "pathhhhhh")
+  
+  const file = {
+    fileName: req.files.profileImag[0].originalname,
+    filePath: image_path,
+    fileType: req.files.profileImag[0].mimetype,
+  }
+  
+  const update = await User.findOneAndUpdate({_id : id},{PhotoURL: JSON.stringify(file)},{upsert : true}) 
+  console.log(update)
+  if(update){
+    res.send({
+      status: 1,
+      message: "Image updated successfully"
+    })
+  }else{
+    res.send({
+      status: 0,
+      message: "Image not updated "
+    })
+  }
+}
+
+
+
+module.exports.retrieveUser = async (req, res, next) => {
+  const { Email } = req.params;
+  const { Password } = req.body;
+  let updatedFields = {};
+
+  try {
+    const user = await User.findOne(
+      { Email },
+      'UserId Name Email Password'
+    );
+    updatedFields = user;
+    
+    if (!user) {
+      return res
+        .status(404)
+        .send({ error: 'Could not find a user with that username.' });
+    }
+    if(user){
+      user.Password = Password;
+      const updatedUser = await user.save();
+      
+      return res.send({user})
+    }
+   
+    
+    return res.send({
+      user
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 

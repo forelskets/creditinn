@@ -33,9 +33,21 @@ ApplyLoanrouter.post(
   '/kycDetails',
   auth,
   upload.fields([
-    { name: 'adhaar' },
+    { name: 'ITRUpload' },
   ]),
   loanApplyController.getApplicationList
+);
+ApplyLoanrouter.get(
+  '/getLoanFormData/:id',
+  auth,
+  loanApplyController.getLoanFormData
+)
+
+ApplyLoanrouter.post(
+  '/kycDetailSalried',
+  auth,
+  
+  loanApplyController.getApplicationLists
 );
 
 // ApplyLoanrouter.post(

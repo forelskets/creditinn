@@ -7,29 +7,42 @@ const employmentSchema = new mongoose.Schema(
     },
     CompanyName: {
       type: String,
-      required: true,
-    },
-    Gst: {
-      type: String,
-      // required: true,
-    },
-    Lyst: {
-      type: String,
-      // required: true,
+      
     },
     TotalExperience: {
       type: String,
-      required: true,
+      
     },
     MonthlyIncome: {
       type: String,
-      required: true,
+      
     },
-    // AnnualIncome: {
-    //   type: String,
-    //   required: true,
-    // },
+    FirmName: {
+      type: String
+    },
+    TotalBusinessExperience:{
+      type: String
+    },
+    CurrentYearIncome:{
+      type: String
+    },
+    LastYearIncome:{
+      type: String
+    },
+    GST: {
+      type: String
+    },
+    ITRUpload:{
+      type: String
+    },
+    ActiveLoanAmount:{
+      type: String
+    },
+    Emi:{
+      type: String
+    }
   },
+   
   { timestamps: true }
 );
 

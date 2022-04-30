@@ -15,6 +15,7 @@ const UserNavbar = () => {
   const [applicationMessage, setApplicationMessage] = useState("");
   const [refralData, setRefralData] = useState([]);
   const [applicationData, setApplicationData] = useState([]);
+  const [profileImage , setProfileImage] = useState();
   const profileFunc = async () => {
     const response = await fetch("/profile", {
       method: "GET",
@@ -25,7 +26,9 @@ const UserNavbar = () => {
       credentials: "include",
     });
     const data = await response.json();
+    const profileImg = JSON.parse(data.PhotoURL)
     setProfile(data);
+    setProfileImage(profileImg)
   };
   const logOutFunc = async () => {
     const response = await fetch("/userLogout", {
@@ -100,7 +103,7 @@ const UserNavbar = () => {
         </div>
         <div className="dropdown">
           <div className="profile-details">
-            <img src="images/545.png" alt="" />
+            <img src={profileImage?.filePath} alt="" />
 
             <span
               className="admin_name"

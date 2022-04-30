@@ -21,7 +21,8 @@
     "node-fetch": "^3.2.3",
     "nodemailer": "^6.7.2",
     "referral-code-generator": "^1.0.8",
-    "referral-codes": "^1.0.1"
+    "referral-codes": "^1.0.1",
+    "sockjs": "^0.3.24"
   },
   "repository": {
     "type": "git",

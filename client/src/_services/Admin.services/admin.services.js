@@ -5,8 +5,10 @@ export const service = async (obj) => {
     return res
 }
 
-export const AllService = async (obj) => {
-    let res =await Api('GET', '/service', obj)
+export const AllService = async (search ,obj ) => {
+    console.log(search , "allservice search");
+    let res =await Api('GET', `/service?${search}`, obj)
+    console.log(search , "allservice search");
     console.log("res",res)
     return res
 }
@@ -61,6 +63,12 @@ export const ShareRefralDataSave = async (id,obj) => {
 
 export const productDataSave = async (id,obj) => {
     let res =await Api('POST', `/user/productDataSave/${id}`, obj)
+    console.log("res",res)
+    return res
+}
+
+export const ApplyLoans = async(id , obj) =>{
+    let res = await Api("GET" , `/getLoanFormData/${id}` , obj)
     console.log("res",res)
     return res
 }

@@ -11,6 +11,18 @@ export const AllService = async (obj) => {
     return res
 }
 
+export const Updateservice = async (id , obj) => {
+    let res =await Api('PUT', `/service/${id}`, obj)
+    console.log("res",res)
+    return res
+}
+
+export const Deleteservice = async (id , obj) => {
+    let res =await Api('DELETE', `/service/${id}`, obj)
+    console.log("res",res)
+    return res
+}
+
 export const createBank = async (obj) => {
     let res =await Api('POST', '/bank', obj)
     console.log("res",res)
