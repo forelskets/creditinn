@@ -267,7 +267,7 @@ exports.PropfileImgUpdate = async (req, res, next)=>{
   }
   
   const update = await User.findOneAndUpdate({_id : req.userId},{PhotoURL: JSON.stringify(file)},{upsert : true}) 
-  console.log(update)
+  console.log("updates",update,"update")
   if(update){
     res.send({
       status: 1,
@@ -299,7 +299,7 @@ exports.PropfileImgUpdateMobile = async (req, res, next)=>{
   }
   
   const update = await User.findOneAndUpdate({_id : id},{PhotoURL: JSON.stringify(file)},{upsert : true}) 
-  console.log(update)
+  
   if(update){
     res.send({
       status: 1,
@@ -312,40 +312,5 @@ exports.PropfileImgUpdateMobile = async (req, res, next)=>{
     })
   }
 }
-
-
-
-module.exports.retrieveUser = async (req, res, next) => {
-  const { Email } = req.params;
-  const { Password } = req.body;
-  let updatedFields = {};
-
-  try {
-    const user = await User.findOne(
-      { Email },
-      'UserId Name Email Password'
-    );
-    updatedFields = user;
-    
-    if (!user) {
-      return res
-        .status(404)
-        .send({ error: 'Could not find a user with that username.' });
-    }
-    if(user){
-      user.Password = Password;
-      const updatedUser = await user.save();
-      
-      return res.send({user})
-    }
-   
-    
-    return res.send({
-      user
-    });
-  } catch (err) {
-    next(err);
-  }
-};
 
 

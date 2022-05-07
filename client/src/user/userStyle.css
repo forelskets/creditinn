@@ -331,7 +331,7 @@ nav .profile-details i {
   color: #333;
 }
 .sales-boxes .top-sales li .left-text {
-  font-size: 17px;
+  font-size: 14px;
   text-transform: capitalize;
   margin: 2px 0px;
   font-weight: 500;
@@ -519,4 +519,20 @@ nav.recent-sales-box-nav {
   .profile-card {
     position: relative;
   }
+}
+
+.select-wrapper {
+  background: url(https://th.bing.com/th/id/OIP.FwS6Ni29xqywQqGEZl8USwHaHa?w=210&h=210&c=7&r=0&o=5&dpr=1.25&pid=1.7) no-repeat;
+  background-size: cover;
+  display: block;
+  position: relative;
+  width: 33px;
+  height: 26px;
+}
+#image_src {
+  width: 26px;
+  height: 26px;
+  margin-right: 100px;
+  opacity: 0;
+  filter: alpha(opacity=0); /* IE 5-7 */
 }

@@ -147,14 +147,12 @@ exports.updateBank = async (req, res, next) => {
 exports.deleteBank = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const result = await Bank.findOne({ where: { id: id } });
+    const result = await Bank.findByIdAndDelete(id);
     if (result) {
-      await result.update({ deleted: 1 });
-
       return res.send({
         status: 1,
-        message: 'deleted',
-      });
+        message: 'deleted'
+      })
     } else {
       return res.send({
         status: 0,

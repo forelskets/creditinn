@@ -1,6 +1,5 @@
 import React from 'react';
 import './userStyle.css';
-// import  './emi.css';
 import ApplyLoan from './ApplyLoan';
 import UserNavbar from './UserNavbar';
 

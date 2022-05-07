@@ -96,8 +96,10 @@ const ApplyLoan = () => {
         history.push("/");
       }
       setProfile(data);
+      if(data.PhotoURL){
       const Img  = JSON.parse(data.PhotoURL);
       setProfileImage(Img)
+      }
       id = data._id;
     } catch (err) {
       console.log(err);
@@ -110,10 +112,12 @@ const ApplyLoan = () => {
     formdata.append('profileImag', e.target.files[0])
    
     const response = await axios.post('/user/propfileImgUpdate',formdata)
-    if(response.status === 1){
-      alert(response.message)
-    }else if(response.status === 0){
-      alert(response.message)
+    console.log(response , "response")
+    if(response.data.status === 1){
+      alert(response.data.message)
+      callUserMainPage();
+    }else if(response.data.status === 0){
+      window.alert(response.data.message)
     }
   }
 
@@ -275,12 +279,16 @@ const ApplyLoan = () => {
                   <ul className="top-sales-details">
                     <li>
                       <NavLink to="#">
+                      
                         
                         <img src={profileImage?.filePath} alt="" />
-                        
+                        {/* <span className="select-wrapper">
+                      <input type='file' id="image_src" name="profileImage"  accept="image/*" onChange={ImageUploader}/>
+                      </span> */}
+                     
+                    
                         <span className="profile-name">{profile.Name}</span>
                       </NavLink>
-                      <input type='file' name="profileImage" accept="image/*" onChange={ImageUploader}/>
                     </li>
 
                     <Button className="btn-3">{profile.RefralNo}</Button>

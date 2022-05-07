@@ -845,6 +845,7 @@ const LoanForm = (props) => {
                           className="form-control"
                           id="mobile"
                           name="mobile"
+                          maxLength="10"
                           value={employeeProfile.mobile}
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
@@ -906,10 +907,11 @@ const LoanForm = (props) => {
                       <div className="form-group col-md-4">
                         <label>Aadhar Card no.</label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           id="adhaarNo"
                           name="adhaarNo"
+                          maxLength="12"
                           placeholder="Adhar Card number"
                           value={employeeProfile.adhaarNo}
                           onChange={ProfileChangeHandler}

@@ -192,7 +192,7 @@ router.post("/sendOtp", async (req, res) => {
   try {
     const { Email } = req.body;
 
-    const result = await User.findOne({ Email, userVerified: 1 });
+    const result = await User.findOne({ Email, userVerified: 0 });
     if (!result) return res.send({ status: 0, message: "user not found" });
     const { Name, Mobile } = result;
     console.log("result", result);
