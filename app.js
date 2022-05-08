@@ -13,7 +13,7 @@ const applicationRouter = require('./routers/application');
 const userRouter = require('./routers/user');
 const supportRouter = require('./routers/support');
 const adminRouter = require('./routers/admin');
-
+const cashAndearningRouter = require('./routers/cashAndearning');
 
 const cors = require('cors');
 
@@ -30,6 +30,7 @@ app.use('/application', applicationRouter);
 app.use('/user', userRouter);
 app.use('/support', supportRouter);
 app.use('/admin', adminRouter);
+app.use('/cashAndearning', cashAndearningRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello server');

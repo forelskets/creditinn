@@ -35,6 +35,18 @@ export const AllBank = async (obj) => {
     return res
 }
 
+export const UpdateBanks = async (id , obj) => {
+    let res =await Api('PUT', `/bank/${id}`, obj)
+    console.log("res",res)
+    return res
+}
+
+export const DeleteBank = async (id , obj) => {
+    let res =await Api('Delete', `/bank/${id}`, obj)
+    console.log("res",res)
+    return res
+}
+
 export const AllBankOffer = async (obj) => {
     let res =await Api('GET', '/bank-offer', obj)
     console.log("res",res)
@@ -55,6 +67,12 @@ export const Applications = async (obj) => {
 
 export const ApplicationsStateChange = async (id,obj) => {
     let res =await Api('PUT', '/application/status/'+id, obj)
+    console.log("res",res)
+    return res
+}
+
+export const allortCashback = async(obj) =>{
+    let res = await Api('POST','/cashAndearning/create', obj)
     console.log("res",res)
     return res
 }

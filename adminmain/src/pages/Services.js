@@ -20,11 +20,7 @@ import { service, AllService , Updateservice ,Deleteservice} from '../_services/
 import toastr from 'toastr';
 // ----------------------------------------------------------------------
 
-const TABLE_HEAD = [
-  { id: 'Service', label: 'Service', alignRight: false },
-  { id: 'Note', label: 'Note', alignRight: false },
-  { id: '' }
-];
+
 
 
 
@@ -74,7 +70,7 @@ export default function Services() {
     <Page title="Services | CreditIN">
       <Container>
            <MaterialTable 
-           title ="Service "
+           title ="Service Table"
            columns = {columns}
            data = {data}
            options={{actionsColumnIndex : -1 , addRowPosition: "first" , filtering: true , exportButton: true}}

@@ -39,8 +39,8 @@ const sidebarConfig = [
   },
 
   {
-    title: 'Share Referals',
-    path: '/dashboard/referal',
+    title: 'Staff',
+    path: '/dashboard/staff',
     icon: getIcon('icon-park-outline:file-staff')
   },
   {

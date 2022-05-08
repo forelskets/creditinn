@@ -6,12 +6,14 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const Bank = require("../models/bankService");
 const BankNote = require("../models/bankOffer");
+const UserTransaction = require("../models/userTransaction")
 const auth = require("../middleware/Authentication");
 const nodemailer = require("nodemailer");
+
 const referralCodes = require("referral-codes");
 const referralCodeGenerator = require('referral-code-generator');
 const { json } = require('express/lib/response');
-
+ // const {CREDIT , DEBIT , CASHBACK , EARNING, AMOUNT} = require('./constant')
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -33,7 +35,7 @@ router.post("/login", async (req, res) => {
       console.log("isMatch", isMatch);
       if (userExist && isMatch) {
         const token = await userExist.generateAuthToken();
-       res.cookie("jwtoken", token);
+        res.cookie("jwtoken", token);
 
         res.status(200).json(userExist);
       } else {
@@ -114,6 +116,16 @@ router.post("/userRegister", async (req, res) => {
     const user = new User(obj);
 
     const addUser = await user.save();
+
+    const cashback = await UserTransaction({
+      userId : addUser._id,
+      TransactionType: "CASHBACK",
+      CreditDebit: "CREDIT",
+      Amount : AMOUNT
+
+    }).save();
+
+    console.log("addUser ,cashback " , addUser , cashback)
     // if (addUser) {
     //   const token = await addUser.generateAuthToken();
     //   res.cookie('jwtoken', token);
@@ -190,12 +202,17 @@ router.post("/userRegister", async (req, res) => {
 
 router.post("/sendOtp", async (req, res) => {
   try {
+    console.log(req.body.Email,"emmmmmmaiiillll")
     const { Email } = req.body;
 
-    const result = await User.findOne({ Email, userVerified: 0 });
+    const result = await User.findOne({ Email, userVerified: 1 });
     if (!result) return res.send({ status: 0, message: "user not found" });
     const { Name, Mobile } = result;
+
     console.log("result", result);
+    
+    console.log(req.body.Email,"emmmmmmaiiillll")
+
 
     const allOtpList = await Otp.find({
       Email,
@@ -279,7 +296,7 @@ router.post("/userLogin", async (req, res) => {
           });
         }
         const token = await isExist.generateAuthToken();
-        res.cookie("jwtoken", token );
+        res.cookie("jwtoken", token,{maxAge: 1800000 , expires: new Date(Date.now() + 300000)});
 
         return res.send({
           status: 1,

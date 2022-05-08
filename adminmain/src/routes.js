@@ -28,7 +28,7 @@ export default function Router() {
         { path: 'bank', element: <Bank /> },
         { path: 'offers', element: <Offer /> },
         { path: 'application', element: <Application /> },
-        { path: 'referal', element: <Staff /> },
+        { path: 'staff', element: <Staff /> },
         { path: 'token', element: <Token /> }
       ]
     },
