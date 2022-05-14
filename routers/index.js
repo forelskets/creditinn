@@ -9,11 +9,11 @@ const BankNote = require("../models/bankOffer");
 const UserTransaction = require("../models/userTransaction")
 const auth = require("../middleware/Authentication");
 const nodemailer = require("nodemailer");
-
+const UserBankDetails = require("../models/userBankDetails")
 const referralCodes = require("referral-codes");
 const referralCodeGenerator = require('referral-code-generator');
 const { json } = require('express/lib/response');
- // const {CREDIT , DEBIT , CASHBACK , EARNING, AMOUNT} = require('./constant')
+  const {CREDIT , DEBIT , CASHBACK , EARNING, AMOUNT} = require('./constant')
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -119,17 +119,19 @@ router.post("/userRegister", async (req, res) => {
 
     const cashback = await UserTransaction({
       userId : addUser._id,
-      TransactionType: "CASHBACK",
-      CreditDebit: "CREDIT",
+      TransactionType: CASHBACK,
+      CreditDebit: CREDIT,
       Amount : AMOUNT
 
     }).save();
 
     console.log("addUser ,cashback " , addUser , cashback)
-    // if (addUser) {
-    //   const token = await addUser.generateAuthToken();
-    //   res.cookie('jwtoken', token);
-    // }
+    const userbankdetails = await UserBankDetails({
+      UserId : addUser._id,
+      Wallet : AMOUNT
+    }).save();
+            console.log(userbankdetails , "userBankDetails")
+
 
     const otpFunc = async () => {
       const otpCode = Math.floor(Math.random() * 10000 + 1);
@@ -296,7 +298,7 @@ router.post("/userLogin", async (req, res) => {
           });
         }
         const token = await isExist.generateAuthToken();
-        res.cookie("jwtoken", token,{maxAge: 1800000 , expires: new Date(Date.now() + 300000)});
+        res.cookie("jwtoken", token);
 
         return res.send({
           status: 1,

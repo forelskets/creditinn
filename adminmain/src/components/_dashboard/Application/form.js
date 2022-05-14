@@ -55,7 +55,7 @@ export default function FormModal(props) {
     if(props?.data?.user?.RefralID === '' || props?.data?.user?.RefralID === undefined ){
        console.log(props.data.user.RefralID , "refralId")
       obj = {
-      userId: props?.data?.user?._id ,TransactionType: "CASHBACK" , CreditDebit: "Credit", Amount: cashback,    
+      userId: props?.data?.user?._id ,TransactionType: "CASHBACK" , CreditDebit: "CREDIT", Amount: cashback,    
       
     }}else{
       console.log(props.data.user.RefralID , "refralId2")
@@ -78,9 +78,10 @@ export default function FormModal(props) {
   }
 
   const callback = () => {
+    
     setCashback("");
     setEarning("");
-   
+    handleClose();
   }
 
  

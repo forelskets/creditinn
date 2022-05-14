@@ -31,8 +31,6 @@ const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
   { id: 'product', label: 'Product', alignRight: false },
   { id: 'mobileno', label: 'MobileNo', alignRight: false },
-  { id: 'refralno', label: 'RefralNo', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
   { id: '' }
 ];
 
@@ -144,20 +142,20 @@ export default function Token() {
   const isUserNotFound = filteredUsers.length === 0;
 
   return (
-    <Page title="User | Minimal-UI">
+    <Page title="Products Enquiry | Creditsin">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Users
+            Products Enquiry
           </Typography>
         </Stack>
          {console.log(filteredUsers,'ffff')}
         <Card>
-          <UserListToolbar
+          {/* <UserListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
-          />
+          /> */}
 
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
@@ -203,11 +201,7 @@ export default function Token() {
                           </TableCell>
                           <TableCell align="left">{Product}</TableCell>
                           <TableCell align="left">{Mobile}</TableCell>
-                          <TableCell align="left">{RefralNo}</TableCell>
-                          <TableCell align="left">{userVerified ? "varified" : "nonVarified"} 
-                            
-                           
-                          </TableCell>
+                          
 
                           <TableCell align="right">
                             <UserMoreMenu />

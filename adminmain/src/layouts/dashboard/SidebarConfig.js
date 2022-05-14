@@ -39,12 +39,22 @@ const sidebarConfig = [
   },
 
   {
-    title: 'Staff',
+    title: 'Share Products ',
     path: '/dashboard/staff',
     icon: getIcon('icon-park-outline:file-staff')
   },
   {
-    title: 'Token',
+    title: 'Transaction',
+    path: '/dashboard/transaction',
+    icon: getIcon('icon-park-outline:file-staff')
+  },
+  {
+    title: 'UserBankDetails',
+    path: '/dashboard/userBankDetails',
+    icon: getIcon('icon-park-outline:file-staff')
+  },
+  {
+    title: 'Products Enquiry',
     path: '/dashboard/token',
     icon: getIcon('ic:outline-token')
   },

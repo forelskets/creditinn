@@ -76,3 +76,15 @@ export const allortCashback = async(obj) =>{
     console.log("res",res)
     return res
 }
+
+export const getTransactionList = async(obj) =>{
+    let res = await Api("GET", "/cashAndearning/getTransactionList", obj)
+    console.log("res" , res)
+    return res
+}
+
+export const getUserBankDetailsList = async(obj) =>{
+    let res = await Api("GET", "/userBankDetails", obj)
+    console.log("res" , res)
+    return res
+}

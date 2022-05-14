@@ -11,7 +11,9 @@ export {
     saveBankOffer,
     Applications,
     ApplicationsStateChange,
-    allortCashback
+    allortCashback,
+    getTransactionList,
+    getUserBankDetailsList
 } from './admin.services'
 
 export {AllUsers , AllRefrals , Products , AdminLogin} from './admin.user'

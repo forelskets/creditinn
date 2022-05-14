@@ -12,7 +12,8 @@ import Offer from './pages/Offer';
 import Staff from './pages/Staff';
 import Application from './pages/Application';
 import Token from './pages/Token';
-
+import Transaction from './pages/Transaction';
+import UserBankDetails from './pages/UserBankDetails';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -29,6 +30,8 @@ export default function Router() {
         { path: 'offers', element: <Offer /> },
         { path: 'application', element: <Application /> },
         { path: 'staff', element: <Staff /> },
+        { path: 'transaction', element: <Transaction /> },
+        { path: 'userBankDetails', element: <UserBankDetails /> },
         { path: 'token', element: <Token /> }
       ]
     },

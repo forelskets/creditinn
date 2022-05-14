@@ -27,15 +27,7 @@ import MaterialTable from 'material-table';
 //  
 // ----------------------------------------------------------------------
 
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
+
 
 
 
@@ -89,7 +81,7 @@ export default function User() {
     { field: 'Amount', title: 'Amount'},
     { field: 'Date', title: 'Date' },
     { field: 'Status', title: 'Status',render : (row)=>  <Status status={row.Status} id={row.Id} ApiUpdate={callEffect} ></Status>},
-    { field: 'Modal', title: 'Modal',render : (row)=>  <FormModal  data = {row} callApi={createCashback}/>}
+    { field: 'Modal', title: 'Modal',render : (row)=> <>{(row?.Status === "Approved") ? (<FormModal  data = {row} callApi={createCashback}/>):""}</>}
    
   ];
 
@@ -98,10 +90,12 @@ export default function User() {
     if(res?.status === 1){
      
     
-      toastr.success("allorted")
+      
       if(callback){
         callback()
+
       }
+      alert("allorted")
     } else{
       if(res?.message)
       toastr.success(res?.message)
