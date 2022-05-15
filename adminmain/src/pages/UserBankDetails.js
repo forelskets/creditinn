@@ -6,7 +6,8 @@ import {getUserBankDetailsList} from '../_services/Admin.services'
 const UserBankDetails = () => {
     const [userbankdetails , setUserbankdetails] = useState([]);
     const columns = [
-        {title:"UserID", field:"UserId"},
+        {title:"Name", field:"Name"},
+        {title:"Email", field:"Email"},
         {title:"BankName", field:"BankName"},
         {title:"IFSCcode", field:"IFSCcode"},
         {title:"AcountNo", field:"AccountNo"},
@@ -18,7 +19,13 @@ const UserBankDetails = () => {
     const getUserBankDetails = async (req , res)=>{
            const result = await getUserBankDetailsList();
            if(result?.status === 1){
-             setUserbankdetails(result?.data)
+             console.log(result?.data , "data")
+             let data = [];
+             result.data.map((item)=>{
+               data.push({Name:item?.UserId?.Name, Email:item?.UserId?.Email, BankName:item?.BankName,IFSCcode:item?.IFSCcode,AccountNo:item?.AccountNo,Wallet:item?.Wallet,AccountHolderName:item?.AccountHolderName})
+             })
+             setUserbankdetails(data)
+               
            }else{
              alert(result?.message)
            }
@@ -28,7 +35,7 @@ const UserBankDetails = () => {
        getUserBankDetails();
     },[])
   return (
-    <Page title="UserBankDetails | CreditIN">
+    <Page title="UserBankDetails | CreditsIN">
         <Container>
             <MaterialTable
             title="UserBankDetails"

@@ -4,6 +4,7 @@ exports.getUserBankDetails = async (req , res , next)=>{
     console.log("getUserBankDetails");
     try{
         var result = await UserBankDetails.find({})
+        .populate(['UserId']).sort({_id:"asc"})
         console.log(result, "result")
         if(result && result.length > 0){
             return res.send({
