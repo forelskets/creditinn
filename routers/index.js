@@ -121,7 +121,8 @@ router.post("/userRegister", async (req, res) => {
       userId : addUser._id,
       TransactionType: CASHBACK,
       CreditDebit: CREDIT,
-      Amount : AMOUNT
+      Amount : AMOUNT,
+      TransactionWallet : AMOUNT
 
     }).save();
 
@@ -281,7 +282,7 @@ router.post("/userLogin", async (req, res) => {
   console.log(req.body.email, req.body.password);
   const { email, password } = req.body;
   if (password && email) {
-    const isExist = await User.findOne({ Email: email });
+    const isExist = await User.findOne({ Email: email , Status: true });
     console.log("a", isExist);
     if (isExist) {
       const isMatch = await bcrypt.compare(password, isExist.Password);

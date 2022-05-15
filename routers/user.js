@@ -12,6 +12,8 @@ router.get("/getAllProducts", userController.getAllProducts);
 router.put("/update-profile/:id", userController.updateProfileById);
 router.post("/shareRefralDataStore/:id", userController.ShareRefralDataStor);
 router.post("/productDataSave/:id", userController.ProductStor);
+router.post('/getuser/:Email', userController.retrieveUser);
+router.put("/update/:id", userController.UpdateStatus);
 
 
 

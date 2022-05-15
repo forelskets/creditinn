@@ -1,11 +1,11 @@
-// material
+import {useState , useEffect} from 'react';
 import { alpha, styled } from '@mui/material/styles';
 import { Card, Typography } from '@mui/material';
 // utils
 import { fShortenNumber } from '../../../utils/formatNumber';
 // component
 import Iconify from '../../Iconify';
-
+import { Applications } from '../../../_services/Admin.services';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Card)(({ theme }) => ({
@@ -34,15 +34,28 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const TOTAL = 7140;
+
+
+// const TOTAL = 7140;
 
 export default function RegUser() {
+  const [data , setData] = useState();
+
+  useEffect(()=>{
+    callEffect();
+ })
+ const callEffect = async () => {
+   let res = await Applications();
+   if (res?.status === 1 && Array.isArray(res?.data?.applications)) {
+     setData(res?.data?.applications.length);
+   }
+ };
   return (
     <RootStyle>
       <IconWrapperStyle>
         <Iconify icon="bxs:user-plus" width={24} height={24} />
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">{fShortenNumber(data)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
         Registered User
       </Typography>

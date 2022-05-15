@@ -200,7 +200,7 @@ exports.getAllProducts =  async (req , res, next)=>{
     console.log("error" , error);
     return res.send({
       status: 0,
-      message: "sonething_went_wrong"
+      message: "something_went_wrong"
     })
   }
 }
@@ -312,5 +312,67 @@ exports.PropfileImgUpdateMobile = async (req, res, next)=>{
     })
   }
 }
+
+exports.UpdateStatus = async (req , res  , next)=>{
+  console.log("updateStatus")
+  const id = req.params.id;
+  const status = req.body.switchStatus
+  console.log(id , status , "idstatus")
+  try{
+  const user = await User.findOneAndUpdate({_id: id} , {Status : status});
+  if(user){
+    res.send({
+      status : 1,
+      message: "Status_changed_successfully"
+    })
+  }else{
+    res.send({
+      status: 0,
+      message: "Status_not_Change"
+    })
+  }
+}catch(err){
+  console.log(err)
+  res.send({
+    status : 0,
+    message: "something_went_wrong"
+  }
+  )
+}
+}
+
+
+module.exports.retrieveUser = async (req, res, next) => {
+  const { Email } = req.params;
+  const { Password } = req.body;
+  let updatedFields = {};
+
+  try {
+    const user = await User.findOne(
+      { Email },
+      'UserId Name Email Password'
+    );
+    updatedFields = user;
+    
+    if (!user) {
+      return res
+        .status(404)
+        .send({ error: 'Could not find a user with that username.' });
+    }
+    if(user){
+      user.Password = Password;
+      const updatedUser = await user.save();
+      
+      return res.send({user})
+    }
+   
+    
+    return res.send({
+      user
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 

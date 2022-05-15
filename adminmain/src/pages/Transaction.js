@@ -58,7 +58,7 @@ export default function Transaction() {
     if (res?.status === 1 && Array.isArray(res?.data)) {
         console.log(res.data[1].Amount)
         res.data.map((item ) =>{
-            data1.push({"Email": item?.userId?.Email , "CreditDebit": item?.CreditDebit , "TransactionType": item?.TransactionType , "Amount": item?.Amount })
+            data1.push({"Email": item?.userId?.Email , "CreditDebit": item?.CreditDebit , "TransactionType": item?.TransactionType , "Amount": item?.Amount , "Wallet":item?.TransactionWallet})
         })
       setTransaction(data1)
     } else {
@@ -81,6 +81,7 @@ export default function Transaction() {
     {title: "CreditDebit", field:"CreditDebit"},
     {title: "TransactionType", field:"TransactionType"},
     {title: "Amount", field:"Amount"},
+    {title: "Wallet", field:"Wallet"},
     
   ]
   

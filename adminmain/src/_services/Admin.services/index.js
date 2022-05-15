@@ -16,4 +16,4 @@ export {
     getUserBankDetailsList
 } from './admin.services'
 
-export {AllUsers , AllRefrals , Products , AdminLogin} from './admin.user'
+export {AllUsers , AllRefrals , Products , AdminLogin , ChangeStatus} from './admin.user'
