@@ -14,6 +14,16 @@ const serviceSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    Status:{
+      type: Boolean,
+      default: true,
+      required: true
+    },
+    Category:{
+      type: String,
+      required: true
+
+    }
   },
   { timestamps: true }
 );

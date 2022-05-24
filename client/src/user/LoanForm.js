@@ -15,6 +15,7 @@ var count = 0 ;
 
 const eye = { fontSize: "15px", height: "0px" };
 var basic = 1;
+var basic1 = 1;
 const LoanForm = (props) => {
   const history = useHistory();
   const [formvalidation , setFormvalidation] = useState(false);
@@ -186,11 +187,7 @@ const LoanForm = (props) => {
   const BasicDetailsFunc = () => {
    
     BasicDetails.current.click();
-   
-      setFormvalidation(false)
-    
-   
-  };
+    };
 
   const ITRUploadHandler = (e) => {
     setItrUpload(e.target.files[0]);
@@ -201,28 +198,13 @@ const LoanForm = (props) => {
       " "
     );
   var tens = "twenty thirty forty fifty sixty seventy eighty ninety".split(" ");
-  // const [loanAmount, setState] = useState();
-  // const [output, setOutput] = useState();
-
-  // const handleChange = (e) => {
-  //   var num = e.target.value;
-  //   setState(e.target.value);
-  //   num = num.toString();
-  //   // convertNumberToWords();
-  //   // setOutput(e.target.value);
-  //   // if (checkIsValid() === true) {
-  //   var str = number2words(num);
-  //   setOutput(str);
-  //   // }
-  // };
+ 
   const LoanAmountHandler = (e) => {
     setLoanAmount(e.target.value);
     var num = e.target.value;
-    // setState(e.target.value);
+    
     num = num.toString();
-    // convertNumberToWords();
-    // setOutput(e.target.value);
-    // if (checkIsValid() === true) {
+   
     var str = number2words(num);
     setOutput(str);
   };
@@ -266,20 +248,10 @@ const LoanForm = (props) => {
       }
     }
 
-    // return (
-    //   number2words(~~(n / 100000)) +
-    //   " lakh" +
-    //   (n % 100000 !== 0 ? " " + number2words(n % 100000) : "")
-    // )
+   
   }
 
-  // const convertNumberToWords = () => {
-  //   if (isNumber(loanAmount)) {
-  //     const numberName = convertor.toWords(loanAmount);
-  //     const final = upperCaseFirst(numberName);
-  //     setOutput(final);
-  //   }
-  // };
+  
 
   const checkIsValid = () => {
     if (loanAmount === undefined) {
@@ -564,26 +536,25 @@ const LoanForm = (props) => {
 
     console.log(basic, "basic 1");
     setBasicInformation(true);
+    
     Object.keys(obj).map((ele) => {
       console.log(obj[ele], "ooo");
       if (obj[ele] !== "" || obj[ele] === null || obj[ele] === undefined) {
         
         basic = 1;
-        console.log(obj[ele])
-        
-      } else {
-       
-        
-        basic = 0;
-        
-       
+        console.log(obj[ele] , basic)
         
       }
+     
     });
-   
-   if(basic === 0){
-     setFormvalidation(true)
-   }
+   console.log(basic  ,"basicde")
+    if(!basic){
+        
+       
+      setFormvalidation(true)
+      basic1 = 0;  
+     console.log(basic1 , "basic1")
+  }
     
   };
 
@@ -717,11 +688,13 @@ const LoanForm = (props) => {
         var upload = {}
         console.log("xios");
         if(professionLabel === 'Salried'){
+          console.log(employeeProfileForm , "employeeProfileForm if")
           upload = await axios.post("/kycDetailSalried", employeeProfileForm , {
             withCredentials: true,
           });   
         }
         else{
+          console.log(formData , "formData else")
           upload = await axios.post("/kycDetails", formData , {
             withCredentials: true,
           });
@@ -730,10 +703,10 @@ const LoanForm = (props) => {
 
       
 
-        if (upload.data.status === 401) {
+        if (upload.data.status === 0) {
           console.log(upload.data.status,"401")
           window.alert(upload.data.message);
-        } else if(upload.data.status === 200) {
+        } else if(upload.data.status === 1) {
           console.log(upload.data.status,"200")
           modelRef.current.click();
           setMessage(upload.data.message);
@@ -826,7 +799,7 @@ const LoanForm = (props) => {
                     data-bs-toggle="tab"
                     to="#step2"
                     ref={EmployeeDatails}
-                    disabled={basic}
+                    disabled={basic1}
                     onClick={LinkClickHandler}
                   >
                     Employement Details
@@ -845,7 +818,6 @@ const LoanForm = (props) => {
                           className="form-control"
                           id="mobile"
                           name="mobile"
-                          maxLength="10"
                           value={employeeProfile.mobile}
                           onChange={ProfileChangeHandler}
                           disabled={validateSelectOptions()}
@@ -907,11 +879,10 @@ const LoanForm = (props) => {
                       <div className="form-group col-md-4">
                         <label>Aadhar Card no.</label>
                         <input
-                          type="number"
+                          type="text"
                           className="form-control"
                           id="adhaarNo"
                           name="adhaarNo"
-                          maxLength="12"
                           placeholder="Adhar Card number"
                           value={employeeProfile.adhaarNo}
                           onChange={ProfileChangeHandler}

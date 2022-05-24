@@ -4,17 +4,9 @@ import MaterialTable from 'material-table'
 // import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
-  Card,
-  Table,
-  Stack,
-  Checkbox,
-  TableRow,
-  TableBody,
-  TableCell,
-  Container,
-  Typography,
-  TableContainer,
-  TablePagination
+  
+  Container
+  
 } from '@mui/material';
 // components
 import Page from '../components/Page';
@@ -58,7 +50,7 @@ export default function Transaction() {
     if (res?.status === 1 && Array.isArray(res?.data)) {
         console.log(res.data[1].Amount)
         res.data.map((item ) =>{
-            data1.push({"Email": item?.userId?.Email , "CreditDebit": item?.CreditDebit , "TransactionType": item?.TransactionType , "Amount": item?.Amount , "Wallet":item?.TransactionWallet})
+            data1.push({"TransactionNo":item?.TransactionNo,"Email": item?.userId?.Email , "CreditDebit": item?.CreditDebit , "TransactionType": item?.TransactionType , "Amount": item?.Amount , "Wallet":item?.TransactionWallet })
         })
       setTransaction(data1)
     } else {
@@ -77,11 +69,13 @@ export default function Transaction() {
   }, []);
 
   const columns = [
+    {title: "TransactionNo", field:"TransactionNo"},
     {title: "Email", field:"Email"},
     {title: "CreditDebit", field:"CreditDebit"},
     {title: "TransactionType", field:"TransactionType"},
     {title: "Amount", field:"Amount"},
     {title: "Wallet", field:"Wallet"},
+    
     
   ]
   

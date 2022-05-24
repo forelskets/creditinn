@@ -26,6 +26,10 @@ const planSchema = new mongoose.Schema(
         ref: 'service',
       },
     ],
+    Picture:{
+      type: String,
+      require: true
+    }
   },
   { timestamps: true }
 );

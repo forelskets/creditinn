@@ -13,7 +13,9 @@ export {
     ApplicationsStateChange,
     allortCashback,
     getTransactionList,
-    getUserBankDetailsList
+    getUserBankDetailsList,
+    ChangeServiceStatus,
+    AllCategory
 } from './admin.services'
 
 export {AllUsers , AllRefrals , Products , AdminLogin , ChangeStatus} from './admin.user'

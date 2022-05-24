@@ -1,5 +1,6 @@
 const BankService = require('../models/bankService');
-
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Types.ObjectId()
 exports.getServiceList = async (req, res, next) => {
   console.log('getServiceList');
   try {
@@ -55,7 +56,8 @@ exports.getServiceById = async (req, res, next) => {
 };
 
 exports.createService = async (req, res, next) => {
-  const { ServiceName, Note } = req.body;
+  const { ServiceName, Note , CategorySelect} = req.body;
+  console.log(CategorySelect , "category")
   try {
     let checkExist = await BankService.findOne({
       ServiceName: ServiceName,
@@ -73,6 +75,7 @@ exports.createService = async (req, res, next) => {
     const result = await BankService.create({
       ServiceName: ServiceName,
       Note: Note,
+      Category: CategorySelect
     });
 
     if (result.id) {
@@ -100,7 +103,7 @@ exports.createService = async (req, res, next) => {
 
 exports.updateService = async (req, res, next) => {
   const id = req.params.id;
-  const { ServiceName, Note } = req.body;
+  const { ServiceName, Note , CategorySelect } = req.body;
   try {
     let checkExist = await BankService.findById(id);
     console.log('checkExist', checkExist);
@@ -117,6 +120,7 @@ exports.updateService = async (req, res, next) => {
       await result.update({
         ServiceName: ServiceName,
         Note: Note,
+        Category: CategorySelect
       });
 
       return res.send({
@@ -138,7 +142,34 @@ exports.updateService = async (req, res, next) => {
   }
 };
 
-exports.deleteService = async (req, res, next) => {
+exports.ChangeServiceStatus = async (req, res, next) => {
+  console.log("changeServiceStatus")
+  const id = req.params.id;
+  const { Status } = req.body;
+  console.log(id ,Status , "data" )
+  try {
+    let updates = await BankService.findByIdAndUpdate(id , {Status : Status});
+    console.log(updates , "update")
+    if (updates) {
+      return res.send({
+        status: 1,
+        message: 'success',
+      });
+    }else {
+      return res.send({
+        status: 0,
+        message: 'not find',
+      });
+    }
+  }catch(err){
+    console.log(err);
+    return res.send({
+      status: 0,
+      message: 'Something_technically_issue',
+    });
+  }
+}
+ exports.deleteService = async (req, res, next) => {
   const id = req.params.id;
   try {
     const result = await BankService.findByIdAndDelete(id);
@@ -156,6 +187,33 @@ exports.deleteService = async (req, res, next) => {
       }
      
      } catch (error) {
+    return res.send({
+      status: 0,
+      message: 'something_went_wrong',
+    });
+  }
+ };
+
+ exports.getMobileServiceList = async (req, res, next) => {
+  console.log('getMobileServiceList');
+  try {
+    var result = await BankService.find({Status : true}).sort({_id :"desc"});
+    console.log(result)
+    if (result && result.length > 0) {
+      return res.send({
+        status: 1,
+        message: 'success',
+        data: {
+          services: result,
+        },
+      });
+    } else {
+      return res.send({
+        status: 0,
+        message: 'no_record_found',
+      });
+    }
+  } catch (error) {
     return res.send({
       status: 0,
       message: 'something_went_wrong',

@@ -1,9 +1,23 @@
 const UserTransaton = require('../models/userTransaction')
 const UserBankDetails = require('../models/userBankDetails')
-
+const ObjectId = require('mongoose').Types.ObjectId; 
+const Sequence = require("../models/sequenceGenerator");
+const { type } = require('express/lib/response');
 exports.createUserTransaction = async (req , res , next) =>{
          try{
-
+             const sequence = await Sequence.findOneAndUpdate({"_id":ObjectId("6281ed6435a76632c8f233ec")},{"$inc" : {TransactionNo : 1 }})
+            let date = new Date();
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const date1 = date.getDate();
+            const hour = date.getHours();
+            const minute = date.getMinutes();
+            const second = date.getSeconds();
+            const transactiongenerator =  `${year}${month}${date1}${hour}${minute}${second}`;
+           
+            let transactionNoCashback = parseInt(transactiongenerator) + parseInt(sequence.TransactionNo) + 1 ;
+           
+         
             const userbankdetails = await UserBankDetails.findOne({UserId : req.body.userId})
             const TransactionWalletCashback =  parseInt(userbankdetails?.Wallet || 0)  + parseInt(req.body.Amount)
             const TransactionWalletEarning =  parseInt(userbankdetails?.Wallet || 0)  + parseInt(req.body.Amount)
@@ -12,7 +26,8 @@ exports.createUserTransaction = async (req , res , next) =>{
                  TransactionType: req.body.TransactionType,
                  CreditDebit: req.body.CreditDebit,
                  Amount:req.body.Amount,
-                 TransactionWallet: TransactionWalletCashback
+                 TransactionWallet: TransactionWalletCashback,
+                 TransactionNo: transactionNoCashback
              });
              console.log(cashback1,"cashback")
              const cashback = cashback1.save();
@@ -27,12 +42,15 @@ exports.createUserTransaction = async (req , res , next) =>{
              }
              if(req.body.Earning !=="" && req.body.Earning !== undefined)
              {
+                const sequenceEarning = await Sequence.findOneAndUpdate({"_id":ObjectId("6281ed6435a76632c8f233ec")},{"$inc" : {TransactionNo : 1 }})
+            let transactionNoEarning = parseInt(transactiongenerator) + parseInt(sequenceEarning.TransactionNo) + 1
                  const earning1 = await UserTransaton({
                  UserId : req.body.refralId,
                  TransactionType : req.body.TransactionTypeEarning,
                  CreditDebit : req.body.CreditDebit,
                  Amount : req.body.Earning,
-                 TransactionWallet: TransactionWalletEarning
+                 TransactionWallet: TransactionWalletEarning,
+                 TransactionNo: transactionNoEarning
              });
              const earning = earning1.save();
              console.log(earning1 ,"earning")
@@ -81,6 +99,35 @@ exports.createUserTransaction = async (req , res , next) =>{
 exports.getTransactionList = async (req , res , next) =>{
     try{
         const result = await UserTransaton.find()
+        .populate(['userId'])
+        .sort({_id : 'desc'});
+        console.log("result" , result)
+       
+        if(result){
+            return res.send({
+                status: 1,
+                data: result,
+                message: 'success'
+            })
+        }else{
+            return res.send({
+                status: 0,
+                message: 'not success'
+            })
+        }
+    }catch(error){
+        console.log('error' , error);
+        return res.send({
+            status: 0,
+            message: 'something_went_wrong'
+        })
+    }
+}
+
+exports.getTransaction = async (req , res , next) =>{
+    const {id} = req.params;
+    try{
+        const result = await UserTransaton.findById(id)
         .populate(['userId'])
         .sort({_id : 'desc'});
         console.log("result" , result)

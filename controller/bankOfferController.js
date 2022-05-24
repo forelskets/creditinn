@@ -1,4 +1,5 @@
 const BankOffer = require('../models/bankOffer');
+const Category = require('../models/category');
 
 exports.getBankOfferList = async (req, res, next) => {
   console.log('getBankOfferList');
@@ -63,7 +64,7 @@ exports.getBankOfferById = async (req, res, next) => {
 };
 
 exports.createBankOffer = async (req, res, next) => {
-  const { BankName, BankService, Note } = req.body;
+  const { BankName, BankService, Note , Category} = req.body;
   try {
     // let checkExist = await BankOffer.find({
     //   where: {
@@ -80,11 +81,23 @@ exports.createBankOffer = async (req, res, next) => {
 
     console.log('BankName', BankName);
     console.log('Note', Note);
+    let file = {};
+    file = req.files.Picture[0];
+    var image_path = file.path.slice(17,)
+    console.log(image_path , "pathththtth")
+    const fileobj = {
+      fileName: file.originalname,
+      filePath: image_path,
+      fileType: file.mimetype
+
+    }
 
     const result = await BankOffer.create({
       BankName: BankName,
       BankService: BankService,
       Note: Note,
+      Category: Category,
+      Picture: JSON.stringify(fileobj)
     });
     console.log('result', result);
 

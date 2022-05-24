@@ -6,7 +6,12 @@ export const service = async (obj) => {
 }
 
 export const AllService = async (obj) => {
-    let res =await Api('GET', '/service', obj)
+    let res =await Api('GET', '/service/getList', obj)
+    console.log("res",res)
+    return res
+}
+export const AllCategory = async (obj) => {
+    let res =await Api('GET', '/category', obj)
     console.log("res",res)
     return res
 }
@@ -14,6 +19,11 @@ export const AllService = async (obj) => {
 export const Updateservice = async (id , obj) => {
     let res =await Api('PUT', `/service/${id}`, obj)
     console.log("res",res)
+    return res
+}
+export const ChangeServiceStatus = async (id , obj) => {
+    let res = await Api('PUT' , `/service/status/${id}` , obj)
+    console.log("res" , res)
     return res
 }
 

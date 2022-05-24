@@ -83,7 +83,7 @@ export default function User() {
  
 
   return (
-    <Page title="User | Minimal-UI">
+    <Page title="User | CreditsIn">
       <Container>
        {console.log(userList , "userList")}
        <MaterialTable
