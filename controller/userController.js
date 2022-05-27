@@ -374,5 +374,3 @@ module.exports.retrieveUser = async (req, res, next) => {
     next(err);
   }
 };
-
-

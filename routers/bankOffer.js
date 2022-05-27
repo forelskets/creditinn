@@ -26,6 +26,8 @@ const upload = multer({storage: storage})
 router.post('/', upload.fields([{
     name: 'Picture'
 }]), bankOfferController.createBankOffer);
+// router.post('/', bankOfferController.createBankOffer);
+
 router.put('/:id', bankOfferController.updateBankOffer);
 router.delete('/:id', bankOfferController.deleteBankOffer);
 

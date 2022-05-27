@@ -32,7 +32,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={FrontMain} />
         <Route path="/state1" exact component={state1} />
-        <Route path="/privacy-policy" exact component={privacy} />
+        <Route path="/privacypolicy" exact component={privacy} />
         <Route path="/form" exact component={formReg} />
         <Route path="/support" exact component={Support} />
         <Route path="/forgetPassword" exact component={ForgetPassword} />

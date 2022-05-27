@@ -1,4 +1,5 @@
 const Application = require('../models/application');
+const WishList = require('../models/wishlist')
 
 exports.getApplicationList = async (req, res, next) => {
   console.log('getApplicationList');

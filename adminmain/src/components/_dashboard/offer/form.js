@@ -76,7 +76,7 @@ export default function FormModal(props) {
     // alert("4444")
 
     setError(Obj)
-    alert(success)
+    
     if (success === 0) {
       props.callApi(obj, callback)
      

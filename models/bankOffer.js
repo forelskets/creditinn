@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 
 const planSchema = new mongoose.Schema(
   {
-    Id: {
-      type: String,
-      // required: true
-    },
+    
     // BankName: {
     //     type: String,
     //     required: true,
@@ -26,6 +23,10 @@ const planSchema = new mongoose.Schema(
         ref: 'service',
       },
     ],
+    Category: {
+      type: String,
+      require: true 
+    },
     Picture:{
       type: String,
       require: true

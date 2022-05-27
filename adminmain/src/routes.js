@@ -14,6 +14,9 @@ import Application from './pages/Application';
 import Token from './pages/Token';
 import Transaction from './pages/Transaction';
 import UserBankDetails from './pages/UserBankDetails';
+import Wishlist from './pages/Wishlist';
+import Withdrawls from './pages/Withdrawls';
+import Useremi from './pages/Useremi';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -32,6 +35,9 @@ export default function Router() {
         { path: 'staff', element: <Staff /> },
         { path: 'transaction', element: <Transaction /> },
         { path: 'userBankDetails', element: <UserBankDetails /> },
+        { path: 'wishlist', element: <Wishlist /> },
+        { path: 'withdrawls', element: <Withdrawls /> },
+        { path: 'useremi', element: <Useremi /> },
         { path: 'token', element: <Token /> }
       ]
     },

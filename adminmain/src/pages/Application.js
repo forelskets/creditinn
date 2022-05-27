@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { filter } from 'lodash';
 import {
-  Card,
-  Table,
-  Stack,
-  Checkbox,
-  TableRow,
-  TableBody,
-  TableCell,
+  
   Container,
-  Typography,
-  TableContainer,
-  TablePagination
+  
 } from '@mui/material';
 // components
 import Page from '../components/Page';
@@ -40,11 +32,7 @@ export default function User() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
+  
 
   const [data, setData] = useState([]);
 
@@ -57,7 +45,7 @@ export default function User() {
     setApplication(data1)
   }
   useEffect(() => {
-    if(data.length === 0){
+    if(data?.length === 0){
     callEffect();
     }else{
       Dataconvert();
@@ -110,7 +98,13 @@ export default function User() {
         <MaterialTable
         title="Applied Application"
         columns={TABLE_HEAD}
-        data={application}/>
+        data={application}
+        options={{
+          paging: true,
+          pageSize:6,       // make initial page size
+          emptyRowsWhenPaging: false,   // To avoid of having empty rows
+          pageSizeOptions:[6,12,20,50],    // rows selection options
+         } }/>
        
       </Container>
     </Page>

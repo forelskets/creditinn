@@ -39,7 +39,7 @@ const sidebarConfig = [
   },
 
   {
-    title: 'Share Products ',
+    title: 'Staff',
     path: '/dashboard/staff',
     icon: getIcon('icon-park-outline:file-staff')
   },
@@ -54,7 +54,22 @@ const sidebarConfig = [
     icon: getIcon('icon-park-outline:file-staff')
   },
   {
-    title: 'Products Enquiry',
+    title: 'WishList',
+    path: '/dashboard/wishlist',
+    icon: getIcon('icon-park-outline:file-staff')
+  },
+  {
+    title: 'Withdrawls',
+    path: '/dashboard/withdrawls',
+    icon: getIcon('icon-park-outline:file-staff')
+  },
+  {
+    title: 'UserEMI',
+    path: '/dashboard/useremi',
+    icon: getIcon('icon-park-outline:file-staff')
+  },
+  {
+    title: 'Token',
     path: '/dashboard/token',
     icon: getIcon('ic:outline-token')
   },

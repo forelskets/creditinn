@@ -33,3 +33,8 @@ export const AdminLogin = async (obj) => {
     console.log("res",res)
     return res
 }
+export const getAllUserEmis = async(obj)=>{
+    let res = await Api("GET" , "/useremi" , obj)
+    console.log("res" , res)
+    return res
+}

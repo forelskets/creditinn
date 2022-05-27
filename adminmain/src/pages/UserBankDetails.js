@@ -35,7 +35,7 @@ const UserBankDetails = () => {
        getUserBankDetails();
     },[])
   return (
-    <Page title="UserBankDetails | CreditsIN">
+    <Page title="UserBankDetails | CreditIN">
         <Container>
             <MaterialTable
             title="UserBankDetails"

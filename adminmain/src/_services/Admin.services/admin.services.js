@@ -26,6 +26,11 @@ export const ChangeServiceStatus = async (id , obj) => {
     console.log("res" , res)
     return res
 }
+export const ChangeBankStatus = async (id , obj) => {
+    let res = await Api('PUT' , `/bank/status/${id}` , obj)
+    console.log("res" , res)
+    return res
+}
 
 export const Deleteservice = async (id , obj) => {
     let res =await Api('DELETE', `/service/${id}`, obj)
@@ -75,6 +80,8 @@ export const Applications = async (obj) => {
     return res
 }
 
+
+
 export const ApplicationsStateChange = async (id,obj) => {
     let res =await Api('PUT', '/application/status/'+id, obj)
     console.log("res",res)
@@ -98,3 +105,30 @@ export const getUserBankDetailsList = async(obj) =>{
     console.log("res" , res)
     return res
 }
+
+export const getAllWishList = async(obj)=>{
+    let res = await Api("GET" , "/wishlist" , obj)
+    console.log("res" , res)
+    return res
+}
+
+export const getAllWithDrawls = async(obj)=>{
+    let res = await Api("GET" , "/withdrawls" , obj)
+    console.log("res" , res)
+    return res
+}
+
+export const WithDrawlsStateChange = async(id , obj)=>{
+    let res = await Api("PUT" , `/withdrawls/status/${id}` , obj)
+    console.log("res" , res)
+    return res
+}
+
+export const WithDrawlsUpdateTransaction = async(id , obj)=>{
+    let res = await Api("PUT" , `/withdrawls/transaction/${id}` , obj)
+    console.log("res" , res)
+    return res
+}
+
+
+

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const userBankDetailsSchema = new Schema({
-    UserId: {
+  UserId: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: "user"
@@ -23,10 +23,13 @@ const userBankDetailsSchema = new Schema({
         type: Number,
         required: true
       },
-      AccountHolderName: {
+      AccHolderName: {
         type: String,
         
       },
+      UPIID:{
+        type: String
+      }
 },
 {timestamps : true});
 

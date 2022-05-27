@@ -57,7 +57,7 @@ export default function User() {
     
     if(response?.status === 1){
       getUsers();
-      
+         
       // alert(response?.message)
     }else{
       alert(response?.message);
@@ -83,7 +83,7 @@ export default function User() {
  
 
   return (
-    <Page title="User | CreditsIn">
+    <Page title="User | Minimal-UI">
       <Container>
        {console.log(userList , "userList")}
        <MaterialTable

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 const userTransactionSchema = new Schema({
@@ -26,10 +27,16 @@ const userTransactionSchema = new Schema({
         type: String,
         default: 0,
         required: true 
+    },
+    TransactionNo:{
+        type : String,
+        unique: true,
+        required: true
     }
-   
 },
 {timestamps: true})
+
+
 
 const userTransaction = new mongoose.model('usertransaction' , userTransactionSchema);
 

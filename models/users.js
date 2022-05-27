@@ -47,11 +47,12 @@ const userSchema = new Schema(
       type: Number,
       default: 0,
     },
-    PhotoURL: {
+    PhotoURL:{
       type: String
     },
     Status: {
       type: Boolean,
+      default:  true,
       required: true,
     },
     tokens: [

@@ -5,7 +5,7 @@ import { Card, Typography } from '@mui/material';
 import { fShortenNumber } from '../../../utils/formatNumber';
 // component
 import Iconify from '../../Iconify';
-import { Applications } from '../../../_services/Admin.services';
+import {AllUsers } from '../../../_services/Admin.services';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Card)(({ theme }) => ({
@@ -45,9 +45,9 @@ export default function RegUser() {
     callEffect();
  })
  const callEffect = async () => {
-   let res = await Applications();
-   if (res?.status === 1 && Array.isArray(res?.data?.applications)) {
-     setData(res?.data?.applications.length);
+   let res = await AllUsers();
+   if (res?.status === 1 && Array.isArray(res?.data)) {
+     setData(res?.data.length);
    }
  };
   return (

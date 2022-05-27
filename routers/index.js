@@ -116,24 +116,24 @@ router.post("/userRegister", async (req, res) => {
     const user = new User(obj);
 
     const addUser = await user.save();
-    const sequence = await Sequence.findOneAndUpdate({"_id":ObjectId("6281ed6435a76632c8f233ec")},{"$inc" : {TransactionNo : 1 }})
+    // const sequence = await Sequence.findOneAndUpdate({"_id":ObjectId("6281ed6435a76632c8f233ec")},{"$inc" : {TransactionNo : 1 }})
     let date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const date1 = date.getDate();
-    const hour = date.getHours();
-    const minute = date.getMinutes();
-    const second = date.getHours();
-    const transactiongenerator =  `${year}${month}${date1}${hour}${minute}${second}`;
+    const count = await UserTransaction.collection.count();
    
-    let transactionNoCashback = parseInt(transactiongenerator) + parseInt(sequence.TransactionNo) + 1 ;
+
+    const transactiongenerator =  `${year}${month}${date1}${count}`;
+   
+    // let transactionNoCashback = parseInt(transactiongenerator) + parseInt(sequence.TransactionNo) + 1 ;
     const cashback = await UserTransaction({
       userId : addUser._id,
       TransactionType: CASHBACK,
       CreditDebit: CREDIT,
       Amount : AMOUNT,
       TransactionWallet : AMOUNT,
-      TransactionNo: transactionNoCashback
+      TransactionNo: transactiongenerator
 
     }).save();
 

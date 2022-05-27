@@ -1,5 +1,6 @@
 const BankOffer = require('../models/bankOffer');
 const Category = require('../models/category');
+const mongoose = require('mongoose')
 
 exports.getBankOfferList = async (req, res, next) => {
   console.log('getBankOfferList');
@@ -78,9 +79,6 @@ exports.createBankOffer = async (req, res, next) => {
     //     message: 'Name already exist',
     //   });
     // }
-
-    console.log('BankName', BankName);
-    console.log('Note', Note);
     let file = {};
     file = req.files.Picture[0];
     var image_path = file.path.slice(17,)
@@ -91,6 +89,7 @@ exports.createBankOffer = async (req, res, next) => {
       fileType: file.mimetype
 
     }
+   
 
     const result = await BankOffer.create({
       BankName: BankName,
@@ -123,6 +122,46 @@ exports.createBankOffer = async (req, res, next) => {
     });
   }
 };
+
+// exports.pictureUploads = async(req , res , next) =>{
+//   const {Id } = req.body
+//   console.log("Idd" , Id)
+//   try {
+    
+    // let file = {};
+    // file = req.files.Picture[0];
+    // var image_path = file.path.slice(17,)
+    // console.log(image_path , "pathththtth")
+    // const fileobj = {
+    //   fileName: file.originalname,
+    //   filePath: image_path,
+    //   fileType: file.mimetype
+
+    // }
+
+//     const bankOffer = await BankOffer.findByIdAndUpdate(Id , { Picture: JSON.stringify(fileobj)})
+//     console.log(bankOffer , "bankoffer")
+//     if(bankOffer){
+//      return res.send({
+//         status: 1,
+//         msg: 'success'
+//       })
+//     }else{
+//      return res.send({
+//         status: 0,
+//         msg:'fail'
+//       })
+//     }
+//   } catch (error) {
+//       console.log(error);
+//       return res.send({
+//         status: 0,
+//         msg:'technical issue'
+//       })
+//   }
+
+
+// }
 
 exports.updateBankOffer = async (req, res, next) => {
   const id = req.params.id;

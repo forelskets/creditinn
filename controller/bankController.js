@@ -9,7 +9,7 @@ exports.getBankList = async (req, res, next) => {
         status: 1,
         message: 'success',
         data: {
-          services: result,
+          banks: result,
         },
       });
     } else {
@@ -60,7 +60,7 @@ exports.getBankById = async (req, res, next) => {
 };
 
 exports.createBank = async (req, res, next) => {
-  const { BankName, Note } = req.body;
+  const { BankName, Note , CategorySelect } = req.body;
   try {
     console.log('BankName', BankName);
 
@@ -80,6 +80,7 @@ exports.createBank = async (req, res, next) => {
     const result = await Bank.create({
       BankName: BankName,
       Note: Note,
+      Category: CategorySelect
     });
     console.log('result', result);
 
@@ -108,7 +109,7 @@ exports.createBank = async (req, res, next) => {
 
 exports.updateBank = async (req, res, next) => {
   const id = req.params.id;
-  const { BankName, Note } = req.body;
+  const { BankName, Note ,CategorySelect} = req.body;
   try {
     let checkExist = await Bank.findById(id);
 
@@ -124,6 +125,7 @@ exports.updateBank = async (req, res, next) => {
       await result.update({
         BankName: BankName,
         Note: Note,
+        Category : CategorySelect
       });
 
       return res.send({
@@ -143,6 +145,34 @@ exports.updateBank = async (req, res, next) => {
     });
   }
 };
+
+exports.ChangeBankStatus = async (req, res, next) => {
+  console.log("changeServiceStatus")
+  const id = req.params.id;
+  const { Status } = req.body;
+  console.log(id ,Status , "data" )
+  try {
+    let updates = await Bank.findByIdAndUpdate(id , {Status : Status});
+    console.log(updates , "update")
+    if (updates) {
+      return res.send({
+        status: 1,
+        message: 'success',
+      });
+    }else {
+      return res.send({
+        status: 0,
+        message: 'not find',
+      });
+    }
+  }catch(err){
+    console.log(err);
+    return res.send({
+      status: 0,
+      message: 'Something_technically_issue',
+    });
+  }
+}
 
 exports.deleteBank = async (req, res, next) => {
   const id = req.params.id;
