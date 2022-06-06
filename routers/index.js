@@ -166,7 +166,7 @@ router.post("/userRegister", async (req, res) => {
           service: "gmail",
           auth: {
             user: "creditsin.com@gmail.com ",
-            pass: "Cghahr@1",
+            pass: "gamokavigwrwcbtm",
           },
         });
 
@@ -259,7 +259,7 @@ router.post("/sendOtp", async (req, res) => {
           service: "gmail",
           auth: {
             user: "creditsin.com@gmail.com",
-            pass: "Cghahr@1",
+            pass: "gamokavigwrwcbtm",
           }
 
         });

@@ -1,4 +1,4 @@
-import { Navigate, useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes ,Route ,Routes , BrowserRouter} from 'react-router-dom';
 // layouts
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
@@ -17,37 +17,42 @@ import UserBankDetails from './pages/UserBankDetails';
 import Wishlist from './pages/Wishlist';
 import Withdrawls from './pages/Withdrawls';
 import Useremi from './pages/Useremi';
+import RouteLinks from './store/private/RouteLinks';
+import PrivateRoute from './store/private/PrivateRoute';
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
-  return useRoutes([
-    {
-      path: '/dashboard',
-      element: <DashboardLayout />,
-      children: [
-        { element: <Navigate to="/dashboard/app" replace /> },
-        { path: 'app', element: <DashboardApp /> },
-        { path: 'user', element: <User /> },
-        { path: 'services', element: <Services /> },
-        { path: 'bank', element: <Bank /> },
-        { path: 'offers', element: <Offer /> },
-        { path: 'application', element: <Application /> },
-        { path: 'staff', element: <Staff /> },
-        { path: 'transaction', element: <Transaction /> },
-        { path: 'userBankDetails', element: <UserBankDetails /> },
-        { path: 'wishlist', element: <Wishlist /> },
-        { path: 'withdrawls', element: <Withdrawls /> },
-        { path: 'useremi', element: <Useremi /> },
-        { path: 'token', element: <Token /> }
-      ]
-    },
-    {
-      path: '/',
-      element: <LogoOnlyLayout />,
-      children: [
-        { path: 'login', element: <Login /> },
-        { path: '/', element: <Navigate to="/dashboard" /> }
-      ]
-    }
-  ]);
+
+  return(
+    <>
+    
+    <Routes>
+    <Route path='/' element={<LogoOnlyLayout/>}>
+          <Route index element={<RouteLinks><Login/></RouteLinks>}/>
+          </Route>
+        <Route path='/dashboard' element={<PrivateRoute><DashboardLayout/></PrivateRoute>}>
+          <Route path='app' element={<PrivateRoute><DashboardApp /></PrivateRoute>}/>
+          <Route path='user' element={<User/>}/>
+          <Route path='services' element={<Services/>}/>
+          <Route path='application' element={<Application/>}/>
+          <Route path='bank' element={<Bank/>}/>
+          <Route path='offers' element={<Offer/>}/>
+          <Route path='staff' element={<Staff/>}/>
+          <Route path='transaction' element={<Transaction/>}/>
+          <Route path='userBankDetails' element={<UserBankDetails/>}/>
+          <Route path='wishlist' element={<Wishlist/>}/>
+          <Route path='withdrawls' element={<Withdrawls/>}/>
+          <Route path='useremi' element={<Useremi/>}/>
+          <Route path='token' element={<Token/>}/>
+          
+        </Route>
+        
+        
+    </Routes>
+  
+    </>
+  )
+  
+
 }

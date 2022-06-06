@@ -54,6 +54,13 @@ export default function Bank() {
   const [categoryArray,setCategoryArray] = useState({});
 
   const columns = [
+    {
+      title: 'Category',
+      field: 'CategorySelect',
+      lookup: categoryArray,
+      validate: (rowData) =>
+        rowData.CategorySelect === undefined || rowData.CategorySelect === '' ? 'required' : true
+    },
     {field: "BankName" , title: "BankName" , validate: rowData => rowData.BankName === undefined || rowData.BankName === "" ? "required" : true},
     {field: "Note" , title: "Note" , validate: rowData => rowData.Note === undefined || rowData.Note === "" ? "required" : true},
     {
@@ -64,12 +71,12 @@ export default function Bank() {
           {row.View === true ? (
             <FormControlLabel
               control={<Switch checked={row.View} onChange={(e) => StatusChangeHandler(e, row)} />}
-              label="Can-View"
+              label="Show"
             />
           ) : (
             <FormControlLabel
               control={<Switch checked={row.View} onChange={(e) => StatusChangeHandler(e, row)} />}
-              label="Can't-View"
+              label="Hide"
             />
           )}
         </>
@@ -77,13 +84,7 @@ export default function Bank() {
       editable: 'never',
       filtering: false
     },
-    {
-      title: 'Category',
-      field: 'CategorySelect',
-      lookup: categoryArray,
-      validate: (rowData) =>
-        rowData.CategorySelect === undefined || rowData.CategorySelect === '' ? 'required' : true
-    }
+   
   ]
 
   const callEffect = async () => {
@@ -134,10 +135,10 @@ export default function Bank() {
   };
 
   return (
-    <Page title="Bank | Minimal-UI">
+    <Page title="Bank | Creditsin">
       <Container>
          <MaterialTable
-           title=" Bank Offer"
+           title=" Bank Lists"
            columns={columns}
            data={BANK}
            options={{actionsColumnIndex : -1 , addRowPosition: "first" , filtering: true , exportButton: true}}

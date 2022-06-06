@@ -45,8 +45,8 @@ exports.createUserTransaction = async (req , res , next) =>{
              }
              if(req.body.Earning !=="" && req.body.Earning !== undefined)
              {
-                // const sequenceEarning = await Sequence.findOneAndUpdate({"_id":ObjectId("6281ed6435a76632c8f233ec")},{"$inc" : {TransactionNo : 1 }})
-            // let transactionNoEarning = parseInt(transactiongenerator) + parseInt(sequenceEarning.TransactionNo) + 1
+            
+           
             let date2 = new Date();
             const year2 = date2.getFullYear();
             const month2 = date2.getMonth() + 1;

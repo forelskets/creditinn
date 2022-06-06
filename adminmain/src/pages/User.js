@@ -44,7 +44,7 @@ export default function User() {
     { field: 'Mobile', title: 'MobileNo' },
     { field: 'RefralNo', title: 'RefralNo'},
     { field: 'Status', title: 'LoginAuthority' , render : (row) =><>{(row.Status === true) ?<FormControlLabel control={<Switch defaultChecked onChange={(e)=> StatusChangeHandler(e ,row)} />} label="Can-Login" />: <FormControlLabel control={<Switch onChange={(e)=> StatusChangeHandler(e, row)} />} label="Can't-Login" />}</>},
-    { field: 'userVerified', title: 'Varification' , render : (row) =><>{(row.userVerified) ?  <div style={{backgroundColor:"green"}}>{"Varified"}</div> :<div style={{backgroundColor:"red"}}>{"Not- Varified"}</div>}</>},
+    { field: 'userVerified', title: 'Verification' , render : (row) =><>{(row.userVerified) ?  <div style={{backgroundColor:"green"}}>{"Verified"}</div> :<div style={{backgroundColor:"red"}}>{"Non- Verified"}</div>}</>},
     
   ];
 
@@ -83,7 +83,7 @@ export default function User() {
  
 
   return (
-    <Page title="User | Minimal-UI">
+    <Page title="Users | Creditsin">
       <Container>
        {console.log(userList , "userList")}
        <MaterialTable

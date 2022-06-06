@@ -12,13 +12,36 @@ import {
   AppCurrentVisits,
   AppWebsiteVisits
 } from '../components/_dashboard/app';
-
+import { useDispatch , useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { REMOVE_MESSAGE } from 'src/store/types/AdminTypes';
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
+  const dispatch = useDispatch();
+  const {message} = useSelector(state => state.AuthReducer)
+ 
+  if(message){
+    toast.success(message);
+  
+  }
+   useEffect(()=>{
+    dispatch({type: REMOVE_MESSAGE})
+   },[])
   return (
     <Page title="Dashboard | Minimal-UI">
+         <Toaster
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{
+              style: {
+               fontSize : "14px",
+              },
+            }}
+          />
       <Container maxWidth="xl">
+        
         <Box sx={{ pb: 5 }}>
           <Typography variant="h4">Hi, CreditIn</Typography>
         </Box>

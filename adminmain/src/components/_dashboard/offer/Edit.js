@@ -3,11 +3,12 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import { FormControl, Select, MenuItem, InputLabel, TextField } from '@mui/material/';
+import { FormControl, Select, MenuItem, InputLabel, TextField ,NativeSelect } from '@mui/material/';
+import axios from 'axios'
 import Iconify from '../../Iconify';
 import { Validate } from '../../../_helper'
 import { AllBank, AllService ,AllCategory} from '../../../_services/Admin.services'
-export default function FormModal(props) {
+export default function Edit(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -20,7 +21,6 @@ export default function FormModal(props) {
   const [bank, setBank] = React.useState('');
   const [service, setService] = React.useState('');
   const [category, setCategory] = React.useState('');
-  const [typed , setTyped] = React.useState('')
 
   const handleChange = (event) => {
     setBank(event.target.value);
@@ -28,7 +28,7 @@ export default function FormModal(props) {
   };
 
 
-  const [note, setNote] = useState('');
+  const [note, setNote] = useState(props?.data?.Note);
   const [BankName, setBankName] = useState('');
   const [error, setError] = useState('');
   const [bankArray, setBankArray] = useState([]);
@@ -58,7 +58,7 @@ export default function FormModal(props) {
     }
   };
 
-  const SubmitForms = (e) => {
+  const SubmitForms = async (e) => {
     // alert("1111")
     e.preventDefault();
     let success = 0;
@@ -67,25 +67,48 @@ export default function FormModal(props) {
       Note: note, BankName: BankName,    // ? BankName.value : "",
       BankService: [services], //Array.isArray(services) ? services.map(x => (x.value)) : null,
       Category: category,
-      Picture: picture,
-      Type: typed
+      Picture: picture
     }
     // alert("3333")
-    let Obj = Validate(obj, rules)
-    Object.keys(Obj).map(key => {
-      if (Obj[key] !== "") {
-        success = 1
-      }
-    })
+    // let Obj = Validate(obj, rules)
+    // Object.keys(Obj).map(key => {
+    //   if (Obj[key] !== "") {
+    //     success = 1
+    //   }
+    // })
     // alert("4444")
 
-    setError(Obj)
+    // setError(Obj)
     
-    if (success === 0) {
-      props.callApi(obj, callback)
+    // if (success === 0) {
+        const formData = new FormData();
+    for(const key in obj){
+      const ele = obj[key]
      
+      if([key] !== undefined){
+        formData.append(key , ele)
+      }
     }
-    // alert("5555")
+    const id = props?.data?.id ;
+
+    console.log(obj , "formdataobj")
+    let res = await axios.post(`/bank-offer/updateOffer/${id}`, formData ,{
+        withCredentials : true
+    })
+    
+    console.log(res , "resaxios")
+    if(res?.data?.status === 1){
+        callback();
+        props.callApi();
+        alert(res?.data?.message)
+
+
+    }else {
+        callback();
+        alert(res?.data?.message)
+    }
+        
+    
   }
 
   const callback = () => {
@@ -94,9 +117,8 @@ export default function FormModal(props) {
     setservices("")
     setCategory("")
     setPicture('')
-    setTyped('')
     handleClose("")
-    
+   
   }
 
   const onChangeBank = (e) => {
@@ -117,10 +139,6 @@ export default function FormModal(props) {
     setPicture(e.target.files[0])
   }
 
-  const onChangeTyped = (e)=>{
-    setTyped(e.target.value)
-  }
-
   return (
     <div>
       <Button
@@ -129,7 +147,7 @@ export default function FormModal(props) {
         startIcon={<Iconify icon="eva:plus-fill" />}
         onClick={handleClickOpen}
       >
-        Add
+        Edit
       </Button>
       <Dialog
         fullWidth
@@ -141,68 +159,54 @@ export default function FormModal(props) {
         <DialogTitle id="alert-dialog-title">Select Bank & Service</DialogTitle>
         <div>
         <FormControl sx={{ m: 2, minWidth: 140 }}>
-            <InputLabel id="demo-simple-select-label">Type</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={typed}
-              label="Type"
-              onChange={onChangeTyped}
-            >
-               <MenuItem value="Approved">Approved</MenuItem>
-               <MenuItem value="Special Offer">Special Offer</MenuItem>
-             
-            </Select>
-            {error?.BankName && <div className='error-msg'>{error.BankName}</div>}
-          </FormControl>
-          <FormControl sx={{ m: 2, minWidth: 140 }}>
-            <InputLabel id="demo-simple-select-label">Bank</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={BankName}
-              label="Bank"
-              onChange={onChangeBank}
-            >
-
-
-              {bankArray.map((obj) => {
-                return <MenuItem value={obj._id}>{obj.BankName}</MenuItem>
+          <InputLabel variant="standard" htmlFor="uncontrolled-native">
+          Banks
+        </InputLabel>
+        <NativeSelect
+          defaultValue={props?.data?.BankId}
+          inputProps={{
+            name: 'banks',
+            id: 'uncontrolled-native',
+          }}
+        >
+            {bankArray.map((obj) => {
+                return <option value={obj._id}>{obj.BankName}</option>
               })}
-            </Select>
-            {error?.BankName && <div className='error-msg'>{error.BankName}</div>}
+            </NativeSelect>
+          {error?.BankName && <div className='error-msg'>{error.BankName}</div>}
           </FormControl>
           <FormControl sx={{ m: 2, minWidth: 140 }}>
-            <InputLabel id="demo-simple-select-label">Service</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select1"
-              value={services}
-              label="Service"
-              onChange={onChangeServices}
-             // multiple
-            >
-              {serviceArray.map((obj) => {
-                return <MenuItem value={obj._id}>{obj.ServiceName}</MenuItem>
+          <InputLabel variant="standard" htmlFor="uncontrolled-native">
+          Services
+        </InputLabel>
+        <NativeSelect
+          defaultValue={props?.data?.ServiceId}
+          inputProps={{
+            name: 'services',
+            id: 'uncontrolled-native',
+          }}
+        >
+            {serviceArray.map((obj) => {
+                return <option value={obj._id}>{obj.ServiceName}</option>
               })}
-            </Select>
-            {error?.BankService && <div className='error-msg'>{error.BankService}</div>}
+            </NativeSelect>
+          {error?.BankService && <div className='error-msg'>{error.BankService}</div>}
           </FormControl>
           <FormControl sx={{ m: 2, minWidth: 140 }}>
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select1"
-              value={category}
-              label="category"
-              onChange={onChangeCategory}
-             // multiple
-            >
-              {console.log(categoryArray , 'cccc')}
-              {categoryArray?.map((obj) => {
-                return <MenuItem value={obj.CatName}>{obj.CatName}</MenuItem>
-               })}
-            </Select>
+          <InputLabel variant="standard" htmlFor="uncontrolled-native">
+          Categories
+        </InputLabel>
+        <NativeSelect
+          defaultValue={props?.data?.Category}
+          inputProps={{
+            name: 'categories',
+            id: 'uncontrolled-native',
+          }}
+        >
+            {categoryArray.map((obj) => {
+                return <option value={obj.CatName}>{obj.CatName}</option>
+              })}
+            </NativeSelect>
             {error?.BankService && <div className='error-msg'>{error.BankService}</div>}
           </FormControl>
           <FormControl sx={{ m: 2, minWidth: 140 }}>
@@ -220,7 +224,7 @@ export default function FormModal(props) {
             </FormControl>
         </div>
         <DialogActions>
-          <Button onClick={SubmitForms} autoFocus>
+          <Button type="submit" onClick={SubmitForms} autoFocus>
             Save
           </Button>
           <Button onClick={handleClose}>Close</Button>

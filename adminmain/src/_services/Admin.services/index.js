@@ -15,12 +15,14 @@ export {
     getTransactionList,
     getUserBankDetailsList,
     ChangeServiceStatus,
+    ChangeOfferStatus,
     AllCategory,
     ChangeBankStatus,
     getAllWishList,
     getAllWithDrawls,
     WithDrawlsStateChange,
-    WithDrawlsUpdateTransaction
+    WithDrawlsUpdateTransaction,
+    DeleteBankOffer
 } from './admin.services'
 
 export {AllUsers , AllRefrals , Products , AdminLogin , ChangeStatus , getAllUserEmis} from './admin.user'

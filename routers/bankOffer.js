@@ -28,6 +28,7 @@ router.post('/', upload.fields([{
 }]), bankOfferController.createBankOffer);
 // router.post('/', bankOfferController.createBankOffer);
 
+router.put('/status/:id', bankOfferController.ChangeOfferStatus);
 router.put('/:id', bankOfferController.updateBankOffer);
 router.delete('/:id', bankOfferController.deleteBankOffer);
 

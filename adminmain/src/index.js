@@ -9,15 +9,19 @@ import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import Store from './store';
 
 // ----------------------------------------------------------------------
 
 ReactDOM.render(
+  <Provider store={Store}>
   <HelmetProvider>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </HelmetProvider>,
+  </HelmetProvider>
+  </Provider>,
   document.getElementById('root')
 );
 

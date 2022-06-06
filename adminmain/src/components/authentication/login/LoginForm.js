@@ -1,7 +1,8 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link as RouterLink, NavLink, useNavigate } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
+import {useDispatch , useSelector} from 'react-redux'
 // material
 import {
   Link,
@@ -16,13 +17,17 @@ import { LoadingButton } from '@mui/lab';
 // component
 import Iconify from '../../Iconify';
 import {AdminLogin} from '../../../_services/Admin.services/index'
+import { postLogin } from 'src/store/asyncMethod/AuthMethod';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
+  const {loginErrors , token} = useSelector(state => state.AuthReducer) 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required')
@@ -38,15 +43,20 @@ export default function LoginForm() {
     onSubmit: async (values) => {
       const Email = values.email;
       const Password = values.password;
-      const response = await AdminLogin({Email , Password})
-      if(response.status === 1){
-        navigate("/dashboard/app");
-      }else if(response.status === 0){
-        alert(response.message)
-      }
+      const data = {Email , Password}
+      dispatch(postLogin(data))
       
-    }
+       }
   });
+
+  useEffect(()=>{
+      if(loginErrors){
+        loginErrors.map((err)=>{
+          toast.error(err.msg)
+        })
+        
+      }
+  },[loginErrors ])
   
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 
@@ -56,6 +66,15 @@ export default function LoginForm() {
 
   return (
     <FormikProvider value={formik}>
+        <Toaster
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{
+              style: {
+               fontSize : "14px",
+              },
+            }}
+          />
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <TextField

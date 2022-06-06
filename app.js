@@ -21,11 +21,12 @@ const withdrawlsRouter = require('./routers/withdrawls');
 const useremiRouter = require('./routers/useremi');
 
 const cors = require('cors');
-
+require('dotenv').config();
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 require('./db/conn');
+
 app.use(router);
 app.use(ApplyLoanRouter);
 app.use('/service', serviceRouter);

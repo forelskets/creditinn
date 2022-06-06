@@ -5,16 +5,17 @@ import MaterialTable from 'material-table'
 // material
 import {
   
-  Container,
+  Container, FormControlLabel, Switch,
   
 } from '@mui/material';
+import toastr from 'toastr';
 // components
 import Page from '../components/Page';
 import Scrollbar from '../components/Scrollbar';
 // import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import {
-  
+  Edit,
   FormModal
 } from '../components/_dashboard/offer';
 
@@ -26,10 +27,11 @@ import axios from 'axios'
 
 import {
   AllBankOffer,
+  ChangeOfferStatus,
   saveBankOffer
 } from '../_services/Admin.services'
-import toastr from 'toastr';
-import {  ApplicationsStateChange } from '../_services/Admin.services';
+
+import {  ApplicationsStateChange , DeleteBankOffer } from '../_services/Admin.services';
 // ----------------------------------------------------------------------
 
 
@@ -45,50 +47,42 @@ export default function Offer() {
  
   const callEffect = async () => {
     let res = await AllBankOffer()
+    console.log(res, "response")
+    let data1 = [];
     if (res?.status === 1 && Array.isArray(res?.data?.services)) {
-      setOffer(res.data.services)
+      res.data.services.map((ele , ind)=>{
+        //  let BannerImg = JSON.parse(ele?.Picture);
+       
+        let BannerImg = {};
+        if(ele.Picture){
+        BannerImg = JSON.parse(ele?.Picture) ;
+        }
+        return(
+        ele?.BankService?.map((elm , indx) =>{
+             
+              data1.push({"type":ele?.Type,"id":ele?._id ,'Bank' : ele?.BankName?.BankName ,"BankId":ele?.BankName?._id, 'Service' : elm?.ServiceName , 'ServiceId':elm?._id , 'Note' : ele?.Note ,'Category':ele?.Category, 'Picture':BannerImg?.filePath ,"View": ele?.Status })
+        })
+        )
+        })
+      setData(data1)
+      console.log(data , "data" ,columns)
       
 
       
     } else {
       if (res?.message)
-        toastr.success(res.message)
+        {toastr.success(res.message)}
     }
     count = count + 1;
   };
 
-  const Dataconvert =  () =>{
-    
-    let data1 = [];
-    
-   
-    
-     offer?.map((ele , ind)=>{
-      //  let BannerImg = JSON.parse(ele?.Picture);
-     
-      let BannerImg = {};
-      if(ele.Picture){
-      BannerImg = JSON.parse(ele?.Picture) ;
-      }
-      return(
-      ele?.BankService?.map((elm , indx) =>{
-           
-            data1.push({'Bank' : ele?.BankName?.BankName , 'Service' : elm?.ServiceName , 'Note' : ele?.Note ,'Category':ele?.Category, 'Picture':BannerImg?.filePath })
-      })
-      )
-      })
-    setData(data1)
-    console.log(data , "data" ,columns)
-  }
+ 
 
   useEffect(() => {
-   if(offer.length === 0){
+   
      callEffect();
-   }
-   else{
-   Dataconvert();
-   }
-  }, [offer]);
+  
+  }, []);
 
 
 
@@ -97,8 +91,30 @@ export default function Offer() {
     {title: "Serivce", field:"Service"},
     {title: "Note", field:"Note"},
     {title: "Category" , field: "Category"},
+    {title: "Type" , field: "type"},
+    {
+      title: 'View',
+      field: 'View',
+      render: (row) => (
+        <>
+          {row.View === true ? (
+            <FormControlLabel
+              control={<Switch checked={row.View} onChange={(e) => StatusChangeHandler(e, row)} />}
+              label="Can-View"
+            />
+          ) : (
+            <FormControlLabel
+              control={<Switch checked={row.View} onChange={(e) => StatusChangeHandler(e, row)} />}
+              label="Can't-View"
+            />
+          )}
+        </>
+      ),
+      editable: 'never',
+      filtering: false
+    },
     {title: "Banner", field:"Picture", render:(row) =><div style={{width:"100px" , height:"100px" }}><img src={`../${row?.Picture}`}/></div>},
-    
+    {title: "" , field: "" , render:(row)=> <><Edit data={row} callApi={callEffect}/></>},
   ]
 
   const saveOffers = async (obj, callback) => {
@@ -111,37 +127,67 @@ export default function Offer() {
         formData.append(key , ele)
       }
     }
-    // alert("8888")
+  
     let res = await axios.post('/bank-offer', formData)
     console.log(res , "resss")
-    // alert("999")
+    
     if (res?.data?.status === 1) {
       if (callback) { callback() }
       callEffect()
       toastr.success("Bank offer created!")
     } else {
-      if (res?.message)
+      if (res?.message){
         toastr.success(res.message)
+      }
     }
   }
 
-  
+ 
+
+  const StatusChangeHandler = async (e, row) => {
+    e.preventDefault();
+    console.log(!row.View);
+    const response = await ChangeOfferStatus(row.id, { Status: !row.View });
+    if (response?.status === 1) {
+      callEffect();
+    } else {
+      if (response?.message){
+         alert(response.message);
+      }
+    }
+  };
 
   return (
     <Page title="Banks Services | CreditIN">
       <Container>
       <FormModal callApi={saveOffers}/>
+      
         {console.log(data , columns , "datacolumns")}
         <MaterialTable 
         title="Bank Services"
         data = {data}
         columns={columns}
         options={{
+          actionsColumnIndex: -1,
           grouping: true,
           paging:true,
           pageSize:6,       // make initial page size
           emptyRowsWhenPaging: false,   // To avoid of having empty rows
           pageSizeOptions:[6,12,20,50],    // rows selection options
+        }}
+        editable={{
+          
+          onRowDelete: (oldData) =>
+            new Promise(async (resolve, reject) => {
+              const response = await DeleteBankOffer(oldData.id);
+              console.log(response);
+              if (response.status === 1) {
+                callEffect();
+                resolve();
+              } else {
+                reject();
+              }
+            })
         }}
         />
       

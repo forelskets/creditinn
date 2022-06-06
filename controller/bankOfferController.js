@@ -65,20 +65,10 @@ exports.getBankOfferById = async (req, res, next) => {
 };
 
 exports.createBankOffer = async (req, res, next) => {
-  const { BankName, BankService, Note , Category} = req.body;
+  console.log("createBankOffer")
+  const { BankName, BankService, Note , Category , Type} = req.body;
   try {
-    // let checkExist = await BankOffer.find({
-    //   where: {
-    //     BankName: BankName,
-    //   },
-    // });
-
-    // if (checkExist) {
-    //   return res.send({
-    //     status: 0,
-    //     message: 'Name already exist',
-    //   });
-    // }
+    
     let file = {};
     file = req.files.Picture[0];
     var image_path = file.path.slice(17,)
@@ -96,7 +86,8 @@ exports.createBankOffer = async (req, res, next) => {
       BankService: BankService,
       Note: Note,
       Category: Category,
-      Picture: JSON.stringify(fileobj)
+      Picture: JSON.stringify(fileobj),
+      Type
     });
     console.log('result', result);
 
@@ -163,28 +154,63 @@ exports.createBankOffer = async (req, res, next) => {
 
 // }
 
-exports.updateBankOffer = async (req, res, next) => {
-  const id = req.params.id;
-  const { BankOfferName, BankService, Note } = req.body;
-  try {
-    const result = await BankOffer.findById(id);
-    if (result) {
-      await result.update({
-        BankOfferName: BankOfferName,
-        BankService: BankService,
-        Note: Note,
-      });
 
+exports.updateBankOffer = async (req, res, next) => {
+  console.log("updateBankOffe")
+  const id = req.params.id;
+  let obj = {}
+  const { BankName, BankService, Note , Category } = req.body;
+  try {
+    console.log("1111")
+      if(BankName){
+        obj.BankName = BankName
+      }
+      if(BankService){
+        obj.BankService = BankService
+      }
+      console.log(req?.files ,"req.files.Picture[0]")
+      console.log("222")
+      if(Category){
+        obj.Category = Category
+      }
+      console.log("oooo")
+      if(Note){
+        obj.Note = Note
+      }
+      console.log("3333")
+  
+   if(req?.files?.Picture){
+     console.log('4444')
+    
+        let file = {};
+        file = req.files.Picture[0];
+        var image_path = file.path.slice(17,)
+        console.log(image_path , "pathththtth")
+        const fileobj = {
+          fileName: file.originalname,
+          filePath: image_path,
+          fileType: file.mimetype
+    
+        }
+      obj['Picture'] = JSON.stringify(fileobj)
+      }
+      console.log("555")
+      console.log(obj , "obj")
+      const result = await BankOffer.findByIdAndUpdate(id , obj);
+       console.log(result , "res")
+       if(result){
       return res.send({
         status: 1,
         message: 'Updated',
       });
-    } else {
+    }else {
       return res.send({
         status: 0,
-        message: 'no_record_found',
+        message: 'not update',
       });
     }
+     
+    
   } catch (error) {
     return res.send({
       status: 0,
@@ -194,13 +220,12 @@ exports.updateBankOffer = async (req, res, next) => {
 };
 
 exports.deleteBankOffer = async (req, res, next) => {
+  console.log("deleteBankOffer")
   const id = req.params.id;
   try {
-    const result = await BankOffer.findOne({ where: { id: id } });
+    const result = await BankOffer.findByIdAndDelete(id);
     if (result) {
-      await result.update({ deleted: 1 });
-
-      return res.send({
+     return res.send({
         status: 1,
         message: 'deleted',
       });
@@ -217,3 +242,31 @@ exports.deleteBankOffer = async (req, res, next) => {
     });
   }
 };
+
+exports.ChangeOfferStatus = async (req, res, next) => {
+  console.log("changeOfferStatus")
+  const id = req.params.id;
+  const { Status } = req.body;
+  console.log(id ,Status , "data" )
+  try {
+    let updates = await BankOffer.findByIdAndUpdate(id , {Status : Status});
+    console.log(updates , "update")
+    if (updates) {
+      return res.send({
+        status: 1,
+        message: 'success',
+      });
+    }else {
+      return res.send({
+        status: 0,
+        message: 'not find',
+      });
+    }
+  }catch(err){
+    console.log(err);
+    return res.send({
+      status: 0,
+      message: 'Something_technically_issue',
+    });
+  }
+}

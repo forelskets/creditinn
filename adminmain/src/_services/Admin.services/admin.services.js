@@ -26,6 +26,11 @@ export const ChangeServiceStatus = async (id , obj) => {
     console.log("res" , res)
     return res
 }
+export const ChangeOfferStatus = async (id , obj) => {
+    let res = await Api('PUT' , `/bank-offer/status/${id}` , obj)
+    console.log("res" , res)
+    return res
+}
 export const ChangeBankStatus = async (id , obj) => {
     let res = await Api('PUT' , `/bank/status/${id}` , obj)
     console.log("res" , res)
@@ -70,6 +75,12 @@ export const AllBankOffer = async (obj) => {
 
 export const saveBankOffer = async (obj) => {
     let res =await Api('POST', '/bank-offer', obj)
+    console.log("res",res)
+    return res
+}
+
+export const DeleteBankOffer = async (id , obj) => {
+    let res =await Api('Delete', `/bank-offer/${id}`, obj)
     console.log("res",res)
     return res
 }

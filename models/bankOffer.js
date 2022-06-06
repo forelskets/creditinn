@@ -25,11 +25,19 @@ const planSchema = new mongoose.Schema(
     ],
     Category: {
       type: String,
-      require: true 
+      required: true 
+    },
+    Status:{
+      type: Boolean,
+      default : true
     },
     Picture:{
       type: String,
-      require: true
+      required: true
+    },
+    Type:{
+      type:String,
+      required:true
     }
   },
   { timestamps: true }

@@ -341,7 +341,6 @@ exports.UpdateStatus = async (req , res  , next)=>{
 }
 }
 
-
 module.exports.retrieveUser = async (req, res, next) => {
   const { Email } = req.params;
   const { Password } = req.body;

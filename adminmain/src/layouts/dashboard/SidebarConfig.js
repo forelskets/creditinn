@@ -72,12 +72,8 @@ const sidebarConfig = [
     title: 'Token',
     path: '/dashboard/token',
     icon: getIcon('ic:outline-token')
-  },
-  {
-    title: 'login',
-    path: '/login',
-    icon: getIcon('eva:lock-fill')
   }
+ 
 ];
 
 export default sidebarConfig;

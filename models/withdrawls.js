@@ -20,7 +20,12 @@ const Withdrawlschema = new Schema({
     TransactionNo:{
         type: String,
         default:"none",
-        required: true
+        
+    },
+    Amount:{
+        type: String,
+        default:"none",
+        
     },
     Status:{
         type: String,
@@ -29,6 +34,6 @@ const Withdrawlschema = new Schema({
     }
 },{timestamps: true})
 
-const Withdrawls = mongoose.model("withdrawl" , Withdrawlschema);
+const Withdrawls = mongoose.model("withdrawal" , Withdrawlschema);
 
 module.exports = Withdrawls

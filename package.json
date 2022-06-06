@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
+  "description": "**Edit a file, c  te a new file, and clone from Bitbucket in under 2 minutes**",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,10 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "axois": "0.0.1-security",
+    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-validator": "^6.14.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.0",
     "multer": "^1.4.4",
@@ -30,6 +33,6 @@
   "bugs": {},
   "homepage": " ",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.16"
   }
 }

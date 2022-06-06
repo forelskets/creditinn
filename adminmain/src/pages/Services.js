@@ -31,6 +31,13 @@ export default function Services() {
   const [data, setData] = useState([]);
   const columns = [
     {
+      title: 'Category',
+      field: 'CategorySelect',
+      lookup: categoryArray,
+      validate: (rowData) =>
+        rowData.CategorySelect === undefined || rowData.CategorySelect === '' ? 'required' : true
+    },
+    {
       title: 'ServiceName',
       field: 'ServiceName',
       validate: (rowData) =>
@@ -49,26 +56,20 @@ export default function Services() {
           {row.View === true ? (
             <FormControlLabel
               control={<Switch checked={row.View} onChange={(e) => StatusChangeHandler(e, row)} />}
-              label="Can-View"
+              label="Show"
             />
           ) : (
             <FormControlLabel
               control={<Switch checked={row.View} onChange={(e) => StatusChangeHandler(e, row)} />}
-              label="Can't-View"
+              label="Hide"
             />
           )}
         </>
       ),
       editable: 'never',
       filtering: false
-    },
-    {
-      title: 'Category',
-      field: 'CategorySelect',
-      lookup: categoryArray,
-      validate: (rowData) =>
-        rowData.CategorySelect === undefined || rowData.CategorySelect === '' ? 'required' : true
     }
+    
   ];
   const colum = [{ ServiceName: 'aniddd', Note: 'ffff' }];
 
@@ -124,7 +125,7 @@ export default function Services() {
     <Page title="Services | CreditIN">
       <Container>
         <MaterialTable
-          title="Service Table"
+          title="Service Lists"
           columns={columns}
           data={data}
           options={{

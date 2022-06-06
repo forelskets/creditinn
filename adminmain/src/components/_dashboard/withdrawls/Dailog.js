@@ -23,9 +23,12 @@ const Dailog = (props) => {
 
   const SubmitTransaction = async (e) =>{
     e.preventDefault();
-     const response = await WithDrawlsUpdateTransaction(props?.data?.Id , {transaction});
-     if(response.status === 1){
+     const response = await WithDrawlsUpdateTransaction(props?.data?.Id , {transaction });
+     
+     if(response?.status === 1){
     props.ApiUpdate();
+     }else {
+       alert(response?.msg)
      }
   }
 
@@ -50,7 +53,7 @@ const Dailog = (props) => {
       >
         <DialogTitle id="alert-dialog-title">Select Bank & Service</DialogTitle>
         <DialogContent >
-        {props?.data?.TransactionNo === "none" ? 
+        {(props?.data?.TransactionNo === null && props?.data?.Status === 'Approved') ? 
         (<Box sx={{ width: '100%', height: 40, display:'flex' , justifyContent: 'space-between' }}>
           <Typography variant="h3" gutterBottom component="span" sx={{ margin: 10 }}>
             TransactionNo:
