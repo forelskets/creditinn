@@ -9,7 +9,7 @@ const ProductModal = (props) => {
     const [product , setProduct] = useState('')
     const [responseMsg , setResponseMsg] = useState('');
     const ProductmodalRef = useRef();
-    const [submitDis , SetSubmitDis] = useState(true)
+    // const [submitDis , SetSubmitDis] = useState(true)
 
     console.log(props.productmodal,"productModal")
     const HandleSubmit =async () =>{

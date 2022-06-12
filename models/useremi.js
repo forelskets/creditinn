@@ -33,7 +33,7 @@ const useremiSchema = new Schema({
       },
       Category:{
           type: String,
-          defalut: false
+          default: false
       }
 },
 {timestamps : true});

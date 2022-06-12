@@ -5,7 +5,7 @@ import { Card, Typography } from '@mui/material';
 import { fShortenNumber } from '../../../utils/formatNumber';
 //
 import Iconify from '../../Iconify';
-
+import {useSelector} from 'react-redux'
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Card)(({ theme }) => ({
@@ -37,14 +37,15 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 const TOTAL = 234;
 
 export default function RaiseAmount() {
+  const {rejectApplications} = useSelector(state => state.TablesReqReducer)
   return (
     <RootStyle>
       <IconWrapperStyle>
         <Iconify icon="clarity:rupee-solid" width={24} height={24} />
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">{fShortenNumber(rejectApplications)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Total Amount (Release)
+        Rejected Applications
       </Typography>
     </RootStyle>
   );

@@ -38,3 +38,16 @@ export const getAllUserEmis = async(obj)=>{
     console.log("res" , res)
     return res
 }
+
+export const getSettingList = async(obj)=>{
+    let res = await Api("GET" , "/admin/settingList" , obj)
+    console.log("res" , res)
+    return res
+}
+
+export const UpdateSettingList = async(obj)=>{
+    let res = await Api("POST" , "/admin/settingUpdate" , obj)
+    console.log("res" , res)
+    return res
+}
+

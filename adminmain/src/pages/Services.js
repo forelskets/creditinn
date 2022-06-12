@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { filter } from 'lodash';
-import Select from 'react-select';
-// import { Link as RouterLink } from 'react-router-dom';
-// material
 import MaterialTable from 'material-table';
 import { Container } from '@mui/material';
-// components
 import Page from '../components/Page';
 
 import '@material-ui/icons';
@@ -31,13 +26,6 @@ export default function Services() {
   const [data, setData] = useState([]);
   const columns = [
     {
-      title: 'Category',
-      field: 'CategorySelect',
-      lookup: categoryArray,
-      validate: (rowData) =>
-        rowData.CategorySelect === undefined || rowData.CategorySelect === '' ? 'required' : true
-    },
-    {
       title: 'ServiceName',
       field: 'ServiceName',
       validate: (rowData) =>
@@ -56,20 +44,26 @@ export default function Services() {
           {row.View === true ? (
             <FormControlLabel
               control={<Switch checked={row.View} onChange={(e) => StatusChangeHandler(e, row)} />}
-              label="Show"
+              label="Can-View"
             />
           ) : (
             <FormControlLabel
               control={<Switch checked={row.View} onChange={(e) => StatusChangeHandler(e, row)} />}
-              label="Hide"
+              label="Can't-View"
             />
           )}
         </>
       ),
       editable: 'never',
       filtering: false
+    },
+    {
+      title: 'Category',
+      field: 'CategorySelect',
+      lookup: categoryArray,
+      validate: (rowData) =>
+        rowData.CategorySelect === undefined || rowData.CategorySelect === '' ? 'required' : true
     }
-    
   ];
   const colum = [{ ServiceName: 'aniddd', Note: 'ffff' }];
 
@@ -125,7 +119,7 @@ export default function Services() {
     <Page title="Services | CreditIN">
       <Container>
         <MaterialTable
-          title="Service Lists"
+          title="Service Table"
           columns={columns}
           data={data}
           options={{

@@ -1,12 +1,13 @@
 import jwt_decoder from 'jwt-decode';
-import { CLOSE_LOADER, LOGIN_ERRORS, SET_LOADER , SET_TOKEN , SET_MESSAGE , REMOVE_MESSAGE, SET_ADMIN, ADMIN_LOGOUT} from '../types/AdminTypes';
+import { USERSARRAY , CLOSE_LOADER , LOGIN_ERRORS, SET_LOADER , SET_TOKEN , SET_MESSAGE , REMOVE_MESSAGE, SET_ADMIN} from '../types/AdminTypes';
 
 const initState = {
     loading : false,
     loginErrors:[],
     token:'',
     admin:'',
-    message:''
+    message:'',
+    usersarray:[]
 }
 
 const verifyToken = (token) =>{
@@ -43,13 +44,13 @@ if(token){
          return {...state , token: action.payload}
      }else if(action.type === SET_ADMIN){
         return {...state , admin: action.payload}
-    }else if(action.type === ADMIN_LOGOUT){
-        return {...state , admin:''}
     }else if(action.type === SET_MESSAGE){
          return {...state , message: action.payload}
      }else if(action.type === REMOVE_MESSAGE){
          return {...state , message:''}
-     }else {
+     }else if(action.type === USERSARRAY){
+        return {...state , usersarray: action.payload}
+    }else {
          return state;
      }
  }

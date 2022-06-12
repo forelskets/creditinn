@@ -8,7 +8,7 @@ const ShareModal = (props) =>{
   const [mobile , setMobile] = useState('')
   const [product , setProduct] = useState('')
   const [responseMsg , setResponseMsg] = useState('');
-  const [submitDis , SetSubmitDis] = useState(true)
+  //  const [submitDis , SetSubmitDis] = useState(true)
    const HandleSubmit =async () =>{
     const refral = props.refral;
     console.log(props.id , name , mobile , product , refral)

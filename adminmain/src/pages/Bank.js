@@ -1,51 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import MaterialTable from 'material-table'
-
-// import { Link as RouterLink } from 'react-router-dom';
-// material
 import {
-  Card,
-  Table,
-  Stack,
-  Checkbox,
-  TableRow,
-  TableBody,
-  TableCell,
   Container,
-  Typography,
-  TableContainer,
-  TablePagination,
   FormControlLabel,
   Switch
 } from '@mui/material';
-// components
 import Page from '../components/Page';
-import Scrollbar from '../components/Scrollbar';
-// import Iconify from '../components/Iconify';
-import SearchNotFound from '../components/SearchNotFound';
-import {
-  BankListHead,
-  BankListToolbar,
-  BankMoreMenu,
-  FormModal
-} from '../components/_dashboard/bank';
-//
-// import BANK from '../_mocks_/bank';
+
 
     
     import { createBank, UpdateBanks ,AllBank ,DeleteBank, AllCategory , ChangeBankStatus} from '../_services/Admin.services';
-import toastr from 'toastr';
-import { Update } from '@material-ui/icons';
-
-// ----------------------------------------------------------------------
-
-const TABLE_HEAD = [
-  { id: 'Bank', label: 'Bank', alignRight: false },
-  { id: 'Note', label: 'Note', alignRight: false },
-  { id: '' }
-];
-
-// ----------------------------------------------------------------------
 
 
 

@@ -38,7 +38,7 @@ export default function Withdrawls(){
     },[])
 
   return (
-    <Page title="Withdrawls | Minimal-UI">
+    <Page title="Withdrawls | Creditsin">
         <Container>
             <MaterialTable
             columns={column}

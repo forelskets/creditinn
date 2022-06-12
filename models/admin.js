@@ -3,6 +3,14 @@ const {Schema , model} = mongoose;
 const bcrypt = require('bcrypt')
 
 const adminSchema = new Schema({
+    Name:{
+        type: String, 
+        required: true
+    },
+    Mobile:{
+        type: String,
+        required: true
+    },
     Email:{
         type: String,
         required: true

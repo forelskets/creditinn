@@ -25,4 +25,4 @@ export {
     DeleteBankOffer
 } from './admin.services'
 
-export {AllUsers , AllRefrals , Products , AdminLogin , ChangeStatus , getAllUserEmis} from './admin.user'
+export {AllUsers , AllRefrals , Products , AdminLogin , ChangeStatus , getAllUserEmis , getSettingList , UpdateSettingList} from './admin.user'

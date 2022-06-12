@@ -4,7 +4,7 @@ import Select from "react-select";
 import axios from "axios";
 import toastr from "toastr";
 import isNumber from "is-number";
-import { Country, State, City } from "country-state-city";
+import { State, City } from "country-state-city";
 import input from "react-number-format";
 import { ToWords } from "to-words";
 import { Validate } from "../_helper/Validation/Validate";
@@ -12,8 +12,6 @@ import { Validate } from "../_helper/Validation/Validate";
 var obj = {};
 var count = 0 ;
 
-
-const eye = { fontSize: "15px", height: "0px" };
 var basic = 1;
 var basic1 = 1;
 const LoanForm = (props) => {
@@ -36,7 +34,7 @@ const LoanForm = (props) => {
   );
   const EmployeeDatails = useRef(null);
   const BasicDetails = useRef(null);
-  const KYCDetails = useRef(null);
+   const KYCDetails = useRef(null);
   const [checkBoxStatus, setCheckBoxStatus] = useState(false);
   const [citySelect, setCitySelect] = useState({});
   const [loanAmount, setLoanAmount] = useState("");

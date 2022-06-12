@@ -12,8 +12,6 @@ import { MHidden } from '../../components/@material-extend';
 //
 import sidebarConfig from './SidebarConfig';
 import account from '../../_mocks_/account';
-import { useDispatch } from 'react-redux';
-import { ADMIN_LOGOUT } from 'src/store/types/AdminTypes';
 
 // ----------------------------------------------------------------------
 
@@ -43,12 +41,6 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
-  const dispatch = useDispatch()
-
-  const LogoutHandler =()=>{
-    localStorage.removeItem("adminLogin")
-    dispatch({type:ADMIN_LOGOUT})
-  }
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -102,15 +94,13 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             bgcolor: 'grey.200'
           }}
         >
-          <Button fullWidth variant="contained" onClick={LogoutHandler}>
+          <Button fullWidth href="https://creditsin.com" target="_blank" variant="contained">
             Logout
           </Button>
         </Stack>
       </Box>
     </Scrollbar>
   );
-
- 
 
   return (
     <RootStyle>

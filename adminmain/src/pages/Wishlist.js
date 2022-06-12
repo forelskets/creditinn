@@ -35,7 +35,7 @@ const Wishlist = () => {
     callEffect();
   },[])
   return (
-    <Page title='WishList | Minimal-UI'>
+    <Page title='WishList | Creditsin'>
       {console.log(wishlist , "data")}
       <Container>
         <MaterialTable

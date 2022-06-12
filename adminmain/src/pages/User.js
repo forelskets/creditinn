@@ -1,42 +1,16 @@
-import { filter } from 'lodash';
-import { sentenceCase } from 'change-case';
+
 import { useEffect, useState } from 'react';
-// material
 import {
- 
-  Container,
-  
+  Container,  
 } from '@mui/material';
-// components
 import Switch from '@mui/material/Switch';
 import Page from '../components/Page';
 import MaterialTable from 'material-table';
-//
-// import userList from '../_mocks_/user';
-
 import { ChangeStatus ,AllUsers} from '../_services/Admin.services/index';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { LoadingButton } from '@mui/lab';
-// ----------------------------------------------------------------------
-
-
-
-// ----------------------------------------------------------------------
-
-
-
-
 
 export default function User() {
-  const [page, setPage] = useState(0);
-  const [order, setOrder] = useState('asc');
-  const [selected, setSelected] = useState([]);
-  const [orderBy, setOrderBy] = useState('name');
-  const [filterName, setFilterName] = useState('');
-  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [userList , setUserList] = useState([]);
-  const [switchStatus , setSwitchStatus] = useState(Boolean)
-  const [loading , setLoading] = useState(false)
 
   const TABLE_HEAD = [
     { field: 'Name', title: 'Name' },
@@ -58,7 +32,6 @@ export default function User() {
     if(response?.status === 1){
       getUsers();
          
-      // alert(response?.message)
     }else{
       alert(response?.message);
       
@@ -95,7 +68,7 @@ export default function User() {
          paging: true,
          pageSize: 5,
          emptyRowsWhenPagin: false,
-         pageSizeOptions : [5 , 10 ,15, 20 ,30 ,40,50 , 100]
+         pageSizeOptions : [10 ,15, 20 ,35 ,50, 100]
        }}/>
       </Container>
     </Page>

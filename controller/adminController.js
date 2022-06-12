@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const {body , validationResult} = require("express-validator")
 const jwt = require('jsonwebtoken');
 const Admin = require('../models/admin');
+const Setting = require('../models/setting');
 
 
 
@@ -62,14 +63,93 @@ exports.AdminLogin = async (req, res , next) =>{
               }
            
             }else{
-                console.log({errors:[{msg:"CREDENTIALS_IS_NOT_CORRECTS"}]} , "error")
           return res.status(400).json({errors:[{msg:"CREDENTIALS_IS_NOT_CORRECTS"}]})
            
         
       }
   } catch (error) {
-      console.log(error.array() , "array error")
-    return res.status(500).json({ errors: error.array() });
+    return res.status(500).json({ errors: error });
   }
 
+}
+
+exports.AdminUpdate = async(req , res , next) =>{
+   console.log("AdminUpdated")
+   const {name , mobile , email} = req.body;
+
+   try {
+       const result = await Admin.findOneAndUpdate({Email : email } , {Name: name , Email : email , Mobile: mobile } ,{upsert:true});
+     
+       if(result){
+        const result1 = await Admin.findOne({Email : email });
+      
+        const token = generateAuthToken(result1);
+        
+           return res.send({
+               status:1, 
+               msg: "Profile_Updated_Successfully",
+               token:token
+           })
+       }else{
+        return res.send({
+            status:0, 
+            msg: "Profile_Not_finding"
+        })
+       }
+   } catch (error) {
+    return res.send({
+        status: 1 , 
+        msg: "Profile_Not_Update_due_to_some_Technical_issues"
+    })
+   }
+}
+
+
+exports.AdminSettingList = async (req , res , next) =>{
+    console.log("AdminSettingList")
+    try {
+        result = await Setting.findById("628b6a5fe4377da6c1bb4f93")
+        if(result){
+            return res.send({
+                status:1,
+                data:result,
+            })
+        }else{
+            return res.send({
+                status:0, 
+                msg:"data_not_found"
+            })
+        }
+    } catch (error) {
+        return res.send({
+            status:0, 
+            msg:"technical_issue"
+        })
+    }
+}
+
+exports.AdminSettingUpdate = async (req , res  , next) =>{
+    console.log("AdminSettingUpdate")
+    const {cashbackreward , minAmount} = req.body;
+    console.log(cashbackreward , minAmount)
+    try {
+        const response = await Setting.findByIdAndUpdate("628b6a5fe4377da6c1bb4f93", {Cashbackreward : cashbackreward , Minamount : minAmount})
+        console.log(response , "response") 
+        if(response){
+            return res.send({
+                status:1,
+                msg:"Updated_successfully"
+            })
+        }else {
+            return res.send({
+                status:0,
+                msg:"fail_ to_Update"
+            })
+        }
+    } catch (error) {
+        return res.send({
+            status:0,
+            msg:"any_technical_issue"
+        })
+    }
 }

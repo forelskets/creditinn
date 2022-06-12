@@ -41,8 +41,8 @@ export const postLogin = (credentials) =>{
            
             } catch (error) {
              dispatch({type: CLOSE_LOADER});
-             dispatch({type: LOGIN_ERRORS , payload: error.response.data.errors});
-             console.log(error.response.data.errors , "response.error.data")
+             dispatch({type: LOGIN_ERRORS , payload: error.response.data});
+             console.log(error.response.data , "response.error.data")
          }
     }
 }

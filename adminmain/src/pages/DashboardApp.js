@@ -30,7 +30,7 @@ export default function DashboardApp() {
     dispatch({type: REMOVE_MESSAGE})
    },[])
   return (
-    <Page title="Dashboard | Minimal-UI">
+    <Page title="Dashboard | Creditsin">
          <Toaster
             position="top-center"
             reverseOrder={false}
@@ -63,13 +63,13 @@ export default function DashboardApp() {
             <AppWebsiteVisits />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={4}>
+          {/* <Grid item xs={12} md={6} lg={4}>
             <AppCurrentVisits />
-          </Grid>
+          </Grid> */}
 
-          <Grid item xs={12} md={6} lg={8}>
+          {/* <Grid item xs={12} md={6} lg={8}>
             <AppNewsUpdate />
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12} md={6} lg={4}>
             <AppOrderTimeline />

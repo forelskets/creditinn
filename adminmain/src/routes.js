@@ -19,6 +19,7 @@ import Withdrawls from './pages/Withdrawls';
 import Useremi from './pages/Useremi';
 import RouteLinks from './store/private/RouteLinks';
 import PrivateRoute from './store/private/PrivateRoute';
+import ProfileSetting from './pages/ProfileSetting';
 
 // ----------------------------------------------------------------------
 
@@ -45,6 +46,7 @@ export default function Router() {
           <Route path='withdrawls' element={<Withdrawls/>}/>
           <Route path='useremi' element={<Useremi/>}/>
           <Route path='token' element={<Token/>}/>
+          <Route path='profileSetting/:id' element={<ProfileSetting/>}/>
           
         </Route>
         

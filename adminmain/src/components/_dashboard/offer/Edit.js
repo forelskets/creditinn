@@ -3,10 +3,9 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import { FormControl, Select, MenuItem, InputLabel, TextField ,NativeSelect } from '@mui/material/';
+import { FormControl,  InputLabel, TextField ,NativeSelect } from '@mui/material/';
 import axios from 'axios'
 import Iconify from '../../Iconify';
-import { Validate } from '../../../_helper'
 import { AllBank, AllService ,AllCategory} from '../../../_services/Admin.services'
 export default function Edit(props) {
   const [open, setOpen] = React.useState(false);
@@ -18,14 +17,14 @@ export default function Edit(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  const [bank, setBank] = React.useState('');
-  const [service, setService] = React.useState('');
+  // const [bank, setBank] = React.useState('');
+  // const [service, setService] = React.useState('');
   const [category, setCategory] = React.useState('');
 
-  const handleChange = (event) => {
-    setBank(event.target.value);
-    setService(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setBank(event.target.value);
+  //   setService(event.target.value);
+  // };
 
 
   const [note, setNote] = useState(props?.data?.Note);
@@ -59,28 +58,17 @@ export default function Edit(props) {
   };
 
   const SubmitForms = async (e) => {
-    // alert("1111")
+  
     e.preventDefault();
     let success = 0;
-    // alert("2222")
+  
     let obj = {
-      Note: note, BankName: BankName,    // ? BankName.value : "",
-      BankService: [services], //Array.isArray(services) ? services.map(x => (x.value)) : null,
+      Note: note, BankName: BankName,  
+      BankService: [services],
       Category: category,
       Picture: picture
     }
-    // alert("3333")
-    // let Obj = Validate(obj, rules)
-    // Object.keys(Obj).map(key => {
-    //   if (Obj[key] !== "") {
-    //     success = 1
-    //   }
-    // })
-    // alert("4444")
-
-    // setError(Obj)
     
-    // if (success === 0) {
         const formData = new FormData();
     for(const key in obj){
       const ele = obj[key]

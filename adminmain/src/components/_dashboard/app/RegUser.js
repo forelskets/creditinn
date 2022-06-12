@@ -6,6 +6,9 @@ import { fShortenNumber } from '../../../utils/formatNumber';
 // component
 import Iconify from '../../Iconify';
 import {AllUsers } from '../../../_services/Admin.services';
+import { useDispatch  } from 'react-redux';
+import { USERSARRAY } from 'src/store/types/AdminTypes';
+import { getApplications } from '../../../store/asyncMethod/TablesReq';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Card)(({ theme }) => ({
@@ -39,16 +42,27 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 // const TOTAL = 7140;
 
 export default function RegUser() {
+  const dispatch  = useDispatch()
+ 
+  
   const [data , setData] = useState();
+ 
 
   useEffect(()=>{
+    
     callEffect();
- })
+    
+ },[])
  const callEffect = async () => {
    let res = await AllUsers();
    if (res?.status === 1 && Array.isArray(res?.data)) {
      setData(res?.data.length);
+     dispatch({type: USERSARRAY , payload: res.data })
+     const data = dispatch(getApplications())
+       
+     
    }
+   
  };
   return (
     <RootStyle>

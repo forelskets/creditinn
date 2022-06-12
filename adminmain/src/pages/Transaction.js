@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { filter } from 'lodash';
 import MaterialTable from 'material-table'
 // import { Link as RouterLink } from 'react-router-dom';
 // material
@@ -10,19 +9,6 @@ import {
 } from '@mui/material';
 // components
 import Page from '../components/Page';
-import Scrollbar from '../components/Scrollbar';
-// import Iconify from '../components/Iconify';
-import SearchNotFound from '../components/SearchNotFound';
-import {
-  OfferListHead,
-  OfferListToolbar,
-  OfferMoreMenu,
-  FormModal
-} from '../components/_dashboard/offer';
-//
-// import OFFERS from '../_mocks_/offer';
-
-// import { OfferForm } from '../components/AddYourBankDetailsForm'
 
 import {
   AllBankOffer,

@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { filter } from 'lodash';
 import {
   
   Container,
   
 } from '@mui/material';
+import dateFormat from "dateformat";
 // components
+
 import Page from '../components/Page';
-import Scrollbar from '../components/Scrollbar';
-import SearchNotFound from '../components/SearchNotFound';
-import { AppListHead, AppListToolbar, AppMoreMenu ,FormModal } from '../components/_dashboard/Application';
-import { Applications, ApplicationsStateChange ,allortCashback } from '../_services/Admin.services';
+import {FormModal } from '../components/_dashboard/Application';
+import { ApplicationsStateChange ,allortCashback } from '../_services/Admin.services';
 import toastr from 'toastr';
 import MaterialTable from 'material-table';
-// ----------------------------------------------------------------------
-
-
-//  
-// ----------------------------------------------------------------------
+import { useDispatch , useSelector } from 'react-redux';
 
 
 
 
 
 export default function User() {
+  const dispatch = useDispatch();
+  const {applications} = useSelector(state => state.TablesReqReducer)
   const [application , setApplication] = useState([]);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
@@ -35,28 +32,30 @@ export default function User() {
   
 
   const [data, setData] = useState([]);
-
-  const Dataconvert = () =>{
-    let data1 =[];
-    data?.map((ele , ind)=>(
-    
-    data1?.push({"Id":ele?._id,"user":ele?.UserId,"Name" : ele?.UserId?.Name , "Mobile":ele?.UserId?.Mobile , "Application":ele?.ApplicationNo , "AadharNo":ele?.KycId?.AdhaarNo , "PanNo":ele?.KycId?.PanNo , "Amount":ele?.Amount , "Date":ele?.createdAt ,"Status":ele?.status , "Modal":"Modal"  })
-    ))
-    setApplication(data1)
-  }
+  const [date, setDate]=useState([]);
+  const now = new Date();
+  
   useEffect(() => {
-    if(data?.length === 0){
+    
+    
     callEffect();
-    }else{
-      Dataconvert();
-    }
-  }, [data]);
+  
+     
+  }, [applications]);
+
+ 
 
   const callEffect = async () => {
-    let res = await Applications();
-    if (res?.status === 1 && Array.isArray(res?.data?.applications)) {
-      setData(res?.data?.applications);
-    }
+  
+   
+      
+      let data1 =[];
+      applications.map((ele , ind)=>(
+      
+      data1?.push({"Id":ele?._id,"user":ele?.UserId,"Name" : ele?.UserId?.Name , "Mobile":ele?.UserId?.Mobile , "Application":ele?.ApplicationNo , "AadharNo":ele?.KycId?.AdhaarNo , "PanNo":ele?.KycId?.PanNo , "Amount":ele?.Amount , "Date":dateFormat(ele?.createdAt,"mmm") ,"Status":ele?.status , "Modal":"Modal"  })
+      ))
+      setApplication(data1)
+    
   };
 
   const TABLE_HEAD = [
@@ -92,7 +91,7 @@ export default function User() {
 
   
   return (
-    <Page title="Applications | CreditIN">
+    <Page title="Applications | CreditsIN">
       <Container>
         {console.log(data,"filteredApps")}
         <MaterialTable
@@ -101,9 +100,9 @@ export default function User() {
         data={application}
         options={{
           paging: true,
-          pageSize:6,       // make initial page size
-          emptyRowsWhenPaging: false,   // To avoid of having empty rows
-          pageSizeOptions:[6,12,20,50],    // rows selection options
+          pageSize:6,       
+          emptyRowsWhenPaging: false,   
+          pageSizeOptions:[6,12,20,50],    
          } }/>
        
       </Container>
@@ -137,7 +136,7 @@ const Status = (props) => {
 
   return (
     <>
-      {/* <p>{props?.status}</p> */}
+      
       <select value={value} onChange={(e) => onChange(e)}>
         {statusArry.map((obj) => {
           return <option value={obj}>{obj}</option>;

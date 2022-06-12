@@ -2,7 +2,6 @@ import React from "react";
 
 import { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { success } from "toastr";
 import { ApplicationsById } from "../_services/Admin.services";
 import { myrefral } from "../_services/Refral.services/index";
 var Success = 0;
