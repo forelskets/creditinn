@@ -22,7 +22,20 @@ export {
     getAllWithDrawls,
     WithDrawlsStateChange,
     WithDrawlsUpdateTransaction,
-    DeleteBankOffer
+    DeleteBankOffer,
+    BankOfferTextEditor
 } from './admin.services'
 
-export {AllUsers , AllRefrals , Products , AdminLogin , ChangeStatus , getAllUserEmis , getSettingList , UpdateSettingList} from './admin.user'
+export {
+    AllUsers , 
+    AllRefrals , 
+    Products ,
+    AdminLogin ,
+    ChangeStatus , 
+    getAllUserEmis , 
+    getSettingList , 
+    UpdateSettingList,
+    addLoan, 
+    addInsurance,
+    addCreditCard
+} from './admin.user'

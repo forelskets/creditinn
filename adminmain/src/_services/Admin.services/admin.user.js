@@ -51,3 +51,22 @@ export const UpdateSettingList = async(obj)=>{
     return res
 }
 
+
+export const addLoan = async(obj , id)=>{
+    let res = await Api("POST" , `/useremi/loan/${id}` , obj)
+    console.log("res" , res)
+    return res
+}
+
+export const addInsurance = async(obj , id)=>{
+    let res = await Api("POST" , `/useremi/insurance/${id}` , obj)
+    console.log("res" , res)
+    return res
+}
+
+export const addCreditCard = async(obj , id)=>{
+    let res = await Api("POST" , `/useremi/creditCard/${id}` , obj)
+    console.log("res" , res)
+    return res
+}
+

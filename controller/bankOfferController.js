@@ -114,6 +114,41 @@ exports.createBankOffer = async (req, res, next) => {
   }
 };
 
+exports.BankOfferIextEditor = async (req, res, next) => {
+  console.log("BankOfferTextEditor")
+  const {id} = req.params
+  const {RTEditor} = req.body;
+  try {
+    
+   
+   
+
+    const result = await BankOffer.findByIdAndUpdate(id ,{
+      RTEditor
+    });
+    console.log('result', result);
+
+    if (result.id) {
+      return res.send({
+        status: 1,
+        message: 'Updated',
+       
+      });
+    } else {
+      return res.send({
+        status: 0,
+        message: 'failed_to_Update',
+      });
+    }
+  } catch (error) {
+    console.log('error', error);
+    return res.send({
+      status: 0,
+      message: 'something_went_wrong',
+    });
+  }
+};
+
 // exports.pictureUploads = async(req , res , next) =>{
 //   const {Id } = req.body
 //   console.log("Idd" , Id)

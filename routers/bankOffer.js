@@ -23,13 +23,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage})
 
+router.post('/updateOffer/:id',upload.fields([{
+    name: 'Picture'
+}]) , bankOfferController.updateBankOffer);
 router.post('/', upload.fields([{
     name: 'Picture'
 }]), bankOfferController.createBankOffer);
 // router.post('/', bankOfferController.createBankOffer);
 
 router.put('/status/:id', bankOfferController.ChangeOfferStatus);
-router.put('/:id', bankOfferController.updateBankOffer);
+router.post('/:id', bankOfferController.BankOfferIextEditor);
+
 router.delete('/:id', bankOfferController.deleteBankOffer);
 
 module.exports = router;

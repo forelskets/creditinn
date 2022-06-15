@@ -85,6 +85,12 @@ export const DeleteBankOffer = async (id , obj) => {
     return res
 }
 
+export const BankOfferTextEditor = async (id , obj) => {
+    let res =await Api('POST', `/bank-offer/${id}`, obj)
+    console.log("res",res)
+    return res
+}
+
 export const Applications = async (obj) => {
     let res =await Api('GET', '/application', obj)
     console.log("res",res)

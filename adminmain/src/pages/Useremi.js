@@ -1,6 +1,6 @@
 import React, { useEffect , useState } from 'react'
 import Page from 'src/components/Page'
-import { Container } from '@mui/material';
+import { Container, Input, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -8,8 +8,14 @@ import Tabs from '@mui/material/Tabs';
 import TabPanel from '@mui/lab/TabPanel';
 import MaterialTable from 'material-table';
 import { getAllUserEmis } from 'src/_services/Admin.services';
+import DatePicker from "react-datepicker";
+
+import { Button , Grid } from '@mui/material';
+import FormModal from "../components/_dashboard/userEmi/Form"
+import { reject } from 'lodash';
 
 const Useremi = () => {
+  const [startDate , setStartDate] = useState(new Date())
   const [value, setValue] = React.useState('1');
   const [loanData , setLoanData] = useState([]);
   const [insuranceData , setInsuranceData] = useState([]);
@@ -29,11 +35,11 @@ const Useremi = () => {
      let data3 = [];
      response?.data.map((ele)=>{
         if(ele?.Category === "Credit Cards"){
-          data1.push({"BankName":ele?.BankName , "Emiamount":ele?.Emiamount , "Emidate":ele?.Emidate})
+          data1.push({"BankName":ele?.BankName , "EmiAmount":ele?.EmiAmount , "EmiDate":ele?.EmiDate})
         } else if(ele?.Category === "Loans"){
-          data2.push({"BankName":ele?.BankName , "Emiamount":ele?.Emiamount , "Emidate": ele?.Emidate , "LoanType": ele?.LoanType })
+          data2.push({"BankName":ele?.BankName , "EmiAmount":ele?.EmiAmount , "EmiDate": ele?.EmiDate , "LoanType": ele?.Type , "EndDate": ele?.EndDate })
         } else if(ele?.Category === "Insurances"){
-          data3.push({"Insucomp":ele?.Insucomp , "Emiamount":ele?.Emiamount , "Emidate": ele?.Emidate , "InsuranceType": ele?.InsuranceType })
+          data3.push({"Insucomp":ele?.ProviderName , "EmiAmount":ele?.EmiAmount , "EmiDate": ele?.EmiDate , "InsuranceType": ele?.Type , "EndDate": ele?.EndDate})
         }
      })
      setLoanData(data2);
@@ -45,24 +51,24 @@ const Useremi = () => {
 
  const InsuranceColumns = [
    {title: "Company", field:"Insucomp"},
-   {title: "Amount", field:"Emiamount"},
+   {title: "Amount", field:"EmiAmount"},
    {title: "InsuranceType", field:"InsuranceType"},
-   {title: "Date", field:"Emidate"},
-   {title: "EndDate", field:"Enddate"}
+   {title: "Date", field:"EmiDate"},
+   {title: "EndDate", field:"EndDate"}
  ]
 
 const CreditCardColumns = [
   {title: "BankName", field:"BankName"},
-  {title:"Amount" , field:"Emiamount"},
-  {title: "Date", field:"Emidate"}
+  {title:"Amount" , field:"EmiAmount"},
+  {title: "Date", field:"EmiDate"}
 ]
 
  const LoanColumns = [
    {title:"Bank" , field:"BankName"},
-   {title:"Amount" , field:"Emiamount"},
-   {title: "EmiDate", field: "Emidate"},
+   {title:"Amount" , field:"EmiAmount"},
+   {title: "EmiDate", field: "EmiDate" },
    {title: "LoanType", field: "LoanType"},
-   {title: "EndDate", field: "Enddate"}
+   {title: "EndDate", field: "EndDate"}
  ]
 
   useEffect(()=>{
@@ -71,10 +77,11 @@ const CreditCardColumns = [
 
   return (
     <Page title='WishList | Minimal-UI'>
+      <FormModal callEffect={callEffect}/>
       <Container>
-     <Box sx={{ width: '100%', typography: 'body1' }}>
+     <Box  sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box container  sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
         value={value}
         onChange={handleChange}
@@ -82,9 +89,12 @@ const CreditCardColumns = [
         indicatorColor="secondary"
         aria-label="secondary tabs example"
       >
+        
         <Tab value="1" label="Loan" />
         <Tab value="2" label="Insurance" />
         <Tab value="3" label="CreditCard" />
+       
+        
       </Tabs>
         </Box>
         <TabPanel value="1">
@@ -92,6 +102,16 @@ const CreditCardColumns = [
           title="Loan Table"
           columns={LoanColumns}
           data={loanData}
+          options={{
+            actionsColumnIndex: -1,
+            addRowPosition:'first'
+          }}
+          editable={{
+            onRowAdd:(newData) =>
+            new Promise(async(resolve , reject) => {
+              console.log(newData , "newData")
+            })
+          }}
           />
         </TabPanel>
         <TabPanel value="2">
