@@ -29,7 +29,6 @@ router.post('/updateOffer/:id',upload.fields([{
 router.post('/', upload.fields([{
     name: 'Picture'
 }]), bankOfferController.createBankOffer);
-// router.post('/', bankOfferController.createBankOffer);
 
 router.put('/status/:id', bankOfferController.ChangeOfferStatus);
 router.post('/:id', bankOfferController.BankOfferIextEditor);

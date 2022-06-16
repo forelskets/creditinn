@@ -38,6 +38,9 @@ const planSchema = new mongoose.Schema(
     Type:{
       type:String,
       required:true
+    },
+    RTEditor:{
+      type: String
     }
   },
   { timestamps: true }

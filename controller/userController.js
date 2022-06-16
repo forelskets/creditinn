@@ -351,6 +351,7 @@ module.exports.retrieveUser = async (req, res, next) => {
       { Email },
       'UserId Name Email Password'
     );
+    
     updatedFields = user;
     
     if (!user) {
