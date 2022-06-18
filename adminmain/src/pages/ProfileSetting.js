@@ -1,4 +1,4 @@
-import React , {useEffect, useState} from 'react';
+import React , {useEffect, useState , useRef} from 'react';
 import jwt_decoder from 'jwt-decode';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -11,12 +11,17 @@ import {useSelector , useDispatch} from 'react-redux'
 import toast, { Toaster } from 'react-hot-toast';
 import { SET_ADMIN, SET_TOKEN, UPDATE_ADMIN } from 'src/store/types/AdminTypes';
 import {useParams} from 'react-router-dom'
-import { getSettingList , UpdateSettingList } from 'src/_services/Admin.services';
+import JoditEditor from 'jodit-react';
+import { getSettingList , UpdateSettingList ,  UpdateTextEditor} from 'src/_services/Admin.services';
+import { Grid, Typography } from '@mui/material';
 
 const ProfileSetting = () => {
+  const editor = useRef(null)
+ 
      const {id} = useParams()
     const dispatch = useDispatch();
     const {admin} = useSelector(state => state.AuthReducer)
+    const [editorData , setEditorData] =  useState('')
     const [name , setName] = useState(admin.Name)
     const [email , setEmail] = useState(admin.Email)
     const [mobile , setMobile] = useState(admin.Mobile)
@@ -85,6 +90,7 @@ const ProfileSetting = () => {
       if(response?.status === 1){
         setCashbackreward(response?.data?.Cashbackreward)
         setMinAmount(response?.data?.Minamount)
+        setEditorData(response?.data?.RTEditor)
       }else {
         toast.error(response?.msg);
       }
@@ -98,7 +104,7 @@ const ProfileSetting = () => {
     },[])
 
     const SettingUpdated = async() =>{
-      const response = await UpdateSettingList({cashbackreward , minAmount})
+      const response = await UpdateSettingList({cashbackreward , minAmount , RTEditor : editorData})
       if(response.status === 1){
            getSettingListData();
            toast.success(response.msg)
@@ -106,6 +112,8 @@ const ProfileSetting = () => {
         toast.error(response.msg)
       }
     }
+
+    
   
   return (
     <Box sx={{ width: '100%', typography: 'body1' }}>
@@ -146,6 +154,8 @@ const ProfileSetting = () => {
           </Box>
       </TabPanel>
       <TabPanel value="2">
+  <Grid container direction="row" >
+    <Grid item lg={3}>
         <Box sx={{ml:5}}>
       <Box  sx={{mt: 2}} item > 
              <TextField onChange={(e)=>setCashbackreward(e.target.value)} value={cashbackreward} label="CashBackReward" variant="filled" color="success"  />
@@ -158,6 +168,15 @@ const ProfileSetting = () => {
               <Button variant='contained' onClick={SettingUpdated}>Update</Button>
               </Box>
               </Box>
+              </Grid>
+              <Grid item container direction="column" alignItems="center" justifyContent="center" lg={9}>
+                <Grid item>
+                <JoditEditor ref={editor} onChange={(content)=> setEditorData(content)} value = {editorData}/>
+                </Grid>
+                
+               
+              </Grid>
+</Grid>
       </TabPanel>
      
     </TabContext>

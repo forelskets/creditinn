@@ -1,13 +1,10 @@
-import React, { useRef , useState } from 'react'
-import { Button } from '@mui/material'
+import React, { useRef , useState } from 'react';
+import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
-import {Box} from '@mui/material'
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Iconify from 'src/components/Iconify';
-import joditEditor from 'jodit-react'
 import JoditEditor from 'jodit-react';
-import { setDefaultLocale } from 'react-datepicker';
 import {BankOfferTextEditor} from '../../../_services/Admin.services'
 
 
@@ -32,6 +29,7 @@ const RichTextEditor = (props) => {
          const response = await BankOfferTextEditor(props?.row?.id , {RTEditor : data})
          if(response?.status === 1){
              alert(response?.message)
+             props.callApi();
          } else {
              alert(response?.message)
          }

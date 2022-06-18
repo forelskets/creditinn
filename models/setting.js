@@ -8,6 +8,9 @@ const settingSchema = new Schema({
     Minamount:{
         type: String,
         required: true
+    },
+    RTEditor : {
+       type : String
     }
 })
 

@@ -116,7 +116,7 @@ export default function Offer() {
     },
     {title: "Banner", field:"Picture", render:(row) =><div style={{width:"100px" , height:"100px" }}><img src={`../${row?.Picture}`}/></div>},
     {title: "" , field: "" , render:(row)=> <><Edit data={row} callApi={callEffect}/></>},
-    {title: "" , field: "" , render:(row)=> <><RichTextEditor row={row} /></>},
+    {title: "" , field: "" , render:(row)=> <><RichTextEditor row={row} callApi={callEffect} /></>},
   ]
 
   const saveOffers = async (obj, callback) => {
