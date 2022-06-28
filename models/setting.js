@@ -11,7 +11,10 @@ const settingSchema = new Schema({
     },
     RTEditor : {
        type : String
-    }
+    },
+    TEL : {
+        type : String
+     }
 })
 
 const Setting = new model("setting" , settingSchema)

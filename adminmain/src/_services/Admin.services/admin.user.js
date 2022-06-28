@@ -26,6 +26,12 @@ export const Products = async (obj) => {
     return res
 }
 
+export const ProductStateChange = async (id , obj) => {
+    let res =await Api('PUT', `/user/statusUpdate/${id}`, obj)
+    console.log("res",res)
+    return res
+}
+
 export const AdminLogin = async (obj) => {
 
     console.log(obj,'oobbjj')

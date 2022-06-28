@@ -125,7 +125,7 @@ exports.BankOfferIextEditor = async (req, res, next) => {
 
     const result = await BankOffer.findByIdAndUpdate(id ,{
       RTEditor
-    });
+    } , {upsert: true});
     console.log('result', result);
 
     if (result.id) {

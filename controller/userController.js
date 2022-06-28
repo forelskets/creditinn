@@ -125,7 +125,7 @@ exports.ShareRefralDataStor =  async (req , res, next)=>{
 }
 
 exports.getAllRefrals =  async (req , res, next)=>{
-  
+    console.log("getAllRefrall")
   try {
     const result = await ShareRefral.find();
     if(result){
@@ -180,9 +180,10 @@ exports.ProductStor =  async (req , res, next)=>{
 }
 
 exports.getAllProducts =  async (req , res, next)=>{
-  
+     console.log("getAllProducts")
   try {
-    const result = await Product.find();
+    const result = await Product.find()
+    .populate(["userId"]);
     if(result){
       
       return res.send({
@@ -203,6 +204,35 @@ exports.getAllProducts =  async (req , res, next)=>{
       message: "something_went_wrong"
     })
   }
+}
+
+exports.UpdateProductStatus =  async (req , res, next)=>{
+  console.log("UpdateProductStatus")
+  const {id } = req.params;
+  const {Status} = req.body;
+  console.log(Status , id)
+try {
+ const result = await Product.findByIdAndUpdate(id , {Status : Status});
+ if(result){
+   
+   return res.send({
+     status: 1,
+     message: "Approved",
+     
+   });
+ }else {
+   return res.send({
+     status: 0,
+     message: "something_went_wrong"
+   })
+ }
+} catch (error){
+ console.log("error" , error);
+ return res.send({
+   status: 0,
+   message: "something_went_wrong"
+ })
+}
 }
 
 
@@ -351,7 +381,6 @@ module.exports.retrieveUser = async (req, res, next) => {
       { Email },
       'UserId Name Email Password'
     );
-    
     updatedFields = user;
     
     if (!user) {

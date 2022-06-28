@@ -14,7 +14,7 @@ const Email = async (Email , Name , Message)=>{
         subject: `Hello ${Name}✔`,
         html:`<br>${Message}</br>`
     })
-    
+       console.log(info , "info")  
 } 
 
 module.exports = Email;

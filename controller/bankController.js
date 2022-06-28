@@ -196,3 +196,28 @@ exports.deleteBank = async (req, res, next) => {
     });
   }
 };
+
+exports.getBanksForMobile = async (req , res , next) =>{
+       console.log("getBaksForMobile")
+       const {Category} = req.body
+       try {
+        const result = await Bank.find({Category})
+        if(result){
+          return res.send({
+            status: 1,
+            data: result
+          })
+        }else {
+          return res.send({
+            status: 0,
+            msg: "data_not_found"
+          })
+        }
+       } catch (error) {
+        console.log(error)
+        return res.send({
+          status: 0,
+          msg: something_went_to_wrong
+        })
+       }
+}

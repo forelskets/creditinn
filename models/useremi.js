@@ -11,11 +11,15 @@ const useremiSchema = new Schema({
         type: String,
         default: false
       },
-      Emiamount: {
+      EmiAmount: {
         type: String,
         default: false
       },
-      Emidate: {
+      EmiDate: {
+        type: String,
+        default: false
+      },
+      EndDate: {
         type: String,
         default:false
       },
@@ -23,17 +27,18 @@ const useremiSchema = new Schema({
         type: String,
         default: false
       },
-      LoanType: {
+      Type: {
         type: String,
         default: false
       },
-      InsuranceType:{
-        type: String,
-        default: false
+      ProviderName:{
+        type:String,
+        defalut: false
       },
+     
       Category:{
           type: String,
-          default: false
+          defalut: false
       }
 },
 {timestamps : true});

@@ -130,10 +130,10 @@ exports.AdminSettingList = async (req , res , next) =>{
 
 exports.AdminSettingUpdate = async (req , res  , next) =>{
     console.log("AdminSettingUpdate")
-    const {cashbackreward , minAmount , RTEditor} = req.body;
+    const {cashbackreward , minAmount , RTEditor , TEL} = req.body;
     console.log(cashbackreward , minAmount)
     try {
-        const response = await Setting.findByIdAndUpdate("628b6a5fe4377da6c1bb4f93", {Cashbackreward : cashbackreward , Minamount : minAmount , RTEditor})
+        const response = await Setting.findByIdAndUpdate("628b6a5fe4377da6c1bb4f93", {Cashbackreward : cashbackreward , Minamount : minAmount , RTEditor , TEL})
         console.log(response , "response") 
         if(response){
             return res.send({

@@ -8,7 +8,7 @@ mongoose.connect('mongodb+srv://creditinuser:creditinpassword@cluster0.8xhvd.mon
     console.log(err)
 })
 
-// mongoose.connect('mongodb+srv://doadmin:W6T3ecN0iA8s7529@db-mongodb-nyc3-52074-9aeb65f4.mongo.ondigitalocean.com/admin?authSource=admin&replicaSet=db-mongodb-nyc3-52074' ).then(() => {
+// mongoose.connect('mongodb+srv://doadmin:4Z19JXp23Ic8d7x6@creditsin-580a594b.mongo.ondigitalocean.com/admin?tls=true&authSource=admin' ).then(() => {
 //     console.log("mongo connection Successful");
 // }).catch((err) => {
 //     console.log(err)

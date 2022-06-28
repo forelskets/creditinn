@@ -220,3 +220,30 @@ exports.ChangeServiceStatus = async (req, res, next) => {
     });
   }
 };
+
+
+exports.getServicesForMobile = async (req , res , next) =>{
+  console.log("getSeervicesForMobile")
+   const {Category} = req.body
+   console.log(Category , "category")
+   try {
+    const result = await BankService.find({Category})
+    if(result){
+      return res.send({
+        status: 1,
+        data: result
+      })
+    }else {
+      return res.send({
+        status: 0,
+        msg: data_not_found
+      })
+    }
+   } catch (error){
+    console.log(error)
+    return res.send({
+      status: 0,
+      msg: something_went_to_wrong
+    })
+   }
+}

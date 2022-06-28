@@ -19,12 +19,6 @@ const shareRefralSchema = new mongoose.Schema({
     Product: {
         type: String,
         required: true
-    },
-    State:{
-        type: String
-    },
-    City:{
-        type: String
     }
 },{timestamps : true })
 

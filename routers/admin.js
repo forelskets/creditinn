@@ -7,6 +7,7 @@ router.post('/login', adminController.loginValidations, adminController.AdminLog
 router.post('/update',  adminController.AdminUpdate);
 router.get('/settingList',  adminController.AdminSettingList);
 router.post('/settingUpdate',  adminController.AdminSettingUpdate);
+
 router.post('/entry',  adminController.AdminLoginEntry);
 
 module.exports = router;

@@ -23,6 +23,10 @@ const ProductSchema = new mongoose.Schema({
     Product: {
         type: String,
         required: true
+    },
+    Status: {
+        type:String,
+        default: 'Pending'
     }
 },{timestamps : true })
 

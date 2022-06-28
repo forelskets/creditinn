@@ -29,7 +29,7 @@ const ProfileSetting = () => {
     const [cashbackreward , setCashbackreward] = useState('')
     const [minAmount , setMinAmount] = useState('')
     const [value, setValue] = useState(id);
-    
+    const [tEL , setTEL] = useState('')
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -91,6 +91,7 @@ const ProfileSetting = () => {
         setCashbackreward(response?.data?.Cashbackreward)
         setMinAmount(response?.data?.Minamount)
         setEditorData(response?.data?.RTEditor)
+        setTEL(response?.data?.TEL)
       }else {
         toast.error(response?.msg);
       }
@@ -104,7 +105,7 @@ const ProfileSetting = () => {
     },[])
 
     const SettingUpdated = async() =>{
-      const response = await UpdateSettingList({cashbackreward , minAmount , RTEditor : editorData})
+      const response = await UpdateSettingList({cashbackreward , minAmount , RTEditor : editorData , TEL : tEL})
       if(response.status === 1){
            getSettingListData();
            toast.success(response.msg)
@@ -163,7 +164,9 @@ const ProfileSetting = () => {
               <Box sx={{mt: 2}} item> 
               <TextField onChange={(e)=>setMinAmount(e.target.value)} value={minAmount} label="MinAmount" variant="filled" color="success" />   
               </Box>
-              
+              <Box sx={{mt: 2}} item> 
+              <TextField onChange={(e)=>setTEL(e.target.value)} value={tEL} label="TEL" variant="filled" color="success" />   
+              </Box>
               <Box  sx={{mt: 2}} item>
               <Button variant='contained' onClick={SettingUpdated}>Update</Button>
               </Box>

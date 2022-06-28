@@ -37,5 +37,6 @@ export {
     UpdateSettingList,
     addLoan, 
     addInsurance,
-    addCreditCard
+    addCreditCard,
+    ProductStateChange
 } from './admin.user'
