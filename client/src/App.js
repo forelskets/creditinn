@@ -1,7 +1,5 @@
 import { Switch, Route } from 'react-router-dom';
 import toastr from 'toastr';
-import './assets/styles/toastr.min.css';
-
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 

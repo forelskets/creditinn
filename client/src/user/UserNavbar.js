@@ -99,10 +99,7 @@ const UserNavbar = () => {
             />
           </div>
         </div>
-        <div className="search-box">
-          <input type="text" placeholder="Search..." />
-          <i className="bx fas fa-search bx-search"></i>
-        </div>
+
         <div className="dropdown">
           <div className="profile-details">
           <img src={profileImage?.filePath} alt="" />

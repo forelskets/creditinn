@@ -243,58 +243,44 @@ const Section3 = () => {
                       <div className="row">
                         <div className="col-md-4 mb-3">
                           <div className="card">
-                            <img
-                              className="img-container "
-                              alt="" style={{ height: '300px', width: '100%' }}
-                              src="images/EY.jpg"
-                            />
 
                             <div className="card-body">
-                              <h4 className="heading3">
-                              Srinuvas Reddy (ERNST & YOUNG LLP)
-                              </h4>
+                             
                               <p className="paragraph">
                               I am exteremely grateful to have my loan application processed via professional,helpful and supportive team of CreditsIn.Your service was excellent! Thank you.
                             <br/><br/>
-                              </p>
+                              </p> <h4 className="heading3">
+                              Srinuvas Reddy (ERNST & YOUNG LLP)
+                              </h4>
                             </div>
                           </div>
                         </div>
                         <div className="col-md-4 mb-3">
                           <div className="card">
-                            <img
-                              className="img-container "
-                              alt="" style={{ height: '300px', width: '100%' }}
-                              src="images/oracle.jpg"
-                            />
 
                             <div className="card-body">
-                              <h4 className="heading3">
-                              Sagarika ( Oracle Financial Services Software Limited)
-                              </h4>
+                            
                               <p className="paragraph">
                               The team helped me in processing my loan application online in no time.Kudos to you and your team for building a very customer friendly and efficient system.
-                            <br/>
-                              </p>
+                             <br/><br/> </p>
+                              <h4 className="heading3">
+                              Sagarika ( Oracle Financial Services Software Limited)
+                              </h4> 
+                            
                             </div>
                           </div>
                         </div>
                         <div className="col-md-4 mb-3">
                           <div className="card">
-                            <img
-                              className="img-container "
-                              alt="" style={{ height: '300px', width: '400px' }}
-                              src="images/benz.jpg"
-                            />
 
                             <div className="card-body">
-                              <h4 className="heading3">
-                              Adi Lakshmi (MERCEDES-BENZ INDIA PRIVATE LIMITED )
-                              </h4>
+                              
                               <p className="paragraph">
                               I would like to thank CreditsIn for arranging the best product at the best rate that suited my refinancing and investment needs.The agent was highly efficent,responsive and patient in processing my application swiftly.
 
-                              </p>
+                              </p><h4 className="heading3">
+                              Adi Lakshmi (MERCEDES-BENZ INDIA PRIVATE LIMITED )
+                              </h4>
                             </div>
                           </div>
                         </div>
