@@ -20,7 +20,7 @@ import { REMOVE_MESSAGE } from 'src/store/types/AdminTypes';
 
 export default function DashboardApp() {
   const dispatch = useDispatch();
-  const {message} = useSelector(state => state.AuthReducer)
+  const {message} = useSelector(state => state?.AuthReducer)
  
   if(message){
     toast.success(message);
@@ -43,7 +43,7 @@ export default function DashboardApp() {
       <Container maxWidth="xl">
         
         <Box sx={{ pb: 5 }}>
-          <Typography variant="h4">Hi, CreditIn</Typography>
+          <Typography variant="h4">Hi, CreditsIn</Typography>
         </Box>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
@@ -59,7 +59,7 @@ export default function DashboardApp() {
             <RaiseAmount />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={8}>
+          <Grid item xs={12} md={6} lg={12}>
             <AppWebsiteVisits />
           </Grid>
 
@@ -71,9 +71,9 @@ export default function DashboardApp() {
             <AppNewsUpdate />
           </Grid> */}
 
-          <Grid item xs={12} md={6} lg={4}>
+          {/* <Grid item xs={12} md={6} lg={4}>
             <AppOrderTimeline />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Page>

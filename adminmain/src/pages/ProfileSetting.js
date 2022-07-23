@@ -33,6 +33,7 @@ const ProfileSetting = () => {
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
+      
     };
 
     const ProfileUpdated = async () =>{
@@ -47,9 +48,9 @@ const ProfileSetting = () => {
         })
         const update = await update1.json();
         
-        if(update.status === 1){
-            localStorage.setItem('adminLogin' , update.token)
-            dispatch({type:SET_TOKEN , payload:update.token})
+        if(update?.status === 1){
+            localStorage.setItem('adminLogin' , update?.token)
+            dispatch({type:SET_TOKEN , payload:update?.token})
           
             const verifyToken = (token) =>{
                 const decodeToken = jwt_decoder(token);
@@ -73,10 +74,10 @@ const ProfileSetting = () => {
                 }
              }
            
-            toast.success(update.msg);
+            toast.success(update?.msg);
         }else {
          
-                toast.error(update.msg);
+                toast.error(update?.msg);
          
         }
     }
@@ -99,18 +100,18 @@ const ProfileSetting = () => {
   
 
     useEffect(()=>{
-      if(id === '2'){
+     setValue(id)
      getSettingListData()
-      }
-    },[])
+  
+    },[id])
 
     const SettingUpdated = async() =>{
       const response = await UpdateSettingList({cashbackreward , minAmount , RTEditor : editorData , TEL : tEL})
-      if(response.status === 1){
+      if(response?.status === 1){
            getSettingListData();
-           toast.success(response.msg)
+           toast.success(response?.msg)
       }else{
-        toast.error(response.msg)
+        toast.error(response?.msg)
       }
     }
 

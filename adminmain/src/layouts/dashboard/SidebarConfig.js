@@ -39,7 +39,7 @@ const sidebarConfig = [
   },
 
   {
-    title: 'Staff',
+    title: 'Refferals',
     path: '/dashboard/staff',
     icon: getIcon('icon-park-outline:file-staff')
   },
@@ -69,8 +69,8 @@ const sidebarConfig = [
     icon: getIcon('icon-park-outline:file-staff')
   },
   {
-    title: 'Token',
-    path: '/dashboard/token',
+    title: 'Insurances',
+    path: '/dashboard/insurances',
     icon: getIcon('ic:outline-token')
   }
  

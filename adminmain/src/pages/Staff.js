@@ -41,8 +41,8 @@ export default function Staff() {
     
     if(response?.status === 1){
       let dataArray=[];
-      response.data.map((item)=>{
-          dataArray.push({"name":item.Name , "product":item.Product ,"mobileno":item.Mobile ,  })
+      response?.data?.map((item)=>{
+          dataArray?.push({"name":item?.Name , "product":item?.Product ,"mobileno":item?.Mobile ,  })
       })
       setUserList(dataArray)
     }
@@ -59,9 +59,9 @@ export default function Staff() {
 
 
   return (
-    <Page title="User | Minimal-UI">
+    <Page title="Refferals | Creditsin">
       <MaterialTable
-      title="Staff"
+      title="Refferals "
       columns={TABLE_HEAD}
       data={userList}/>
     </Page>

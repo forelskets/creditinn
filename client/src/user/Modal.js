@@ -30,7 +30,7 @@ const ShareInput = (props) =>{
          <select onChange={(e)=>setProduct(e.target.value)} className="form-control mb-3">
            <option value='ddd'>Selected</option>
            <option value="Health Insurance" >Health Insurance</option>
-           <option value="Car Insourance" >Car Insurance</option>
+           <option value="Car Insurance" >Car Insurance</option>
          </select>
          <Button type="button" className="btn-3" onClick={HandleSubmit}>Submit</Button>
          {responseMsg ? responseMsg : ""}

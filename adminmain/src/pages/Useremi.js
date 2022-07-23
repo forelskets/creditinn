@@ -29,11 +29,11 @@ const Useremi = () => {
  const callEffect = async() =>{
    const response = await getAllUserEmis();
    console.log(response) 
-   if(response.status === 1 && Array.isArray(response?.data)){
+   if(response?.status === 1 && Array.isArray(response?.data)){
      let data1 = [];
      let data2 = [];
      let data3 = [];
-     response?.data.map((ele)=>{
+     response?.data?.map((ele)=>{
         if(ele?.Category === "Credit Cards"){
           data1.push({"BankName":ele?.BankName , "EmiAmount":ele?.EmiAmount , "EmiDate":ele?.EmiDate})
         } else if(ele?.Category === "Loans"){
@@ -76,7 +76,7 @@ const CreditCardColumns = [
   },[])
 
   return (
-    <Page title='WishList | Minimal-UI'>
+    <Page title='Users EMI Details'>
       <FormModal callEffect={callEffect}/>
       <Container>
      <Box  sx={{ width: '100%', typography: 'body1' }}>
@@ -99,7 +99,7 @@ const CreditCardColumns = [
         </Box>
         <TabPanel value="1">
           <MaterialTable
-          title="Loan Table"
+          title="Loans Lists"
           columns={LoanColumns}
           data={loanData}
           options={{
@@ -116,14 +116,14 @@ const CreditCardColumns = [
         </TabPanel>
         <TabPanel value="2">
         <MaterialTable
-          title="Insurance Table"
+          title="Insurances List"
           columns={InsuranceColumns}
           data={insuranceData}
           />
         </TabPanel>
         <TabPanel value="3">
         <MaterialTable
-          title="CreditCard Table"
+          title="CreditCard List"
           columns={CreditCardColumns}
           data={creditCardData}
           />

@@ -39,8 +39,8 @@ const sidebarConfig = [
   },
 
   {
-    title: 'Staff',
-    path: '/dashboard/staff',
+    title: 'Refferals',
+    path: '/dashboard/refferals',
     icon: getIcon('icon-park-outline:file-staff')
   },
   {

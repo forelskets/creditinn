@@ -2,6 +2,7 @@ import React from "react";
 
 import { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
+import { success } from "toastr";
 import { ApplicationsById } from "../_services/Admin.services";
 import { myrefral } from "../_services/Refral.services/index";
 var Success = 0;
@@ -10,11 +11,11 @@ const UserNavbar = () => {
   const modelRef = useRef(false);
   const history = useHistory();
   const [profile, setProfile] = useState({});
+  const [profileImage, setProfileImage] = useState();
   const [refralMessage, setRefralMessage] = useState("");
   const [applicationMessage, setApplicationMessage] = useState("");
   const [refralData, setRefralData] = useState([]);
   const [applicationData, setApplicationData] = useState([]);
-  const [profileImage , setProfileImage] = useState();
   const profileFunc = async () => {
     const response = await fetch("/profile", {
       method: "GET",
@@ -30,7 +31,6 @@ const UserNavbar = () => {
     setProfileImage(profileImg)
     }
     setProfile(data);
-    
   };
   const logOutFunc = async () => {
     const response = await fetch("/userLogout", {
@@ -105,7 +105,7 @@ const UserNavbar = () => {
         </div>
         <div className="dropdown">
           <div className="profile-details">
-            <img src={profileImage?.filePath} alt="" />
+          <img src={profileImage?.filePath} alt="" />
 
             <span
               className="admin_name"

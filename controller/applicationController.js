@@ -1,18 +1,18 @@
-const Application = require('../models/application');
-const WishList = require('../models/wishlist')
+const Application = require("../models/application");
+const WishList = require("../models/wishlist");
 
 exports.getApplicationList = async (req, res, next) => {
-  console.log('getApplicationList');
+  console.log("getApplicationList");
   try {
     var result = await Application.find()
-      .populate(['UserId', 'ProfileId', 'EploymentId', 'KycId'])
-      .sort({ _id: 'desc' });
-    console.log('result', result);
+      .populate(["UserId", "ProfileId", "EploymentId", "KycId"])
+      .sort({ _id: "desc" });
+    console.log("result", result);
 
     if (result && result.length > 0) {
       return res.send({
         status: 1,
-        message: 'success',
+        message: "success",
         data: {
           applications: result,
         },
@@ -20,14 +20,14 @@ exports.getApplicationList = async (req, res, next) => {
     } else {
       return res.send({
         status: 0,
-        message: 'no_record_found',
+        message: "no_record_found",
       });
     }
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
     return res.send({
       status: 0,
-      message: 'something_went_wrong',
+      message: "something_went_wrong",
     });
   }
 };
@@ -44,54 +44,56 @@ exports.updateApplicationStatus = async (req, res, next) => {
 
       return res.send({
         status: 1,
-        message: 'Updated',
+        message: "Updated",
       });
     } else {
       return res.send({
         status: 0,
-        message: 'no_record_found',
+        message: "no_record_found",
       });
     }
   } catch (error) {
     return res.send({
       status: 0,
-      message: 'something_went_wrong',
+      message: "something_went_wrong",
     });
   }
 };
- exports.getApplicationById = async (req, res, next) => {
+exports.getApplicationById = async (req, res, next) => {
+  console.log("ApplicationById");
   const id = req.params.id;
-  var options = {
-    where: {
-      id: id,
-    },
-  };
-  console.log(id,'id')
+  console.log(id, "id");
+  // var options = {
+  //   where: {
+  //     id: id,
+  //   },
+  // };
+  // console.log(id,'id')
 
   try {
-    const result = await Application.find({UserId : id});
-    console.log(result,'vvv');
+    const result = await Application.find({ UserId: id });
+    console.log(result, "vvv");
     if (result && result.length > 0) {
-      console.log('111');
+      console.log("111");
       return res.send({
         status: 1,
-        message: 'success',
+        message: "success",
         data: {
           service: result,
         },
       });
     } else {
-      console.log('222');
+      console.log("222");
       return res.send({
         status: 0,
-        message: 'No data available',
+        message: "No data available",
       });
     }
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
     return res.send({
       status: 0,
-      message: 'something_went_wrong',
+      message: "something_went_wrong",
     });
   }
 };

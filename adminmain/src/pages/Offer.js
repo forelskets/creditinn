@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { filter } from 'lodash';
+import { cloneDeep } from "lodash";
 import MaterialTable from 'material-table'
 import RichTextEditor from '../components/_dashboard/offer/RichTextEditor'
 // import { Link as RouterLink } from 'react-router-dom';
 // material
+import OneSignal from 'react-onesignal'
+
 import {
   
-  Container, FormControlLabel, Switch,
+  Button,
+  Container, Dialog, DialogActions, DialogContent, FormControlLabel, Switch,
   
 } from '@mui/material';
 import toastr from 'toastr';
@@ -25,7 +28,7 @@ import axios from 'axios'
 // import OFFERS from '../_mocks_/offer';
 
 // import { OfferForm } from '../components/AddYourBankDetailsForm'
-
+import { Grid , Box, DialogTitle } from '@material-ui/core';
 import {
   AllBankOffer,
   ChangeOfferStatus,
@@ -43,25 +46,31 @@ import {  ApplicationsStateChange , DeleteBankOffer } from '../_services/Admin.s
 export default function Offer() {
   const [age , setAge] = useState('')
  const [data , setData] = useState([])
+ const [realData , setRealData] = useState([])
 
   const [offer, setOffer] = useState([]);
+  const [dialogOpen ,setDialogOpen] = useState(false)
+  const [dialogClose ,setDialogClose] = useState(false)
+  const [startDate , setStartDate] = useState('');
+  const [endDate , setEndDate] = useState('')
+
  
   const callEffect = async () => {
     let res = await AllBankOffer()
     console.log(res, "response")
     let data1 = [];
     if (res?.status === 1 && Array.isArray(res?.data?.services)) {
-      res.data.services.map((ele , ind)=>{
+      res?.data?.services?.map((ele , ind)=>{
         //  let BannerImg = JSON.parse(ele?.Picture);
       
         let BannerImg = {};
-        if(ele.Picture){
+        if(ele?.Picture){
         BannerImg = JSON.parse(ele?.Picture) ;
         }
         return(
         ele?.BankService?.map((elm , indx) =>{
              
-              data1.push({"RTEditor":ele?.RTEditor ,"type":ele?.Type,"id":ele?._id ,'Bank' : ele?.BankName?.BankName ,"BankId":ele?.BankName?._id, 'Service' : elm?.ServiceName , 'ServiceId':elm?._id , 'Note' : ele?.Note ,'Category':ele?.Category, 'Picture':BannerImg?.filePath ,"View": ele?.Status })
+              data1.push({"createdAt":ele?.createdAt,"RTEditor":ele?.RTEditor ,"type":ele?.Type,"id":ele?._id ,'Bank' : ele?.BankName?.BankName ,"BankId":ele?.BankName?._id, 'Service' : elm?.ServiceName , 'ServiceId':elm?._id , 'Note' : ele?.Note ,'Category':ele?.Category, 'Picture':BannerImg?.filePath ,"View": ele?.Status })
         })
         )
         })
@@ -82,6 +91,7 @@ export default function Offer() {
   useEffect(() => {
    
      callEffect();
+     OneSignal.init({appId: '46551eb3-d9ac-4284-9e80-eef0a50ed38a'})
   
   }, []);
 
@@ -100,12 +110,12 @@ export default function Offer() {
         <>
           {row.View === true ? (
             <FormControlLabel
-              control={<Switch checked={row.View} onChange={(e) => StatusChangeHandler(e, row)} />}
+              control={<Switch checked={row?.View} onChange={(e) => StatusChangeHandler(e, row)} />}
               label="Can-View"
             />
           ) : (
             <FormControlLabel
-              control={<Switch checked={row.View} onChange={(e) => StatusChangeHandler(e, row)} />}
+              control={<Switch checked={row?.View} onChange={(e) => StatusChangeHandler(e, row)} />}
               label="Can't-View"
             />
           )}
@@ -139,7 +149,7 @@ export default function Offer() {
       toastr.success("Bank offer created!")
     } else {
       if (res?.message){
-        toastr.success(res.message)
+        toastr?.success(res?.message)
       }
     }
   }
@@ -148,21 +158,76 @@ export default function Offer() {
 
   const StatusChangeHandler = async (e, row) => {
     e.preventDefault();
-    console.log(!row.View);
-    const response = await ChangeOfferStatus(row.id, { Status: !row.View });
+    console.log(!row?.View);
+    const response = await ChangeOfferStatus(row?.id, { Status: !row?.View });
     if (response?.status === 1) {
       callEffect();
     } else {
       if (response?.message){
-         alert(response.message);
+         alert(response?.message);
       }
     }
   };
 
+  
+
+  const handleDate = () => {
+    let tempData = cloneDeep(data)
+    setRealData(data)
+   
+    const s = new Date(startDate)
+    const e = new Date(endDate)
+    console.log(s.toISOString(), "and" , e.toISOString())
+    const newData = tempData.filter(item =>  s.toISOString() <= item?.createdAt ).filter(itemf => itemf?.createdAt <= e.toISOString())
+    console.log(newData  ," newData")
+    setData(newData)
+    console.log(tempData[0].createdAt > s.toISOString() , "tempDAta")
+    console.log(s.toISOString() > e.toISOString() , " date")
+    setStartDate('')
+    setEndDate('')
+    setDialogClose(true); setDialogOpen(false) 
+  }
+
+  const handleDisabled = () =>{
+    if(!startDate || !endDate){
+      return true
+    }else {
+      return false
+    }
+  }
+
   return (
+    <>
+    
     <Page title="Banks Services | CreditIN">
+      
       <Container>
-      <FormModal callApi={saveOffers}/>
+     <div style={{display: 'flex' }}>
+        <FormModal callApi={saveOffers}/>
+        <Button variant="contained" onClick={()=> setDialogOpen(true)}>Search By Date</Button>
+        <Button variant="contained" onClick={()=> setData(realData)}>Refresh</Button>
+        </div>
+        <Dialog
+        open={dialogOpen}
+        onClose={dialogClose}>
+          <DialogTitle>Select time period</DialogTitle>
+          <DialogContent>
+             <div>
+              <label>from:</label>
+              <input name="startDate" type="date" value={startDate} onChange={(e)=> setStartDate(e.target.value)} />
+             </div>
+             -
+             <div>
+             <label>to:</label>
+              <input name="endDate" type="date" value={endDate} onChange={(e)=> setEndDate(e.target.value)}/>
+             </div>
+          </DialogContent>
+          <DialogActions>
+            <Button variant='contained' onClick={() => {setDialogClose(true); setDialogOpen(false)}}>cancel</Button>
+            <Button disabled={handleDisabled()} variant="contained" onClick={handleDate}>close</Button>
+          </DialogActions>
+        </Dialog>
+      
       
         {console.log(data , columns , "datacolumns")}
         <MaterialTable 
@@ -194,7 +259,10 @@ export default function Offer() {
         />
       
       </Container>
+
+     
     </Page>
+    </>
   );
 }
 

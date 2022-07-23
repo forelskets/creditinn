@@ -14,8 +14,8 @@ export default function Withdrawls(){
         {title:"Amount" , field: "amount"},
         {title:"RequestNo" , field: "requestNo"},
         {title:"Date" , field: "date"},
-        {title:"TransactionNo" , field: 'TransactionNo' , render:(row) => <>{row?.TransactionNo !== "none" ? row.TransactionNo : ""}</>},
-        { field: 'Status', title: 'Status',render : (row)=>  <>{row.Status === 'Reject' ? "Reject" : <Status status={row.Status} id={row.Id} ApiUpdate={callEffect} ></Status>}</>},
+        {title:"TransactionNo" , field: 'TransactionNo' , render:(row) => <>{row?.TransactionNo !== "none" ? row?.TransactionNo : ""}</>},
+        { field: 'Status', title: 'Status',render : (row)=>  <>{row?.Status === 'Reject' ? "Reject" : <Status status={row?.Status} id={row?.Id} ApiUpdate={callEffect} ></Status>}</>},
         {title:"",field:"" , render:(rowData) => <><Dialog data={rowData} ApiUpdate={callEffect}/></>}
     ]
 
@@ -23,9 +23,9 @@ export default function Withdrawls(){
       const response = await getAllWithDrawls();
       console.log(response , "response")
       if(response?.status === 1 && Array.isArray(response?.data)){
-        console.log(response.data , "ifResponse")
+        console.log(response?.data , "ifResponse")
         let data1 = []
-        response?.data.map((ele)=>{
+        response?.data?.map((ele)=>{
              data1.push({"userId":ele?.UserId?._id,"TransactionNo": ele?.TransactionNo,"Id":ele?._id, "Status":ele?.Status,"name" : ele?.UserId?.Name  , "amount": ele?.Amount , "requestNo": ele?.Requestno , "wallet":ele?.BankId?.Wallet , "AccHolderName":ele?.BankId?.AccHolderName ,"AccountNo":ele?.BankId?.AccountNo , "BankName":ele?.BankId?.BankName, "IFSCcode":ele?.BankId?.IFSCcode , "UPIID":ele?.BankId?.UPIID})
         })
         console.log(data1 , "arraydata")
@@ -43,7 +43,7 @@ export default function Withdrawls(){
             <MaterialTable
             columns={column}
             data={withdrawls}
-            title="Withdrawls"/>
+            title="Withdrawls Request"/>
         </Container>
     </Page>
   )

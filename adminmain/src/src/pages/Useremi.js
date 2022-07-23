@@ -76,7 +76,7 @@ const CreditCardColumns = [
   },[])
 
   return (
-    <Page title='WishList | Minimal-UI'>
+    <Page title='WishList | CreditsIn'>
       <FormModal callEffect={callEffect}/>
       <Container>
      <Box  sx={{ width: '100%', typography: 'body1' }}>

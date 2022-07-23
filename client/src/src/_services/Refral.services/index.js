@@ -1,1 +1,0 @@
-export {myrefral } from './RefralServices';

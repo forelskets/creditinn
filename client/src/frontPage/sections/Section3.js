@@ -19,21 +19,7 @@ const Section3 = () => {
                   <div>
                     <div>
                       <div className="row">
-                        {/* <div className="col-md-4 mb-3">
-                          <div className="card">
-                            <img
-                              className="img-container "
-                              alt=""
-                              src="images/portrait-young-smiling-woman-2.png"
-                            />
-
-                            <div className="card-body">
-                              <h4 className="heading3">
-                                Special title treatment
-                              </h4>
-                            </div>
-                          </div>
-                        </div> */}
+                      
                         <div className="col-md-4  ">
                           <div
                             className="card card1 mx-auto"
@@ -98,21 +84,7 @@ const Section3 = () => {
                         </div>
                       </div>
                       <div className="row">
-                        {/* <div className="col-md-4 mb-3">
-                          <div className="card">
-                            <img
-                              className="img-container "
-                              alt=""
-                              src="images/portrait-young-smiling-woman-2.png"
-                            />
-
-                            <div className="card-body">
-                              <h4 className="heading3">
-                                Special title treatment
-                              </h4>
-                            </div>
-                          </div>
-                        </div> */}
+                      
                         <div className="col-md-2"></div>
                         <div className="col-md-4 mb-3 ">
                           <div
@@ -274,16 +246,16 @@ const Section3 = () => {
                             <img
                               className="img-container "
                               alt="" style={{ height: '300px', width: '100%' }}
-                              src="images/personal.jpg"
+                              src="images/EY.jpg"
                             />
 
                             <div className="card-body">
                               <h4 className="heading3">
-                                Special title treatment
+                              Srinuvas Reddy (ERNST & YOUNG LLP)
                               </h4>
                               <p className="paragraph">
-                                With supporting text below as a natural lead-in
-                                to additional content.
+                              I am exteremely grateful to have my loan application processed via professional,helpful and supportive team of CreditsIn.Your service was excellent! Thank you.
+                            <br/><br/>
                               </p>
                             </div>
                           </div>
@@ -293,16 +265,16 @@ const Section3 = () => {
                             <img
                               className="img-container "
                               alt="" style={{ height: '300px', width: '100%' }}
-                              src="images/business.jpeg"
+                              src="images/oracle.jpg"
                             />
 
                             <div className="card-body">
                               <h4 className="heading3">
-                                Special title treatment
+                              Sagarika ( Oracle Financial Services Software Limited)
                               </h4>
                               <p className="paragraph">
-                                With supporting text below as a natural lead-in
-                                to additional content.
+                              The team helped me in processing my loan application online in no time.Kudos to you and your team for building a very customer friendly and efficient system.
+                            <br/>
                               </p>
                             </div>
                           </div>
@@ -312,16 +284,16 @@ const Section3 = () => {
                             <img
                               className="img-container "
                               alt="" style={{ height: '300px', width: '400px' }}
-                              src="images/home.webp"
+                              src="images/benz.jpg"
                             />
 
                             <div className="card-body">
                               <h4 className="heading3">
-                                Special title treatment
+                              Adi Lakshmi (MERCEDES-BENZ INDIA PRIVATE LIMITED )
                               </h4>
                               <p className="paragraph">
-                                With supporting text below as a natural lead-in
-                                to additional content.
+                              I would like to thank CreditsIn for arranging the best product at the best rate that suited my refinancing and investment needs.The agent was highly efficent,responsive and patient in processing my application swiftly.
+
                               </p>
                             </div>
                           </div>

@@ -57,26 +57,26 @@ export default function Bank() {
     console.log(allcategory, 'allcategory');
     if (allcategory?.status === 1 && Array.isArray(allcategory?.data?.CatNames)) {
       let data2 = {};
-      allcategory?.data?.CatNames.map((ele) => {
-        data2[ele.CatName] = ele.CatName;
+      allcategory?.data?.CatNames?.map((ele) => {
+        data2[ele?.CatName] = ele?.CatName;
       });
       setCategoryArray(data2);
     }
     if (res?.status === 1 && Array.isArray(res?.data?.banks)) {
       let data1 = [];
-      res.data.banks.map((ele) => {
+      res?.data?.banks?.map((ele) => {
         data1.push({
-          BankName: ele.BankName,
-          Note: ele.Note,
-          View: ele.Status,
-          _id: ele._id,
-          CategorySelect: ele.Category
+          BankName: ele?.BankName,
+          Note: ele?.Note,
+          View: ele?.Status,
+          _id: ele?._id,
+          CategorySelect: ele?.Category
         });
       });
       setData(data1);
     } else {
       if (res?.message){
-          alert(res.message);
+          alert(res?.message);
       } 
     }
   };
@@ -87,13 +87,13 @@ export default function Bank() {
 
   const StatusChangeHandler = async (e, row) => {
     e.preventDefault();
-    console.log(!row.View);
-    const response = await ChangeBankStatus(row._id, { Status: !row.View });
+    console.log(!row?.View);
+    const response = await ChangeBankStatus(row?._id, { Status: !row?.View });
     if (response?.status === 1) {
       callEffect();
     } else {
       if (response?.message){
-            alert(response.message);
+            alert(response?.message);
       } 
     }
   };

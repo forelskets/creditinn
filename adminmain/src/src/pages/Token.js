@@ -58,7 +58,7 @@ export default function Token() {
   
 
   return (
-    <Page title="User | Minimal-UI">
+    <Page title="Insurances | CreditsIn">
        <MaterialTable
        title="Token"
        columns={TABLE_HEAD}

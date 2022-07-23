@@ -1,4 +1,5 @@
 import { filter } from 'lodash';
+import { cloneDeep } from "lodash";
 import { sentenceCase } from 'change-case';
 import { useEffect, useState } from 'react';
 import MaterialTable from 'material-table';
@@ -13,7 +14,12 @@ import { Products , ProductStateChange } from 'src/_services/Admin.services';
 import FormModal from '../components/_dashboard/Token/form'
 
 // ----------------------------------------------------------------------
-
+import {
+  
+  Button,
+ Dialog, DialogActions, DialogContent , DialogTitle
+  
+} from '@mui/material';
 
 
 
@@ -22,7 +28,12 @@ import FormModal from '../components/_dashboard/Token/form'
 export default function Token() {
  
   const [userList , setUserList] = useState([])
-
+  const [data , setData] = useState([])
+  const [realData , setRealData] = useState([])
+  const [dialogOpen ,setDialogOpen] = useState(false)
+  const [dialogClose ,setDialogClose] = useState(false)
+  const [startDate , setStartDate] = useState('');
+  const [endDate , setEndDate] = useState('')
 
   useEffect( ()=>{
          getUsers();
@@ -32,7 +43,7 @@ export default function Token() {
     { field: 'name', title: 'Name'},
     { field: 'product', title: 'Product'},
     { field: 'mobileno', title: 'MobileNo'},
-    { field: 'Status', title: 'Status' , render:(row) => <><Status id={row.id} value={row.Status} ApiUpdate={getUsers} /></>},
+    { field: 'Status', title: 'Status' , render:(row) => <><Status id={row?.id} value={row?.Status} ApiUpdate={getUsers} /></>},
     { field: 'Modal', title: 'Modal',render : (row)=> <>{(row?.Status === "Approved") ? (<FormModal  data = {row} callApi={getUsers}/>):""}</>}
    
   ];
@@ -40,27 +51,73 @@ export default function Token() {
   const getUsers = async () =>{
     const response = await Products();
     console.log(response, 'response')
-    setUserList(response.data)
+    setUserList(response?.data)
     if(response?.status === 1){
       let dataArray = [];
      
       response?.data.map((item)=>(
-        dataArray.push({"user":item.userId,"id":item._id,"Status":item.Status ,"name":item.Name , "product":item.Product , "mobileno":item.Mobile , "status":item.status})
+        dataArray.push({"createdAt":item?.createdAt ,"user":item?.userId,"id":item?._id,"Status":item?.Status ,"name":item?.Name , "product":item?.Product , "mobileno":item?.Mobile , "status":item?.status})
       ))
       setUserList(dataArray)
     }
   }
 
- 
+  const handleDate = () => {
+    let tempData = cloneDeep(userList)
+    setRealData(userList)
+   
+    const s = new Date(startDate)
+    const e = new Date(endDate)
+    console.log(s.toISOString(), "and" , e.toISOString())
+    const newData = tempData.filter(item =>  s.toISOString() <= item?.createdAt ).filter(itemf => itemf?.createdAt <= e?.toISOString())
+    console.log(newData  ," newData")
+    setUserList(newData)
+    
+    setStartDate('')
+    setEndDate('')
+    setDialogClose(true); setDialogOpen(false) 
+  }
+
+  const handleDisabled = () =>{
+    if(!startDate || !endDate){
+      return true
+    }else {
+      return false
+    }
+  }
 
  
 
   
 
   return (
-    <Page title="User | Minimal-UI">
+    <Page title="Insurances Application">
+       <div style={{display: 'flex' }}>
+        <Button variant="contained" onClick={()=> setDialogOpen(true)}>Select By Date</Button>
+        <Button variant="contained" onClick={()=> setUserList(realData)}>Refresh</Button>
+      </div>
+        <Dialog
+        open={dialogOpen}
+        onClose={dialogClose}>
+          <DialogTitle>Select time period</DialogTitle>
+          <DialogContent>
+             <div>
+              <label>from:</label>
+              <input name="startDate" type="date" value={startDate} onChange={(e)=> setStartDate(e.target.value)} />
+             </div>
+             -
+             <div>
+             <label>to:</label>
+              <input name="endDate" type="date" value={endDate} onChange={(e)=> setEndDate(e.target.value)}/>
+             </div>
+          </DialogContent>
+          <DialogActions>
+            <Button variant='contained' onClick={() => {setDialogClose(true); setDialogOpen(false)}}>cancel</Button>
+            <Button disabled={handleDisabled()} variant="contained" onClick={handleDate}>close</Button>
+          </DialogActions>
+        </Dialog>
        <MaterialTable
-       title="Token"
+       title="Insurances Application"
        columns={TABLE_HEAD}
        data={userList}/>
     </Page>

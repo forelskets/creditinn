@@ -47,4 +47,4 @@ const UserBankDetails = () => {
   )
 }
 
-export default UserBankDetails
+export default UserBankDetails;

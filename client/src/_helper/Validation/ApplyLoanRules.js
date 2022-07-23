@@ -9,7 +9,7 @@ export const rules = (field, rule) => {
             if(!gst_regex.test(field))
             message = rule.fieldName + " not correct"
         }else if (rule.type === 'PanNo') {
-            var pan_regex = /^[a-zA-Z]{4}[a-zA-Z0-9]{6}$/;
+            var pan_regex = /^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]$/;
             if(!pan_regex.test(field))
             message = rule.fieldName + " not correct"
         }else if(rule.type === 'Mobile'){

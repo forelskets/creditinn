@@ -134,8 +134,8 @@ const Footer = () => {
                     <h3>Learn More</h3>
                   </div>
                   <ul className="padding-ul">
-                    <li>About Us</li>
-                    <li>Privacy Policy</li>
+                  <li > <a href="/about"  className="text-light" style={{textDecoration: 'none'}}>About Us</a></li>
+                  <li > <a href="/privacy-policy"  className="text-light" style={{textDecoration: 'none'}}>Privacy Policy</a></li>
                     <li>T & C</li>
                     <li onClick={loginVar}>Login </li>
 
@@ -233,18 +233,7 @@ const Footer = () => {
               Forelsket Softwares Pvt. Ltd.
             </NavLink>
           </div>
-          <div>
-            <a
-              href="https://www.facebook.com/skulamapp/"
-              className="text-white me-4"
-            >
-              About us.
-            </a>
-            <a href="https://facebook.com/" className="text-white me-4">
-              {' '}
-              Privacy and policy.{' '}
-            </a>
-          </div>
+         
         </div>
       </section>
     </div>

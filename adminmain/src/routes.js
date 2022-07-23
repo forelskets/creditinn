@@ -45,7 +45,7 @@ export default function Router() {
           <Route path='wishlist' element={<Wishlist/>}/>
           <Route path='withdrawls' element={<Withdrawls/>}/>
           <Route path='useremi' element={<Useremi/>}/>
-          <Route path='token' element={<Token/>}/>
+          <Route path='insurances' element={<Token/>}/>
           <Route path='profileSetting/:id' element={<ProfileSetting/>}/>
           
         </Route>

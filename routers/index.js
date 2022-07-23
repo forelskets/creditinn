@@ -1,6 +1,7 @@
-
-
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+const Phone = require("./util/Phone");
+const EmailFn = require("./util/Email");
 const express = require("express");
 const User = require("../models/users");
 const Otp = require("../models/otp");
@@ -8,14 +9,14 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const Bank = require("../models/bankService");
 const BankNote = require("../models/bankOffer");
-const UserTransaction = require("../models/userTransaction")
+const UserTransaction = require("../models/userTransaction");
 const auth = require("../middleware/Authentication");
 const nodemailer = require("nodemailer");
-const UserBankDetails = require("../models/userBankDetails")
+const UserBankDetails = require("../models/userBankDetails");
 const referralCodes = require("referral-codes");
-const referralCodeGenerator = require('referral-code-generator');
-const { json } = require('express/lib/response');
-  const {CREDIT , DEBIT , CASHBACK , EARNING, AMOUNT} = require('./constant')
+const referralCodeGenerator = require("referral-code-generator");
+const { json } = require("express/lib/response");
+const { CREDIT, DEBIT, CASHBACK, EARNING, AMOUNT } = require("./constant");
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -86,7 +87,7 @@ router.post("/userRegister", async (req, res) => {
     console.log(Name, Email, Password, Mobile);
 
     data1++;
-    const refral = referralCodeGenerator.alphaNumeric('uppercase', 3, 1);
+    const refral = referralCodeGenerator.alphaNumeric("uppercase", 3, 1);
 
     const isMatch = await User.findOne({ Email });
     //  console.log(isMatch);
@@ -124,32 +125,29 @@ router.post("/userRegister", async (req, res) => {
     const month = date.getMonth() + 1;
     const date1 = date.getDate();
     const count = await UserTransaction.collection.count();
-   
 
-    const transactiongenerator =  `${year}${month}${date1}${count}`;
-   
+    const transactiongenerator = `${year}${month}${date1}${count}`;
+
     // let transactionNoCashback = parseInt(transactiongenerator) + parseInt(sequence.TransactionNo) + 1 ;
     const cashback = await UserTransaction({
-      userId : addUser._id,
+      userId: addUser._id,
       TransactionType: CASHBACK,
       CreditDebit: CREDIT,
-      Amount : AMOUNT,
-      TransactionWallet : AMOUNT,
-      TransactionNo: transactiongenerator
-
+      Amount: AMOUNT,
+      TransactionWallet: AMOUNT,
+      TransactionNo: transactiongenerator,
     }).save();
 
-    console.log("addUser ,cashback " , addUser , cashback)
+    console.log("addUser ,cashback ", addUser, cashback);
     const userbankdetails = await UserBankDetails({
-      UserId : addUser._id,
-      Wallet : AMOUNT
+      UserId: addUser._id,
+      Wallet: AMOUNT,
     }).save();
-            console.log(userbankdetails , "userBankDetails")
-
+    console.log(userbankdetails, "userBankDetails");
 
     const otpFunc = async () => {
       const otpCode = Math.floor(Math.random() * 10000 + 1);
-      console.log(otpCode)
+      console.log(otpCode);
       const otpData = new Otp({
         Email,
         Mobile,
@@ -157,47 +155,9 @@ router.post("/userRegister", async (req, res) => {
         expireIn: new Date().getTime() + 300 * 10000,
       });
       const otpResponse = await otpData.save();
-      otpMail(Email, otpCode, Name , Mobile);
-      // res.status(200).send({message: "otp sent"})
+      Phone(otpCode, Mobile);
+      EmailFn(otpCode, Email);
     };
-    function otpMail(Email, otpCode, Name , Mobile) {
-      console.log(Mobile)
-      console.log(otpCode)
-      async function main() {
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: "creditsin.com@gmail.com ",
-            pass: "gamokavigwrwcbtm",
-          },
-        });
-
-        let info = await transporter.sendMail({
-          from: '"CreditsIN OTP Verification" <creditsin.com@gmail.com>',
-          to: `${Email}, info@creditsin.com, mr.sachinpathak95@gmail.com`,
-          subject: `Hello ${Name}✔`,
-          html: `<b>${otpCode}</b>`,
-        });
-      
-        fetch('http://mobicomm.dove-sms.com//REST/sendsms/', {method:"POST",headers:{"Content-Type":"application/json"}, body: JSON.stringify({
-          "listsms":
-        [
-        {"sms": otpCode,
-        "mobiles": Mobile,
-        "senderid":"ABCDEF",
-        "clientSMSID":"1947692308",
-        "accountusagetypeid":"1"},
-        ],
-        "password":"dddb337a6aXX","user":"rahulinf"})})
-        .then((res) => res.json())
-        .then((json) => console.log(json))
-        
-     
-      
-    }
-
-    main().catch(console.error);
-    }
 
     otpFunc();
     if (addUser) {
@@ -218,17 +178,16 @@ router.post("/userRegister", async (req, res) => {
 
 router.post("/sendOtp", async (req, res) => {
   try {
-    console.log(req.body.Email,"emmmmmmaiiillll")
+    console.log(req.body.Email, "emmmmmmaiiillll");
     const { Email } = req.body;
 
-    const result = await User.findOne({ Email, userVerified: 1 });
+    const result = await User.findOne({ Email, userVerified: 0 });
     if (!result) return res.send({ status: 0, message: "user not found" });
     const { Name, Mobile } = result;
 
     console.log("result", result);
-    
-    console.log(req.body.Email,"emmmmmmaiiillll")
 
+    console.log(req.body.Email, "emmmmmmaiiillll");
 
     const allOtpList = await Otp.find({
       Email,
@@ -251,31 +210,11 @@ router.post("/sendOtp", async (req, res) => {
       });
 
       const otpResponse = await otpData.save();
-      otpMail(Email, otpCode, Name);
+      EmailFn(otpCode, Email);
+      Phone(otpCode, Mobile);
       console.log("otpCode", otpCode);
       // res.status(200).send({message: "otp sent"})
     };
-    function otpMail(Email, otpCode, Name) {
-      async function main() {
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: "creditsin.com@gmail.com",
-            pass: "gamokavigwrwcbtm",
-          }
-
-        });
-
-        let info = await transporter.sendMail({
-          from: '"CreditsIN OTP Verification" <creditsin.com@gmail.com>',
-          to: `${Email}, info@creditsin.com`,
-          subject: `Hello ${Name}✔`,
-          html: `<b>${otpCode}</b>`,
-        });
-      }
-
-      main().catch(console.error);
-    }
 
     otpFunc();
     return res.send({
@@ -295,7 +234,7 @@ router.post("/userLogin", async (req, res) => {
   console.log(req.body.email, req.body.password);
   const { email, password } = req.body;
   if (password && email) {
-    const isExist = await User.findOne({ Email: email , Status: true });
+    const isExist = await User.findOne({ Email: email, Status: true });
     console.log("a", isExist);
     if (isExist) {
       const isMatch = await bcrypt.compare(password, isExist.Password);
@@ -345,10 +284,10 @@ router.post("/userLogin", async (req, res) => {
 });
 
 router.post("/matchOtp", async (req, res) => {
-  const { Email, Mobile,Code } = req.body;
+  const { Email, Mobile, Code } = req.body;
 
   const data = await Otp.findOne({ Email, Mobile, Code, used: 0 });
-  console.log('aaa', data);
+  console.log("aaa", data);
   if (data) {
     const currentTime = new Date().getTime();
     const diff = data.expireIn - currentTime;
@@ -401,49 +340,50 @@ router.get("/userLogout", auth, (req, res) => {
   res.status(200).send("user Logout");
 });
 
-router.post('/web/passUpdate' ,  async(req,res)=>{
-  const {Email ,Password } = req.body;
+router.post("/web/passUpdate", async (req, res) => {
+  const { Email, Password } = req.body;
 
-   console.log(Email , Password)
-   const hashPassword = await bcrypt.hash(Password, 12);
-  const isMatch = await User.findOneAndUpdate({Email},{Password : hashPassword});
-  console.log(isMatch, "isMatch")
-  if(isMatch){
-    
+  console.log(Email, Password);
+  const hashPassword = await bcrypt.hash(Password, 12);
+  const isMatch = await User.findOneAndUpdate(
+    { Email },
+    { Password: hashPassword }
+  );
+  console.log(isMatch, "isMatch");
+  if (isMatch) {
     res.send({
-         status: 1,
-         message: "PASSWORD_IS_UPDATED"
-       })
-      }
-  else{
+      status: 1,
+      message: "PASSWORD_IS_UPDATED",
+    });
+  } else {
     res.send({
       status: 0,
-      message: "something_is_wrong"
-    })
+      message: "something_is_wrong",
+    });
   }
-})
+});
 
-router.post('/mobile/passUpdate' ,  async(req,res)=>{
-  const {UserId , Password} = req.body;
+router.post("/mobile/passUpdate", async (req, res) => {
+  const { UserId, Password } = req.body;
 
-   console.log(UserId , Password)
-  
-  const isMatch = await User.updateOne({UserId},{$set:{Passsword1: Password}},{upsert: true});
-  if(isMatch){
-    
-    const fin = await User.findOne({UserId})
-     console.log('updated')
-     res.send({
-       status : 1,
-       message : "password updated",
-       data : fin
-     })
-     
+  console.log(UserId, Password);
 
+  const isMatch = await User.updateOne(
+    { UserId },
+    { $set: { Passsword1: Password } },
+    { upsert: true }
+  );
+  if (isMatch) {
+    const fin = await User.findOne({ UserId });
+    console.log("updated");
+    res.send({
+      status: 1,
+      message: "password updated",
+      data: fin,
+    });
+  } else {
+    res.json("user not exist");
   }
-  else{
-    res.json('user not exist')
-  }
-})
+});
 
 module.exports = router;

@@ -67,7 +67,7 @@ export default function User() {
     { field: 'PanNo', title: 'Pan No' },
     { field: 'Amount', title: 'Amount'},
     { field: 'Date', title: 'Date' },
-    { field: 'Status', title: 'Status',render : (row)=>  <Status status={row.Status} id={row.Id} ApiUpdate={callEffect} ></Status>},
+    { field: 'Status', title: 'Status',render : (row)=>  <Status status={row?.Status} id={row?.Id} ApiUpdate={callEffect} ></Status>},
     { field: 'Modal', title: 'Modal',render : (row)=> <>{(row?.Status === "Approved") ? (<FormModal  data = {row} callApi={createCashback}/>):""}</>}
    
   ];
@@ -138,7 +138,7 @@ const Status = (props) => {
     <>
       
       <select value={value} onChange={(e) => onChange(e)}>
-        {statusArry.map((obj) => {
+        {statusArry?.map((obj) => {
           return <option value={obj}>{obj}</option>;
         })}
       </select>

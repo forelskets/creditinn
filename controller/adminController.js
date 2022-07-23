@@ -108,7 +108,8 @@ exports.AdminUpdate = async(req , res , next) =>{
 exports.AdminSettingList = async (req , res , next) =>{
     console.log("AdminSettingList")
     try {
-        result = await Setting.findById("628b6a5fe4377da6c1bb4f93")
+        // result = await Setting.findById("628b6a5fe4377da6c1bb4f93")
+        result = await Setting.findById("62bbd6a18daacc4f72344179")
         if(result){
             return res.send({
                 status:1,
@@ -133,7 +134,7 @@ exports.AdminSettingUpdate = async (req , res  , next) =>{
     const {cashbackreward , minAmount , RTEditor , TEL} = req.body;
     console.log(cashbackreward , minAmount)
     try {
-        const response = await Setting.findByIdAndUpdate("628b6a5fe4377da6c1bb4f93", {Cashbackreward : cashbackreward , Minamount : minAmount , RTEditor , TEL})
+        const response = await Setting.findByIdAndUpdate("62bbd6a18daacc4f72344179", {Cashbackreward : cashbackreward , Minamount : minAmount , RTEditor , TEL})
         console.log(response , "response") 
         if(response){
             return res.send({

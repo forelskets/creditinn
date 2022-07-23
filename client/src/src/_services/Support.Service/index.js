@@ -1,1 +1,0 @@
-export {customerSupport , corporateSupport } from './SupportService';

@@ -1078,6 +1078,11 @@ const LoanForm = (props) => {
                 aria-label="Close"
               ></button>
             </div>
+            <img
+              src="images/web.jpg"
+              alt="applyprocess"
+              style={{ width: '100%', align: 'center', leftPadding: '100px' }}
+            />
             <div className="modal-body">{message}</div>
           </div>
         </div>

@@ -14,13 +14,10 @@ function FrontMain() {
     <>
       <Navbar />
       <Section1 />
-      {/* <Section2 /> */}
-      {/* <Section5 /> */}
+      
       <Section3 />
 
-      {/* <Section4 /> */}
-       {/* <Section6 />  */}
-      {/* <Section7 /> */}
+     
       <Footer />
     </>
   );

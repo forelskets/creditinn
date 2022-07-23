@@ -6,7 +6,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 
 import FrontMain from './frontPage/frontMain';
-
+import AboutUs from './frontPage/aboutus';
 import ApplyLoan from './user/ApplyLoan';
 
 import UserMain from './user/UserMain';
@@ -26,6 +26,7 @@ function App() {
         <Route path="/privacy-policy" exact component={privacy} />
         <Route path="/form" exact component={formReg} />
         <Route path="/support" exact component={Support} />
+        <Route path="/about" exact component={AboutUs} />
         <Route path="/forgetPassword" exact component={ForgetPassword} />
 
         <Route path="/applyloan" component={ApplyLoan} />
