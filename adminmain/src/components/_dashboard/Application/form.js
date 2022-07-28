@@ -3,10 +3,10 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import { FormControl,  TextField } from '@mui/material/';
+import { FormControl, TextField } from '@mui/material/';
 import Iconify from '../../Iconify';
-import { Validate } from '../../../_helper'
-import { AllBank, AllService } from '../../../_services/Admin.services'
+import { Validate } from '../../../_helper';
+import { AllBank, AllService } from '../../../_services/Admin.services';
 export default function FormModal(props) {
   const [open, setOpen] = React.useState(false);
 
@@ -25,7 +25,6 @@ export default function FormModal(props) {
     setService(event.target.value);
   };
 
-
   const [earning, setEarning] = useState('');
   const [cashback, setCashback] = useState('');
   const [error, setError] = useState('');
@@ -33,62 +32,81 @@ export default function FormModal(props) {
   const [serviceArray, setServiceArr] = useState([]);
   const [services, setservices] = useState('');
   useEffect(() => {
-    callEffect()
-  }, [])
+    callEffect();
+  }, []);
 
   const callEffect = async () => {
-    let res = await AllBank()
+    let res = await AllBank();
     if (res?.status === 1 && Array.isArray(res?.data?.services)) {
-      setBankArray(res.data.services)
+      setBankArray(res.data.services);
     }
-    let allservice = await AllService()
+    let allservice = await AllService();
     if (allservice?.status === 1 && Array.isArray(allservice?.data?.services)) {
-      setServiceArr(allservice.data.services)
+      setServiceArr(allservice.data.services);
     }
   };
 
   const SubmitForms = () => {
     let success = 0;
     let obj = {};
-    console.log(props.data, "propsdata")
+    console.log(props.data, 'propsdata');
 
-    if(props?.data?.user?.RefralID === '' || props?.data?.user?.RefralID === undefined ){
-       console.log(props.data.user.RefralID , "refralId")
+    if (props?.data?.user?.RefralID === '' || props?.data?.user?.RefralID === undefined) {
+      console.log(props.data.user.RefralID, 'refralId');
       obj = {
-      userId: props?.data?.user?._id ,TransactionType: "CASHBACK" , CreditDebit: "CREDIT", Amount: cashback,    
-      
-    }}else{
-      console.log(props.data.user.RefralID , "refralId2")
-    obj = {
-      userId: props?.data?.user?._id , refralId:props?.data?.user?.RefralID ,TransactionType: "CASHBACK" ,TransactionTypeEarning:"EARNING", CreditDebit: "CREDIT", Amount: cashback, Earning: earning   
-      
-    }}
-    console.log(obj , "obj")
-    let Obj = Validate(obj, rules)
-    Object.keys(Obj).map(key => {
-      if (Obj[key] !== "") {
-        success = 1
-      }
-    })
-    setError(Obj)
-    if (success === 0) {
-      props.callApi(obj, callback)
-     
+        userId: props?.data?.user?._id,
+        TransactionType: 'CASHBACK',
+        CreditDebit: 'CREDIT',
+        Amount: cashback
+      };
+    } else {
+      console.log(props.data.user.RefralID, 'refralId2');
+      obj = {
+        userId: props?.data?.user?._id,
+        refralId: props?.data?.user?.RefralID,
+        TransactionType: 'CASHBACK',
+        TransactionTypeEarning: 'EARNING',
+        CreditDebit: 'CREDIT',
+        Amount: cashback,
+        Earning: earning
+      };
     }
-  }
+    console.log(obj, 'obj');
+    let Obj = Validate(obj, rules);
+    Object.keys(Obj).map((key) => {
+      if (Obj[key] !== '') {
+        success = 1;
+      }
+    });
+    setError(Obj);
+    if (success === 0) {
+      props.callApi(obj, callback);
+    }
+  };
 
   const callback = () => {
-    
-    setCashback("");
-    setEarning("");
+    setCashback('');
+    setEarning('');
     handleClose();
-  }
+  };
 
- 
+  const HandleClose = () => {
+    callback();
+  };
 
   const onChangeServices = (e) => {
-    console.log(e)
-    setservices(e.target.value)
+    console.log(e);
+    setservices(e.target.value);
+  };
+
+  let isDisabled = true;
+
+  if (props?.data?.user?.RefralID) {
+    if (cashback && earning) {
+      isDisabled = false;
+    }
+  } else if (cashback) {
+    isDisabled = false;
   }
 
   return (
@@ -111,56 +129,65 @@ export default function FormModal(props) {
         <DialogTitle id="alert-dialog-title">Select Bank & Service</DialogTitle>
         <div>
           <FormControl sx={{ m: 2, minWidth: 140 }}>
-          <TextField
+            <TextField
               sx={{ m: 2, minWidth: 100 }}
               id="demo-helper-text-aligned-no-helper"
               label="CashBack"
               value={cashback}
-              onChange={(e) => { setCashback(e.target.value); setError("") }}
+              onChange={(e) => {
+                setCashback(e.target.value);
+                setError('');
+              }}
             />
-           
-            {error?.BankName && <div className='error-msg'>{error.BankName}</div>}
+
+            {!cashback && <div style={{ color: 'red' }}>Please select CashBack</div>}
           </FormControl>
-         { (props?.data?.user?.RefralID) ? (<FormControl sx={{ m: 2, minWidth: 140 }}>
-            
-            <TextField
-              sx={{ m: 2, minWidth: 100 }}
-              id="demo-helper-text-aligned-no-helper"
-              label="Earning"
-              value={earning}
-              onChange={(e) => { setEarning(e.target.value); setError("") }}
-            />
-          </FormControl>) : ""}
-          
-         
+          {props?.data?.user?.RefralID ? (
+            <FormControl sx={{ m: 2, minWidth: 140 }}>
+              <TextField
+                sx={{ m: 2, minWidth: 100 }}
+                id="demo-helper-text-aligned-no-helper"
+                label="Earning"
+                value={earning}
+                onChange={(e) => {
+                  setEarning(e.target.value);
+                  setError('');
+                }}
+              />
+              {!earning && <div style={{ color: 'red' }}>Please select Earning</div>}
+            </FormControl>
+          ) : (
+            ''
+          )}
         </div>
         <DialogActions>
-          <Button onClick={SubmitForms} autoFocus>
+          <Button onClick={SubmitForms} autoFocus disabled={isDisabled}>
             Save
           </Button>
-          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={HandleClose}>Close</Button>
         </DialogActions>
       </Dialog>
     </div>
   );
 }
 
-
-const rules = [{
-  field: 'Note',
-  fieldName: 'Note',
-  type: 'string',
-  require: true
-}, {
-  field: 'BankName',
-  fieldName: 'Bank Name',
-  type: 'string',
-  require: true
-},
-//  {
-//   field: 'BankService',
-//   fieldName: 'Service',
-//   type: 'string',
-//   require: true
-// }
-]
+const rules = [
+  {
+    field: 'Note',
+    fieldName: 'Note',
+    type: 'string',
+    require: true
+  },
+  {
+    field: 'BankName',
+    fieldName: 'Bank Name',
+    type: 'string',
+    require: true
+  }
+  //  {
+  //   field: 'BankService',
+  //   fieldName: 'Service',
+  //   type: 'string',
+  //   require: true
+  // }
+];

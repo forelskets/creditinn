@@ -124,7 +124,7 @@ router.post("/userRegister", async (req, res) => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const date1 = date.getDate();
-    const count = await UserTransaction.collection.count();
+    const count =( await UserTransaction.collection.count())+1;
 
     const transactiongenerator = `${year}${month}${date1}${count}`;
 

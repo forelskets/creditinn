@@ -4,6 +4,7 @@ const profileSchema = new mongoose.Schema(
   {
     UserId: {
       type: String,
+      
       required: true,
     },
     FirstName: {

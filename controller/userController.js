@@ -277,7 +277,7 @@ exports.getgenerateOtp =  async (req , res, next)=>{
     console.log("error" , error);
     return res.send({
       status: 0,
-      message: "sonething_went_wrong"
+      message: "something_went_wrong"
     })
   }
 }

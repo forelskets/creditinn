@@ -47,7 +47,7 @@ Grievance Officer
     <li>Mr. Srinivas Rao</li>
     <li>Conquer info marketing (Proprietorship Firm)</li>
     <li>72, 41st cross 8th block jayanagar Bangalore 560082</li>
-    <li>Phone No: +91 9902800500</li>
+    <li>Phone No: +91 96206 46047</li>
     <li>Email: srinivas@conquerinfo.in</li>
 </ul>
         </div>
