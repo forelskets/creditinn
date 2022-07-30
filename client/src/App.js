@@ -6,6 +6,7 @@ import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import FrontMain from './frontPage/frontMain';
 import AboutUs from './frontPage/aboutus';
 import ApplyLoan from './user/ApplyLoan';
+import terms from './frontPage/sections/terms';
 
 import UserMain from './user/UserMain';
 import formReg from './frontPage/sections/formreg';
@@ -22,6 +23,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={FrontMain} />
         <Route path="/privacy-policy" exact component={privacy} />
+        <Route path="/terms-and-conditions" exact component={terms} />
         <Route path="/form" exact component={formReg} />
         <Route path="/support" exact component={Support} />
         <Route path="/about" exact component={AboutUs} />

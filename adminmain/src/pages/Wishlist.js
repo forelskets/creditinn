@@ -37,7 +37,7 @@ const Wishlist = () => {
       console.log(response?.data , "ifResponse")
       let data1 = []
       response?.data?.map((ele)=>{
-           data1?.push({"createdAt":ele?.CreatedAt ,"name" : ele?.UserId?.Name , "email" : ele?.UserId?.Email , "product": ele?.Product , "planning_Time": ele?.Planning_Time , "budget":ele?.Budget , "remarks":ele?.Remarks , "city":ele?.City , "state": ele?.State})
+           data1?.push({"createdAt":ele?.CreatedAt ,"name" : ele?.UserId?.Name , "email" : ele?.UserId?.Email , "product": ele?.Product , "planning_Time": ele?.Planning_time , "budget":ele?.Budget , "remarks":ele?.Remarks , "city":ele?.City , "state": ele?.State})
       })
       console.log(data1 , "arraydata")
       setWishlist(data1)

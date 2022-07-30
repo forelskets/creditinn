@@ -17,7 +17,7 @@ import {
   EmailShareButton,
   FacebookIcon,
 } from "react-share";
-var id = "";
+  var id = "";
 
 const ApplyLoan = () => {
   const shareUrl = "www.creditsin.com/form ";

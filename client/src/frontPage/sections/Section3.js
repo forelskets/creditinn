@@ -20,7 +20,7 @@ const Section3 = () => {
                     <div>
                       <div className="row">
                       
-                        <div className="col-md-4  ">
+                        <div className="col-md-4 mb-3 ">
                           <div
                             className="card card1 mx-auto"
                             style={{
@@ -209,10 +209,12 @@ const Section3 = () => {
                   <div className="text-box">
                     <h2 className="heading">Customer engagement</h2>
                     <p className="paragraph">
-                     Creditsin is in the process of customer engagement with 100%  satisfaction.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Creditsin is in the process of customer engagement with 100% satisfaction. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     </p>
                   </div>
                 </div>
+                
                 <lottie-player
                   src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
                   background="transparent"

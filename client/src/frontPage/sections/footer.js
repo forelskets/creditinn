@@ -136,7 +136,7 @@ const Footer = () => {
                   <ul className="padding-ul">
                   <li > <a href="/about"  className="text-light" style={{textDecoration: 'none'}}>About Us</a></li>
                   <li > <a href="/privacy-policy"  className="text-light" style={{textDecoration: 'none'}}>Privacy Policy</a></li>
-                    <li>T & C</li>
+                    <li><a href="/terms-and-conditions"  className="text-light" style={{textDecoration: 'none'}}>T & C</a></li>
                     <li onClick={loginVar}>Login </li>
 
                   </ul>
@@ -189,14 +189,14 @@ const Footer = () => {
                   <div className="align-inline">
                     <div className="m-auto">
                       <div className="padding-ul">
-                        <a className="text-light" style={{textDecoration: 'none'}} href="https://instagram.com/creditin">
+                        <a className="text-light" style={{textDecoration: 'none'}} href="https://instagram.com/credistin">
 
                           <i className="fab fa-instagram" ></i></a>
-                        <a className="text-light" style={{textDecoration: 'none'}} href="https://facebook.com/creditin">
+                        <a className="text-light" style={{textDecoration: 'none'}} href="https://facebook.com/credistin">
 
                           <i className="fab fa-facebook" ></i></a>
-
-                        <i className="fab fa-twitter"></i>
+                          <a className="text-light" style={{textDecoration: 'none'}} href="https://www.linkedin.com/company/creditsin/">
+                        <i className="fab fa-linkedin"></i>
                         <i className="fab fa-youtube"></i>{' '}
                       </div>
                     </div>
