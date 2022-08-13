@@ -142,7 +142,7 @@ const Section3 = () => {
             <div className="row">
               <div className="col-md-5 col-12 d-md-block d-none">
                 <div className="img-area ">
-                  <img src="images/creditapp.png" alt="" />
+                  <img src="images/creditapp.png" alt="credistin backcover" />
                 </div>
               </div>
               <div className="col-md-7 col-12 text-area">
@@ -159,7 +159,7 @@ const Section3 = () => {
                   <div className="icon-box1">
                     <img
                       src="images/rupee-card.svg"
-                      alt=""
+                      alt="loan"
                       className="img-fluid"
                     />
                     <lottie-player
@@ -187,7 +187,7 @@ const Section3 = () => {
                   <div className="icon-box1">
                     <img
                       src="images/rupee-card.svg"
-                      alt=""
+                      alt="loan"
                       className="img-fluid"
                     />
                   </div>
@@ -202,27 +202,27 @@ const Section3 = () => {
                   <div className="icon-box1">
                     <img
                       src="images/rupee-card.svg"
-                      alt=""
+                      alt="loan"
                       className="img-fluid"
                     />
                   </div>
                   <div className="text-box">
                     <h2 className="heading">Customer engagement</h2>
                     <p className="paragraph">
-                    Creditsin is in the process of customer engagement with 100% satisfaction. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Creditsin is in the process of customer engagement with 100% satisfaction. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                    
                     </p>
                   </div>
                 </div>
                 
-                <lottie-player
+                {/* <lottie-player
                   src="https://assets2.lottiefiles.com/private_files/lf30_khh7mhre.json"
                   background="transparent"
                   speed="1"
                   style={{ width: '100px', height: '100px' }}
                   loop
                   autoplay
-                ></lottie-player>
+                ></lottie-player> */}
               </div>
             </div>
           </div>
@@ -288,64 +288,7 @@ const Section3 = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="carousel-item">
-                      <div className="row">
-                        <div className="col-md-4 mb-3">
-                          <div className="card">
-                            <img
-                              className="img-container"
-                              alt=""
-                              src="images/portrait-young-smiling-woman-2.png"
-                            />
-                            <div className="card-body">
-                              <h4 className="heading">
-                                Special title treatment
-                              </h4>
-                              <p className="paragraph">
-                                With supporting text below as a natural lead-in
-                                to additional content.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-4 mb-3">
-                          <div className="card">
-                            <img
-                              className="img-container"
-                              alt=""
-                              src="images/portrait-young-smiling-woman-2.png"
-                            />
-                            <div className="card-body">
-                              <h4 className="heading">
-                                Special title treatment
-                              </h4>
-                              <p className="paragraph">
-                                With supporting text below as a natural lead-in
-                                to additional content.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-4 mb-3">
-                          <div className="card">
-                            <img
-                              className="img-container"
-                              alt=""
-                              src="images/portrait-young-smiling-woman-2.png"
-                            />
-                            <div className="card-body">
-                              <h4 className="heading">
-                                Special title treatment
-                              </h4>
-                              <p className="paragraph">
-                                With supporting text below as a natural lead-in
-                                to additional content.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  
                   </div>
                 </div>
               </div>

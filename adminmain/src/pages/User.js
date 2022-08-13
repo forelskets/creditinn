@@ -119,7 +119,7 @@ export default function User() {
             <Button disabled={handleDisabled()} variant="contained" onClick={handleDate}>search</Button>
           </DialogActions>
         </Dialog>
-       {console.log(userList , "userList")}
+    
        <MaterialTable
        title="User-Table"
        columns={TABLE_HEAD}

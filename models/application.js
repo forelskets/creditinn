@@ -51,6 +51,10 @@ const ApplicationSchema = new mongoose.Schema(
       type: String,
       // require:true
     },
+    Category: {
+      type: String,
+      // require:true
+    },
     Status: {
       type: Boolean,
       // require:true

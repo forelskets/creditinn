@@ -137,6 +137,13 @@ export default function Transaction() {
         title="Transactions"
         data = {transaction}
         columns={columns}
+        options={{
+          exportButton: true,
+          paging: true,
+          pageSize: 5,
+          emptyRowsWhenPagin: false,
+          pageSizeOptions : [10 ,15, 20 ,35 ,50, 100]
+        }}
         />
       
       </Container>

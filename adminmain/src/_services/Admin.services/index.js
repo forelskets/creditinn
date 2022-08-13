@@ -39,5 +39,9 @@ export {
   addLoan,
   addInsurance,
   addCreditCard,
-  ProductStateChange
+  ProductStateChange,
+  getAdmins,
+  AddAdmin,
+  UpdateSubAdmin,
+  DeleteSubAdmin
 } from './admin.user';

@@ -1,7 +1,7 @@
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const Phone = require("./util/Phone");
-const EmailFn = require("./util/Email");
+const Emailfn = require("./util/Email");
 const express = require("express");
 const User = require("../models/users");
 const Otp = require("../models/otp");
@@ -17,6 +17,7 @@ const referralCodes = require("referral-codes");
 const referralCodeGenerator = require("referral-code-generator");
 const { json } = require("express/lib/response");
 const { CREDIT, DEBIT, CASHBACK, EARNING, AMOUNT } = require("./constant");
+const { response } = require("express");
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -81,7 +82,6 @@ router.get("/addBankService", async (req, res) => {
 
 router.post("/userRegister", async (req, res) => {
   try {
-    console.log(req.body.Refral);
     let data1 = await User.collection.count();
     const { Name, Email, Password, Mobile, RefralUserCode } = req.body;
     console.log(Name, Email, Password, Mobile);
@@ -90,7 +90,7 @@ router.post("/userRegister", async (req, res) => {
     const refral = referralCodeGenerator.alphaNumeric("uppercase", 3, 1);
 
     const isMatch = await User.findOne({ Email });
-    //  console.log(isMatch);
+    console.log(isMatch);
     if (isMatch) {
       return res.send({ status: 0, message: "user is already exist." });
     }
@@ -106,6 +106,7 @@ router.post("/userRegister", async (req, res) => {
       userVerified: 0,
       Status: true,
     };
+    console.log("1111111");
 
     if (RefralUserCode) {
       const ReferedUser = await User.findOne({ RefralNo: RefralUserCode });
@@ -116,6 +117,8 @@ router.post("/userRegister", async (req, res) => {
       }
     }
 
+    console.log("222222");
+
     const user = new User(obj);
 
     const addUser = await user.save();
@@ -124,19 +127,27 @@ router.post("/userRegister", async (req, res) => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const date1 = date.getDate();
-    const count =( await UserTransaction.collection.count())+1;
-
+    const count = (await UserTransaction.collection.count()) + 1;
+    console.log(count, "count");
     const transactiongenerator = `${year}${month}${date1}${count}`;
-
+    console.log("33333");
     // let transactionNoCashback = parseInt(transactiongenerator) + parseInt(sequence.TransactionNo) + 1 ;
-    const cashback = await UserTransaction({
+    console.log(
+      addUser._id,
+      CASHBACK,
+      CREDIT,
+      AMOUNT,
+      transactiongenerator,
+      "usertransaction "
+    );
+    const cashback = await UserTransaction.create({
       userId: addUser._id,
       TransactionType: CASHBACK,
       CreditDebit: CREDIT,
       Amount: AMOUNT,
       TransactionWallet: AMOUNT,
       TransactionNo: transactiongenerator,
-    }).save();
+    });
 
     console.log("addUser ,cashback ", addUser, cashback);
     const userbankdetails = await UserBankDetails({
@@ -156,7 +167,7 @@ router.post("/userRegister", async (req, res) => {
       });
       const otpResponse = await otpData.save();
       Phone(otpCode, Mobile);
-      EmailFn(otpCode, Email);
+      Emailfn(otpCode, Email);
     };
 
     otpFunc();
@@ -210,7 +221,7 @@ router.post("/sendOtp", async (req, res) => {
       });
 
       const otpResponse = await otpData.save();
-      EmailFn(otpCode, Email);
+      Email(otpCode, Email);
       Phone(otpCode, Mobile);
       console.log("otpCode", otpCode);
       // res.status(200).send({message: "otp sent"})
@@ -230,7 +241,61 @@ router.post("/sendOtp", async (req, res) => {
   }
 });
 
-router.post("/userLogin", async (req, res) => {
+router.post("/otpGenerate", async (req, res) => {
+  console.log("otpGenerate");
+  try {
+    const { Mobile } = req?.body;
+    const otpCode = Math.floor(Math.random() * 10000 + 1);
+    console.log(otpCode);
+    const otpData = new Otp({
+      Mobile,
+      Code: otpCode,
+      expireIn: new Date().getTime() + 300 * 10000,
+    });
+    const otpResponse = await otpData.save();
+    Phone(otpCode, Mobile);
+    if (otpResponse) {
+      res.send({
+        status: 1,
+        msg: "Otp sent to your entered mobile no.",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.send({
+      status: 0,
+      msg: "something_is_technical_issue",
+    });
+  }
+});
+
+router.post("/matchGenerateOtp", async (req, res) => {
+  const { Mobile, Code } = req.body;
+
+  const data = await Otp.findOne({ Mobile, Code, used: 0 });
+  console.log("aaa", data);
+  if (data) {
+    const currentTime = new Date().getTime();
+    const diff = data.expireIn - currentTime;
+    if (diff < 0) {
+      return res.send({ status: 0, message: "Token Failed" });
+    } else {
+      await data.update({ used: 1 });
+
+      // const token = await result.generateAuthToken();
+      // res.cookie('jwtoken', token);
+
+      return res.send({
+        status: 1,
+        message: "User Verified",
+      });
+    }
+  } else {
+    return res.send({ status: 0, message: "Invalid otp" });
+  }
+});
+
+router.post("/userLogin", auth, async (req, res) => {
   console.log(req.body.email, req.body.password);
   const { email, password } = req.body;
   if (password && email) {
@@ -327,7 +392,7 @@ router.get("/dashboard", auth, async (req, res) => {
   res.status(200).send(req.rootUser);
 });
 
-router.get("/profile", auth, async (req, res) => {
+router.get("/profile", async (req, res) => {
   res.status(200).send(req.rootUser);
 });
 

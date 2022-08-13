@@ -125,7 +125,7 @@ const section1 = () => {
             <div className="col-md-7 col-12 img-area d-md-block d-none">
               <img
                 src="images/creditdash.png"
-                alt=""
+                alt="logo"
                 className="img-container"
               />
               <lottie-player

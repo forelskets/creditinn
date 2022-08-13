@@ -105,7 +105,8 @@ export default function Bank() {
            title=" Bank Lists"
            columns={columns}
            data={BANK}
-           options={{actionsColumnIndex : -1 , addRowPosition: "first" , filtering: true , exportButton: true}}
+           options={{
+            exportButton: true,actionsColumnIndex : -1 , addRowPosition: "first" , filtering: true , exportButton: true}}
            editable={{
              onRowAdd:(newData) => new Promise (async(resolve , reject)=>{
                console.log(newData , "newData")

@@ -207,6 +207,7 @@ export default function Services() {
           columns={columns}
           data={data}
           options={{
+            exportButton: true,
             actionsColumnIndex: -1,
             addRowPosition: 'first',
             filtering: true,

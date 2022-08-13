@@ -196,7 +196,7 @@ const Footer = () => {
 
                           <i className="fab fa-facebook" ></i></a>
                           <a className="text-light" style={{textDecoration: 'none'}} href="https://www.linkedin.com/company/creditsin/">
-                        <i className="fab fa-linkedin"></i>
+                        <i className="fab fa-linkedin"></i></a>
                         <i className="fab fa-youtube"></i>{' '}
                       </div>
                     </div>

@@ -119,7 +119,14 @@ export default function Token() {
        <MaterialTable
        title="Insurances Application"
        columns={TABLE_HEAD}
-       data={userList}/>
+       data={userList}
+          options={{
+              exportButton: true,
+              paging: true,
+              pageSize: 5,
+              emptyRowsWhenPagin: false,
+              pageSizeOptions : [10 ,15, 20 ,35 ,50, 100]
+            }}/>
     </Page>
   );
 }

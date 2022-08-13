@@ -278,6 +278,7 @@ export default function Offer() {
             columns={columns}
             options={{
               actionsColumnIndex: -1,
+              exportButton: true,
               grouping: true,
               paging: true,
               pageSize: 6, // make initial page size

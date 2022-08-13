@@ -66,7 +66,8 @@ export default function Staff() {
       <MaterialTable
       title="Refferals "
       columns={TABLE_HEAD}
-      data={userList}/>
+      data={userList}
+      />/>
     </Page>
   );
 }

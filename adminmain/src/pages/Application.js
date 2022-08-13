@@ -42,14 +42,16 @@ export default function User() {
     applications.map((ele, ind) =>
       data1?.push({
         Id: ele?._id,
+        Type: ele?.Category,
         user: ele?.UserId,
-        Name: ele?.UserId?.Name,
-        Mobile: ele?.UserId?.Mobile,
+        Name: ele?.ProfileId?.FirstName,
+        Mobile: ele?.ProfileId?.Mobile,
         Application: ele?.ApplicationNo,
-        AadharNo: ele?.KycId?.AdhaarNo,
+        // AadharNo: ele?.KycId?.AdhaarNo,
         PanNo: ele?.KycId?.PanNo,
+        Bank: ele?.Purpose,
         Amount: ele?.Amount,
-        Date: dateFormat(ele?.createdAt, 'mmm'),
+        Date: dateFormat(ele?.createdAt, 'dd-mmm'),
         Status: ele?.status,
         Modal: ele?.Modal
       })
@@ -57,12 +59,14 @@ export default function User() {
     setApplication(data1);
   };
   const TABLE_HEAD = [
+    { field: 'Type', title: 'Type' },
     { field: 'Name', title: 'Name' },
     { field: 'Mobile', title: 'MobileNo' },
     { field: 'Application', title: 'ApplicationNo' },
-    { field: 'AadharNo', title: 'Aadhar No' },
+    // { field: 'AadharNo', title: 'Aadhar No' },
     { field: 'PanNo', title: 'Pan No' },
     { field: 'Amount', title: 'Amount' },
+    {field: 'Bank', title:'Bank/Loan Type'},
     { field: 'Date', title: 'Date' },
     {
       field: 'Status',
@@ -99,6 +103,7 @@ export default function User() {
           columns={TABLE_HEAD}
           data={application}
           options={{
+            exportButton: true,
             paging: true,
             pageSize: 6,
             emptyRowsWhenPaging: false,

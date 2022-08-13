@@ -103,8 +103,16 @@ const CreditCardColumns = [
           columns={LoanColumns}
           data={loanData}
           options={{
+            
             actionsColumnIndex: -1,
             addRowPosition:'first'
+          }}
+          options={{
+            exportButton: true,
+            paging: true,
+            pageSize: 5,
+            emptyRowsWhenPagin: false,
+            pageSizeOptions : [10 ,15, 20 ,35 ,50, 100]
           }}
           editable={{
             onRowAdd:(newData) =>
@@ -119,6 +127,13 @@ const CreditCardColumns = [
           title="Insurances List"
           columns={InsuranceColumns}
           data={insuranceData}
+          options={{
+            exportButton: true,
+            paging: true,
+            pageSize: 5,
+            emptyRowsWhenPagin: false,
+            pageSizeOptions : [10 ,15, 20 ,35 ,50, 100]
+          }}
           />
         </TabPanel>
         <TabPanel value="3">
@@ -126,6 +141,13 @@ const CreditCardColumns = [
           title="CreditCard List"
           columns={CreditCardColumns}
           data={creditCardData}
+          options={{
+            exportButton: true,
+            paging: true,
+            pageSize: 5,
+            emptyRowsWhenPagin: false,
+            pageSizeOptions : [10 ,15, 20 ,35 ,50, 100]
+          }}
           />
         </TabPanel>
       </TabContext>

@@ -1,10 +1,17 @@
 // component
 import Iconify from '../../components/Iconify';
-
+import jwt_decoder from 'jwt-decode';
+import { useSelector } from 'react-redux';
 // ----------------------------------------------------------------------
 
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
+const token = localStorage.getItem('adminLogin');
 
+let admin = {};
+if (token) {
+  admin = jwt_decoder(token);
+  console.log(admin, admin.admin.Type, 'adminconfig');
+}
 const sidebarConfig = [
   {
     title: 'dashboard',
@@ -72,8 +79,12 @@ const sidebarConfig = [
     title: 'Insurances',
     path: '/dashboard/insurances',
     icon: getIcon('ic:outline-token')
+  },
+  {
+    title: 'Sub-Admin',
+    path: '/dashboard/subAdmin',
+    icon: getIcon('ic:outline-token')
   }
- 
 ];
 
 export default sidebarConfig;

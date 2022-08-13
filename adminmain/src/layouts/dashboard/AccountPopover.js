@@ -45,6 +45,13 @@ export default function AccountPopover() {
     setOpen(false);
   };
 
+  const LogoutHandler = () => {
+    localStorage.removeItem('adminLogin');
+    setTimeout(() => {
+      dispatch({ type: ADMIN_LOGOUT, payload: '' });
+    }, 1000);
+  };
+
   return (
     <>
       <IconButton
@@ -109,14 +116,7 @@ export default function AccountPopover() {
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button
-            fullWidth
-            color="inherit"
-            variant="outlined"
-            onClick={() => {
-              dispatch({ type: ADMIN_LOGOUT });
-            }}
-          >
+          <Button fullWidth color="inherit" variant="outlined" onClick={LogoutHandler}>
             Logout
           </Button>
         </Box>

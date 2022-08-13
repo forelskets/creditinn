@@ -48,6 +48,29 @@ export const getSettingList = async (obj) => {
   console.log('res', res);
   return res;
 };
+export const getAdmins = async (obj) => {
+  let res = await Api('GET', '/admin', obj);
+  console.log('res', res);
+  return res;
+};
+
+export const AddAdmin = async (obj) => {
+  let res = await Api('POST', '/admin/addAdmin', obj);
+  console.log('res', res);
+  return res;
+};
+
+export const UpdateSubAdmin = async (id, obj) => {
+  let res = await Api('PATCH', `/admin/udateSubAdmin/${id}`, obj);
+  console.log('res', res);
+  return res;
+};
+
+export const DeleteSubAdmin = async (id) => {
+  let res = await Api('DELETE', `/admin/deleteSubAdmin/${id}`);
+  console.log('res', res);
+  return res;
+};
 
 export const UpdateSettingList = async (obj) => {
   let res = await Api('POST', '/admin/settingUpdate', obj);
