@@ -1,8 +1,7 @@
 
 import { useEffect, useState } from 'react';
-// material
+import dateFormat from 'dateformat';
 
-// components
 import Page from '../components/Page';
 
 //
@@ -29,6 +28,7 @@ export default function Staff() {
     {field: 'city', title: 'City'},
     {field: 'state', title: 'State'},
     {field: 'pincode', title: 'Pincode'},
+    {field:'createdAt',title:'Date & Time'}
    
    
   ];
@@ -45,7 +45,8 @@ export default function Staff() {
     if(response?.status === 1){
       let dataArray=[];
       response?.data?.map((item)=>{
-          dataArray?.push({"name":item?.Name , "product":item?.Product ,"mobileno":item?.Mobile ,"city":item?.City , "state":item?.State ,"pincode":item?.Zip_Code ,})
+          dataArray?.push({
+            "name":item?.Name , "product":item?.Product ,"mobileno":item?.Mobile ,"city":item?.City , "state":item?.State ,"pincode":item?.Zip_Code ,"createdAt":dateFormat(item?.createdAt, 'dd-mmm -hh:mm') ,})
       })
       setUserList(dataArray)
     }
@@ -67,7 +68,14 @@ export default function Staff() {
       title="Refferals "
       columns={TABLE_HEAD}
       data={userList}
-      />/>
+      options={{
+        exportButton: true,
+        paging: true,
+        pageSize: 6,
+        emptyRowsWhenPaging: false,
+        pageSizeOptions: [15, 25, 50]
+      }}
+      />
     </Page>
   );
 }

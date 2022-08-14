@@ -295,7 +295,7 @@ router.post("/matchGenerateOtp", async (req, res) => {
   }
 });
 
-router.post("/userLogin", auth, async (req, res) => {
+router.post("/userLogin", async (req, res) => {
   console.log(req.body.email, req.body.password);
   const { email, password } = req.body;
   if (password && email) {

@@ -1,7 +1,6 @@
-import { filter } from 'lodash';
 import { cloneDeep } from "lodash";
-import { sentenceCase } from 'change-case';
 import { useEffect, useState } from 'react';
+import dateFormat from 'dateformat';
 import MaterialTable from 'material-table';
 // components
 import Page from '../components/Page';
@@ -40,9 +39,10 @@ export default function Token() {
   },[])
 
   const TABLE_HEAD = [
-    { field: 'name', title: 'Name'},
+
     { field: 'product', title: 'Product'},
     { field: 'mobileno', title: 'MobileNo'},
+    { field: 'createdAt', title: 'Date& Time' },
     { field: 'Status', title: 'Status' , render:(row) => <><Status id={row?.id} value={row?.Status} ApiUpdate={getUsers} /></>},
     { field: 'Modal', title: 'Modal',render : (row)=> <>{(row?.Status === "Approved") ? (<FormModal  data = {row} callApi={getUsers}/>):""}</>}
    
@@ -56,7 +56,7 @@ export default function Token() {
       let dataArray = [];
      
       response?.data.map((item)=>(
-        dataArray.push({"createdAt":item?.createdAt ,"user":item?.userId,"id":item?._id,"Status":item?.Status ,"name":item?.Name , "product":item?.Product , "mobileno":item?.Mobile , "status":item?.status})
+        dataArray.push({"createdAt":dateFormat(item?.createdAt, 'dd-mmm -hh:mm') ,"user":item?.userId,"id":item?._id,"Status":item?.Status ,"name":item?.Name , "product":item?.Product , "mobileno":item?.Mobile , "status":item?.status})
       ))
       setUserList(dataArray)
     }

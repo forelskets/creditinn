@@ -52,6 +52,7 @@ export default function User() {
         Bank: ele?.Purpose,
         Amount: ele?.Amount,
         Date: dateFormat(ele?.createdAt, 'dd-mmm'),
+        Time: dateFormat(ele?.createdAt, 'hh:mm'),
         Status: ele?.status,
         Modal: ele?.Modal
       })
@@ -68,6 +69,7 @@ export default function User() {
     { field: 'Amount', title: 'Amount' },
     {field: 'Bank', title:'Bank/Loan Type'},
     { field: 'Date', title: 'Date' },
+    { field: 'Time', title: 'Time' },
     {
       field: 'Status',
       title: 'Status',
