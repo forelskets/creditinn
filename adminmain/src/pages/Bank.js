@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import MaterialTable from 'material-table'
-import {
-  Container,
-  FormControlLabel,
-  Switch
-} from '@mui/material';
+import MaterialTable from 'material-table';
+import { Container, FormControlLabel, Switch } from '@mui/material';
 import Page from '../components/Page';
 
-
-    
-    import { createBank, UpdateBanks ,AllBank ,DeleteBank, AllCategory , ChangeBankStatus} from '../_services/Admin.services';
-
-
+import {
+  createBank,
+  UpdateBanks,
+  AllBank,
+  DeleteBank,
+  AllCategory,
+  ChangeBankStatus
+} from '../_services/Admin.services';
 
 export default function Bank() {
   const [BANK, setData] = useState([]);
-  const [categoryArray,setCategoryArray] = useState({});
+  const [categoryArray, setCategoryArray] = useState({});
 
   const columns = [
     {
@@ -25,8 +24,17 @@ export default function Bank() {
       validate: (rowData) =>
         rowData.CategorySelect === undefined || rowData.CategorySelect === '' ? 'required' : true
     },
-    {field: "BankName" , title: "BankName" , validate: rowData => rowData.BankName === undefined || rowData.BankName === "" ? "required" : true},
-    {field: "Note" , title: "Note" , validate: rowData => rowData.Note === undefined || rowData.Note === "" ? "required" : true},
+    {
+      field: 'BankName',
+      title: 'BankName',
+      validate: (rowData) =>
+        rowData.BankName === undefined || rowData.BankName === '' ? 'required' : true
+    },
+    {
+      field: 'Note',
+      title: 'Note',
+      validate: (rowData) => (rowData.Note === undefined || rowData.Note === '' ? 'required' : true)
+    },
     {
       title: 'View',
       field: 'View',
@@ -47,9 +55,8 @@ export default function Bank() {
       ),
       editable: 'never',
       filtering: false
-    },
-   
-  ]
+    }
+  ];
 
   const callEffect = async () => {
     let res = await AllBank();
@@ -75,9 +82,9 @@ export default function Bank() {
       });
       setData(data1);
     } else {
-      if (res?.message){
-          alert(res?.message);
-      } 
+      if (res?.message) {
+        alert(res?.message);
+      }
     }
   };
 
@@ -92,54 +99,62 @@ export default function Bank() {
     if (response?.status === 1) {
       callEffect();
     } else {
-      if (response?.message){
-            alert(response?.message);
-      } 
+      if (response?.message) {
+        alert(response?.message);
+      }
     }
   };
 
   return (
     <Page title="Bank | Creditsin">
       <Container>
-         <MaterialTable
-           title=" Bank Lists"
-           columns={columns}
-           data={BANK}
-           options={{
-            exportButton: true,actionsColumnIndex : -1 , addRowPosition: "first" , filtering: true , exportButton: true}}
-           editable={{
-             onRowAdd:(newData) => new Promise (async(resolve , reject)=>{
-               console.log(newData , "newData")
-               const response = await createBank(newData);
-               console.log(response);
-               if(response.status === 1){
-                 resolve();
-                 callEffect();
-               }else{
-                 reject();
-               }
-             }),
-             onRowUpdate:(newData , oldData) =>new Promise (async(resolve , reject)=>{
-               const response = await UpdateBanks(oldData._id , newData);
-               if(response.status === 1){
-                resolve();
-                callEffect();
-              }else{
-                reject();
-              }
-              }),
-              onRowDelete:(oldData) => new Promise (async(resolve , reject)=>{
-                const response = await DeleteBank(oldData._id);
+        <MaterialTable
+          title=" Bank Lists"
+          columns={columns}
+          data={BANK}
+          options={{
+            exportButton: true,
+            actionsColumnIndex: -1,
+            addRowPosition: 'first',
+            filtering: true,
+            pageSizeOptions: [10, 15, 20, 35, 50, BANK?.length]
+          }}
+          editable={{
+            onRowAdd: (newData) =>
+              new Promise(async (resolve, reject) => {
+                console.log(newData, 'newData');
+                const response = await createBank(newData);
                 console.log(response);
-                if(response.status === 1){
+                if (response.status === 1) {
                   resolve();
                   callEffect();
-                }else{
+                } else {
+                  reject();
+                }
+              }),
+            onRowUpdate: (newData, oldData) =>
+              new Promise(async (resolve, reject) => {
+                const response = await UpdateBanks(oldData._id, newData);
+                if (response.status === 1) {
+                  resolve();
+                  callEffect();
+                } else {
+                  reject();
+                }
+              }),
+            onRowDelete: (oldData) =>
+              new Promise(async (resolve, reject) => {
+                const response = await DeleteBank(oldData._id);
+                console.log(response);
+                if (response.status === 1) {
+                  resolve();
+                  callEffect();
+                } else {
                   reject();
                 }
               })
-           }}
-         />
+          }}
+        />
       </Container>
     </Page>
   );

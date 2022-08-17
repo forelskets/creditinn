@@ -201,7 +201,7 @@ export default function Offer() {
     const newData = tempData
       .filter((item) => s.toISOString() <= item?.createdAt)
       .filter((itemf) => itemf?.createdAt <= e.toISOString());
-    console.log(newData, ' newData');
+
     setData(newData);
     console.log(tempData[0].createdAt > s.toISOString(), 'tempDAta');
     console.log(s.toISOString() > e.toISOString(), ' date');
@@ -283,7 +283,7 @@ export default function Offer() {
               paging: true,
               pageSize: 6, // make initial page size
               emptyRowsWhenPaging: false, // To avoid of having empty rows
-              pageSizeOptions: [6, 12, 20, 50] // rows selection options
+              pageSizeOptions: [6, 12, 20, 50, data?.length] // rows selection options
             }}
             editable={{
               onRowDelete: (oldData) =>

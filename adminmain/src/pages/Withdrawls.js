@@ -79,13 +79,18 @@ export default function Withdrawls() {
   return (
     <Page title="Withdrawls | Creditsin">
       <Container>
-        <MaterialTable columns={column} data={withdrawls} title="Withdrawls Request"    options={{
-         exportButton: true,
-         paging: true,
-         pageSize: 5,
-         emptyRowsWhenPagin: false,
-         pageSizeOptions : [10 ,20 ,50, 100]
-       }}/>
+        <MaterialTable
+          columns={column}
+          data={withdrawls}
+          title="Withdrawls Request"
+          options={{
+            exportButton: true,
+            paging: true,
+            pageSize: 5,
+            emptyRowsWhenPagin: false,
+            pageSizeOptions: [10, 20, 50, withdrawls?.length]
+          }}
+        />
       </Container>
     </Page>
   );

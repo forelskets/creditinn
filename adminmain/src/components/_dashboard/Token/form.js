@@ -36,17 +36,17 @@ export default function FormModal(props) {
     console.log(props.data, "propsdata")
 
     if(props?.data?.user?.RefralID === '' || props?.data?.user?.RefralID === undefined ){
-       console.log(props?.data?.user?.RefralID , "refralId")
+       
       obj = {
       userId: props?.data?.user?._id ,TransactionType: "CASHBACK" , CreditDebit: "CREDIT", Amount: cashback,    
       
     }}else{
-      console.log(props?.data?.user?.RefralID , "refralId2")
+    
     obj = {
       userId: props?.data?.user?._id , refralId:props?.data?.user?.RefralID ,TransactionType: "CASHBACK" ,TransactionTypeEarning:"EARNING", CreditDebit: "CREDIT", Amount: cashback, Earning: earning   
       
     }}
-    console.log(obj , "obj")
+ 
     let Obj = Validate(obj, rules)
     Object.keys(Obj).map(key => {
       if (Obj[key] !== "") {

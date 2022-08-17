@@ -24,7 +24,6 @@ export const NotificationMsg = (obj) => {
         }
       })
     });
-    console.log(response, 'Notification Response');
   };
 };
 
@@ -36,6 +35,6 @@ export const NotificationTable = (obj) => {
       deepurl: `this is deepurl`
     };
     const response = await OfferNotifiactionSave(sentObj);
-    console.log(response, 'NotificaitonTable');
+
   };
 };

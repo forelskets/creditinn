@@ -103,7 +103,6 @@ export default function Services() {
         });
       });
       setData(data1);
-      console.log(categoryArray, 'category');
     } else {
       if (res?.message) toastr.success(res?.message);
     }
@@ -158,7 +157,7 @@ export default function Services() {
       <Container>
         <div style={{ display: 'flex' }}>
           <Button variant="contained" onClick={() => setDialogOpen(true)}>
-           Search By Date
+            Search By Date
           </Button>
           <Button variant="contained" onClick={() => setData(realData)}>
             Refresh
@@ -211,7 +210,8 @@ export default function Services() {
             actionsColumnIndex: -1,
             addRowPosition: 'first',
             filtering: true,
-            exportButton: true
+            exportButton: true,
+            pageSizeOptions: [6, 12, 20, 50, data?.length]
           }}
           editable={{
             onRowAdd: (newData) =>

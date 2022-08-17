@@ -7,13 +7,11 @@ export const registerService = async (obj) => {
 
 export const matchOTP = async (obj) => {
     let res =await NoAUTH_API('POST', '/matchOtp', obj)
-    console.log("res",res)
     return res
 }
 
 export const sendOTP = async (obj) => {
     let res =await NoAUTH_API('POST', '/sendOtp', obj)
-    console.log("res",res)
     return res
 }
 

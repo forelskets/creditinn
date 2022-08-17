@@ -43,7 +43,7 @@ export default function FormModal(props) {
 
   const callEffect = async () => {
     let res = await AllBank();
-    console.log(res, 'bankres');
+  
     if (res?.status === 1 && Array.isArray(res?.data?.banks)) {
       setBankArray(res.data.banks);
     }
@@ -52,7 +52,6 @@ export default function FormModal(props) {
       setServiceArr(allservice.data.services);
     }
     let allcategory = await AllCategory();
-    console.log(allcategory, 'allcategory');
     if (allcategory?.status === 1 && Array.isArray(allcategory?.data?.CatNames)) {
       setCategoryArray(allcategory?.data?.CatNames);
     }
@@ -107,12 +106,12 @@ export default function FormModal(props) {
   };
 
   const onChangeServices = (e) => {
-    console.log(e);
+
     setservices(e.target.value);
   };
 
   const onChangeCategory = (e) => {
-    console.log(e);
+
     setCategory(e.target.value);
   };
 
@@ -203,7 +202,6 @@ export default function FormModal(props) {
               onChange={onChangeCategory}
               // multiple
             >
-              {console.log(categoryArray, 'cccc')}
               {categoryArray?.map((obj) => {
                 return <MenuItem value={obj.CatName}>{obj.CatName}</MenuItem>;
               })}

@@ -36,7 +36,6 @@ export const postLogin = (credentials) => {
       if (token) {
         const decoded = verifyToken(token);
 
-        console.log(decoded, 'decoded');
         if (decoded) {
           const { admin } = decoded;
           dispatch({ type: SET_MESSAGE, payload: data.msg });
@@ -46,7 +45,7 @@ export const postLogin = (credentials) => {
     } catch (error) {
       dispatch({ type: CLOSE_LOADER });
       dispatch({ type: LOGIN_ERRORS, payload: error.response.data });
-      console.log(error.response.data, 'response.error.data');
+     
     }
   };
 };
@@ -58,7 +57,6 @@ export const forgotPasswordFn = (credentials) => {
       withCredentials: true
     });
     dispatch({ type: CLOSE_LOADER });
-    console.log(data.status, data.msg);
     return data;
   };
 };

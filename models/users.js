@@ -10,7 +10,7 @@ const userSchema = new Schema(
     },
     UserId: {
       type: Number,
-      required: true,
+      // required: true,
     },
     RefralNo: {
       type: String,

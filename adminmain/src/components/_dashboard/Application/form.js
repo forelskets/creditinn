@@ -49,10 +49,10 @@ export default function FormModal(props) {
   const SubmitForms = () => {
     let success = 0;
     let obj = {};
-    console.log(props.data, 'propsdata');
+  
 
     if (props?.data?.user?.RefralID === '' || props?.data?.user?.RefralID === undefined) {
-      console.log(props.data.user.RefralID, 'refralId');
+
       obj = {
         userId: props?.data?.user?._id,
         TransactionType: 'CASHBACK',
@@ -60,7 +60,6 @@ export default function FormModal(props) {
         Amount: cashback
       };
     } else {
-      console.log(props.data.user.RefralID, 'refralId2');
       obj = {
         userId: props?.data?.user?._id,
         refralId: props?.data?.user?.RefralID,
@@ -71,7 +70,6 @@ export default function FormModal(props) {
         Earning: earning
       };
     }
-    console.log(obj, 'obj');
     let Obj = Validate(obj, rules);
     Object.keys(Obj).map((key) => {
       if (Obj[key] !== '') {
@@ -95,7 +93,7 @@ export default function FormModal(props) {
   };
 
   const onChangeServices = (e) => {
-    console.log(e);
+ 
     setservices(e.target.value);
   };
 

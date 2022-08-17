@@ -41,7 +41,7 @@ export default function Edit(props) {
 
   const callEffect = async () => {
     let res = await AllBank()
-    console.log(res , "bankres")
+    
     if (res?.status === 1 && Array.isArray(res?.data?.banks)) {
       
       setBankArray(res.data.banks)
@@ -51,7 +51,6 @@ export default function Edit(props) {
       setServiceArr(allservice.data.services)
     }
     let allcategory = await AllCategory()
-    console.log(allcategory , "allcategory")
     if (allcategory?.status === 1 && Array.isArray(allcategory?.data?.CatNames)) {
       setCategoryArray(allcategory?.data?.CatNames)
     }
@@ -79,12 +78,10 @@ export default function Edit(props) {
     }
     const id = props?.data?.id ;
 
-    console.log(obj , "formdataobj")
     let res = await axios.post(`/bank-offer/updateOffer/${id}`, formData ,{
         withCredentials : true
     })
     
-    console.log(res , "resaxios")
     if(res?.data?.status === 1){
         callback();
         props.callApi();
@@ -114,12 +111,12 @@ export default function Edit(props) {
   }
 
   const onChangeServices = (e) => {
-    console.log(e)
+  
     setservices(e.target.value)
   }
 
   const onChangeCategory = (e) =>{
-    console.log(e)
+  
     setCategory(e.target.value)
   }
 

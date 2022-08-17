@@ -51,7 +51,7 @@ exports.getBankById = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log('error', error);
+    
     return res.send({
       status: 0,
       message: 'something_went_wrong',
@@ -147,7 +147,7 @@ exports.updateBank = async (req, res, next) => {
 };
 
 exports.ChangeBankStatus = async (req, res, next) => {
-  console.log("changeServiceStatus")
+
   const id = req.params.id;
   const { Status } = req.body;
   console.log(id ,Status , "data" )
@@ -166,7 +166,7 @@ exports.ChangeBankStatus = async (req, res, next) => {
       });
     }
   }catch(err){
-    console.log(err);
+  
     return res.send({
       status: 0,
       message: 'Something_technically_issue',
@@ -198,7 +198,7 @@ exports.deleteBank = async (req, res, next) => {
 };
 
 exports.getBanksForMobile = async (req , res , next) =>{
-       console.log("getBaksForMobile")
+       
        const {Category} = req.body
        try {
         const result = await Bank.find({Category})
@@ -214,7 +214,7 @@ exports.getBanksForMobile = async (req , res , next) =>{
           })
         }
        } catch (error) {
-        console.log(error)
+       
         return res.send({
           status: 0,
           msg: something_went_to_wrong

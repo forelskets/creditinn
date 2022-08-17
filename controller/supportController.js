@@ -15,7 +15,7 @@ exports.customerSupport = async(req, res)=>{
 
     const addSupport = await customer.save();
     const email = await Email(customeremail , customername , customerarea);
-    // console.log(email, 'email')
+   
     if(addSupport ) {
         return res.send({
             status:1,
@@ -53,7 +53,6 @@ exports.corporateSupport = async(req, res)=>{
         })
     }
 }catch(err){
-    console.log(err);
     return res.send({
         status: 0,
         message: "something went wrong"

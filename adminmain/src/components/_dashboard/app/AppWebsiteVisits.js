@@ -24,7 +24,7 @@ export default function AppWebsiteVisits() {
   
   const {usersarray} = useSelector(state => state.AuthReducer)
   const {applications} = useSelector(state => state.TablesReqReducer)
-      console.log(usersarray , "USERSaRRAY")
+     
       
       const getChartData = () =>{
         for(let i = 0 ; i < 12 ; i++){
@@ -34,13 +34,11 @@ export default function AppWebsiteVisits() {
             const month = date.getMonth();
             if(month === i){
               count++;
-            console.log(date.getMonth() ,i )
             }
           })
           userData[i] = count
         }
 
-        console.log(applications , "application")
         for(let i = 0 ; i < 12 ; i++){
           let applicationscount = 0
           let ApprovedCount = 0
@@ -59,7 +57,7 @@ export default function AppWebsiteVisits() {
             else  if(application.status === "Reject"){
               RejectCount++;
           }
-            console.log(date.getMonth() ,i )
+          
             }
           })
           applicationsData[i] = applicationscount
@@ -70,8 +68,7 @@ export default function AppWebsiteVisits() {
         dispatch({type: SET_PENDING_APPLICATIONS , payload:PendingCount})
         dispatch({type: SET_APPROVE_APPLICATIONS , payload:ApproveCount})
         dispatch({type: SET_REJECT_APPLICATIONS , payload:RejectCount})
-        console.log(applicationsData  , "applicatondata" , applicationApprove , "applicationApprove" , PendingCount , "PendingApplication" , RejectCount , "RejectApplication" , ApproveCount , "Approvecount")
-       
+    
          setCHART_DATA([
           {
             name: 'User Per Month',

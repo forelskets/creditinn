@@ -66,7 +66,7 @@ export default function Router() {
           <Route path="withdrawls" element={<Withdrawls />} />
           <Route path="useremi" element={<Useremi />} />
           <Route path="insurances" element={<Token />} />
-          <Route path="profileSetting/:id" element={<ProfileSetting />} />
+          <Route path="profileSetting/:id" element={ <AdminRoutes><ProfileSetting /></AdminRoutes>} />
           <Route
             path="subAdmin"
             element={
