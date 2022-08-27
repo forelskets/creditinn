@@ -14,15 +14,9 @@ import { getApplications } from '../store/asyncMethod/TablesReq';
 export default function User() {
   const dispatch = useDispatch();
   let { applications } = useSelector((state) => state.TablesReqReducer);
-  const [update, setUpdate] = useState(false);
 
   const [application, setApplication] = useState([]);
-  const [page, setPage] = useState(0);
-  const [order, setOrder] = useState('asc');
-  const [selected, setSelected] = useState([]);
-  const [orderBy, setOrderBy] = useState('name');
-  const [filterName, setFilterName] = useState('');
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+
 
   const [data, setData] = useState([]);
   const [date, setDate] = useState([]);
@@ -42,17 +36,19 @@ export default function User() {
     applications.map((ele, ind) =>
       data1?.push({
         Id: ele?._id,
-        Type: ele?.Category,
+        Type: ele?.Type,
         user: ele?.UserId,
         Name: ele?.ProfileId?.FirstName,
         Mobile: ele?.ProfileId?.Mobile,
         Application: ele?.ApplicationNo,
-        // AadharNo: ele?.KycId?.AdhaarNo,
         PanNo: ele?.KycId?.PanNo,
         Bank: ele?.Purpose,
         Amount: ele?.Amount,
+        City: ele?.ProfileId?.City,
+        State: ele?.ProfileId?.State,
+        Profession: ele?.Profession,
         Date: dateFormat(ele?.createdAt, 'dd-mmm'),
-        Time: dateFormat(ele?.createdAt, 'hh:mm'),
+        Time: dateFormat(ele?.createdAt, 'HH:MM'),
         Status: ele?.status,
         Modal: ele?.Modal
       })
@@ -68,6 +64,9 @@ export default function User() {
     { field: 'PanNo', title: 'Pan No' },
     { field: 'Amount', title: 'Amount' },
     {field: 'Bank', title:'Bank/Loan Type'},
+    {field: 'City', title:'City'},
+    {field: 'State', title:'State'},
+    {field: 'Profession', title:'Profession'},
     { field: 'Date', title: 'Date' },
     { field: 'Time', title: 'Time' },
     {
@@ -109,7 +108,7 @@ export default function User() {
             paging: true,
             pageSize: 6,
             emptyRowsWhenPaging: false,
-            pageSizeOptions: [6, 12, 20, 50]
+            pageSizeOptions: [6, 12, 20, 50,application?.length]
           }}
         />
       </Container>

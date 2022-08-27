@@ -21,6 +21,9 @@ export default function FormModal(props) {
   const [service, setService] = React.useState('');
   const [category, setCategory] = React.useState('');
   const [typed, setTyped] = React.useState('');
+  const [notificationService, setNotificationService] = React.useState('');
+  const [notificationCategory, setNotificationCategory] = React.useState('');
+  const [notificationBank, setNotificationBank] = React.useState('');
   const [isSubmit, setIsSubmit] = React.useState(true);
 
   const handleChange = (event) => {
@@ -43,7 +46,7 @@ export default function FormModal(props) {
 
   const callEffect = async () => {
     let res = await AllBank();
-  
+    console.log(res, 'bankres');
     if (res?.status === 1 && Array.isArray(res?.data?.banks)) {
       setBankArray(res.data.banks);
     }
@@ -52,6 +55,7 @@ export default function FormModal(props) {
       setServiceArr(allservice.data.services);
     }
     let allcategory = await AllCategory();
+    console.log(allcategory, 'allcategory');
     if (allcategory?.status === 1 && Array.isArray(allcategory?.data?.CatNames)) {
       setCategoryArray(allcategory?.data?.CatNames);
     }
@@ -71,6 +75,12 @@ export default function FormModal(props) {
       Type: typed
     };
     // alert("3333")
+
+    const notificationObj = {
+      service: notificationService,
+      category: notificationCategory,
+      bank: notificationBank
+    };
     let Obj = Validate(obj, rules);
     Object.keys(Obj).map((key) => {
       if (Obj[key] !== '') {
@@ -82,7 +92,7 @@ export default function FormModal(props) {
     setError(Obj);
 
     if (success === 0) {
-      props.callApi(obj, callback);
+      props.callApi(obj, notificationObj, callback);
     }
     // alert("5555")
   };
@@ -106,11 +116,13 @@ export default function FormModal(props) {
   };
 
   const onChangeServices = (e) => {
+    // const notificationEle = document.querySelector(`#${e.target.id}`);
 
     setservices(e.target.value);
   };
 
   const onChangeCategory = (e) => {
+    console.log(e);
 
     setCategory(e.target.value);
   };
@@ -171,7 +183,11 @@ export default function FormModal(props) {
               onChange={onChangeBank}
             >
               {bankArray.map((obj) => {
-                return <MenuItem value={obj._id}>{obj.BankName}</MenuItem>;
+                return (
+                  <MenuItem value={obj._id} onClick={() => setNotificationBank(obj.BankName)}>
+                    {obj.BankName}
+                  </MenuItem>
+                );
               })}
             </Select>
             {!BankName && <div style={{ color: 'red' }}>Please select Bank</div>}
@@ -187,7 +203,12 @@ export default function FormModal(props) {
               // multiple
             >
               {serviceArray.map((obj) => {
-                return <MenuItem value={obj._id}>{obj.ServiceName}</MenuItem>;
+                const name = `${obj.ServiceName}`;
+                return (
+                  <MenuItem value={obj._id} onClick={() => setNotificationService(obj.ServiceName)}>
+                    {obj.ServiceName}
+                  </MenuItem>
+                );
               })}
             </Select>
             {!services && <div style={{ color: 'red' }}>Please select Service</div>}
@@ -203,7 +224,14 @@ export default function FormModal(props) {
               // multiple
             >
               {categoryArray?.map((obj) => {
-                return <MenuItem value={obj.CatName}>{obj.CatName}</MenuItem>;
+                return (
+                  <MenuItem
+                    value={obj.CatName}
+                    onClick={() => setNotificationCategory(obj.CatName)}
+                  >
+                    {obj.CatName}
+                  </MenuItem>
+                );
               })}
             </Select>
             {!category && <div style={{ color: 'red' }}>Please select Category</div>}

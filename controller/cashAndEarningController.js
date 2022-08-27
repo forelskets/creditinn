@@ -5,6 +5,8 @@ const Sequence = require("../models/sequenceGenerator");
 const { type } = require("express/lib/response");
 
 exports.createUserTransaction = async (req, res, next) => {
+  console.log("createUserTransaction");
+  console.log(req.body);
   try {
     //  const sequence = await Sequence.findOneAndUpdate({"_id":ObjectId("6281ed6435a76632c8f233ec")},{"$inc" : {TransactionNo : 1 }})
     let date = new Date();

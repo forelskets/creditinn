@@ -1,53 +1,51 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const employmentSchema = new mongoose.Schema(
   {
     UserId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
       required: true,
     },
     CompanyName: {
       type: String,
-      
     },
     TotalExperience: {
       type: String,
-      
     },
     MonthlyIncome: {
       type: String,
-      
     },
     FirmName: {
-      type: String
+      type: String,
     },
-    TotalBusinessExperience:{
-      type: String
+    TotalBusinessExperience: {
+      type: String,
     },
-    CurrentYearIncome:{
-      type: String
+    CurrentYearIncome: {
+      type: String,
     },
-    LastYearIncome:{
-      type: String
+    LastYearIncome: {
+      type: String,
     },
     GST: {
-      type: String
+      type: String,
     },
-    ITRUpload:{
-      type: String
+    ITRUpload: {
+      type: String,
     },
-    ActiveLoanAmount:{
-      type: String
+    ActiveLoanAmount: {
+      type: String,
     },
-    Emi:{
-      type: String
-    }
+    Emi: {
+      type: String,
+    },
   },
-   
+
   { timestamps: true }
 );
 
 const EmploymentDetails = new mongoose.model(
-  'employmentDetail',
+  "employmentDetail",
   employmentSchema
 );
 

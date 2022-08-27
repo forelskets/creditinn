@@ -59,8 +59,8 @@ export default function Token() {
 
       response?.data.map((item) =>
         dataArray.push({
-          createdAt: dateFormat(item?.createdAt, 'dd-mmm -hh:mm'),
-          user: item?.userId,
+          createdAt: dateFormat(item?.createdAt, 'dd-mmm -HH:MM'),
+          user: item?.UserId,
           id: item?._id,
           Status: item?.Status,
           name: item?.Name,

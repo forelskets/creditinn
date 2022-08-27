@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const kycSchema = new mongoose.Schema(
   {
     UserId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
       required: true,
     },
     AdhaarNo: {
@@ -65,6 +66,6 @@ const kycSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const KycDetails = new mongoose.model('kycdetail', kycSchema);
+const KycDetails = new mongoose.model("kycdetail", kycSchema);
 
 module.exports = KycDetails;

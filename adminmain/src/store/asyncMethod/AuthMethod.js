@@ -1,6 +1,5 @@
 import jwt_decoder from 'jwt-decode';
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
 import {
   SET_LOADER,
   CLOSE_LOADER,

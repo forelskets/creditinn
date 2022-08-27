@@ -2,14 +2,8 @@ import { useEffect, useState } from 'react';
 import dateFormat from 'dateformat';
 
 import Page from '../components/Page';
-
-//
-// import userList from '../_mocks_/user';
 import { AllRefrals } from 'src/_services/Admin.services';
 import MaterialTable from 'material-table';
-// ----------------------------------------------------------------------
-
-// ----------------------------------------------------------------------
 
 export default function Staff() {
   const [userList, setUserList] = useState([]);
@@ -44,7 +38,7 @@ export default function Staff() {
           city: item?.City,
           state: item?.State,
           pincode: item?.Zip_Code,
-          createdAt: dateFormat(item?.createdAt, 'dd-mmm -hh:mm')
+          createdAt: dateFormat(item?.createdAt, 'dd-mmm -HH:MM')
         });
       });
       setUserList(dataArray);

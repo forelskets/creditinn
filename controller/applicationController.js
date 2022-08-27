@@ -33,15 +33,17 @@ exports.getApplicationList = async (req, res, next) => {
 };
 
 exports.updateApplicationStatus = async (req, res, next) => {
+  console.log("updateApplicationStatus");
   const id = req.params.id;
   const { status } = req.body;
   try {
-    const result = await Application.findById(id);
+    const result = await Application.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+    console.log(result.status, "status");
     if (result) {
-      await result.update({
-        status: status,
-      });
-
       return res.send({
         status: 1,
         message: "Updated",

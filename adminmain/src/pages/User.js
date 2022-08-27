@@ -7,7 +7,7 @@ import { ChangeStatus, AllUsers } from '../_services/Admin.services/index';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { cloneDeep } from 'lodash';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { padding } from '@mui/system';
+import dateFormat from 'dateformat';
 
 export default function User() {
   const [userList, setUserList] = useState([]);
@@ -22,6 +22,11 @@ export default function User() {
     { field: 'Email', title: 'EmailId' },
     { field: 'Mobile', title: 'MobileNo' },
     { field: 'RefralNo', title: 'RefralNo' },
+    {
+      field: 'createdAt',
+      title: 'Date & Time',
+      render: (rowData) => dateFormat(rowData.createdAt, 'dd-mmm - HH:MM')
+    },
     {
       field: 'Status',
       title: 'LoginAuthority',
@@ -64,7 +69,6 @@ export default function User() {
 
   const getUsers = async () => {
     const response = await AllUsers();
-    console.log(response, 'response');
     setUserList(response?.data);
     if (response?.status === 1) {
       setUserList(response?.data);

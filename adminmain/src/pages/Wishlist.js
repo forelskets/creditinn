@@ -8,7 +8,6 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
-  const [data, setData] = useState([]);
   const [realData, setRealData] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogClose, setDialogClose] = useState(false);

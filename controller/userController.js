@@ -163,7 +163,7 @@ exports.ProductStor = async (req, res, next) => {
   console.log(id, name, mobile, product, refral, email);
   try {
     const result = await Product({
-      userId: id,
+      UserId: id,
       Name: name,
       Mobile: mobile,
       Email: email,
@@ -194,7 +194,7 @@ exports.ProductStor = async (req, res, next) => {
 exports.getAllProducts = async (req, res, next) => {
   console.log("getAllProducts");
   try {
-    const result = await Product.find().populate(["userId"]);
+    const result = await Product.find().populate(["UserId"]);
     if (result) {
       return res.send({
         status: 1,

@@ -38,12 +38,12 @@ export default function FormModal(props) {
     if(props?.data?.user?.RefralID === '' || props?.data?.user?.RefralID === undefined ){
        
       obj = {
-      userId: props?.data?.user?._id ,TransactionType: "CASHBACK" , CreditDebit: "CREDIT", Amount: cashback,    
+      userId: props?.data?.user?._id ,TransactionType: "CASHBACK" , CreditDebit: "Credit", Amount: cashback,    
       
     }}else{
     
     obj = {
-      userId: props?.data?.user?._id , refralId:props?.data?.user?.RefralID ,TransactionType: "CASHBACK" ,TransactionTypeEarning:"EARNING", CreditDebit: "CREDIT", Amount: cashback, Earning: earning   
+      userId: props?.data?.user?._id , refralId:props?.data?.user?.RefralID ,TransactionType: "CASHBACK" ,TransactionTypeEarning:"EARNING", CreditDebit: "Credit", Amount: cashback, Earning: earning   
       
     }}
  

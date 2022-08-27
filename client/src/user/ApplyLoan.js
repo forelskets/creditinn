@@ -17,7 +17,7 @@ import {
   EmailShareButton,
   FacebookIcon,
 } from "react-share";
-  var id = "";
+var id = "";
 
 const ApplyLoan = () => {
   const shareUrl = "www.creditsin.com/form ";
@@ -28,7 +28,7 @@ const ApplyLoan = () => {
   const [userKycData, setUserKycData] = useState({});
   const [userEmpDetailsData, setUserEmpDetailsData] = useState({});
   const [userProfileData, setUserProfileData] = useState({});
-  const [profileImage ,setProfileImage] = useState();
+  const [profileImage, setProfileImage] = useState();
 
   const ShareModal = () => {
     console.log("shareModal");
@@ -45,7 +45,6 @@ const ApplyLoan = () => {
     setLstatus(!lstatus);
   };
   const getApplyLoan = async () => {
-  
     console.log(profile._id, "dddddddddddd");
     const res = await ApplyLoans(profile._id);
     if (res.status === 1) {
@@ -66,16 +65,13 @@ const ApplyLoan = () => {
   );
 
   useEffect(() => {
-   if(!profile._id){
-     callUserMainPage();
-   }
-
-   else if(profile._id){
+    if (!profile._id) {
+      callUserMainPage();
+    } else if (profile._id) {
       getApplyLoan();
-      console.log("use efffect")
-   }
-    
-  },[profile._id]);
+      console.log("use efffect");
+    }
+  }, [profile._id]);
 
   const history = useHistory();
   const callUserMainPage = async (req, res) => {
@@ -90,15 +86,15 @@ const ApplyLoan = () => {
       });
 
       const data = await res.json();
-      
+
       console.log(res);
       if (res.status === 401) {
         history.push("/");
       }
       setProfile(data);
-      if(data.PhotoURL){
-      const Img  = JSON.parse(data.PhotoURL);
-      setProfileImage(Img)
+      if (data.PhotoURL) {
+        const Img = JSON.parse(data.PhotoURL);
+        setProfileImage(Img);
       }
       id = data._id;
     } catch (err) {
@@ -106,24 +102,32 @@ const ApplyLoan = () => {
     }
   };
 
-  const ImageUploader = async (e) =>{
-    console.log(e.target.files[0],"gggg")
+  const ImageUploader = async (e) => {
+    console.log(e.target.files[0], "gggg");
     const formdata = new FormData();
-    formdata.append('profileImag', e.target.files[0])
-   
-    const response = await axios.post('/user/propfileImgUpdate',formdata)
-    console.log(response , "response")
-    if(response.data.status === 1){
-      alert(response.data.message)
+    formdata.append("profileImag", e.target.files[0]);
+
+    const response = await axios.post("/user/propfileImgUpdate", formdata);
+    console.log(response, "response");
+    if (response.data.status === 1) {
+      alert(response.data.message);
       callUserMainPage();
-    }else if(response.data.status === 0){
-      window.alert(response.data.message)
+    } else if (response.data.status === 0) {
+      window.alert(response.data.message);
     }
-  }
+  };
+
+  const ShareModalStatus = (status) => {
+    setSharemodal(status);
+  };
+
+  const ProductModalStatus = (status) => {
+    setProductmodal(status);
+  };
 
   return (
     <div>
-      {console.log(profileImage?.filePath, profile , "Profileeeeeee")}
+      {console.log(profileImage?.filePath, profile, "Profileeeeeee")}
       <section>
         <div className="home-content">
           <div className="container">
@@ -244,7 +248,7 @@ const ApplyLoan = () => {
                           userProfileData={userProfileData}
                           userKycData={userKycData}
                           userEmpDetailsData={userEmpDetailsData}
-                          getApplyLoan = {getApplyLoan}
+                          getApplyLoan={getApplyLoan}
                           LoanFunc={LoanFunc}
                         />
                       ) : (
@@ -271,22 +275,17 @@ const ApplyLoan = () => {
                 </div>
 
                 <div className="top-sales box profile-card col-sm-3">
-                  <div className="col">
-                   
-                  </div>
+                  <div className="col"></div>
 
                   <div className="title">Profile</div>
                   <ul className="top-sales-details">
                     <li>
                       <NavLink to="#">
-                      
-                        
                         <img src={profileImage?.filePath} alt="" />
                         {/* <span className="select-wrapper">
                       <input type='file' id="image_src" name="profileImage"  accept="image/*" onChange={ImageUploader}/>
                       </span> */}
-                     
-                    
+
                         <span className="profile-name">{profile.Name}</span>
                       </NavLink>
                     </li>
@@ -380,25 +379,22 @@ const ApplyLoan = () => {
           </div>
         </div>
       </section>
-      {console.log(profile.RefralNo, "ccc", productmodal)}
-      {sharemodal ? (
+      {productmodal && (
+        <ProductModal
+          productmodal={true}
+          InputValue="PRODUCTINPUT"
+          profile={profile}
+          ProductModalStatus={ProductModalStatus}
+        />
+      )}
+      {sharemodal && (
         <ShareModalc
-          sharemodal={sharemodal}
+          sharemodal={true}
           InputValue="SHAREINPUT"
           id={profile._id}
           refral={profile.RefralNo}
+          ShareModalStatus={ShareModalStatus}
         />
-      ) : (
-        ""
-      )}
-      {productmodal ? (
-        <ProductModal
-          productmodal={productmodal}
-          InputValue="PRODUCTINPUT"
-          profile={profile}
-        />
-      ) : (
-        ""
       )}
     </div>
   );

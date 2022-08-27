@@ -56,7 +56,7 @@ export default function FormModal(props) {
       obj = {
         userId: props?.data?.user?._id,
         TransactionType: 'CASHBACK',
-        CreditDebit: 'CREDIT',
+        CreditDebit: 'Credit',
         Amount: cashback
       };
     } else {
@@ -65,7 +65,7 @@ export default function FormModal(props) {
         refralId: props?.data?.user?.RefralID,
         TransactionType: 'CASHBACK',
         TransactionTypeEarning: 'EARNING',
-        CreditDebit: 'CREDIT',
+        CreditDebit: 'Credit',
         Amount: cashback,
         Earning: earning
       };

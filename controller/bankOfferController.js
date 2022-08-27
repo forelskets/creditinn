@@ -40,6 +40,7 @@ exports.getBankOfferById = async (req, res, next) => {
       "BankName",
       "BankService",
     ]);
+    console.log("result", result);
 
     if (result) {
       return res.send({
@@ -56,6 +57,7 @@ exports.getBankOfferById = async (req, res, next) => {
       });
     }
   } catch (error) {
+    console.log("error", error);
     return res.send({
       status: 0,
       message: "something_went_wrong",
@@ -70,6 +72,7 @@ exports.createBankOffer = async (req, res, next) => {
     let file = {};
     file = req.files.Picture[0];
     var image_path = file.path.slice(17);
+    console.log(image_path, "pathththtth");
     const fileobj = {
       fileName: file.originalname,
       filePath: image_path,
@@ -101,6 +104,7 @@ exports.createBankOffer = async (req, res, next) => {
       });
     }
   } catch (error) {
+    console.log("error", error);
     return res.send({
       status: 0,
       message: "something_went_wrong",

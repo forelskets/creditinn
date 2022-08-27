@@ -70,8 +70,7 @@ exports.getApplicationList = async (req, res, next) => {
     !req.body.TotalBusinessExperience ||
     !req.body.CurrentYearIncome ||
     !req.body.LastYearIncome ||
-    !req.body.GST 
- 
+    !req.body.GST
   ) {
     res.send({
       status: 401,
@@ -93,14 +92,14 @@ exports.getApplicationList = async (req, res, next) => {
       {
         UserId: req.userId,
         FirstName: req.body.FirstName,
-       
+
         FatherName: req.body.FatherName,
         DOB: req.body.DOB,
-        
+
         Mobile: req.body.Mobile,
-        
+
         CurrentAddress: req.body.CurrentAddress,
-        
+
         State: req.body.State,
         City: req.body.City,
         ZIP: req.body.ZIP,
@@ -119,8 +118,8 @@ exports.getApplicationList = async (req, res, next) => {
         LastYearIncome: req.body.LastYearIncome,
         GST: req.body.GST,
         ITRUpload: req.body.ITRUpload,
-        ActiveLoanAmount : req.body.ActiveLoanAmount,
-        Emi: req.body.Emi
+        ActiveLoanAmount: req.body.ActiveLoanAmount,
+        Emi: req.body.Emi,
       },
       { upsert: true }
     );
@@ -135,17 +134,17 @@ exports.getApplicationList = async (req, res, next) => {
       },
       { upsert: true }
     );
-    let count = await Application.collection.count();
-    const counter = `AP${count}CRED`;
-
-    
+    let count = (await Application.collection.count()) + 1;
+    console.log(count , "count")
+    let counter = `AP${count}CRED`;
 
     try {
-      const kycSave =  await KYC.findOne({UserId: req.userId});
-      const detailsSave =  await EmploymentDetails.findOne({UserId: req.userId});
-      const profileSave =  await Profile.findOne({UserId: req.userId});
-    
-     
+      const kycSave = await KYC.findOne({ UserId: req.userId });
+      const detailsSave = await EmploymentDetails.findOne({
+        UserId: req.userId,
+      });
+      const profileSave = await Profile.findOne({ UserId: req.userId });
+
       console.log("aaa", profileSave, detailsSave, kycSave);
 
       const applicaiton = new Application({
@@ -161,7 +160,7 @@ exports.getApplicationList = async (req, res, next) => {
       });
       console.log("applicaiton", applicaiton);
 
-      const applicationSave =  applicaiton.save();
+      const applicationSave = applicaiton.save();
       console.log("aa applicaiton", applicationSave);
 
       if (profileSave && detailsSave && kycSave && applicationSave) {
@@ -198,7 +197,7 @@ const fileSizeFormatter = (bytes, decimal) => {
 exports.getApplicationLists = async (req, res, next) => {
   console.log("4");
   console.log("kycDetail req", req.body.FirstName);
- 
+
   if (
     (!req.body.FirstName ||
       !req.body.FatherName ||
@@ -287,7 +286,7 @@ exports.getApplicationLists = async (req, res, next) => {
         TotalExperience: req.body.TotalExperience,
         MonthlyIncome: req.body.MonthlyIncome,
         ActiveLoanAmount: req.body.ActiveLoanAmount,
-        Emi : req.body.Emi,
+        Emi: req.body.Emi,
       },
       { upsert: true }
     );
@@ -303,10 +302,8 @@ exports.getApplicationLists = async (req, res, next) => {
       },
       { upsert: true }
     );
-    let count = await Application.collection.count();
-    const counter = `AP${count}CRED`;
-
-   
+    let count = (await Application.collection.count()) +1;
+    let counter = `AP${count}CRED`;
 
     try {
       const profileSave = await profile.save();

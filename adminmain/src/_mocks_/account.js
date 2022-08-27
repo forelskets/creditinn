@@ -1,9 +1,9 @@
 // ----------------------------------------------------------------------
 
 const account = {
-  displayName: 'CreditsIN',
+  displayName: 'Administration',
   email: 'info@creditsin.com',
-  photoURL: '/favicon/favicon.png'
+  photoURL: '/static/mock-images/avatars/avatar_default.jpg'
 };
 
 export default account;

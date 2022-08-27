@@ -24,17 +24,19 @@ export const NotificationMsg = (obj) => {
         }
       })
     });
+    console.log(response, 'Notification Response');
   };
 };
 
-export const NotificationTable = (obj) => {
+export const NotificationTable = (notification) => {
   return async (dispatch) => {
+    console.log(notification, 'notification');
     let sentObj = {
-      title: `this is my obj`,
-      message: `this is my message`,
+      title: `Exclusive ${notification?.service} offer for you`,
+      message: `We offered ${notification?.bank} ${notification?.category} offer`,
       deepurl: `this is deepurl`
     };
     const response = await OfferNotifiactionSave(sentObj);
-
+    console.log(response, 'NotificaitonTable');
   };
 };

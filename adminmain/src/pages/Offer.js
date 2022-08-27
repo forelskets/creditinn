@@ -150,7 +150,7 @@ export default function Offer() {
     }
   ];
 
-  const saveOffers = async (obj, callback) => {
+  const saveOffers = async (obj, notification, callback) => {
     const formData = new FormData();
     for (const key in obj) {
       const ele = obj[key];
@@ -169,8 +169,8 @@ export default function Offer() {
       }
       callEffect();
       toastr.success('Bank offer created!');
-      dispatch(NotificationTable());
-      dispatch(NotificationMsg(obj));
+      dispatch(NotificationTable(notification));
+      dispatch(NotificationMsg(notification));
     } else {
       if (res?.message) {
         toastr?.success(res?.message);

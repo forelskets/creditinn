@@ -21,12 +21,13 @@ const { response } = require("express");
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  console.log(email, password, "ffff");
   if (!email || !password) {
     return res.status(400).json("plz filled the login details");
   }
   try {
     const userExist = await User.findOne({ Email: email });
-    // console.log("userExixt", userExist);
+    console.log("userExixt", userExist);
     if (userExist) {
       if (userExist.userVerified !== 1) {
         return res.send({
@@ -83,15 +84,18 @@ router.get("/addBankService", async (req, res) => {
 router.post("/userRegister", async (req, res) => {
   try {
     let data1 = await User.collection.count();
+
     const { Name, Email, Password, Mobile, RefralUserCode } = req.body;
-    console.log(Name, Email, Password, Mobile);
+    let mobile = `+91${Mobile}`;
+    console.log(Name, Email, Password, mobile);
 
     data1++;
     const refral = referralCodeGenerator.alphaNumeric("uppercase", 3, 1);
 
-    const isMatch = await User.findOne({ Email });
-    console.log(isMatch);
-    if (isMatch) {
+    const isMatchEmail = await User.findOne({ Email });
+    const isMatchMobile = await User.findOne({ Mobile: mobile });
+    console.log(isMatchMobile);
+    if (isMatchEmail || isMatchMobile) {
       return res.send({ status: 0, message: "user is already exist." });
     }
 
@@ -102,7 +106,7 @@ router.post("/userRegister", async (req, res) => {
       Name,
       Email,
       Password,
-      Mobile,
+      Mobile: mobile,
       userVerified: 0,
       Status: true,
     };
@@ -132,14 +136,7 @@ router.post("/userRegister", async (req, res) => {
     const transactiongenerator = `${year}${month}${date1}${count}`;
     console.log("33333");
     // let transactionNoCashback = parseInt(transactiongenerator) + parseInt(sequence.TransactionNo) + 1 ;
-    console.log(
-      addUser._id,
-      CASHBACK,
-      CREDIT,
-      AMOUNT,
-      transactiongenerator,
-      "usertransaction "
-    );
+   
     const cashback = await UserTransaction.create({
       userId: addUser._id,
       TransactionType: CASHBACK,

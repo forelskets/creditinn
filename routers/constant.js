@@ -1,6 +1,6 @@
 const CASHBACK = 'CASHBACK';
 const EARNING = 'EARNING';
- const CREDIT = 'CREDIT';
+ const CREDIT = 'Credit';
  const DEBIT = 'DEBIT';
 const AMOUNT = 500;
 

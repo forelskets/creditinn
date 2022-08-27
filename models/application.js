@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ApplicationSchema = new mongoose.Schema(
   {
@@ -9,22 +9,22 @@ const ApplicationSchema = new mongoose.Schema(
     UserId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'user',
+      ref: "user",
     },
     ProfileId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'profile',
+      ref: "profile",
     },
     EploymentId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'employmentDetail',
+      ref: "employmentDetail",
     },
     KycId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'kycdetail',
+      ref: "kycdetail",
     },
     ApplicationNo: {
       type: String,
@@ -32,7 +32,7 @@ const ApplicationSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: 'pending',
+      default: "pending",
       require: true,
     },
     Purpose: {
@@ -53,7 +53,8 @@ const ApplicationSchema = new mongoose.Schema(
     },
     Category: {
       type: String,
-      // require:true
+
+      default: "Loan",
     },
     Status: {
       type: Boolean,
@@ -63,7 +64,6 @@ const ApplicationSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Application = new mongoose.model('applicaitons', ApplicationSchema);
-
+const Application = new mongoose.model("applicaitons", ApplicationSchema);
 
 module.exports = Application;
