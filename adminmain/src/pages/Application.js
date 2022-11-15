@@ -33,7 +33,7 @@ export default function User() {
     applications = await dispatch(getApplications());
     console.log(applications, 'applications all efect');
     let data1 = [];
-    applications.map((ele, ind) =>
+    applications?.map((ele, ind) =>
       data1?.push({
         Id: ele?._id,
         Type: ele?.Type,
